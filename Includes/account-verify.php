@@ -1,0 +1,19 @@
+<?php
+
+session_start();
+
+if (!class_exists('Connection')) {
+    include('connection-function.php');
+    $_SESSION['db'] = $db;
+}
+$db = $_SESSION['db'];
+
+if (isset($_GET["token"])) {
+    $update = $db->query("UPDATE Users SET verified = 1 WHERE token = :token", array(array(":token", $_GET["token"])));
+    $getId = $db->query("SELECT id FROM Users WHERE tokenR = :token;", array(array(":token", $token)));
+    $updateToken= $db->query("UPDATE Users SET tokenR = ? WHERE id = ?;", array(":token", NULL), array(":id", $userid["id"]));
+    header("Location: ../Pages/login.html");
+    } else {
+        echo 'pas de get';
+    }
+?>

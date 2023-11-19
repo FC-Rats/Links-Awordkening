@@ -1,0 +1,136 @@
+/* Réinitialisation des styles de base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Styles du formulaire */
+form {
+    width: 350px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Styles pour les libellés */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.required {
+    color : rgb(228, 16, 16);
+    font-size: 18px;
+}
+
+/* Styles pour les champs de saisie */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#password, #confirm-password {
+    width: 100%;
+    padding: 10px;
+    margin-right: 40px; /* Ajout de marge à droite pour le bouton "œil" */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#toggle-password > img, #toggle-confirm-password > img {
+    width: 16px; /* Ajustez la taille de l'image selon vos besoins */
+    height: 16px; /* Ajustez la taille de l'image selon vos besoins */
+    vertical-align: middle; /* Centrez l'image verticalement */
+}
+
+#toggle-password, #toggle-confirm-password {
+    position: absolute;
+    right: 0; /* Positionne le bouton à droite */
+    cursor: pointer;
+    padding: 9px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+    box-sizing: border-box;
+    background-color: #eee;
+}
+
+/* Styles pour les conditions du mot de passe et de l'email */
+#password-conditions, #email-condition {
+    font-size: 14px;
+    color: gray;
+    text-align: left;
+}
+
+#password-conditions ul {
+    padding-left: 0;
+}
+
+#password-conditions li, #email-condition {
+    list-style: none;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#email-condition.valid {
+    color: rgb(0, 96, 221);
+}
+
+#password-conditions li.valid {
+    color: rgb(0, 96, 221);
+}
+
+.correct {
+    border : 1px solid #479400;
+}
+
+/* Styles pour le bouton de soumission */
+#submit-button, #connection-button {
+    margin: 0 auto;
+    display: block;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#submit-button[disabled] {
+    background-color: #ff8c008f;
+    cursor: not-allowed;
+}
+
+#submit-button:not([disabled]), #connection-button {
+    background-color: #ff8c00;
+    color: #fff;
+}
+
+/* Style pour le lien vers connexion */
+#lien-connexion, #lien-mpd-oublie {
+    font-size: 14px;
+    color: #ff8c00;
+    text-decoration: none;
+}
