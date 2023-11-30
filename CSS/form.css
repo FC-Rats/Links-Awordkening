@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: var(--viridian);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,23 +15,28 @@ body {
 form {
     width: 350px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--parchment);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: var(--viridian);
     border-radius: 10px;
     text-align: center;
+}
+
+h1 {
+    font-size: 40px;
 }
 
 /* Styles pour les libellés */
 label {
     display: block;
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: normal;
     text-align: left;
+    color: white;
 }
 
 .required {
-    color : rgb(228, 16, 16);
+    color: rgb(228, 16, 16);
     font-size: 18px;
 }
 
@@ -40,10 +45,16 @@ input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--parchment);
     border-radius: 5px;
     text-align: left;
     box-sizing: border-box;
+    background-color: var(--brunswickGreen);
+    color: white;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .password-input {
@@ -52,37 +63,42 @@ input {
     position: relative;
 }
 
-#password, #confirm-password {
+#password,
+#confirm-password {
     width: 100%;
     padding: 10px;
     margin-right: 40px; /* Ajout de marge à droite pour le bouton "œil" */
-    border: 1px solid #ccc;
+    border: 1px solid var(--parchment);
     border-radius: 5px;
 }
 
-#toggle-password > img, #toggle-confirm-password > img {
+#toggle-password > img,
+#toggle-confirm-password > img {
     width: 16px; /* Ajustez la taille de l'image selon vos besoins */
     height: 16px; /* Ajustez la taille de l'image selon vos besoins */
     vertical-align: middle; /* Centrez l'image verticalement */
+    filter: invert(1);
 }
 
-#toggle-password, #toggle-confirm-password {
+#toggle-password,
+#toggle-confirm-password {
     position: absolute;
     right: 0; /* Positionne le bouton à droite */
     cursor: pointer;
     padding: 9px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--parchment);
     border-radius: 5px;
     text-align: left;
     box-sizing: border-box;
-    background-color: #eee;
+    background-color: var(--brunswickGreen);
 }
 
 /* Styles pour les conditions du mot de passe et de l'email */
-#password-conditions, #email-condition {
+#password-conditions,
+#email-condition {
     font-size: 14px;
-    color: gray;
+    color: var(--tan);
     text-align: left;
 }
 
@@ -90,47 +106,55 @@ input {
     padding-left: 0;
 }
 
-#password-conditions li, #email-condition {
+#password-conditions li,
+#email-condition {
     list-style: none;
     margin-bottom: 5px;
     text-align: left;
 }
 
-#email-condition.valid {
-    color: rgb(0, 96, 221);
-}
-
+#email-condition.valid,
 #password-conditions li.valid {
-    color: rgb(0, 96, 221);
+    color: var(--parchment);
 }
 
 .correct {
-    border : 1px solid #479400;
+    border: 1px solid #479400;
 }
 
 /* Styles pour le bouton de soumission */
-#submit-button, #connection-button {
+#submit-button,
+#connection-button {
     margin: 0 auto;
     display: block;
     border-radius: 15px;
     border: none;
     padding: 10px;
     cursor: pointer;
+    text-align: center;
 }
 
 #submit-button[disabled] {
-    background-color: #ff8c008f;
+    background-color: var(--coffee);
     cursor: not-allowed;
+    color: #fff;
+    width: 100%;
 }
 
-#submit-button:not([disabled]), #connection-button {
-    background-color: #ff8c00;
+#submit-button:not([disabled]),
+#connection-button {
+    background-color: var(--coffee);
     color: #fff;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 /* Style pour le lien vers connexion */
-#lien-connexion, #lien-mpd-oublie {
+#lien-connexion,
+#lien-mpd-oublie {
     font-size: 14px;
-    color: #ff8c00;
+    color: #1e37c5;
     text-decoration: none;
 }
