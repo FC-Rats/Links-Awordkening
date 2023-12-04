@@ -5,9 +5,42 @@
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Création de compte</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/form.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/style.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/index.css'>
+
+
     </head>
 <body>
-    <h1>Bienvenue</h1>
+    <!-- Voir OffCanvas pour la navbar https://getbootstrap.com/docs/5.3/components/offcanvas/#how-it-works -->
+    <div class="container-fluid">
+        <div class="row">
+          <nav class="col-2 bg-light sidebar">
+            <div class="vh-100 d-flex flex-column justify-content-start">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Profil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Messages</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Paramètres</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Déconnexion</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    
+          <main role="main" class="col-md-10">
+            <!-- Le contenu principal de la page va ici -->
+          </main>
+        </div>
+      </div>
 </body>
 </html> 
