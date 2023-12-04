@@ -158,3 +158,29 @@ input::placeholder {
     color: #1e37c5;
     text-decoration: none;
 }
+
+@media (max-width: 600px) {
+    /* Réduire la largeur du formulaire */
+    body {
+        height: auto;
+    }
+    form {
+        width: 80%;
+    }
+
+    /* Ajustements pour les champs de saisie */
+    input {
+        width: calc(100% - 20px);
+        /* Le calcul prend en compte la marge totale des champs de saisie */
+    }
+
+    /* Ajustement de la taille du titre */
+    h1 {
+        font-size: 30px;
+    }
+
+    /* Ajustements pour les libellés */
+    label {
+        text-align: center;
+    }
+}
