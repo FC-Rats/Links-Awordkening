@@ -11,7 +11,6 @@
     <body>
         <h1>Bienvenue</h1>
         <div id="container"></div>
-
         <script src="../Assets/JS/graphHighCharts.js"></script>
     </body>
 </html> 
