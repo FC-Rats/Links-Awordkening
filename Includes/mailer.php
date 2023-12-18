@@ -59,11 +59,12 @@ function generateTokenLink($email, $conn)
     $link = "http://perso-etudiant.u-pem.fr/~kellian.bredeau/Projet-SAE/Pages/recuperation-password.php?token=";
     $link .= $token;
     session_start();
-    if (isset($_SESSION['db'])) {
-        $db = $_SESSION['db'];
-        $getId = $db->query("SELECT id FROM Users WHERE email = :email;",array(array(":email", $email)));
-        $updatePassword = $db->query("UPDATE Users SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    if (!class_exists('Connection')) {
+        include('connection-function.php');
     }
+    
+    $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;",array(array(":email", $email)));
+    $updatePassword = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
     return $link;
 }
 
@@ -73,11 +74,12 @@ function generateVerifyLink($idUser, $conn)
     $link = "http://perso-etudiant.u-pem.fr/~kellian.bredeau/Projet-SAE/Includes/account-verify.php?token=";
     $link .= $token;
     session_start();
-    if (isset($_SESSION['db'])) {
-        $db = $_SESSION['db'];
-        $getId = $db->query("SELECT id FROM Users WHERE email = :email;",array(array(":email", $email)));
-        $updatePassword = $db->query("UPDATE Users SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    if (!class_exists('Connection')) {
+        include('connection-function.php');
     }
+    
+    $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;",array(array(":email", $email)));
+    $updatePassword = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
     return $link;
 }
 

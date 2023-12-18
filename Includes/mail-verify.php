@@ -18,7 +18,7 @@ if (isset($_POST['email'])) {
 
     envoi_mail($email,$conn,$objet,$message);
     header("Location: mail-redirection.php");
-    /*     $stmt = $conn->prepare("SELECT email FROM WUsers WHERE email = ?;");
+    /*     $stmt = $conn->prepare("SELECT email FROM WLA_USER WHERE email = ?;");
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();

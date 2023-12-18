@@ -2,9 +2,7 @@
 session_start();
 if (!class_exists('Connection')) {
     include('connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -12,15 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST["password"];
 
         // Vérifier les informations de connexion dans la base de données
-        $connectionVerif = $db->query("SELECT id, username, password, verified FROM Users WHERE username = :username", array(array(":username", $username))) ;
+        $connectionVerif = $db->query("SELECT id, username, password, verified FROM LA_USER WHERE username = :username", array(array(":username", $username))) ;
             if (count($connectionVerif) == 1) {
                 if (password_verify($password, $connectionVerif[0]['password']) && $connectionVerif[0]['verified'] == 1) {
                     $_SESSION["username"] = $connectionVerif[0]['username'];
                     $_SESSION["idUser"] = $connectionVerif[0]['id'];
 
                     $id_user = $_SESSION["idUser"];
-                    $log = $db->query("INSERT INTO Logs (idUser, time, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
-                    print_r($_SESSION);
+                    $log = $db->query("INSERT INTO LA_LOG (idUser, datetime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
                     header("Location: ../Pages/home.php");
                 } else {
                     Echo "Mot de passe incorrect.";

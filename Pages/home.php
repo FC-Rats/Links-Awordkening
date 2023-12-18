@@ -1,20 +1,12 @@
 <?php
 session_start();
-print_r($_SESSION);
 
 if (!class_exists('Connection')) {
     include('../Includes/connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 //Récupère les statistiques
-$stats = $db->query("SELECT COUNT(score) AS nombre_scores, MAX(score) AS score_max, MIN(score) AS score_min, AVG(score) AS score_moyen, SUM(score) AS score_total FROM Stats WHERE idUser = :idUser", array(array(":idUser", $_SESSION["idUser"])));
-if (empty($stats)) {
-    return 0;
-}
-return $stats;
-
+$stats = $db->query("SELECT COUNT(score) AS nombre_scores, MAX(score) AS score_max, MIN(score) AS score_min, AVG(score) AS score_moyen, SUM(score) AS score_total FROM LA_SCORE WHERE idUser = :idUser", array(array(":idUser", $_SESSION["idUser"])));
 ?>
 
 <!DOCTYPE html>
@@ -29,14 +21,14 @@ return $stats;
     </head>
     <body>
         <ul class="navbar">
-            <li><a href="#">Jouer</a></li>
-            <li><a href="#">Règle</a></li>
-            <li><a href="#">Projet</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="../Game/testExec.php">Jouer</a></li>
+            <li><a href="#">Profil</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Paramètres</a></li>
             <li class="dropdown">
                 <a class="dropbtn"><?php echo $_SESSION["username"];?></a>
                 <div class="dropdown-content">
-                    <a href="">Déconnexion</a>
+                    <a href="../Includes/account-logout.php">Déconnexion</a>
                 </div>
             </li>
         </ul>
