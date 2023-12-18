@@ -3,9 +3,7 @@ session_start();
 
 if (!class_exists('Connection')) {
     include('connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 function genererCodeAleatoire()
 {

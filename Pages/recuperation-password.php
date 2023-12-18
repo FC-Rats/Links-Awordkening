@@ -4,8 +4,8 @@
     <meta charset='utf-8'>
     <title>Form</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/form.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
 </head>
 <body>
 <h1>Changement de mot de passe </h1>
@@ -15,13 +15,13 @@
         <label for="password">Mot de passe<span class="required"> *</span></label>
         <div class="password-input">
             <input type="password" id="password" name="password" placeholder="Ex : MotDeP@sseCorr3cte" required>
-            <button type="button" id="toggle-password"><img src="../img/oeil.png"></button>
+            <button type="button" id="toggle-password"><img src="../Assets/img/oeil.png"></button>
         </div>
         
         <label for="confirm-password">Confirmer le mot de passe<span class="required"> *</span></label>
         <div class="password-input">
             <input type="password" id="confirm-password" name="confirm-password" required>
-            <button type="button" id="toggle-confirm-password"><img src="../img/oeil.png"></button>
+            <button type="button" id="toggle-confirm-password"><img src="../Assets/img/oeil.png"></button>
         </div>
 
         <div id="password-conditions">
@@ -39,7 +39,7 @@
         <input type="submit" id="submit-button" value="Modifier">
     </form>
 
-    <script src="../JS/password-toggle.js"></script>
-    <script src="../JS/password-check.js"></script>
+    <script src="../Assets/JS/password-toggle.js"></script>
+    <script src="../Assets/JS/password-check.js"></script>
 </body>
 </html>

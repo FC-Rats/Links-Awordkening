@@ -4,9 +4,7 @@ session_start();
 
 if (!class_exists('Connection')) {
     include('connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 if (isset($_GET["token"])) {
     $update = $db->query("UPDATE Users SET verified = 1 WHERE token = :token", array(array(":token", $_GET["token"])));

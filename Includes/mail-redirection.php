@@ -10,8 +10,8 @@ session_start();
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Home</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/waiting-bloc.css'>
-        <link rel='stylesheet' type='text/css' media='screen' href='../CSS/style.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/waiting-bloc.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
     </head>
     <body>
         <div class="waiting-screen">

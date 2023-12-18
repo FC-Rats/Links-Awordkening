@@ -2,9 +2,7 @@
 session_start();
 if (!class_exists('Connection')) {
     include('connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -20,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $id_user = $_SESSION["idUser"];
                     $log = $db->query("INSERT INTO Logs (idUser, time, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
-                    print_r($_SESSION);
                     header("Location: ../Pages/home.php");
                 } else {
                     Echo "Mot de passe incorrect.";

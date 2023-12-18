@@ -4,7 +4,9 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include('connection-function.php');
+if (!class_exists('Connection')) {
+    include('connection-function.php');
+}
 
 $token = $_POST['token'];
 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);

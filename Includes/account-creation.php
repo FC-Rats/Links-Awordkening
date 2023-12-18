@@ -2,9 +2,7 @@
 session_start();
 if (!class_exists('Connection')) {
     include('connection-function.php');
-    $_SESSION['db'] = $db;
 }
-$db = $_SESSION['db'];
 
 if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["email"]) && isset($_POST["password"])) {
     $username = $_POST["username"];
