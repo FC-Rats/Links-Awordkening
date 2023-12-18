@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["idUser"] = $connectionVerif[0]['id'];
 
                     $id_user = $_SESSION["idUser"];
-                    $log = $db->query("INSERT INTO LA_LOG (idUser, datetime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
+                    $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
                     header("Location: ../Pages/home.php");
                 } else {
                     Echo "Mot de passe incorrect.";
