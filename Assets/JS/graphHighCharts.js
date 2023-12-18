@@ -1,19 +1,18 @@
 $(function () {
     $.ajax({
-        url: "../../Includes/game.php",
+        url: "../Game/game.php",
         type: "POST",
         dataType: "JSON",
         data: { },
         success: function (data) {
             if (data.WordsChart) {
-                console.log(data.WordsChart);
                 var keys = Object.keys(data.WordsChart);
             
                 var seriesData = keys.map(function(key) {
                     return {
-                        from: parseFloat(data.WordsChart[key][0]),
-                        to: parseFloat(data.WordsChart[key][1]),
-                        "label": parseFloat(data.WordsChart[key][2])
+                        "from": data.WordsChart[key][0],
+                        "to": data.WordsChart[key][1],
+                        "label": parseInt(data.WordsChart[key][2])
                     };
                 });
             
