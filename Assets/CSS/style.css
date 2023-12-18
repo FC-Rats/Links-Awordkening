@@ -10,3 +10,43 @@ body {
     --parchment: #F4E9CD;
     --tan: #D2B48C;
 }
+
+.bg-viridian {
+    background-color: var(--viridian)!important;
+}
+
+.bg-brunswickGreen {
+    background-color: var(--brunswickGreen)!important;
+}
+
+.bg-coffee {
+    background-color: var(--coffee)!important;
+}
+
+.bg-parchment {
+    background-color: var(--parchment)!important;
+}
+
+.bg-tan {
+    background-color: var(--tan)!important;
+}
+
+.viridian {
+    color: var(--viridian)!important;
+}
+
+.brunswickGreen {
+    color: var(--brunswickGreen)!important;
+}
+
+.coffee {
+    color: var(--coffee)!important;
+}
+
+.parchment {
+    color: var(--parchment)!important;
+}
+
+.tan {
+    color: var(--tan)!important;
+}
