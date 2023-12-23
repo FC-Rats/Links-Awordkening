@@ -1,42 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <title>Création de compte</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
-    </head>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Accueil</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
+    <link rel="stylesheet" href="../Assets/CSS/bootstrap.min.css">
+</head>
+
 <body>
-    <!-- Voir OffCanvas pour la navbar https://getbootstrap.com/docs/5.3/components/offcanvas/#how-it-works -->
     <div class="container-fluid">
         <div class="row">
-          <nav class="col-2 bg-light sidebar">
-            <div class="vh-100 d-flex flex-column justify-content-start">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Profil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Messages</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Paramètres</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="login.html" tabindex="-1" aria-disabled="true">Se connecter</a>
-                </li>
-              </ul>
+            <nav class="col-2 bg-viridian sidebar d-none d-md-block witdh" style="width: 300px;">
+                <div class="vh-100 d-flex flex-column p-2 fs-4">
+                    <ul class="nav flex-column vh-100 justify-content-evenly align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link text-white active" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Messages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Paramètres</a>
+                        </li>
+                        <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
+                            <button class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
+                                Se connecter
+                            </button>
+                            <button class="btn rounded-5 bg-parchment" href="creation.php" tabindex="-1" aria-disabled="true">
+                                S'inscrire
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- TO DO : Don't work for now & bug header disappear -->
+            <div class="d-md-none">
+                <button class="btn btn-primary fixed-top" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body
+                    scrolling</button>
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <p>Try scrolling the rest of the page to see this option in action.</p>
+                    </div>
+                </div>
             </div>
-          </nav>
-    
-          <main role="main" class="col-md-10">
-            <!-- Le contenu principal de la page va ici -->
-          </main>
+
+            <main role="main" class="col-md-10">
+                <!-- Le contenu principal de la page va ici -->
+                <header class="vh-100 d-flex justify-content-center align-items-center ">
+                    <div class="text-center">
+                      <h1 class="h1 p-5">Links Awordkening</h1>
+                      <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
+                    </div>
+                </header>
+                </main>
         </div>
-      </div>
+    </div>
 </body>
-</html> 
+</html>
