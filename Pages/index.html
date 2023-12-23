@@ -30,34 +30,32 @@
                             <a class="nav-link text-white" href="#">Paramètres</a>
                         </li>
                         <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                            <button class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
+                            <a class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
                                 Se connecter
-                            </button>
-                            <button class="btn rounded-5 bg-parchment" href="creation.php" tabindex="-1" aria-disabled="true">
+                            </a>
+                            <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
                                 S'inscrire
-                            </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </nav>
             <!-- TO DO : Don't work for now & bug header disappear -->
             <div class="d-md-none">
-                <button class="btn btn-primary fixed-top" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body
-                    scrolling</button>
-                <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-                    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <p>Try scrolling the rest of the page to see this option in action.</p>
-                    </div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Menu</button>
+
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <p>Try scrolling the rest of the page to see this option in action.</p>
+                  </div>
                 </div>
             </div>
 
-            <main role="main" class="col-md-10">
+            <main role="main" class="col">
                 <!-- Le contenu principal de la page va ici -->
                 <header class="vh-100 d-flex justify-content-center align-items-center ">
                     <div class="text-center">
@@ -65,7 +63,7 @@
                       <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
-                </main>
+            </main>
         </div>
     </div>
 </body>
