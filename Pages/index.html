@@ -40,17 +40,37 @@
                     </ul>
                 </div>
             </nav>
-            <!-- TO DO : Don't work for now & bug header disappear -->
             <div class="d-md-none">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Menu</button>
+                <button class="btn btn-primary p-1 m-4 position-fixed bg-viridian" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
 
-                <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas offcanvas-start bg-viridian " data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                   <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">Menu</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
-                  <div class="offcanvas-body">
-                    <p>Try scrolling the rest of the page to see this option in action.</p>
+                  <div class="offcanvas-body d-flex flex-column p-0">
+                    <ul class="nav flex-column flex-grow-1 justify-content-evenly align-items-center fs-4">
+                        <li class="nav-item">
+                            <a class="nav-link text-white active" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Messages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Paramètres</a>
+                        </li>
+                        <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
+                            <a class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
+                                Se connecter
+                            </a>
+                            <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                                S'inscrire
+                            </a>
+                        </li>
+                    </ul>
                   </div>
                 </div>
             </div>
@@ -66,5 +86,6 @@
             </main>
         </div>
     </div>
+    <script src="../Assets/JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>
