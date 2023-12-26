@@ -6,9 +6,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Accueil</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
-    <link rel="stylesheet" href="../Assets/CSS/bootstrap.min.css">
+    <?php
+        include '../Includes/import.php';
+    ?>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                 <div class="vh-100 d-flex flex-column p-2 fs-4">
                     <ul class="nav flex-column vh-100 justify-content-evenly align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link text-white active" href="#">Accueil</a>
+                            <a class="nav-link text-white active" href="#home">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Profil</a>
@@ -51,7 +51,7 @@
                   <div class="offcanvas-body d-flex flex-column p-0">
                     <ul class="nav flex-column flex-grow-1 justify-content-evenly align-items-center fs-4">
                         <li class="nav-item">
-                            <a class="nav-link text-white active" href="#">Accueil</a>
+                            <a class="nav-link text-white active" href="#home">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Profil</a>
@@ -79,13 +79,15 @@
                 <!-- Le contenu principal de la page va ici -->
                 <header class="vh-100 d-flex justify-content-center align-items-center ">
                     <div class="text-center">
-                      <h1 class="h1 p-5">Links Awordkening</h1>
+                      <h1 class="h1 p-5" id="home">Links Awordkening</h1>
                       <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
             </main>
         </div>
     </div>
-    <script src="../Assets/JS/bootstrap.bundle.min.js"></script>
+    <?php
+        include '../Includes/importFooter.php';
+    ?>
 </body>
 </html>
