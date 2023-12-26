@@ -1,0 +1,74 @@
+var logsTable;
+
+$(function () {
+    listDatas();
+});
+
+function listDatas() {
+    $.ajax({
+        url: '../Includes/list-logs.php',
+        type: 'POST',
+        dataType: "JSON",
+        cache: false,
+        async: false,
+        data: {},
+        success: function (data) {
+            listLogs = data.Logs;
+
+            $("#LogsTable").dataTable().fnDestroy();
+            logsTable = $("#LogsTable").DataTable({
+                data: listLogs,
+                clientSide: true,
+                responsive: true,
+                stateSave: false,
+                columns: [
+                    { data: 'idUser' },
+                    { data: 'dateTime' },
+                    { data: 'log' }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        responsivePriority: 1,
+                        data: "idUser",
+                        render: function (data, type, row, meta) {
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.idUser + '</span></div>';
+                            return $row_output;
+                        }
+                    },
+                    {
+                        targets: 1,
+                        responsivePriority: 1,
+                        data: "dateTime",
+                        render: function (data, type, row, meta) {
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.dateTime + '</span></div>';
+                            return $row_output;
+                        }
+                    },
+                    {
+                        targets: 2,
+                        responsivePriority: 1,
+                        data: "log",
+                        render: function (data, type, row, meta) {
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.log + '</span></div>';
+                            return $row_output;
+                        }
+                    }
+                ],
+                order: [[1, 'asc']],
+                dom:
+                    '<"row mx-2"' +
+                    '<"col-md-2"<"me-3"l>>' +
+                    '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
+                    '>t' +
+                    '<"row mx-2"' +
+                    '<"col-sm-12 col-md-6"i>' +
+                    '<"col-sm-12 col-md-6"p>' +
+                    '>',
+                language: {
+                    url: "../Assets/json/table.json",
+                },
+            });
+        }
+    });
+}
