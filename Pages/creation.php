@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="container d-flex flex-column justify-content-center align-items-center py-3">
+    <div class="container d-flex flex-column justify-content-center align-items-center py-3 bg">
         <h1 class="text-center">Création de compte</h1>
         <div class="col-12 col-md-8 bg-viridian rounded-2 d-flex justify-content-center align-items-center py-4 px-3">
             <form action="../Includes/account-creation.php" method="post" id="password-form" class="border-0 text-start col-md-8 col-12">
@@ -72,7 +72,7 @@
                 <button type="submit" id="submit-button" disabled>Créer</button>
 
                 <div class="text-center p-3">
-                    <a id="lien-connexion" href="login.html" class="text-light">Déjà un compte ? Se connecter ➔</a>
+                    <a id="lien-connexion" href="login.php" class="text-light">Déjà un compte ? Se connecter ➔</a>
                 </div>
             </form>
         </div>

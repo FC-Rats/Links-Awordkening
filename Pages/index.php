@@ -30,10 +30,10 @@
                             <a class="nav-link text-white" href="#">Paramètres</a>
                         </li>
                         <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                            <a class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
+                            <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
                                 Se connecter
                             </a>
-                            <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                            <a class="btn rounded-5 bg-parchment" href="creation.php" tabindex="-1" aria-disabled="true">
                                 S'inscrire
                             </a>
                         </li>
@@ -63,7 +63,7 @@
                             <a class="nav-link text-white" href="#">Paramètres</a>
                         </li>
                         <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                            <a class="btn rounded-5 bg-coffee text-white" href="login.html" tabindex="-1" aria-disabled="true">
+                            <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
                                 Se connecter
                             </a>
                             <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
