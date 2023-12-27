@@ -6,3 +6,14 @@ nav li:hover {
 nav {
     z-index: 10;
 }
+
+
+.main-content {
+    margin-left: 300px;
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+}
