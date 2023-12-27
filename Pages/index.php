@@ -30,10 +30,10 @@
                             <a class="nav-link text-white" href="#profil">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Messages</a>
+                            <a class="nav-link text-white" href="#message">Messages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Paramètres</a>
+                            <a class="nav-link text-white" href="#parametres">Paramètres</a>
                         </li>
                         <?php if (isset($_SESSION['idUser'])) { ?>
                             <li class="nav-item">
@@ -69,10 +69,10 @@
                                 <a class="nav-link text-white" href="#profil">Profil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Messages</a>
+                                <a class="nav-link text-white" href="#message">Messages</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Paramètres</a>
+                                <a class="nav-link text-white" href="#parametres">Paramètres</a>
                             </li>
                             <?php if (isset($_SESSION['idUser'])) { ?>
                                 <li class="nav-item">
@@ -94,23 +94,20 @@
             </div>
 
             <main role="main" class="col main-content p-5">
+            <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-3.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-4.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-5.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-6.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-7.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
+            <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
                 <!-- Le contenu principal de la page va ici -->
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
                         <h1 class="h1 pt-5" id="home">Links Awordkening : </h1>
                         <h2 class="h2 pb-5 fst-italic">Where Words Unite</h2>
                         <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
-                    </div>
-                    <div class="" style="overflow: hidden;">
-                        <!-- brouillon -->
-                        <img src="../Assets/img/leaf-1.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; right: 0px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-2.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; right: 500px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-3.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; right: 225px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-4.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; right: 205px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-5.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; right: 815px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-6.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; right: 10px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-7.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; right: 440px; overflow-x: hidden;">
-                        <img src="../Assets/img/leaf-8.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; right: 700px; overflow-x: hidden;">
                     </div>
                 </header>
                 <div class="section d-flex justify-content-center align-items-center position-relative">
@@ -160,6 +157,12 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div id="message">
+                    <h2>Messages</h2>
+                </div>
+                <div id="parametres">
+                    <h2>Parametres</h2>
                 </div>
             </main>
         </div>
