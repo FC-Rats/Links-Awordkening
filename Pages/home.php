@@ -36,6 +36,7 @@ $stats = $db->query("SELECT COUNT(score) AS nombre_scores, MAX(score) AS score_m
     </ul>
 
     <?php
+    print_r($_SESSION) . "<br>";
     echo "Nombre de parties : " . $stats[0]['nombre_scores'] . "<br>";
     echo "Score maximum : " . $stats[0]['score_max'] . "<br>";
     echo "Score minimum : " . $stats[0]['score_min'] . "<br>";

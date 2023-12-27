@@ -33,19 +33,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Paramètres</a>
                         </li>
-                        <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                            <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
-                                Se connecter
-                            </a>
-                            <a class="btn rounded-5 bg-parchment" href="creation.php" tabindex="-1" aria-disabled="true">
-                                S'inscrire
-                            </a>
-                        </li>
+                        <?php if (isset($_SESSION['idUser'])) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#">Mon compte</a>
+                            </li>
+                        <?php } else { ?>
+                            <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
+                                <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
+                                    Se connecter
+                                </a>
+                                <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                                    S'inscrire
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </nav>
             <div class="d-md-none">
-                <button class="btn btn-primary p-1 m-4 position-fixed bg-viridian" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
+                <button class="btn btn-primary p-1 m-4 position-fixed bg-viridian border-0 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
 
                 <div class="offcanvas offcanvas-start bg-viridian " data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">
@@ -66,14 +72,20 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#">Paramètres</a>
                             </li>
-                            <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                                <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
-                                    Se connecter
-                                </a>
-                                <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
-                                    S'inscrire
-                                </a>
-                            </li>
+                            <?php if (isset($_SESSION['idUser'])) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#">Mon compte</a>
+                                </li>
+                            <?php } else { ?>
+                                <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
+                                    <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
+                                        Se connecter
+                                    </a>
+                                    <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                                        S'inscrire
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -87,6 +99,18 @@
                         <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
+                <div class="vh-100" style="overflow: hidden;">
+                <!-- brouillon -->
+                    <img src="../Assets/img/leaf-1.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; right: 0px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-2.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; left: 500px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-3.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; left: 325px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-4.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -280px; left: 150px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-5.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; left: 1115px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-6.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; left: 1025px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-7.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; left: 440px; overflow-x: hidden;">
+                    <img src="../Assets/img/leaf-8.svg" alt="" class="position-absolute" style="width: 500px; height: 500px; bottom: -50px; left: 700px; overflow-x: hidden;">
+
+                </div>
             </main>
         </div>
     </div>

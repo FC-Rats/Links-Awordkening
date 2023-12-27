@@ -10,21 +10,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST["password"];
 
         // Vérifier les informations de connexion dans la base de données
-        $connectionVerif = $db->query("SELECT id, username, password, verified FROM LA_USER WHERE username = :username", array(array(":username", $username))) ;
-            if (count($connectionVerif) == 1) {
-                if (password_verify($password, $connectionVerif[0]['password']) && $connectionVerif[0]['verified'] == 1) {
-                    $_SESSION["username"] = $connectionVerif[0]['username'];
-                    $_SESSION["idUser"] = $connectionVerif[0]['id'];
+        $connectionVerif = $db->query("SELECT id, username, password, verified FROM LA_USER WHERE username = :username", array(array(":username", $username)));
+        if (count($connectionVerif) == 1) {
+            if (password_verify($password, $connectionVerif[0]['password']) && $connectionVerif[0]['verified'] == 1) {
+                $_SESSION["username"] = $connectionVerif[0]['username'];
+                $_SESSION["idUser"] = $connectionVerif[0]['id'];
 
-                    $id_user = $_SESSION["idUser"];
-                    $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user),array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
-                    header("Location: ../Pages/home.php");
-                } else {
-                    Echo "Mot de passe incorrect.";
-                }
+                print_r($_SESSION);
+
+                $id_user = $_SESSION["idUser"];
+                $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user), array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
+                header("Location: ../Pages/index.php");
             } else {
-                echo "Nom d'utilisateur incorrect.";
+                echo "Mot de passe incorrect.";
             }
+        } else {
+            echo "Nom d'utilisateur incorrect.";
+        }
     }
 }
-?>

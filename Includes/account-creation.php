@@ -27,7 +27,7 @@ if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["ema
                     $id_user = $lastId[0]["LAST_INSERT_ID()"];
                     $_SESSION["idUser"] = $id_user;
                     $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:datetime,:log);", array(array(":id", $id_user),array(":datetime", date('Y-m-d H:i:s')), array(":log", "Inscription")));
-                    $_SESSION['db'] = $db;
+                    //$_SESSION['db'] = $db;
                     include ('mail-verify.php');
                 } else {
                     throw new Exception("L'adresse e-mail ou le nom d'utilisateur existe déjà. Veuillez vous connecter.");
