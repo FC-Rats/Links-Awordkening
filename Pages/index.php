@@ -93,16 +93,16 @@
                 </div>
             </div>
 
+            <!-- Le contenu principal de la page va ici -->
             <main role="main" class="col main-content p-5">
-            <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-3.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-4.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-5.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-6.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-7.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-            <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none;">
-                <!-- Le contenu principal de la page va ici -->
+                <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-3.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-4.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-5.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-6.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-7.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
                         <h1 class="h1 pt-5" id="home">Links Awordkening : </h1>
@@ -110,12 +110,11 @@
                         <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
-                <div class="section d-flex justify-content-center align-items-center position-relative">
-                </div>
                 <div class="profil vh-100" id="profil">
                     <div class="text-center">
                         <h2 class="p-5">Mon profil</h2>
                     </div>
+                    <?php if (isset($_SESSION['idUser'])) { ?>
                     <!--TODO: Max height à 100% pour que sa prenne toute la page-->
                     <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100">
                         <form>
@@ -157,12 +156,69 @@
                             </div>
                         </form>
                     </div>
+                    <?php } else { ?>
+                        <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100 position-relative" style="user-select: none;">
+                            <form>
+                                <div class="form-group row py-2">
+                                    <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row py-2">
+                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row py-2">
+                                    <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row py-2">
+                                    <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row py-2">
+                                    <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary bg-coffee border-none" id="boutonModifier">Modifier</button>
+
+                                    <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
+                                    <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
+                                </div>
+                            </form>
+                            <div class="text-center position-absolute top-50 start-50 translate-middle rounded-3 d-flex flex-column justify-content-center" style="backdrop-filter: blur(20px); width: 100%; height: 100%;">
+                                <h2 class="p-5">Vous devez être connecté pour accéder à cette page</h2>
+                                    <div class="my-4">
+                                    <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
+                                        Se connecter
+                                    </a>
+                                    <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                                        S'inscrire
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                    <?php } ?>
                 </div>
-                <div id="message">
-                    <h2>Messages</h2>
+                <div id="message" class="vh-100">
+                <div class="text-center">
+                        <h2 class="p-5">Messages</h2>
+                    </div>
                 </div>
-                <div id="parametres">
-                    <h2>Parametres</h2>
+                <div id="parametres" class="vh-100">
+                <div class="text-center">
+                        <h2 class="p-5">Parametres</h2>
+                    </div>
                 </div>
             </main>
         </div>
