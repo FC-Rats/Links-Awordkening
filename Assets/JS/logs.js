@@ -6,7 +6,7 @@ $(function () {
 
 function listDatas() {
     $.ajax({
-        url: '../Includes/list-logs.php',
+        url: '../Includes/getLogs.php',
         type: 'POST',
         dataType: "JSON",
         cache: false,
@@ -23,7 +23,9 @@ function listDatas() {
                 stateSave: false,
                 columns: [
                     { data: 'idUser' },
+                    { data: 'username' },
                     { data: 'dateTime' },
+                    { data: 'ip' },
                     { data: 'log' }
                 ],
                 columnDefs: [
@@ -39,6 +41,15 @@ function listDatas() {
                     {
                         targets: 1,
                         responsivePriority: 1,
+                        data: "username",
+                        render: function (data, type, row, meta) {
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.username + '</span></div>';
+                            return $row_output;
+                        }
+                    },
+                    {
+                        targets: 2,
+                        responsivePriority: 1,
                         data: "dateTime",
                         render: function (data, type, row, meta) {
                             var date = new Date(row.dateTime);
@@ -48,7 +59,16 @@ function listDatas() {
                         }
                     },
                     {
-                        targets: 2,
+                        targets: 3,
+                        responsivePriority: 1,
+                        data: "ip",
+                        render: function (data, type, row, meta) {
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.ip + '</span></div>';
+                            return $row_output;
+                        }
+                    },
+                    {
+                        targets: 4,
                         responsivePriority: 1,
                         data: "log",
                         render: function (data, type, row, meta) {
@@ -57,7 +77,7 @@ function listDatas() {
                         }
                     }
                 ],
-                order: [[1, 'desc']],
+                order: [[2, 'desc']],
                 dom:
                     '<"row mx-2"' +
                     '<"col-md-2"<"me-3"l>>' +

@@ -3,6 +3,7 @@ session_start();
 if (!class_exists('Connection')) {
     include('connection-function.php');
 }
+include 'utils.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -16,10 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["username"] = $connectionVerif[0]['username'];
                 $_SESSION["idUser"] = $connectionVerif[0]['id'];
 
-                print_r($_SESSION);
-
                 $id_user = $_SESSION["idUser"];
-                $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:time,:log);", array(array(":id", $id_user), array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion")));
+                
+                $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $id_user), array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion"), array(":ip", getIP())));
                 header("Location: ../Pages/index.php");
             } else {
                 echo "Mot de passe incorrect.";

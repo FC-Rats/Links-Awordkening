@@ -50,3 +50,7 @@ body {
 .tan {
     color: var(--tan)!important;
 }
+
+.section {
+    min-height: 100vh;
+}

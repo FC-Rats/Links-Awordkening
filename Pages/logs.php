@@ -32,7 +32,9 @@
                         <thead>
                             <tr>
                                 <th>Identifiant utilisateur</th>
-                                <th>Jour et Heure</th>
+                                <th>Pseudo utilisateur</th>
+                                <th>Trace</th>
+                                <th>IP</th>
                                 <th>Trace</th>
                             </tr>
                         </thead>
