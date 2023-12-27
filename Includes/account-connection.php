@@ -3,7 +3,7 @@ session_start();
 if (!class_exists('Connection')) {
     include('connection-function.php');
 }
-include 'utils.php';
+include '_utils.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["username"]) && isset($_POST["password"])) {

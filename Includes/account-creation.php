@@ -4,7 +4,7 @@ if (!class_exists('Connection')) {
     include('connection-function.php');
 }
 
-include 'utils.php';
+include '_utils.php';
 
 if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["email"]) && isset($_POST["password"])) {
     $username = $_POST["username"];

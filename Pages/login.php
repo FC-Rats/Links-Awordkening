@@ -15,11 +15,11 @@
 </head>
 
 <body>
-    <div class="container vh-100 d-flex justify-content-center align-items-center ">
-        <div class="row justify-content-center w-100 ">
+    <div class="container section d-flex justify-content-center align-items-center ">
+        <div class="row justify-content-center col-12">
             <h1 class="d-flex justify-content-center">Se connecter</h1>
             <div class="col-md-6 d-flex justify-content-center">
-                <form action="../Includes/account-connection.php" method="post" class="w-75 bg-viridian p-5 rounded-3">
+                <form action="../Includes/account-connection.php" method="post" class="col-lg-8 bg-viridian py-4 px-3 px-md-5 rounded-3">
                     <label for="username" class="text-white">Pseudo<span class="required"> *</span></label>
                     <input type="text" id="username" name="username" placeholder="Ex : WordsKing77" required>
 

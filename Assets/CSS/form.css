@@ -93,7 +93,7 @@ input::placeholder {
 #connection-button {
     margin: 0 auto;
     display: block;
-    border-radius: 15px;
+    border-radius: 15px!important;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -109,7 +109,7 @@ input::placeholder {
 
 #submit-button:not([disabled]),
 #connection-button {
-    background-color: var(--coffee);
+    background-color: var(--coffee)!important;
     color: #fff;
     margin-top: 15px;
     width: 100%;
