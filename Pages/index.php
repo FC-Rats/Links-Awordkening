@@ -18,11 +18,11 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-2 bg-viridian sidebar d-none d-md-block witdh" style="width: 300px;">
+            <nav class="col-2 bg-brunswickGreen sidebar d-none d-md-block witdh" style="width: 300px; position:fixed;">
                 <div class="vh-100 d-flex flex-column p-2 fs-4">
                     <ul class="nav flex-column vh-100 justify-content-evenly align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link text-white active" href="#home">Accueil</a>
+                            <a class="nav-link text-white active" href="#">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Profil</a>
@@ -51,9 +51,9 @@
                 </div>
             </nav>
             <div class="d-md-none">
-                <button class="btn btn-primary p-1 m-4 position-fixed bg-viridian border-0 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
+                <button class="btn btn-primary p-1 m-4 position-fixed bg-brunswickGreen border-0 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
 
-                <div class="offcanvas offcanvas-start bg-viridian " data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas offcanvas-start bg-brunswickGreen " data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">Menu</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -61,7 +61,7 @@
                     <div class="offcanvas-body d-flex flex-column p-0">
                         <ul class="nav flex-column flex-grow-1 justify-content-evenly align-items-center fs-4">
                             <li class="nav-item">
-                                <a class="nav-link text-white active" href="#home">Accueil</a>
+                                <a class="nav-link text-white active" href="#">Accueil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#">Profil</a>
@@ -91,11 +91,11 @@
                 </div>
             </div>
 
-            <main role="main" class="col">
+            <main role="main" class="col main-content">
                 <!-- Le contenu principal de la page va ici -->
-                <header class="vh-100 d-flex justify-content-center align-items-center ">
+                <header class="vh-100 d-flex justify-content-center align-items-center">
                     <div class="text-center">
-                        <h1 class="h1 p-5" id="home">Links Awordkening</h1>
+                        <h1 class="h1 p-5" id="accueil">Links Awordkening</h1>
                         <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
