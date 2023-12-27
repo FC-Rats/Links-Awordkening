@@ -9,6 +9,6 @@ $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log) VALUES (:id,:datet
 
 session_destroy();
 
-header("Location: ../Pages/login.html");
+header("Location: ../Pages/login.php");
 exit;
 ?>

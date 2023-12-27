@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <title>Form</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
+    <?php include '../Includes/importHeader.php'; ?>
 </head>
+
 <body>
-<h1>Récupération </h1>
+    <h1>Récupération </h1>
     <form method="POST" action="../Includes/mail-password.php">
         <label for="email">Adresse e-mail :</label>
         <input type="email" name="email" required><br>
@@ -17,5 +19,8 @@
 
         <input type="submit" id="connection-button" value="Envoyer le mail">
     </form>
+
+    <?php include '../Includes/importFooter.php'; ?>
 </body>
+
 </html>

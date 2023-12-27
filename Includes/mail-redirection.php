@@ -17,7 +17,7 @@ session_start();
         <div class="waiting-screen">
             <h3>Vérification email</h3>
             <p>Un email vous a été envoyé pour vérifier votre compte</p>
-            <a href="../Pages/login.html"><button>Retourner à la page de connexion</button></a>
+            <a href="../Pages/login.php"><button>Retourner à la page de connexion</button></a>
         </div>
     </body>
 </html>

@@ -15,7 +15,7 @@ if (isset($_POST['email'])) {
     <br><br> De la part de : projetgrenadeunesco@gmail.com";
 
     envoi_mail($email,$conn,$objet,$message);
-    header("Location: ../Pages/login.html");
+    header("Location: ../Pages/login.php");
 /*     $stmt = $conn->prepare("SELECT email FROM WLA_USER WHERE email = ?;");
     $stmt->bind_param('s', $email);
     $stmt->execute();

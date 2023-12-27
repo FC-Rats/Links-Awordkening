@@ -6,14 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/new-game.css'>
-    <!-- FontAwesome -->
-    <link href="../Assets/fonts/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="../Assets/fonts/fontawesome/css/brands.min.css" rel="stylesheet" />
-    <link href="../Assets/fonts/fontawesome/css/solid.min.css" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link href="../Assets/CSS/bootstrap.min.css" rel="stylesheet" />
+    <?php include '../Includes/importHeader.php'; ?>
 </head>
 
 <body>
@@ -44,10 +38,7 @@
             </form>
         </div>
     </div>
-    <!-- JQuery -->
-    <script src="../Assets/fonts/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../Assets/fonts/bootstrap.bundle.min.js"></script>
+    <?php include '../Includes/importFooter.php'; ?>
 </body>
 
 </html>

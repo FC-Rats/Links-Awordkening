@@ -41,6 +41,6 @@ if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["ema
 
 
 } else {
-    header("Location: ../Pages/index.html");
+    header("Location: ../Pages/index.php");
 }
 ?>

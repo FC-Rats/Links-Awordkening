@@ -1,3 +1,7 @@
+<?php if (!isset($_SESSION)) {
+    session_start();
+} ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,13 +11,7 @@
     <title>Création de compte</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/style.css'>
-    <!-- FontAwesome -->
-    <link href="../Assets/fonts/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="../Assets/fonts/fontawesome/css/brands.min.css" rel="stylesheet" />
-    <link href="../Assets/fonts/fontawesome/css/solid.min.css" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link href="../Assets/CSS/bootstrap.min.css" rel="stylesheet" />
+    <?php include '../Includes/importHeader.php'; ?>
 </head>
 
 <body>
@@ -23,12 +21,12 @@
             <form action="../Includes/account-creation.php" method="post" id="password-form" class="border-0 text-start col-md-8 col-12">
                 <div class="mb-3">
                     <label for="username" class="form-label text-light">Pseudo<span class="required"> *</span></label>
-                    <input type="text" class="form-control" iname="username" d="username" placeholder="Ex : KillerBunny" required>
+                    <input type="text" class="form-control" iname="username" id="username" placeholder="Ex : WordsKing77" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="birthYear" class="form-label text-light">Année de naissance<span class="required"> *</span></label>
-                    <input type="number" class="form-control" name="birthYear" id="birthYear" placeholder="Ex : 2002" required>
+                    <input type="number" class="form-control" name="birthYear" id="birthYear" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" placeholder="Ex : 2002" required>
                 </div>
 
                 <div class="mb-3">
@@ -72,7 +70,7 @@
                 <button type="submit" id="submit-button" disabled>Créer</button>
 
                 <div class="text-center p-3">
-                    <a id="lien-connexion" href="login.php" class="text-light">Déjà un compte ? Se connecter ➔</a>
+                    <a id="lien-connexion" href="login.php" class="text-light text-decoration-underline">Déjà un compte ? Se connecter ➔</a>
                 </div>
             </form>
         </div>
@@ -80,10 +78,7 @@
 
     <script src="../Assets/JS/password-check.js"></script>
     <script src="../Assets/JS/password-toggle.js"></script>
-    <!-- JQuery -->
-    <script src="../Assets/JS/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../Assets/JS/bootstrap.bundle.min.js"></script>
+    <?php include '../Includes/importFooter.php'; ?>
 
 </body>
 

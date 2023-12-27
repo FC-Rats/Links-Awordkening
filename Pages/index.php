@@ -1,3 +1,7 @@
+<?php if (!isset($_SESSION)) {
+    session_start();
+} ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +11,7 @@
     <title>Accueil</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <?php
-        include '../Includes/importHeader.php';
+    include '../Includes/importHeader.php';
     ?>
 </head>
 
@@ -44,34 +48,34 @@
                 <button class="btn btn-primary p-1 m-4 position-fixed bg-viridian" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="../Assets/img/burger-menu.svg" alt="" style="height: 20px; width: 20px; filter: invert(1);"></button>
 
                 <div class="offcanvas offcanvas-start bg-viridian " data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-                  <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body d-flex flex-column p-0">
-                    <ul class="nav flex-column flex-grow-1 justify-content-evenly align-items-center fs-4">
-                        <li class="nav-item">
-                            <a class="nav-link text-white active" href="#home">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Messages</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Paramètres</a>
-                        </li>
-                        <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
-                            <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
-                                Se connecter
-                            </a>
-                            <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
-                                S'inscrire
-                            </a>
-                        </li>
-                    </ul>
-                  </div>
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body d-flex flex-column p-0">
+                        <ul class="nav flex-column flex-grow-1 justify-content-evenly align-items-center fs-4">
+                            <li class="nav-item">
+                                <a class="nav-link text-white active" href="#home">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#">Messages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#">Paramètres</a>
+                            </li>
+                            <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
+                                <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
+                                    Se connecter
+                                </a>
+                                <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
+                                    S'inscrire
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -79,15 +83,16 @@
                 <!-- Le contenu principal de la page va ici -->
                 <header class="vh-100 d-flex justify-content-center align-items-center ">
                     <div class="text-center">
-                      <h1 class="h1 p-5" id="home">Links Awordkening</h1>
-                      <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
+                        <h1 class="h1 p-5" id="home">Links Awordkening</h1>
+                        <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
                     </div>
                 </header>
             </main>
         </div>
     </div>
     <?php
-        include '../Includes/importFooter.php';
+    include '../Includes/importFooter.php';
     ?>
 </body>
+
 </html>

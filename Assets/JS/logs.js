@@ -41,7 +41,9 @@ function listDatas() {
                         responsivePriority: 1,
                         data: "dateTime",
                         render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.dateTime + '</span></div>';
+                            var date = new Date(row.dateTime);
+                            var formattedDate = padNumber(date.getDate()) + '/' + padNumber(date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + padNumber(date.getHours()) + ':' + padNumber(date.getMinutes()) + ':' + padNumber(date.getSeconds());
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + formattedDate + '</span></div>';
                             return $row_output;
                         }
                     },
@@ -71,4 +73,8 @@ function listDatas() {
             });
         }
     });
+}
+
+function padNumber(number) {
+    return (number < 10 ? '0' : '') + number;
 }
