@@ -27,7 +27,7 @@
                             <a class="nav-link text-white active" href="#">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Profil</a>
+                            <a class="nav-link text-white" href="#profil">Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Messages</a>
@@ -66,7 +66,7 @@
                                 <a class="nav-link text-white active" href="#">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Profil</a>
+                                <a class="nav-link text-white" href="#profil">Profil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#">Messages</a>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <main role="main" class="col main-content">
+            <main role="main" class="col main-content p-5">
                 <!-- Le contenu principal de la page va ici -->
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
@@ -115,12 +115,59 @@
                 </header>
                 <div class="section d-flex justify-content-center align-items-center position-relative">
                 </div>
+                <div class="profil vh-100" id="profil">
+                    <div class="text-center">
+                        <h2 class="p-5">Mon profil</h2>
+                    </div>
+                    <!--TODO: Max height à 100% pour que sa prenne toute la page-->
+                    <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100">
+                        <form>
+                            <div class="form-group row py-2">
+                                <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row py-2">
+                                <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row py-2">
+                                <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row py-2">
+                                <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row py-2">
+                                <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary bg-coffee border-none" id="boutonModifier">Modifier</button>
+
+                                <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
+                                <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
     <?php
     include '../Includes/importFooter.php';
     ?>
+    <script src="../Assets/JS/formModificationForm.js"></script>
 </body>
 
 </html>
