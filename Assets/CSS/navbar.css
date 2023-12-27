@@ -1,4 +1,8 @@
 nav li:hover {
-    color: var(--coffee);
+    color: var(--tan);
     text-decoration: underline;
+}
+
+nav {
+    z-index: 10;
 }

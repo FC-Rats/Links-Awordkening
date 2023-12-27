@@ -2,14 +2,14 @@
 if (!class_exists("User", false)) {
     class User extends JSONable
     {
-        protected $id;
-        protected $username;
-        protected $birthYear;
-        protected $email;
-        protected $password;
-        protected $verified;
-        protected $tokenR;
-        protected $scores;
+        private $id;
+        private $username;
+        private $birthYear;
+        private $email;
+        private $password;
+        private $verified;
+        private $tokenR;
+        private $scores;
         protected $errorData;
 
         public function __construct()
