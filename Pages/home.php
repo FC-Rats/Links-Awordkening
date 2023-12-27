@@ -1,12 +1,7 @@
 <?php
-session_start();
-
-if (!class_exists('Connection')) {
-    include('../Includes/connection-function.php');
+if (!isset($_SESSION)) {
+    session_start();
 }
-
-//Récupère les statistiques
-$stats = $db->query("SELECT COUNT(score) AS nombre_scores, MAX(score) AS score_max, MIN(score) AS score_min, AVG(score) AS score_moyen, SUM(score) AS score_total FROM LA_SCORE WHERE idUser = :idUser", array(array(":idUser", $_SESSION["idUser"])));
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +31,7 @@ $stats = $db->query("SELECT COUNT(score) AS nombre_scores, MAX(score) AS score_m
     </ul>
 
     <?php
-    print_r($_SESSION) . "<br>";
+    include("../Includes/getStats.php");
     echo "Nombre de parties : " . $stats[0]['nombre_scores'] . "<br>";
     echo "Score maximum : " . $stats[0]['score_max'] . "<br>";
     echo "Score minimum : " . $stats[0]['score_min'] . "<br>";
