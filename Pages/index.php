@@ -35,7 +35,7 @@
                         </li>
                         <?php if (isset($_SESSION['idUser'])) { ?>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Deconnexion</a>
+                                <a class="nav-link text-white rounded-5 bg-danger fs-6" href="#">Deconnexion</a>
                             </li>
                         <?php } else { ?>
                             <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
@@ -74,7 +74,7 @@
                             </li>
                             <?php if (isset($_SESSION['idUser'])) { ?>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="#">Deconnexion</a>
+                                    <a class="nav-link text-white rounded-5 bg-danger fs-6" href="#">Deconnexion</a>
                                 </li>
                             <?php } else { ?>
                                 <li class="d-flex justify-content-evenly align-items-center w-100 p-2 fs-6">
