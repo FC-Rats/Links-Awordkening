@@ -6,7 +6,7 @@
         <title>Création de compte</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
-        <?php include '../Includes/import.php'; ?>
+        <?php include '../Includes/importHeader.php'; ?>
     </head>
 <body>
     <div class="container vh-100 d-flex justify-content-center align-items-center ">
