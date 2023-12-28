@@ -22,8 +22,8 @@ redirectionConnection();
 
 <body>
     <div class="content-wrapper">
+        <a href="index.php"><button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button" >&larr; Retour à l'accueil</button></a>
         <div class="container pt-5">
-            <a href="index.php" class="text-dark fs-5">< Retour à l'accueil</a>
             <h1 class="text-center py-4">Liste des 500 dernières traces</h1>
         </div>
         <div class="container-fluid">
