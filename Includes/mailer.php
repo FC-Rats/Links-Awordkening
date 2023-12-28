@@ -55,7 +55,7 @@ function generateUniqueID($length)
 function generateTokenLink($email, $conn)
 {
     $token = generateUniqueID(12);
-    $link = "http://perso-etudiant.u-pem.fr/~kellian.bredeau/Projet-SAE/Pages/recuperation-password.php?token=";
+    $link = $config['link_host']."Pages/recuperation-password.php?token=";
     $link .= $token;
     session_start();
     if (!class_exists('Connection')) {
@@ -70,7 +70,7 @@ function generateTokenLink($email, $conn)
 function generateVerifyLink($idUser, $conn)
 {
     $token = generateUniqueID(12);
-    $link = "http://perso-etudiant.u-pem.fr/~kellian.bredeau/Projet-SAE/Includes/account-verify.php?token=";
+    $link = $config['link_host']."Includes/account-verify.php?token=";
     $link .= $token;
     session_start();
     if (!class_exists('Connection')) {

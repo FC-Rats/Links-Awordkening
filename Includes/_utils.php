@@ -37,3 +37,7 @@ function isValidPassword($password) {
 
     return true;
 }
+
+function isConnected() {
+    return isset($_SESSION["idUser"]) && isset($_SESSION["username"]);
+}
