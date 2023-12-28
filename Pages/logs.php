@@ -1,6 +1,9 @@
 <?php if (!isset($_SESSION)) {
     session_start();
-} ?>
+} 
+include '../Includes/_utils.php';
+redirectionConnection();
+?>
 
 <!DOCTYPE html>
 <html>

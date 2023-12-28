@@ -2,6 +2,8 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+include '../Includes/_utils.php';
+redirectionConnection();
 include("../Includes/getStats.php");
 ?>
 

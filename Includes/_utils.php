@@ -38,6 +38,9 @@ function isValidPassword($password) {
     return true;
 }
 
-function isConnected() {
-    return isset($_SESSION["idUser"]) && isset($_SESSION["username"]);
+function redirectionConnection() {
+    if (!isset($_SESSION["idUser"]) || !isset($_SESSION["username"])) {
+        header('Location: ../Pages/login.php');
+        exit();
+    }
 }

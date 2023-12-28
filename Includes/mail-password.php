@@ -11,10 +11,10 @@ if (isset($_POST['email'])) {
     $message = " Cher client, 
     <br> Il semble que vous avez oublié votre mot de passe.  
     <br> Si ce n'est pas vous à l'origine de cette récupération de compte, ignorez ce mail. \n
-    <br><br> Lien d'activation : " . generateTokenLink($email,$conn) . "
-    <br><br> De la part de : projetgrenadeunesco@gmail.com";
+    <br><br> Lien d'activation : " . generateTokenLink($email) . "
+    <br><br> De la part de : projet.saebut@gmail.com";
 
-    envoi_mail($email,$conn,$objet,$message);
+    envoi_mail($email,$objet,$message);
     header("Location: ../Pages/login.php");
 /*     $stmt = $conn->prepare("SELECT email FROM WLA_USER WHERE email = ?;");
     $stmt->bind_param('s', $email);

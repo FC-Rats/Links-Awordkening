@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function envoi_mail($to_email,$conn,$objet,$message)
+function envoi_mail($to_email,$objet,$message)
 {
     $mail = new PHPMailer(true);
 
@@ -52,7 +52,7 @@ function generateUniqueID($length)
     return $randomString;
 }
 
-function generateTokenLink($email, $conn)
+function generateTokenLink($email)
 {
     $token = generateUniqueID(12);
     $link = $config['link_host']."Pages/recuperation-password.php?token=";
@@ -67,7 +67,7 @@ function generateTokenLink($email, $conn)
     return $link;
 }
 
-function generateVerifyLink($idUser, $conn)
+function generateVerifyLink($idUser)
 {
     $token = generateUniqueID(12);
     $link = $config['link_host']."Includes/account-verify.php?token=";
