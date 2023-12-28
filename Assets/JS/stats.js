@@ -1,4 +1,4 @@
-var logsTable;
+var historyTable;
 
 $(function () {
     listDatas();
@@ -6,44 +6,43 @@ $(function () {
 
 function listDatas() {
     $.ajax({
-        url: '../Includes/getLogs.php',
+        url: '../Includes/getHistory.php',
         type: 'POST',
         dataType: "JSON",
         cache: false,
         async: false,
         data: {},
         success: function (data) {
-            listLogs = data.Logs;
+            listLogs = data.History;
 
-            $("#LogsTable").dataTable().fnDestroy();
-            logsTable = $("#LogsTable").DataTable({
+            $("#HistoryTable").dataTable().fnDestroy();
+            historyTable = $("#HistoryTable").DataTable({
                 data: listLogs,
                 clientSide: true,
                 responsive: true,
                 stateSave: false,
                 columns: [
-                    { data: 'idUser' },
-                    { data: 'username' },
+                    { data: 'name' },
+                    { data: 'type' },
                     { data: 'dateTime' },
-                    { data: 'ip' },
-                    { data: 'log' }
+                    { data: 'score' }
                 ],
                 columnDefs: [
                     {
                         targets: 0,
                         responsivePriority: 1,
-                        data: "idUser",
+                        data: "name",
                         render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.idUser + '</span></div>';
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.name + '</span></div>';
                             return $row_output;
                         }
                     },
                     {
                         targets: 1,
                         responsivePriority: 1,
-                        data: "username",
+                        data: "type",
                         render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.username + '</span></div>';
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + typeGame(row.type) + '</span></div>';
                             return $row_output;
                         }
                     },
@@ -59,18 +58,9 @@ function listDatas() {
                     {
                         targets: 3,
                         responsivePriority: 1,
-                        data: "ip",
+                        data: "score",
                         render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.ip + '</span></div>';
-                            return $row_output;
-                        }
-                    },
-                    {
-                        targets: 4,
-                        responsivePriority: 1,
-                        data: "log",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.log + '</span></div>';
+                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.score + '</span></div>';
                             return $row_output;
                         }
                     }
@@ -91,4 +81,8 @@ function listDatas() {
             });
         }
     });
+}
+
+function typeGame(type) {
+    return (type === "SinglePlayer") ? "Solo" : (type === "MultiPlayer") ? "Multi" : "Autre";
 }

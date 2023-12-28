@@ -46,9 +46,10 @@
     <?php
     include '../Includes/importFooter.php';
     ?>
-    <script src="../Assets/js/jquery.dataTables.min.js"></script>
-    <script src="../Assets/js/dataTables.responsive.min.js"></script>
-    <script src="../Assets/js/logs.js"></script>
+    <script src="../Assets/JS/jquery.dataTables.min.js"></script>
+    <script src="../Assets/JS/dataTables.responsive.min.js"></script>
+    <script src="../Assets/JS/_utils.js"></script>
+    <script src="../Assets/JS/logs.js"></script>
 </body>
 
 </html>

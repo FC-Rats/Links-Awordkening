@@ -18,7 +18,7 @@
         <div class="d-flex flex-column align-items-center justify-content-center">
             <h3 class="text-start">Vérification email</h3>
             <p class="text-start">Un email vous a été envoyé pour vérifier votre compte.</p>
-            <a href="../Pages/login.php"><button class="bg-viridian text-light p-3 rounded-5 border-0">Retourner à la page de connexion</button></a>
+            <a href="login.php"><button class="bg-viridian text-light p-3 rounded-5 border-0">Retourner à la page de connexion</button></a>
         </div>
     </div>
 

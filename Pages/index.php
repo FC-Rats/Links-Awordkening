@@ -115,8 +115,8 @@
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
                         <!--TODO: Max height à 100% pour que sa prenne toute la page-->
-                        <div class="container mt-5 bg-viridian py-4 px-3 px-md-5 rounded-3 mh-100">
-                            <form>
+                        <div class="container mh-100">
+                            <form class="mt-5 py-4 px-3 px-md-5 rounded-3 bg-viridian">
                                 <div class="form-group row py-2">
                                     <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
                                     <div class="col-sm-8">
@@ -154,6 +154,9 @@
                                     <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
                                 </div>
                             </form>
+                            <div class="py-5 d-flex align-items-center justify-content-center">
+                                <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0">Consulter mon historique de parties et mes statistiques</button></a>
+                            </div>
                         </div>
                     <?php } else { ?>
                         <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100 position-relative" style="user-select: none;">

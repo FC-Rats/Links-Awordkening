@@ -1,21 +1,21 @@
-#LogsTable thead th {
-    background-color: var(--viridian)!important;
+table thead th {
+    background-color: var(--brunswickGreen)!important;
     color: var(--parchment)!important;
 }
 
-#LogsTable tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
     background-color: var(--brunswickGreen)!important;
 }
 
-#LogsTable tbody tr:nth-child(odd) {
+table tbody tr:nth-child(odd) {
     background-color: var(--coffee)!important;
 }
 
-#LogsTable tbody td {
+table tbody td {
     color: var(--coffee)!important;
 }
 
-#LogsTable tbody tr:hover {
+table tbody tr:hover {
     background-color: var(--tan)!important;
     color: var(--parchment)!important;
 }
