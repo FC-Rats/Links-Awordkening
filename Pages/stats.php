@@ -21,8 +21,8 @@ include("../Includes/getStats.php");
 </head>
 
 <body>
+    <a href="index.php#parametres"><button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button" >&larr; Retour à l'accueil</button></a>
     <div class="container section d-flex flex-column justify-content-center">
-    <a href="index.php#profil" class="text-dark mb-5 ms-3 fs-5">< Retour au profil</a>
 
         <h1 class="d-flex justify-content-center">Vos parties</h1>
 
