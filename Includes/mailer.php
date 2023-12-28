@@ -27,9 +27,8 @@ function envoi_mail($to_email,$conn,$objet,$message)
         $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('projetgrenadeunesco@gmail.com', 'FCFLEM');
+        $mail->setFrom('projet.saebut@gmail.com', 'Links Awordkening');
         $mail->addAddress($to_email, 'Client');
-        //$mail->addAddress('lna.chevalier@gmail.com', 'Client');
 
         //Content à changer
         $mail->isHTML(true);

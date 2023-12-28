@@ -114,47 +114,47 @@
                         <h2 class="p-5">Mon profil</h2>
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
-                    <!--TODO: Max height à 100% pour que sa prenne toute la page-->
-                    <div class="container mt-5 bg-viridian py-4 px-3 px-md-5 rounded-3 mh-100">
-                        <form>
-                            <div class="form-group row py-2">
-                                <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                        <!--TODO: Max height à 100% pour que sa prenne toute la page-->
+                        <div class="container mt-5 bg-viridian py-4 px-3 px-md-5 rounded-3 mh-100">
+                            <form>
+                                <div class="form-group row py-2">
+                                    <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row py-2">
-                                <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
-                                <div class="col-sm-8">
-                                    <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                <div class="form-group row py-2">
+                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row py-2">
-                                <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                <div class="form-group row py-2">
+                                    <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row py-2">
-                                <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                <div class="form-group row py-2">
+                                    <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row py-2">
-                                <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                <div class="form-group row py-2">
+                                    <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
 
-                                <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
-                                <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
-                            </div>
-                        </form>
-                    </div>
+                                    <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
+                                    <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
                     <?php } else { ?>
                         <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100 position-relative" style="user-select: none;">
                             <form>
@@ -197,7 +197,7 @@
                             </form>
                             <div class="text-center position-absolute top-50 start-50 translate-middle rounded-3 d-flex flex-column justify-content-center" style="backdrop-filter: blur(20px); width: 100%; height: 100%;">
                                 <h2 class="p-5">Vous devez être connecté pour accéder à cette page</h2>
-                                    <div class="my-4">
+                                <div class="my-4">
                                     <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
                                         Se connecter
                                     </a>
@@ -206,17 +206,20 @@
                                     </a>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     <?php } ?>
                 </div>
-                <div id="message" class="vh-100">
-                <div class="text-center">
+                <div id="message" class="section">
+                    <div class="text-center">
                         <h2 class="p-5">Messages</h2>
+                        <p class="fst-italic">Fonctionnalité à venir très prochainement.</p>
                     </div>
                 </div>
-                <div id="parametres" class="vh-100">
-                <div class="text-center">
-                        <h2 class="p-5">Parametres</h2>
+                <div id="parametres" class="section">
+                    <div class="text-center d-flex flex-column">
+                        <h2 class="p-5">Paramètres</h2>
+                        <a href="#profil" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon profil</button></a>
+                        <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
                     </div>
                 </div>
             </main>

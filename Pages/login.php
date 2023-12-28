@@ -8,7 +8,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Création de compte</title>
+    <title>Connexion au compte</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
     <?php include '../Includes/importHeader.php'; ?>
