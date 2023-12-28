@@ -1,10 +1,10 @@
 <?php
 if (!class_exists("Score", false)) {
     class Score extends JSONable{
-        private $idUser;
-        private $idGame;
-        private $score;
-        private $words;
+        protected $idUser;
+        protected $idGame;
+        protected $score;
+        protected $words;
         protected $errorData;
 
         public function __construct() {

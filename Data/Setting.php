@@ -1,9 +1,9 @@
 <?php
 if (!class_exists("Setting", false)) {
     class Setting extends JSONable{
-        private $idUser;
-        private $profilPicture;
-        private $visibility;
+        protected $idUser;
+        protected $profilPicture;
+        protected $visibility;
         protected $errorData;
 
         public function __construct() {

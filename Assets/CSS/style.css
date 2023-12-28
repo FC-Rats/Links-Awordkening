@@ -54,3 +54,9 @@ body {
 .section {
     min-height: 100vh;
 }
+
+.beautiful-button {
+    border: 0!important;
+    outline: none!important;
+    box-shadow: none!important;
+}

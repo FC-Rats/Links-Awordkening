@@ -2,10 +2,10 @@
 if (!class_exists("Log", false)) {
     class Log extends JSONable
     {
-        private $idUser;
-        private $dateTime;
-        private $log;
-        private $ip;
+        protected $idUser;
+        protected $dateTime;
+        protected $log;
+        protected $ip;
         protected $errorData;
 
         public function __construct()

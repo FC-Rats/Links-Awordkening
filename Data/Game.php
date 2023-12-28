@@ -1,15 +1,15 @@
 <?php
 if (!class_exists("Game", false)) {
     class Game extends JSONable {
-        private $id;
-        private $idJoin;
-        private $idHost;
-        private $dateTime;
-        private $name;
-        private $type;
-        private $maxPlayer;
-        private $active;
-        private $users;
+        protected $id;
+        protected $idJoin;
+        protected $idHost;
+        protected $dateTime;
+        protected $name;
+        protected $type;
+        protected $maxPlayer;
+        protected $active;
+        protected $users;
         protected $errorData;
 
         public function __construct() {

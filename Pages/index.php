@@ -11,7 +11,6 @@
     <title>Accueil</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/navbar.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/nav.css'>
     <?php
     include '../Includes/importHeader.php';
     ?>
@@ -94,7 +93,7 @@
             </div>
 
             <!-- Le contenu principal de la page va ici -->
-            <main role="main" class="col main-content p-5">
+            <main role="main" class="col main-content py-4 px-3 px-md-5">
                 <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-3.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
@@ -116,7 +115,7 @@
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
                     <!--TODO: Max height à 100% pour que sa prenne toute la page-->
-                    <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100">
+                    <div class="container mt-5 bg-viridian py-4 px-3 px-md-5 rounded-3 mh-100">
                         <form>
                             <div class="form-group row py-2">
                                 <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
@@ -149,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary bg-coffee border-none" id="boutonModifier">Modifier</button>
+                                <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
 
                                 <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
                                 <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
