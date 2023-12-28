@@ -7,3 +7,10 @@ function formatDate(date) {
 function padNumber(number) {
     return (number < 10 ? '0' : '') + number;
 }
+
+function renderText(column, customFormatter = null) {
+    return function (data, type, row, meta) {
+        var formattedData = (customFormatter) ? customFormatter(row[column]) : row[column];
+        return '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + formattedData + '</span></div>';
+    };
+}

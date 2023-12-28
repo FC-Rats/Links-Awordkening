@@ -1,21 +1,54 @@
-table thead th {
-    background-color: var(--brunswickGreen)!important;
-    color: var(--parchment)!important;
+.card {
+    background-color: var(--coffee);
+    color: var(--parchment);
 }
 
-table tbody tr:nth-child(even) {
-    background-color: var(--brunswickGreen)!important;
+.card-datatable table {
+    border-color: var(--tan);
 }
 
-table tbody tr:nth-child(odd) {
-    background-color: var(--coffee)!important;
+.card-datatable th {
+    background-color: var(--brunswickGreen);
+    color: var(--tan);
 }
 
-table tbody td {
-    color: var(--coffee)!important;
+.card-datatable td {
+    background-color: var(--parchment);
+    color: var(--brunswickGreen);
 }
 
-table tbody tr:hover {
+.dt-action-buttons button {
+    background-color: var(--coffee);
+    color: var(--parchment);
+}
+
+.dt-action-buttons button:hover {
+    background-color: var(--tan);
+}
+
+option {
+    color: var(--brunswickGreen);
+}
+
+.dataTables_filter input {
     background-color: var(--tan)!important;
-    color: var(--parchment)!important;
+    color: var(--brunswickGreen)!important;
+    border: 1px solid var(--brunswickGreen);
+}
+
+.dataTables_info,
+.dataTables_paginate a {
+    color: var(--brunswickGreen);
+}
+
+.dataTables_paginate a:hover {
+    color: var(--coffee);
+}
+
+a, label {
+    color: var(--parchment);
+}
+
+#HistoyTable {
+    max-width: 100%!important;
 }

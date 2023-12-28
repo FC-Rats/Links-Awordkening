@@ -120,31 +120,31 @@
                                 <div class="form-group row py-2">
                                     <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                                        <input type="text" class="form-control input-modifiable beautiful-button" id="pseudo" value="MonPseudo" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
-                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
+                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                                     <div class="col-sm-8">
-                                        <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                        <input type="number" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                        <input type="email" class="form-control input-modifiable beautiful-button" id="mail" value="exemple@mail.com" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                        <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesJouees" value="10" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                        <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesGagnees" value="5" readonly>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -159,45 +159,48 @@
                             </div>
                         </div>
                     <?php } else { ?>
-                        <div class="container mt-5 bg-viridian p-5 rounded-3 mh-100 position-relative" style="user-select: none;">
-                            <form>
+                        <div class="container mh-100 position-relative" style="user-select: none;">
+                            <form class="mt-5 bg-viridian p-5 rounded-3 ">
                                 <div class="form-group row py-2">
                                     <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control input-modifiable" id="pseudo" value="MonPseudo" readonly>
+                                        <input type="text" class="form-control input-modifiable beautiful-button" id="pseudo" value="MonPseudo" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
-                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Date de naissance</label>
+                                    <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                                     <div class="col-sm-8">
-                                        <input type="date" class="form-control input-modifiable" id="dateNaissance" value="2000-01-01" readonly>
+                                        <input type="number" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control input-modifiable" id="mail" value="exemple@mail.com" readonly>
+                                        <input type="email" class="form-control input-modifiable beautiful-button" id="mail" value="exemple@mail.com" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-modifiable" id="nbPartiesJouees" value="10" readonly>
+                                        <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesJouees" value="10" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row py-2">
                                     <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-modifiable" id="nbPartiesGagnees" value="5" readonly>
+                                        <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesGagnees" value="5" readonly>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary bg-coffee border-none" id="boutonModifier">Modifier</button>
+                                    <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
 
                                     <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
                                     <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
                                 </div>
                             </form>
+                            <div class="py-5 d-flex align-items-center justify-content-center">
+                                <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0">Consulter mon historique de parties et mes statistiques</button></a>
+                            </div>
                             <div class="text-center position-absolute top-50 start-50 translate-middle rounded-3 d-flex flex-column justify-content-center" style="backdrop-filter: blur(20px); width: 100%; height: 100%;">
                                 <h2 class="p-5">Vous devez être connecté pour accéder à cette page</h2>
                                 <div class="my-4">
@@ -221,8 +224,13 @@
                 <div id="parametres" class="section">
                     <div class="text-center d-flex flex-column">
                         <h2 class="p-5">Paramètres</h2>
-                        <a href="#profil" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon profil</button></a>
-                        <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
+                        <?php if (isset($_SESSION['idUser'])) { ?>
+                            <a href="#profil" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon profil</button></a>
+                            <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
+                            <a href="logs.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Accéder aux 500 dernières traces</button></a>
+                        <?php } else { ?>
+                            <p class="fst-italic">Aucun paramétrage à réaliser.</p>
+                        <?php } ?>
                     </div>
                 </div>
             </main>

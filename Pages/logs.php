@@ -19,7 +19,8 @@
 
 <body>
     <div class="content-wrapper">
-        <div class="container">
+        <div class="container pt-5">
+            <a href="index.php" class="text-dark fs-5">< Retour à l'accueil</a>
             <h1 class="text-center py-4">Liste des 500 dernières traces</h1>
         </div>
         <div class="container-fluid">

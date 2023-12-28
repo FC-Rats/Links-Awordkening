@@ -19,7 +19,9 @@ include("../Includes/getStats.php");
 </head>
 
 <body>
-    <div class="container section d-flex flex-column justify-content-center align-items-center">
+    <div class="container section d-flex flex-column justify-content-center">
+    <a href="index.php#profil" class="text-dark mb-5 ms-3 fs-5">< Retour au profil</a>
+
         <h1 class="d-flex justify-content-center">Vos parties</h1>
 
         <div class="d-flex flex-row flex-wrap col-12 bg-viridian rounded-5 my-2 py-4 justify-content-center align-items-center">
@@ -43,10 +45,12 @@ include("../Includes/getStats.php");
             </div>
 
             <div class="col-12 col-xl-6 d-flex flex-column justify-content-center align-items-center py-4">
-                <h3 class="d-flex justify-content-center">Historique de vos parties</h3>
                 <div class="content-wrapper">
                     <div class="container-fluid">
                         <div class="card">
+                            <h3 class="card-header">
+                                Historique de vos parties
+                            </h3>
                             <div class="card-datatable table-responsive">
                                 <table class="dt-responsive table border-top display" id="HistoryTable" style="width:100%">
                                     <thead>

@@ -20,60 +20,13 @@ function listDatas() {
                 data: listLogs,
                 clientSide: true,
                 responsive: true,
-                stateSave: false,
+                stateSave: true,
                 columns: [
-                    { data: 'idUser' },
-                    { data: 'username' },
-                    { data: 'dateTime' },
-                    { data: 'ip' },
-                    { data: 'log' }
-                ],
-                columnDefs: [
-                    {
-                        targets: 0,
-                        responsivePriority: 1,
-                        data: "idUser",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.idUser + '</span></div>';
-                            return $row_output;
-                        }
-                    },
-                    {
-                        targets: 1,
-                        responsivePriority: 1,
-                        data: "username",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.username + '</span></div>';
-                            return $row_output;
-                        }
-                    },
-                    {
-                        targets: 2,
-                        responsivePriority: 1,
-                        data: "dateTime",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + formatDate(row.dateTime) + '</span></div>';
-                            return $row_output;
-                        }
-                    },
-                    {
-                        targets: 3,
-                        responsivePriority: 1,
-                        data: "ip",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.ip + '</span></div>';
-                            return $row_output;
-                        }
-                    },
-                    {
-                        targets: 4,
-                        responsivePriority: 1,
-                        data: "log",
-                        render: function (data, type, row, meta) {
-                            var $row_output = '<div class="d-flex justify-content-start align-items-center"><span class="text-truncate d-flex align-items-center">' + row.log + '</span></div>';
-                            return $row_output;
-                        }
-                    }
+                    { data: 'idUser', render: renderText('idUser') },
+                    { data: 'username', render: renderText('username') },
+                    { data: 'dateTime', render: renderText('dateTime', formatDate) },
+                    { data: 'ip', render: renderText('ip') },
+                    { data: 'log', render: renderText('log') }
                 ],
                 order: [[2, 'desc']],
                 dom:
