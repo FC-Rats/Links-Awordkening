@@ -7,7 +7,7 @@ include './mailer.php';
 if (!empty($_POST['username']) && !empty($_POST['birthYear']) && !empty($_POST['email'])) {
     try {
         
-        $getpreviousEmail = $db->query("SELECT email, username FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
+        $getpreviousEmail = $db->query("SELECT id, email, username FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
         $updateUser = "UPDATE LA_USER SET username = :username, birthYear = :birthYear, email = :email WHERE username = :previousUsername";
         $conditions = array(array(':username', $_POST['username']), array(':birthYear', $_POST['birthYear']), array(':email', $_POST['email']), array(':previousUsername', $getpreviousEmail[0]['username']));
 
@@ -16,6 +16,8 @@ if (!empty($_POST['username']) && !empty($_POST['birthYear']) && !empty($_POST['
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['email'] = $_POST['email'];
         envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "Votre profil a bien été modifié.", $config);
+        $id_user = $getpreviousEmail[0]['id'];
+        $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Modification du profil"), array(":ip", getIP())));
         echo json_encode($response);
     } catch (PDOException $e) {
         // En cas d'erreur de requête SQL
