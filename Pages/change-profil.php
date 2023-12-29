@@ -1,6 +1,11 @@
-<?php if (!isset($_SESSION)) {
+<?php 
+if (!isset($_SESSION)) {
     session_start();
-} ?>
+}
+if (isset($_SESSION["idUser"])) {
+    include("../Includes/getUser.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,46 +21,53 @@
             <h1 class="text-center py-4">Modifier mon profil</h1>
         </div>
         <?php if (isset($_SESSION['idUser'])) { ?>
-            <!--TODO: Max height à 100% pour que sa prenne toute la page-->
             <div class="container mh-100">
                 <form class="mt-5 py-4 px-3 px-md-5 rounded-3 bg-viridian">
                     <div class="form-group row py-2">
                         <label for="pseudo" class="col-sm-4 col-form-label text-white">Pseudo</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-modifiable beautiful-button" id="pseudo" value="Mon pseudo" readonly>
+                            <input type="text" class="form-control input-modifiable beautiful-button" id="pseudo" value="<?= $user[0]["username"] ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                         <div class="col-sm-8">
-                            <input type="number" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
+                            <input type="number" min="<?php echo date("Y") - 150; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="<?= $user[0]["birthYear"] ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control input-modifiable beautiful-button" id="mail" value="exemple@mail.com" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
-                        <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesJouees" value="10" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
-                        <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesGagnees" value="5" readonly>
+                            <input type="email" class="form-control input-modifiable beautiful-button" id="mail" value="<?= $user[0]["email"] ?>" readonly>
                         </div>
                     </div>
                     <div class="text-center">
                         <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
 
                         <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
-                        <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
+                        <button type="button" id="boutonEnregistrer" class="btn btn-success d-none" data-bs-toggle="modal" data-bs-target="#modal-change-profil">Enregistrer</button>
                     </div>
                 </form>
+                <div class="modal fade " id="modal-change-profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmez les modifications</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    
+                                </p>
+                                <p>Un email vous sera envoyé à <?= $user[0]["email"] ?> pour que les changements soient effectués</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <input type="button" class="btn btn-primary beautiful-button bg-viridian" id="modifyProfilButton" value="Enregistrer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="py-5 d-flex align-items-center justify-content-center">
                     <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0">Consulter mon historique de parties et mes statistiques</button></a>
                 </div>
@@ -72,25 +84,13 @@
                     <div class="form-group row py-2">
                         <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                         <div class="col-sm-8">
-                            <input type="number" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
+                            <input type="number" min="<?php echo date("Y") - 150;// age maximum ?>" max="<?php echo date("Y") - 10 ; //age minimum ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label for="mail" class="col-sm-4 col-form-label text-white">Mail</label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control input-modifiable beautiful-button" id="mail" value="exemple@mail.com" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
-                        <label for="nbPartiesJouees" class="col-sm-4 col-form-label text-white">Nombre de parties jouées</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesJouees" value="10" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
-                        <label for="nbPartiesGagnees" class="col-sm-4 col-form-label text-white">Nombre de parties gagnées</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control input-modifiable beautiful-button" id="nbPartiesGagnees" value="5" readonly>
                         </div>
                     </div>
                     <div class="text-center">
@@ -119,5 +119,6 @@
     </div>
     <?php include '../Includes/importFooter.php'; ?>
     <script src="../Assets/JS/formModificationForm.js"></script>
+    <script src="../Assets/JS/modifyProfil.js"></script>
 </body>
 </html>

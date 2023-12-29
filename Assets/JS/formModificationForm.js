@@ -14,6 +14,7 @@ document.getElementById('boutonAnnuler').addEventListener('click', function() {
     toggleBoutons(false);
 
     // Remettre les inputs en mode lecture seule
+    location.reload();
     setInputsReadOnly();
 });
 
