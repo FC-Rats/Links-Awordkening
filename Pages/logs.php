@@ -22,7 +22,11 @@ redirectionConnection();
 
 <body>
     <div class="content-wrapper">
-        <a href="index.php#parametres"><button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button" >&larr; Retour à l'accueil</button></a>
+        <a href="index.php#parametres">
+            <button class="btn rounded-5 bg-coffee m-2 m-md-5 px-4 py-2 py-md-3 text-white fs-5 fs-md-4 beautiful-button">
+                &larr; Retour à l'accueil
+            </button>
+        </a>
         <div class="container pt-5">
             <h1 class="text-center py-4">Liste des 500 dernières traces</h1>
         </div>

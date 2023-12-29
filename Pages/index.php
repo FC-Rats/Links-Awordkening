@@ -7,7 +7,6 @@ if (!class_exists('Connection')) {
 }
 
 include '../Includes/_utils.php';
-redirectionConnection();
 
 if (isset($_SESSION["idUser"])) {
     include("../Includes/getUser.php");
@@ -127,7 +126,7 @@ if (isset($_SESSION["idUser"])) {
                         <h2 class="p-5">Mon profil</h2>
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
-                        <div class="d-block d-md-flex justify-content-evenly align-items-center" style="height: 75%; border-radius: 200px;">
+                        <div class="d-block d-md-flex justify-content-evenly align-items-center" style="border-radius: 200px;">
                             <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
                                 <div>
@@ -150,14 +149,17 @@ if (isset($_SESSION["idUser"])) {
                                 </div>
                             </div>
                         </div>
+                    <div class="py-5 d-flex align-items-center justify-content-center">
+                        <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0 mt-5">Consulter mon historique de parties et mes statistiques</button></a>
+                    </div>
                     <?php } else { ?>
-                        <p class="fst-italic text-center">Connectez-vous pour voir les vos données de profil.</p>
+                        <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>
                     <?php } ?>
                 </div>
                 <div id="message" class="section">
                     <div class="text-center">
                         <h2 class="p-5">Messages</h2>
-                        <p class="fst-italic">Fonctionnalité à venir très prochainement.</p>
+                        <p class="fst-italic fs-5">Fonctionnalité à venir très prochainement.</p>
                     </div>
                 </div>
                 <div id="parametres" class="section">
@@ -168,7 +170,7 @@ if (isset($_SESSION["idUser"])) {
                             <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
                             <a href="logs.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Accéder aux 500 dernières traces</button></a>
                         <?php } else { ?>
-                            <p class="fst-italic">Aucun paramétrage à réaliser.</p>
+                            <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>
                         <?php } ?>
                     </div>
                 </div>
