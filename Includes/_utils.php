@@ -1,5 +1,5 @@
 <?php
-function getIP()
+function getIP($idUser = null)
 {
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -8,9 +8,14 @@ function getIP()
     } else {
         $ip_address = $_SERVER['REMOTE_ADDR'];
     }
-    $ip_address = $_SESSION["idUser"] . '|' . $ip_address;
+    
+    $idUser = isset($idUser) ? $idUser : $_SESSION['idUser'];
+    
+    $ip_address = $idUser . '|' . $ip_address;
+    
     return $ip_address;
 }
+
 
 function isValidUsername($username) {
     return preg_match('/^[A-Za-z0-9_!@#$%^&*()\-_=+{};:<.>]+$/', $username);

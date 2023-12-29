@@ -1,7 +1,7 @@
-<?php 
+<?php
 if (!isset($_SESSION)) {
     session_start();
-} 
+}
 if (!class_exists('Connection')) {
     include('../Includes/connection-function.php');
 }
@@ -123,31 +123,31 @@ if (isset($_SESSION["idUser"])) {
                         <h2 class="p-5">Mon profil</h2>
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
-                    <div class="d-block d-md-flex justify-content-evenly align-items-center" style="height: 75%; border-radius: 200px;">
-                        <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
-                        <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
-                            <div >
-                                <p>Pseudo</p>
-                                <h3 class="fs-1"><?= $user[0]["username"] ?></h3>
+                        <div class="d-block d-md-flex justify-content-evenly align-items-center" style="height: 75%; border-radius: 200px;">
+                            <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
+                            <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
+                                <div>
+                                    <p>Pseudo</p>
+                                    <h3 class="fs-1"><?= $user[0]["username"] ?></h3>
+                                </div>
+                                <div>
+                                    <p>Année de naissance</p>
+                                    <h3 class="fs-1"><?= $user[0]["birthYear"] ?></h3>
+                                </div>
                             </div>
-                            <div>
-                                <p>Année de naissance</p>
-                                <h3 class="fs-1"><?= $user[0]["birthYear"] ?></h3>
+                            <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
+                                <div>
+                                    <p>Mail</p>
+                                    <h3 class="fs-1"><?= $user[0]["email"] ?></h3>
+                                </div>
+                                <div>
+                                    <p>Nombre de parties jouées</p>
+                                    <h3 class="fs-1"><?= $stats[0]['nombre_scores'] ?></h3>
+                                </div>
                             </div>
                         </div>
-                        <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
-                            <div>
-                                <p>Mail</p>
-                                <h3 class="fs-1"><?= $user[0]["email"] ?></h3>
-                            </div>
-                            <div>
-                                <p>Nombre de parties jouées</p>
-                                <h3 class="fs-1"><?= $stats[0]['nombre_scores'] ?></h3>
-                            </div>
-                        </div>
-                    </div>
                     <?php } else { ?>
-                        <p class="fst-italic text-center">Connectez vous voir les vos données de profil</p>
+                        <p class="fst-italic text-center">Connectez-vous pour voir les vos données de profil.</p>
                     <?php } ?>
                 </div>
                 <div id="message" class="section">

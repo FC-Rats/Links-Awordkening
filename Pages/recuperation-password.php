@@ -14,7 +14,7 @@
         <h1 class="text-center py-5">Changement de mot de passe</h1>
         <div class="col-12 col-md-8 bg-viridian rounded-2 d-flex justify-content-center align-items-center py-4 px-3">
             <form action="../Includes/update-password.php" method="post" id="password-form" class="border-0 text-start col-md-8 col-12">
-                <input type="hidden" name="token" id="token" value="<?php htmlspecialchars($_GET['token']); ?>">
+                <input type="hidden" name="token" id="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
 
                 <div class="mb-3">
                     <label for="password" class="form-label text-light">Mot de passe<span class="required"> *</span></label>

@@ -11,7 +11,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function envoi_mail($to_email,$objet,$message)
+include '_utils.php';
+
+function envoi_mail($to_email,$objet,$message, $config)
 {
     $mail = new PHPMailer(true);
 
@@ -24,6 +26,7 @@ function envoi_mail($to_email,$objet,$message)
         $mail->SMTPAuth = true;
         $mail->Username = $config['mailer_username'];
         $mail->Password = $config['mailer_password'];
+        $mail->CharSet  = 'UTF-8';
         $mail->Port = 465;
 
         //Recipients
@@ -52,34 +55,32 @@ function generateUniqueID($length)
     return $randomString;
 }
 
-function generateTokenLink($email)
+function generateTokenLink($email,$config)
 {
     $token = generateUniqueID(12);
     $link = $config['link_host']."Pages/recuperation-password.php?token=";
     $link .= $token;
-    session_start();
     if (!class_exists('Connection')) {
         include('connection-function.php');
     }
     
     $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;",array(array(":email", $email)));
-    $updatePassword = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    $recuperation = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $getId[0]["id"]),array(":time", date('Y-m-d H:i:s')), array(":log", "Récupération"), array(":ip", getIP($getId[0]["id"]))));
     return $link;
 }
 
-function generateVerifyLink($idUser)
+function generateVerifyLink($idUser,$config)
 {
     $token = generateUniqueID(12);
     $link = $config['link_host']."Includes/account-verify.php?token=";
     $link .= $token;
-    session_start();
     if (!class_exists('Connection')) {
         include('connection-function.php');
     }
     
     $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;",array(array(":email", $email)));
-    $updatePassword = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    $verfication = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+    $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $getId[0]["id"]),array(":time", date('Y-m-d H:i:s')), array(":log", "Vérification"), array(":ip", getIP($getId[0]["id"]))));
     return $link;
 }
-
-

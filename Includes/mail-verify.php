@@ -13,10 +13,10 @@ if (isset($_POST['email'])) {
     <br> Bienvenue,  
     <br> Attention : vous ne pourrez pas changer votre mot de passe tant que votre compte n'est pas vérifié.
     <br> Afin de finaliser votre inscription veuillez cliquer sur le lien de vérification ci-dessous :
-    <br><br> Lien d'activation : " . generateVerifyLink($email) . "
+    <br><br> Lien d'activation : " . generateVerifyLink($email,$config) . "
     <br><br> De la part de : projet.saebut@gmail.com";
 
-    envoi_mail($email,$objet,$message);
+    envoi_mail($email,$objet,$message,$config);
     header("Location: ../Pages/mail-redirection.php");
     /*     $stmt = $conn->prepare("SELECT email FROM WLA_USER WHERE email = ?;");
     $stmt->bind_param('s', $email);
