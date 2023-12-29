@@ -14,9 +14,9 @@ if (!class_exists("Game", false)) {
 
         public function __construct() {
             $this->id = 0;
-            $this->idJoin = 0;
+            $this->idJoin = "";
             $this->idHost = 0;
-            $this->dateTime = 0;
+            $this->dateTime = "";
             $this->name = "";
             $this->type = "";
             $this->maxPlayer = 1;
@@ -27,9 +27,9 @@ if (!class_exists("Game", false)) {
 
         // Gets
         public function getId():int { return $this->id; }
-        public function getIdJoin():int { return $this->idJoin; }
+        public function getIdJoin():string { return $this->idJoin; }
         public function getIdHost():int { return $this->idHost; }
-        public function getDateTime():int { return $this->dateTime; }
+        public function getDateTime():string { return $this->dateTime; }
         public function getName():string { return $this->name; }
         public function getType():string { return $this->type; }
         public function getMaxPlayer():int { return $this->maxPlayer; }
@@ -39,14 +39,42 @@ if (!class_exists("Game", false)) {
 
         // Sets
         public function setId(int $id) { $this->id = $id; }
-        public function setIdJoin(int $idJoin) { $this->idJoin = $idJoin; }
+        public function setIdJoin(string $idJoin) { $this->idJoin = $idJoin; }
         public function setIdHost(int $idHost) { $this->idHost = $idHost; }
-        public function setDateTime(int $dateTime) { $this->dateTime = $dateTime; }
+        public function setDateTime(string $dateTime) { $this->dateTime = $dateTime; }
         public function setName(string $name) { $this->name = $name; }
         public function setType(string $type) { $this->type = $type; }
         public function setMaxPlayer(int $maxPlayer) { $this->maxPlayer = $maxPlayer; }
         public function setActive(int $active) { $this->active = $active; }
         public function setUsers(array $users) { $this->users = $users; }
         public function setErrorData($errorData) { $this->errorData = $errorData; }
+
+
+        public function save($db) {
+            $data = [
+                [':idJoin', $this->idJoin],
+                [':idHost', $this->idHost],
+                [':dateTime', $this->dateTime],
+                [':name', $this->name],
+                [':type', $this->type],
+                [':maxPlayer', $this->maxPlayer],
+                [':active', $this->active]
+            ];
+
+            $existingGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND dateTime = :dateTime", array(array(":name", $this->name), array(":dateTime", $this->dateTime)));
+
+            if ($existingGame == []) {
+                // Nouvel enregistrement
+                $sql = "INSERT INTO LA_GAME (idJoin, idHost, dateTime, name, type, maxPlayer, active) VALUES (:idJoin, :idHost, :dateTime, :name, :type, :maxPlayer, :active)";
+            } else {
+                // Enregistrement existant
+                $sql = "UPDATE LA_GAME SET dateTime = :dateTime, name = :name, type = :type, maxPlayer = :maxPlayer, active = :active WHERE id = :id";
+                $data[] = [':id', $existingGame[0]["id"]];
+            }
+
+            $insert = $db->query($sql, $data);
+
+            return $insert;
+        }
     }
 }

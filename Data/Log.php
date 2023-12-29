@@ -11,7 +11,7 @@ if (!class_exists("Log", false)) {
         public function __construct()
         {
             $this->idUser = 0;
-            $this->dateTime = 0;
+            $this->dateTime = "";
             $this->log = "";
             $this->ip = "";
             $this->errorData = null;
@@ -19,14 +19,14 @@ if (!class_exists("Log", false)) {
 
         // Gets
         public function getIdUser():int { return $this->idUser; }
-        public function getDateTime():int { return $this->dateTime; }
+        public function getDateTime():string { return $this->dateTime; }
         public function getLog():string { return $this->log; }
         public function getIp():string { return $this->ip; }
         public function getErrorData() { return $this->errorData; }
 
         // Sets
         public function setIdUser(int $idUser) { $this->idUser = $idUser; }
-        public function setDateTime(int $dateTime) { $this->dateTime = $dateTime; }
+        public function setDateTime(string $dateTime) { $this->dateTime = $dateTime; }
         public function setLog(string $log) { $this->log = $log; }
         public function setIp(string $ip) { $this->ip = $ip; }
         public function setErrorData($errorData) { $this->errorData = $errorData; }

@@ -118,7 +118,7 @@ if (isset($_SESSION["idUser"])) {
                     <div class="text-center">
                         <h1 class="h1 pt-5" id="home">Links Awordkening : </h1>
                         <h2 class="h2 pb-5 fst-italic">Where Words Unite</h2>
-                        <button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button>
+                        <a href="new-game.php" class="text-light"><button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button></a>
                     </div>
                 </header>
                 <div class="profil vh-100" id="profil">

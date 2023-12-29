@@ -1,15 +1,3 @@
 .new-game {
-    min-height : 100vh;
-}
-
-.card-new-game {
-    background-color: var(--viridian);
-}
-
-.card-new-game input[type="submit"] {
-    background-color: var(--tan);
-}
-
-.card-new-game {
     accent-color: var(--coffee);
 }
