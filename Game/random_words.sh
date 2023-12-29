@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Liste de mots
+# Liste de mots 
 words=("Chat" "Chien" "Poisson" "Lapin" "Poule" "Vache" "Cochon" "Chèvre" "Mouton" "Cheval")
 
 # Vérifier le nombre d'arguments
