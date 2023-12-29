@@ -1,3 +1,12 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+} 
+if (!isset($_GET['token'])) {
+    header('Location: recover.php');
+}
+?>
+
 <!DOCTYPE html>
 <html>
 

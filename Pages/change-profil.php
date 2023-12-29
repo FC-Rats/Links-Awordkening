@@ -2,6 +2,10 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+include '../Includes/_utils.php';
+redirectionConnection();
+
 if (isset($_SESSION["idUser"])) {
     include("../Includes/getUser.php");
 }

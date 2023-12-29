@@ -8,32 +8,23 @@ if (isset($_POST['email'])) {
     $email = $_POST['email'];
 
     $objet = "Récuperation mot de passe";
-    $message = " Cher client, 
-    <br> Il semble que vous avez oublié votre mot de passe.  
-    <br> Si ce n'est pas vous à l'origine de cette récupération de compte, ignorez ce mail. \n
-    <br><br> Lien d'activation : " . generateTokenLink($email,$config) . "
-    <br><br> De la part de : projet.saebut@gmail.com";
-
-    envoi_mail($email,$objet,$message,$config);
-    header("Location: ../Pages/login.php");
-/*     $stmt = $conn->prepare("SELECT email FROM WLA_USER WHERE email = ?;");
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $ligne = $result->fetch_assoc();
-
-    if ($ligne) {
-        // Alors l'adresse existe => on envoit le mail
-        if (envoi_mail($email)) {
-            echo 'OK';
-        } else {
-            echo "Une erreur s'est produite";
-        }
+    $res= generateTokenLink($email, $config);
+    if ($res != "") {
+        $message = " Cher client, 
+        <br> Il semble que vous avez oublié votre mot de passe.  
+        <br> Si ce n'est pas vous à l'origine de cette récupération de compte, ignorez ce mail. \n
+        <br><br> Lien d'activation : " . $res . "
+        <br><br> De la part de : projet.saebut@gmail.com";
     } else {
-        echo "Adresse e-mail non trouvée dans la base de données.";
+        $message = " Cher client, 
+        <br> Il semble que vous avez oublié votre mot de passe.  
+        <br> Si ce n'est pas vous à l'origine de cette récupération de compte, ignorez ce mail. \n
+        <br><br> Votre compte n'est pas vérifié, veuillez vérifier votre compte avant de pouvoir changer votre mot de passe.
+        <br><br> De la part de : projet.saebut@gmail.com";
     }
-} else {
-    echo "L'adresse e-mail n'a pas été fournie.";*/
-}
 
-?>
+    envoi_mail($email, $objet, $message, $config);
+    header("Location: ../Pages/mail-redirection-recover.php");
+} else {
+    header("Location: ../Pages/recover.php");
+}

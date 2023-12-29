@@ -5,6 +5,10 @@ if (!isset($_SESSION)) {
 if (!class_exists('Connection')) {
     include('../Includes/connection-function.php');
 }
+
+include '../Includes/_utils.php';
+redirectionConnection();
+
 if (isset($_SESSION["idUser"])) {
     include("../Includes/getUser.php");
     include("../Includes/getStats.php");

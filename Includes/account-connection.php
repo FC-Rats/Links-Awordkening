@@ -32,5 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Inputs incorrects.";
         }
+    } else {
+        header("Location: ../Pages/login.php");
     }
+} else {
+    header("Location: ../Pages/login.php");
 }

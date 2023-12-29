@@ -45,5 +45,5 @@ if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["ema
         throw new Exception("Inputs incorrects.");
     }
 } else {
-    header("Location: ../Pages/index.php");
+    header("Location: ../Pages/creation.php");
 }

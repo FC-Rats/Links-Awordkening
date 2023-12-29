@@ -10,6 +10,10 @@ if (!class_exists('Connection')) {
 
 include '_utils.php';
 
+if (!isset($_POST['token']) || !isset($_POST['password'])) {
+    header("Location: ../Pages/recover.php");
+}
+
 $token = $_POST['token'];
 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 

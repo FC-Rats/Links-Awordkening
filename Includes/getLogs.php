@@ -5,6 +5,9 @@ if (!class_exists('Connection')) {
     include('../Includes/connection-function.php');
 }
 
+include '../Includes/_utils.php';
+redirectionConnection();
+
 $response = [];
 
 $logs = $db->query("SELECT u.username, l.idUser, l.ip, l.log, l.dateTime FROM LA_LOG l JOIN LA_USER u ON u.id = l.idUser LIMIT 500");
