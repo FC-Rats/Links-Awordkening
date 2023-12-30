@@ -17,8 +17,15 @@ $(function () {
                 });
             
                 Highcharts.chart('container', {
+                    title: {
+                        text: '' // Remplacez par le nom que vous voulez
+                    },
                     chart: {
-                        type: 'networkgraph'
+                        type: 'networkgraph',
+                        backgroundColor: 'transparent',
+                    },
+                    credits: {
+                        enabled: false // Désactive le lien Highcharts.com
                     },
                     plotOptions: {
                         networkgraph: {
