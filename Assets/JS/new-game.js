@@ -26,7 +26,6 @@ $(function () {
                 success: function (data) {
                     if (data.Insert) {
                         console.log(data.Insert);
-                        alert("OK");
                         //window.location.href = "/game";
                     }
                 },
@@ -70,15 +69,15 @@ function verfication() {
     }
 
     if (gameType === "MultiPlayer") {
-            if (number < 2 || number > 5) {
-                alert("Veuillez entrer un nombre de joueurs entre 2 et 5.");
-                return false;
-            }
+        if (number < 2 || number > 5) {
+            alert("Veuillez entrer un nombre de joueurs entre 2 et 5.");
+            return false;
         }
+    }
 
     // a enlever quand le jeu sera fini
     if (gameType === "MultiPlayer") {
-        alert("Veuillez choisir un seul joueur.");
+        alert("Multijoueur non disponible pour le moment.");
         return false;
     }
 
