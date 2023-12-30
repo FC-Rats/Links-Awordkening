@@ -2,6 +2,7 @@ var name = "";
 var gameType = "";
 var number = 2;
 
+
 $(function () {
     $("#game").on("click", function() {
         name = $("#name").val();
@@ -25,6 +26,7 @@ $(function () {
                 success: function (data) {
                     if (data.Insert) {
                         console.log(data.Insert);
+                        alert("OK");
                         //window.location.href = "/game";
                     }
                 },
@@ -67,10 +69,12 @@ function verfication() {
         return false;
     }
 
-    if (number < 2 || number > 5) {
-        alert("Veuillez entrer un nombre de joueurs entre 2 et 5.");
-        return false;
-    }
+    if (gameType === "MultiPlayer") {
+            if (number < 2 || number > 5) {
+                alert("Veuillez entrer un nombre de joueurs entre 2 et 5.");
+                return false;
+            }
+        }
 
     // a enlever quand le jeu sera fini
     if (gameType === "MultiPlayer") {
@@ -80,3 +84,24 @@ function verfication() {
 
     return true;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var containerNbPlayer = document.getElementById('container-nb-player');
+
+    // Cacher la section "Nombre de joueurs" au chargement de la page
+    containerNbPlayer.style.display = 'none';
+
+    // Récupérer tous les boutons radio par leur nom
+    var gameTypeRadios = document.getElementsByName('gameType');
+
+    // Parcourir tous les boutons radio pour ajouter un écouteur d'événements
+    for (var i = 0; i < gameTypeRadios.length; i++) {
+        gameTypeRadios[i].addEventListener('change', function() {
+            if (this.value === 'SinglePlayer') {
+                containerNbPlayer.style.display = 'none'; // Masquer la section si le mode est "Un joueur"
+            } else {
+                containerNbPlayer.style.display = 'block'; // Afficher la section si le mode est "Multijoueur"
+            }
+        });
+    }
+});

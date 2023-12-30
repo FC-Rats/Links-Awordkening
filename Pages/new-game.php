@@ -39,7 +39,7 @@
                         <p id="rules" class="text-center"></p>
                     </div>
 
-                    <div>
+                    <div id="container-nb-player">
                         <label for="number" class="text-white">Nombre de joueurs<span class="required"> *</span></label>
                         <input type="number" id="number" name="number" placeholder="Entre 2 et 5" min="2" max="5" required>
                     </div>
