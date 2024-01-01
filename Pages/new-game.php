@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+include '../Includes/_utils.php';
+unsetGameSessionVariable()
+?>
 <!DOCTYPE html>
 <html>
 

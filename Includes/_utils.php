@@ -49,3 +49,19 @@ function redirectionConnection() {
         exit();
     }
 }
+
+function unsetGameSessionVariable() {
+    unsetWordChartSessionVariable();
+    unsetScoreSessionVariable();
+}
+
+function unsetScoreSessionVariable() {
+    if (isset($_SESSION['score'])) {
+        unset($_SESSION['score']);
+    }
+}
+function unsetWordChartSessionVariable() {
+    if (isset($_SESSION['WordsChart'])) {
+        unset($_SESSION['WordsChart']);
+    }
+}

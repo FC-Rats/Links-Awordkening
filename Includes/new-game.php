@@ -20,6 +20,7 @@ $game->setIdHost($_SESSION['idUser']);
 $game->setDateTime(date("Y-m-d H:i:s"));
 $game->setActive(1);
 print_r(genererCodeAleatoire());
+header('Location: ../Pages/highcharts.php');
 
 function genererCodeAleatoire()
 {
