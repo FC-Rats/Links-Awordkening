@@ -21,9 +21,6 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
 
     }
 
-
-    // Ajouter cette entrée à la structure existante
-
     header('Location: ../Pages/highcharts.php');
 }
 
