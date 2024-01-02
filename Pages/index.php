@@ -126,26 +126,26 @@ if (isset($_SESSION["idUser"])) {
                         <h2 class="p-5">Mon profil</h2>
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
-                        <div class="d-block d-md-flex justify-content-evenly align-items-center" style="border-radius: 200px;">
+                        <div class="d-block d-xl-flex justify-content-evenly align-items-center" style="border-radius: 200px;">
                             <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
                                 <div>
                                     <p>Pseudo</p>
-                                    <h3 class="fs-1"><?= $user[0]["username"] ?></h3>
+                                    <h3 class="h1"><?= $user[0]["username"] ?></h3>
                                 </div>
                                 <div>
                                     <p>Année de naissance</p>
-                                    <h3 class="fs-1"><?= $user[0]["birthYear"] ?></h3>
+                                    <h3 class="h1"><?= $user[0]["birthYear"] ?></h3>
                                 </div>
                             </div>
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
                                 <div>
                                     <p>Mail</p>
-                                    <h3 class="fs-1"><?= $user[0]["email"] ?></h3>
+                                    <h3 class="h1 custom-text-wrap"><?= $user[0]["email"] ?></h3>
                                 </div>
                                 <div>
                                     <p>Nombre de parties jouées</p>
-                                    <h3 class="fs-1"><?= $stats[0]['nombre_scores'] ?></h3>
+                                    <h3 class="h1"><?= $stats[0]['nombre_scores'] ?></h3>
                                 </div>
                             </div>
                         </div>

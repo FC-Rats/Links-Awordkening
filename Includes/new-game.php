@@ -19,8 +19,6 @@ $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:d
 $game->setIdHost($_SESSION['idUser']);
 $game->setDateTime(date("Y-m-d H:i:s"));
 $game->setActive(1);
-print_r(genererCodeAleatoire());
-header('Location: ../Pages/highcharts.php');
 
 function genererCodeAleatoire()
 {

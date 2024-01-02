@@ -60,3 +60,9 @@ body {
     outline: none!important;
     box-shadow: none!important;
 }
+
+@media (max-width: 576px) {
+    .custom-text-wrap {
+        word-wrap: break-word;
+    }
+}
