@@ -23,7 +23,10 @@ include("../Includes/getStats.php");
 <body>
 
     <div class="container section d-flex flex-column justify-content-center">
-    <a href="index.php#profil"><button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button" >&larr; Retour à l'accueil</button></a>
+    <a href="index.php#profil"><button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button" >
+            &larr; Retour à l'accueil
+        </button>
+    </a>
         <h1 class="d-flex justify-content-center">Vos parties</h1>
 
         <div class="d-flex flex-row flex-wrap col-12 bg-viridian rounded-5 my-2 py-4 justify-content-center align-items-center">

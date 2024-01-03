@@ -79,13 +79,6 @@ if (isset($_SESSION["idUser"])) {
                         </div>
                     </div>
                 </div>
-                <div class="py-5 d-flex align-items-center justify-content-center">
-                    <a href="stats.php">
-                        <button class="bg-coffee text-light p-3 rounded-5 border-0">
-                            Consulter mon historique de parties et mes statistiques
-                        </button>
-                    </a>
-                </div>
             </div>
         <?php } else { ?>
             <div class="container mh-100 position-relative" style="user-select: none;">
@@ -126,14 +119,6 @@ if (isset($_SESSION["idUser"])) {
                 </div>
                 <div class="text-center position-absolute top-50 start-50 translate-middle rounded-3 d-flex flex-column justify-content-center" style="backdrop-filter: blur(20px); width: 100%; height: 100%;">
                     <h2 class="p-5">Vous devez être connecté pour accéder à cette page</h2>
-                    <div class="my-4">
-                        <a class="btn rounded-5 bg-coffee text-white" href="login.php" tabindex="-1" aria-disabled="true">
-                            Se connecter
-                        </a>
-                        <a class="btn rounded-5 bg-parchment" href="./creation.php" tabindex="-1" aria-disabled="true">
-                            S'inscrire
-                        </a>
-                    </div>
                 </div>
             </div>
         <?php } ?>
