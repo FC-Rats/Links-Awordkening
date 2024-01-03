@@ -4,7 +4,7 @@ var number = 2;
 
 
 $(function () {
-    $("#game").on("click", function() {
+    $("#game").on("click", function () {
         name = $("#name").val();
         gameType = $("input[name='gameType']:checked").val();
         number = $("#number").val();
@@ -18,26 +18,28 @@ $(function () {
                 type: gameType,
                 maxPlayer: number
             };
-            $.ajax({
-                url: "../Includes/new-game.php",
-                type: "POST",
-                dataType: "JSON",
-                data: { game: JSON.stringify(game) },
-                success: function (data) {
-                    if (data.Insert) {
-                        console.log(data.Insert);
-                        //window.location.href = "/game";
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-            });
+            if (checkIfGameExists(game) === true) {
+                $.ajax({
+                    url: "../Includes/new-game.php",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { game: JSON.stringify(game) },
+                    success: function (data) {
+                        if (data.Insert) {
+                            console.log(data.Insert);
+                            //window.location.href = "/game";
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                });
+            }
         }
-    
+
     });
 
-    $("input[name='gameType']").on("change", function() {
+    $("input[name='gameType']").on("change", function () {
         gameType = $("input[name='gameType']:checked").val();
         changeRules();
     });
@@ -84,7 +86,28 @@ function verfication() {
     return true;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function checkIfGameExists(game) {
+    $.ajax({
+        url: "../Includes/doesGameExists.php",
+        type: "POST",
+        dataType: "JSON",
+        data: { game: JSON.stringify(game) },
+        success: function (data) {
+            if (data.Result) {
+                if (data.Result == true) {
+                    alert("Nom de partie déjà existant.");
+                    return false;
+                }
+                return true;
+            }
+        },
+        error: function (data) {
+            console.log(data);
+        },
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
     var containerNbPlayer = document.getElementById('container-nb-player');
 
     // Cacher la section "Nombre de joueurs" au chargement de la page
@@ -95,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Parcourir tous les boutons radio pour ajouter un écouteur d'événements
     for (var i = 0; i < gameTypeRadios.length; i++) {
-        gameTypeRadios[i].addEventListener('change', function() {
+        gameTypeRadios[i].addEventListener('change', function () {
             if (this.value === 'SinglePlayer') {
                 containerNbPlayer.style.display = 'none'; // Masquer la section si le mode est "Un joueur"
             } else {

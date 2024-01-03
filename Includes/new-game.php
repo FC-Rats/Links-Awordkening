@@ -12,10 +12,6 @@ $response = [];
 
 list($game, $jsonError) = Game::getJsonData($_POST["game"]);
 
-$getId = $db->query("SELECT id FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
-$id_user = $getId[0]['id'];
-$log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Création d'une partie"), array(":ip", getIP())));
-
 $game->setIdHost($_SESSION['idUser']);
 $game->setDateTime(date("Y-m-d H:i:s"));
 $game->setActive(1);
@@ -31,10 +27,15 @@ function genererCodeAleatoire()
 }
 
 $game->setIdJoin(genererCodeAleatoire());
-$game->save($db);
+$insert = $game->save($db);
 
-//print_r($test);
-
-$response['Insert'] = $game;
-echo json_encode($response);
-?>
+if ($insert === false) {
+    $response['Error'] = $game->getErrorData();
+    echo json_encode($response);
+} else {
+    $getId = $db->query("SELECT id FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
+    $id_user = $getId[0]['id'];
+    $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Création d'une partie"), array(":ip", getIP())));
+    $response['Insert'] = $game;
+    echo json_encode($response);
+}

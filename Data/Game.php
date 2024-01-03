@@ -61,15 +61,15 @@ if (!class_exists("Game", false)) {
                 [':active', $this->active]
             ];
 
-            $existingGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND dateTime = :dateTime", array(array(":name", $this->name), array(":dateTime", $this->dateTime)));
+            $existingGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(":name", $this->name), array(":idHost", $this->idHost)));
 
             if ($existingGame == []) {
                 // Nouvel enregistrement
                 $sql = "INSERT INTO LA_GAME (idJoin, idHost, dateTime, name, type, maxPlayer, active) VALUES (:idJoin, :idHost, :dateTime, :name, :type, :maxPlayer, :active)";
             } else {
                 // Enregistrement existant
-                $sql = "UPDATE LA_GAME SET dateTime = :dateTime, name = :name, type = :type, maxPlayer = :maxPlayer, active = :active WHERE id = :id";
-                $data[] = [':id', $existingGame[0]["id"]];
+                $this->errorData = "Une partie avec ce nom existe déjà.";
+                return false;
             }
 
             $insert = $db->query($sql, $data);
