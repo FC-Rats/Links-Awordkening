@@ -27,7 +27,7 @@
 
                 <div class="mb-3">
                     <label for="birthYear" class="form-label text-light">Année de naissance<span class="required"> *</span></label>
-                    <input type="number" class="form-control" name="birthYear" id="birthYear" min="<?php echo date("Y") - 100; ?>" max="<?php echo date("Y") - 10; ?>" placeholder="Ex : 2002" required>
+                    <input type="number" class="form-control" name="birthYear" id="birthYear" min="<?php echo date("Y") - 150; ?>" max="<?php echo date("Y") - 10; ?>" placeholder="Ex : 2002" required>
                 </div>
 
                 <div class="mb-3">
