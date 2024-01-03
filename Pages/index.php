@@ -150,7 +150,11 @@ if (isset($_SESSION["idUser"])) {
                             </div>
                         </div>
                     <div class="py-5 d-flex align-items-center justify-content-center">
-                        <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0 mt-5">Consulter mon historique de parties et mes statistiques</button></a>
+                        <a href="stats.php">
+                            <button class="bg-coffee text-light p-3 rounded-5 border-0 mt-5">
+                                Consulter mon historique de parties et mes statistiques
+                            </button>
+                        </a>
                     </div>
                     <?php } else { ?>
                         <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>
@@ -177,9 +181,7 @@ if (isset($_SESSION["idUser"])) {
             </main>
         </div>
     </div>
-    <?php
-    include '../Includes/importFooter.php';
-    ?>
+    <?php include '../Includes/importFooter.php'; ?>
 </body>
 
 </html>

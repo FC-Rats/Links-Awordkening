@@ -1,0 +1,2 @@
+chien;chat;0.38
+score:0.38

@@ -1,6 +1,5 @@
 <?php
-function getIP($idUser = null)
-{
+function getIP($idUser = null) {
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
         $ip_address = explode(',', $ip_address);
@@ -8,14 +7,13 @@ function getIP($idUser = null)
     } else {
         $ip_address = $_SERVER['REMOTE_ADDR'];
     }
-    
+
     $idUser = isset($idUser) ? $idUser : $_SESSION['idUser'];
-    
+
     $ip_address = $idUser . '|' . $ip_address;
-    
+
     return $ip_address;
 }
-
 
 function isValidUsername($username) {
     return preg_match('/^[A-Za-z0-9_!@#$%^&*()\-_=+{};:<.>]+$/', $username);
@@ -60,6 +58,7 @@ function unsetScoreSessionVariable() {
         unset($_SESSION['score']);
     }
 }
+
 function unsetWordChartSessionVariable() {
     if (isset($_SESSION['WordsChart'])) {
         unset($_SESSION['WordsChart']);

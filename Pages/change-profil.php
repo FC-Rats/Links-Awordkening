@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -40,7 +40,8 @@ if (isset($_SESSION["idUser"])) {
                     <div class="form-group row py-2">
                         <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                         <div class="col-sm-8">
-                            <input type="number" min="<?php echo date("Y") - 150; ?>" max="<?php echo date("Y") - 10; ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="<?= $user[0]["birthYear"] ?>" readonly>
+                            <input type="number" min="<?php echo date("Y") - 150; ?>" max="<?php echo date("Y") - 10; ?>"
+                                   class="form-control input-modifiable beautiful-button" id="dateNaissance" value="<?= $user[0]["birthYear"] ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row py-2">
@@ -53,7 +54,9 @@ if (isset($_SESSION["idUser"])) {
                         <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
 
                         <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
-                        <button type="button" id="boutonEnregistrer" class="btn btn-success d-none" data-bs-toggle="modal" data-bs-target="#modal-change-profil">Enregistrer</button>
+                        <button type="button" id="boutonEnregistrer" class="btn btn-success d-none" data-bs-toggle="modal" data-bs-target="#modal-change-profil">
+                            Enregistrer
+                        </button>
                     </div>
                 </form>
                 <div class="modal fade " id="modal-change-profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,7 +68,7 @@ if (isset($_SESSION["idUser"])) {
                             </div>
                             <div class="modal-body">
                                 <p>
-                                    
+
                                 </p>
                                 <p>Un email vous sera envoyé à <?= $user[0]["email"] ?> pour que les changements soient effectués</p>
                             </div>
@@ -77,7 +80,11 @@ if (isset($_SESSION["idUser"])) {
                     </div>
                 </div>
                 <div class="py-5 d-flex align-items-center justify-content-center">
-                    <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0">Consulter mon historique de parties et mes statistiques</button></a>
+                    <a href="stats.php">
+                        <button class="bg-coffee text-light p-3 rounded-5 border-0">
+                            Consulter mon historique de parties et mes statistiques
+                        </button>
+                    </a>
                 </div>
             </div>
         <?php } else { ?>
@@ -92,7 +99,8 @@ if (isset($_SESSION["idUser"])) {
                     <div class="form-group row py-2">
                         <label for="dateNaissance" class="col-sm-4 col-form-label text-white">Année de naissance</label>
                         <div class="col-sm-8">
-                            <input type="number" min="<?php echo date("Y") - 150;// age maximum ?>" max="<?php echo date("Y") - 10 ; //age minimum ?>" class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
+                            <input type="number" min="<?php echo date("Y") - 150;// age maximum ?>" max="<?php echo date("Y") - 10 ; //age minimum ?>"
+                                   class="form-control input-modifiable beautiful-button" id="dateNaissance" value="2000" readonly>
                         </div>
                     </div>
                     <div class="form-group row py-2">
@@ -102,14 +110,19 @@ if (isset($_SESSION["idUser"])) {
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">Modifier</button>
-
+                        <button type="button" class="btn btn-primary bg-coffee border-none beautiful-button" id="boutonModifier">
+                            Modifier
+                        </button>
                         <button type="button" id="boutonAnnuler" class="btn btn-secondary d-none">Annuler</button>
                         <button type="button" id="boutonEnregistrer" class="btn btn-success d-none">Enregistrer</button>
                     </div>
                 </form>
                 <div class="py-5 d-flex align-items-center justify-content-center">
-                    <a href="stats.php"><button class="bg-coffee text-light p-3 rounded-5 border-0">Consulter mon historique de parties et mes statistiques</button></a>
+                    <a href="stats.php">
+                        <button class="bg-coffee text-light p-3 rounded-5 border-0">
+                            Consulter mon historique de parties et mes statistiques
+                        </button>
+                    </a>
                 </div>
                 <div class="text-center position-absolute top-50 start-50 translate-middle rounded-3 d-flex flex-column justify-content-center" style="backdrop-filter: blur(20px); width: 100%; height: 100%;">
                     <h2 class="p-5">Vous devez être connecté pour accéder à cette page</h2>
