@@ -12,6 +12,7 @@ $response = [];
 list($game, $jsonError) = Game::getJsonData($_POST["game"]);
 
 $existingGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(":name", $game->getName()), array(":idHost", $_SESSION['idUser'])));
+//VERIFIER LE CHAMPS ACTIVE
 
 if ($existingGame == []) {
     $response['Result'] = false;
