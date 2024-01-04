@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 include('./mailer.php');
 
 if (isset($_POST['email'])) {

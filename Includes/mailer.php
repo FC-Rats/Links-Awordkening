@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include '_utils.php';
+include_once '_utils.php';
 
 function envoi_mail($to_email,$objet,$message, $config)
 {
@@ -81,6 +81,7 @@ function generateVerifyLink($email,$config)
     if (!class_exists('Connection')) {
         include('connection-function.php');
     }
+    global $db;
     
     $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;",array(array(":email", $email)));
     $verfication = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));

@@ -22,7 +22,7 @@
             <form action="../Includes/account-creation.php" method="post" id="password-form" class="border-0 text-start col-md-8 col-12">
                 <div class="mb-3">
                     <label for="username" class="form-label text-light">Pseudo<span class="required"> *</span></label>
-                    <input type="text" class="form-control" iname="username" id="username" placeholder="Ex : WordsKing77" required>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Ex : WordsKing77" required>
                 </div>
 
                 <div class="mb-3">
