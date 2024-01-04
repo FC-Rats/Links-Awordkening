@@ -18,23 +18,31 @@ $(function () {
                 type: gameType,
                 maxPlayer: number
             };
-            if (checkIfGameExists(game) === true) {
-                $.ajax({
-                    url: "../Includes/new-game.php",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: { game: JSON.stringify(game) },
-                    success: function (data) {
-                        if (data.Insert) {
-                            console.log(data.Insert);
-                            //window.location.href = "/game";
-                        }
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    },
-                });
-            }
+            checkIfGameExists(game)
+            .then(function(result) {
+                console.log(result);
+                if (result == true) {
+                    console.log("true");
+                    $.ajax({
+                        url: "../Includes/new-game.php",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { game: JSON.stringify(game) },
+                        success: function (data) {
+                            if (data.Insert) {
+                                window.location.href = "/game";
+                                //  GET http://localhost/game 404 (Not Found)
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
         }
 
     });
@@ -87,23 +95,27 @@ function verfication() {
 }
 
 function checkIfGameExists(game) {
-    $.ajax({
-        url: "../Includes/doesGameExists.php",
-        type: "POST",
-        dataType: "JSON",
-        data: { game: JSON.stringify(game) },
-        success: function (data) {
-            if (data.Result) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: "../Includes/doesGameExists.php",
+            type: "POST",
+            dataType: "JSON",
+            data: { game: JSON.stringify(game) },
+            success: function (data) {
                 if (data.Result == true) {
+                    console.log("existe");
                     alert("Nom de partie déjà existant.");
-                    return false;
+                    resolve(false);
+                } else {
+                    console.log("n'existe pas");
+                    resolve(true);
                 }
-                return true;
-            }
-        },
-        error: function (data) {
-            console.log(data);
-        },
+            },
+            error: function (data) {
+                console.log(data);
+                reject(data);
+            },
+        });
     });
 }
 
