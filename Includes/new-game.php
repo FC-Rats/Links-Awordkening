@@ -10,12 +10,6 @@ include('../Data/Game.php');
 
 $response = [];
 
-list($game, $jsonError) = Game::getJsonData($_POST["game"]);
-
-$game->setIdHost($_SESSION['idUser']);
-$game->setDateTime(date("Y-m-d H:i:s"));
-$game->setActive(1);
-
 function genererCodeAleatoire()
 {
     $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -25,6 +19,14 @@ function genererCodeAleatoire()
     }
     return $chaineAleatoire;
 }
+
+
+list($game, $jsonError) = Game::getJsonData($_POST["game"]);
+
+$game->setIdHost($_SESSION['idUser']);
+$game->setDateTime(date("Y-m-d H:i:s"));
+$game->setActive(1);
+
 
 $game->setIdJoin(genererCodeAleatoire());
 $insert = $game->save($db);

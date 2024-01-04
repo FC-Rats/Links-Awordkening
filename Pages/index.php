@@ -106,14 +106,15 @@ if (isset($_SESSION["idUser"])) {
 
             <!-- Le contenu principal de la page va ici -->
             <main role="main" class="col main-content py-4 px-3 px-md-5">
-                <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+
+<!--            <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-3.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-4.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-5.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-6.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-7.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
-                <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
+                <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">-->
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
                         <h1 class="h1 pt-5" id="home">Links Awordkening : </h1>
@@ -145,7 +146,7 @@ if (isset($_SESSION["idUser"])) {
                                 </div>
                                 <div>
                                     <p>Nombre de parties jouées</p>
-                                    <h3 class="h1"><?= $stats[0]['nombre_scores'] ?></h3>
+                                    <h3 class="h1"><?= $db->query("SELECT count(*) FROM LA_GAME WHERE idHost = :id;", array(array(':id', $_SESSION['idUser'])))[0]['count(*)'] ?></h3>
                                 </div>
                             </div>
                         </div>

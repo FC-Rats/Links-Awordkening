@@ -22,12 +22,27 @@ function modifyUser() {
         dataType: "JSON",
         data: { "username": username, "birthYear": birthYear, "email": email },
         success: function (data) {
-            var result = data.modifyUser;
-            console.log(result);
+            debugger;
+            console.log(data);
+            if (data.Error) {
+                alert(data.Error);
+            } else if (data.Success) {
+                alert(data.Success);
+            } else {
+                alert("Une erreur est survenue");
+            }
+            location.reload();
         },
         error: function (data) {
             console.log(data);
+            if (data.Error) {
+                alert(data.Error);
+            } else if (data.Success) {
+                alert(data.Success);
+            } else {
+                alert("Une erreur est survenue");
+            }
+            location.reload();
         },
     });
-    location.reload();
 }

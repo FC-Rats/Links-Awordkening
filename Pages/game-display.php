@@ -3,6 +3,12 @@
 }
 include '../Includes/_utils.php';
 redirectionConnection();
+
+if (!class_exists('Connection')) {
+    include('../Includes/connection-function.php');
+}
+$game = $db->query("SELECT * FROM LA_GAME WHERE id = :id", array(array(':id', $_SESSION['idGame'])));
+$hostUser = $db->query("SELECT username FROM LA_USER WHERE id = :id", array(array(':id', $game[0]['idHost'])));
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +22,7 @@ redirectionConnection();
     <?php include '../Includes/importHeader.php'; ?>
     <!--<link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/loadingScreen.css'>-->
 </head>
+
 
 <body>
 <div id="loading-screen">
@@ -31,8 +38,20 @@ redirectionConnection();
     <div class="game m-5 text-center">
         <div class="d-flex justify-content-evenly">
             <div>
+                <p>Mode de jeu</p>
+                <h2 class="fs-1"><?= $game[0]['type'] ?></h2>
+            </div>
+            <div>
                 <p>Nom de la partie</p>
-                <h2 class="fs-1">LeNom</h2>
+                <h2 class="fs-1"><?= $game[0]['name'] ?></h2>
+            </div>
+            <div>
+                <p>ID de la partie</p>
+                <h2 class="fs-1"><?= $game[0]['idJoin'] ?></h2>
+            </div>
+            <div>
+                <p>Nom de l'hote de la partie </p>
+                <h2 class="fs-1"><?= $hostUser[0]['username'] ?></h2>
             </div>
             <div>
                 <p>Score</p>
