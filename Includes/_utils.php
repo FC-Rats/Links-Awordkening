@@ -51,6 +51,13 @@ function redirectionConnection() {
 function unsetGameSessionVariable() {
     unsetWordChartSessionVariable();
     unsetScoreSessionVariable();
+    unsetIdGameSessionVariable();
+}
+
+function unsetIdGameSessionVariable() {
+    if (isset($_SESSION['idGame'])) {
+        unset($_SESSION['idGame']);
+    }
 }
 
 function unsetScoreSessionVariable() {

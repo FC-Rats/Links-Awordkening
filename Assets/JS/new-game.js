@@ -30,8 +30,7 @@ $(function () {
                         data: { game: JSON.stringify(game) },
                         success: function (data) {
                             if (data.Insert) {
-                                window.location.href = "/game";
-                                //  GET http://localhost/game 404 (Not Found)
+                                window.location.href = link + "Pages/highcharts.php";
                             }
                         },
                         error: function (data) {

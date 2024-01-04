@@ -36,6 +36,9 @@ if ($insert === false) {
     $getId = $db->query("SELECT id FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
     $id_user = $getId[0]['id'];
     $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Création d'une partie"), array(":ip", getIP())));
+    $idGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(':name', $game->getName()), array(':idHost', $_SESSION['idUser'])));
+    // session
+    $_SESSION['idGame'] = $idGame[0]['id'];
     $response['Insert'] = $game;
     echo json_encode($response);
 }

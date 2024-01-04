@@ -3,7 +3,8 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include '../Includes/_utils.php';
-unsetGameSessionVariable()
+unsetGameSessionVariable();
+$config = parse_ini_file('../Includes/config.ini');
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,6 +68,9 @@ unsetGameSessionVariable()
 
 
 <?php include '../Includes/importFooter.php'; ?>
+<script>
+    var link = "<?php echo $config["link_host"]; ?>";
+</script>
 <script src="../Assets/JS/new-game.js"></script>
 </body>
 

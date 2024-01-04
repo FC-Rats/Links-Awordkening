@@ -3,13 +3,17 @@
 }
 include '../Includes/_utils.php';
 redirectionConnection();
+if (!isset($_SESSION['score'])) {
+    header('Location: new-game.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fin de partie</title>
     <?php include '../Includes/importHeader.php'; ?>
 </head>
 <body>
@@ -18,7 +22,7 @@ redirectionConnection();
 
     <p class="fs-4">Vous avez fait un score de <span class="fs-1 fw-bold"><?= $_SESSION['score'] ?></span> points !</p>
 
-    <a href="new-game.php">
+    <a href="index.php">
         <button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button">&larr; Retour à l'écran
             principal
         </button>

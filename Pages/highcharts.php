@@ -11,7 +11,7 @@ redirectionConnection();
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>highcharts</title>
+    <title>Partie</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <?php include '../Includes/importHeader.php'; ?>
     <!--<link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/loadingScreen.css'>-->
