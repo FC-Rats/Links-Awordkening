@@ -8,7 +8,7 @@ if (!isset($_SESSION['WordsChart']) || empty($_SESSION['WordsChart'])) {
 }
 
 if (isset($_POST['mot']) && empty($_POST['mot'])) {
-    header('Location: ../Pages/highcharts.php');
+    header('Location: ../Pages/game-display.php');
 }
 
 if (isset($_POST['mot']) && !empty($_POST['mot'])) {
@@ -22,7 +22,7 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
             $_SESSION['score'] += 1; // score a changer
         }
     }
-    header('Location: ../Pages/highcharts.php');
+    header('Location: ../Pages/game-display.php');
 }
 $response["WordsChart"] = $_SESSION['WordsChart'];
 echo json_encode($response, JSON_UNESCAPED_UNICODE);

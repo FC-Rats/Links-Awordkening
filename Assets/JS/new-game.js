@@ -30,7 +30,7 @@ $(function () {
                         data: { game: JSON.stringify(game) },
                         success: function (data) {
                             if (data.Insert) {
-                                window.location.href = link + "Pages/highcharts.php";
+                                window.location.href = link + "Pages/game-display.php";
                             }
                         },
                         error: function (data) {
