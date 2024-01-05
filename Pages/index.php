@@ -122,7 +122,7 @@ if (isset($_SESSION["idUser"])) {
                         <a href="new-game.php" class="text-light"><button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button></a>
                     </div>
                 </header>
-                <div class="profil vh-100" id="profil">
+                <div class="profil section" id="profil">
                     <div class="text-center">
                         <h2 class="p-5">Mon profil</h2>
                     </div>
@@ -130,21 +130,21 @@ if (isset($_SESSION["idUser"])) {
                         <div class="d-block d-xl-flex justify-content-evenly align-items-center" style="border-radius: 200px;">
                             <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
-                                <div>
+                                <div class="my-5">
                                     <p>Pseudo</p>
                                     <h3 class="h1"><?= $user[0]["username"] ?></h3>
                                 </div>
-                                <div>
+                                <div class="my-5">
                                     <p>Année de naissance</p>
                                     <h3 class="h1"><?= $user[0]["birthYear"] ?></h3>
                                 </div>
                             </div>
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
-                                <div>
+                                <div class="my-5">
                                     <p>Mail</p>
                                     <h3 class="h1 custom-text-wrap"><?= $user[0]["email"] ?></h3>
                                 </div>
-                                <div>
+                                <div class="my-5">
                                     <p>Nombre de parties jouées</p>
                                     <h3 class="h1"><?= $db->query("SELECT count(*) FROM LA_GAME WHERE idHost = :id;", array(array(':id', $_SESSION['idUser'])))[0]['count(*)'] ?></h3>
                                 </div>

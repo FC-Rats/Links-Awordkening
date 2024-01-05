@@ -10,8 +10,11 @@ if (!empty($_POST['username']) && !empty($_POST['birthYear']) && !empty($_POST['
     try {
         $getpreviousEmail = $db->query("SELECT id, email, username FROM LA_USER WHERE username = :username", array(array(':username', $_SESSION['username'])));
         $alreadyExist = $db->query("SELECT id, email, username FROM LA_USER WHERE email = :email OR username = :username", array(array(':email', $_POST['email']), array(':username', $_POST['username'])));
+
         if (!empty($alreadyExist) && $alreadyExist[0]['id'] != $getpreviousEmail[0]['id']) {
+
             envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "La modification de votre profil n'a pas pu aboutir car le mot de passe ou l'email existe déjà.", $config);
+
             if ($alreadyExist[0]['email'] == $_POST['email'] && $alreadyExist[0]['username'] == $_POST['username']) {
                 $response['Error'] = "L'adresse e-mail et le nom d'utilisateur existent déjà.";
                 echo json_encode($response);
