@@ -41,6 +41,6 @@ if ($insert === false) {
     $idGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(':name', $game->getName()), array(':idHost', $_SESSION['idUser'])));
     // session
     $_SESSION['idGame'] = $idGame[0]['id'];
-    $response['Insert'] = $game;
+    $response['Insert'] = $game->toArray();
     echo json_encode($response);
 }
