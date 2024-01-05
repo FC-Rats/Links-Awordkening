@@ -12,7 +12,7 @@ $hostUser = $db->query("SELECT username FROM LA_USER WHERE id = :id", array(arra
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset='utf-8'>

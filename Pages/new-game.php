@@ -7,7 +7,7 @@ unsetGameSessionVariable();
 $config = parse_ini_file('../Includes/config.ini');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset='utf-8'>
