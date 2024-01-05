@@ -132,7 +132,7 @@ if (isset($_SESSION["idUser"])) {
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
                                 <div class="my-5">
                                     <p>Pseudo</p>
-                                    <h3 class="h1"><?= $user[0]["username"] ?></h3>
+                                    <h3 class="h1 custom-text-wrap"><?= $user[0]["username"] ?></h3>
                                 </div>
                                 <div class="my-5">
                                     <p>Année de naissance</p>
