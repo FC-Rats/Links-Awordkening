@@ -36,30 +36,32 @@ $hostUser = $db->query("SELECT username FROM LA_USER WHERE id = :id", array(arra
         </button>
     </a>
     <div class="game m-5 text-center">
-        <div class="d-flex justify-content-evenly">
-            <div>
-                <p>Mode de jeu</p>
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+            <div class="text-center mb-4">
+                <p class="mb-2">Mode de jeu</p>
                 <h2 class="fs-1"><?= $game[0]['type'] ?></h2>
             </div>
-            <div>
-                <p>Nom de la partie</p>
+            <div class="text-center mb-4">
+                <p class="mb-2">Nom de la partie</p>
                 <h2 class="fs-1"><?= $game[0]['name'] ?></h2>
             </div>
-            <div>
-                <p>ID de la partie</p>
+            <div class="text-center mb-4">
+                <p class="mb-2">ID de la partie</p>
                 <h2 class="fs-1"><?= $game[0]['idJoin'] ?></h2>
             </div>
-            <div>
-                <p>Nom de l'hote de la partie </p>
+            <div class="text-center mb-4">
+                <p class="mb-2">Nom de l'hôte de la partie</p>
                 <h2 class="fs-1"><?= $hostUser[0]['username'] ?></h2>
             </div>
-            <div>
-                <p>Score</p>
+            <div class="text-center mb-4">
+                <p class="mb-2">Score</p>
                 <h2 class="fs-1"><?= isset($_SESSION['score']) ? $_SESSION['score'] : 0 ?></h2>
             </div>
         </div>
+
+    </div>
         <div id="container" class="rounded-3 my-2" style="text-align: center; border: 1px var(--viridian) solid;"></div>
-        <form action="../Game/game.php" method="post">
+        <form action="../Game/game.php" method="post" class="text-center">
             <label for="mot" class="fs-4">Rentrez un mot :</label>
             <input name="mot" id="mot">
             <button type="submit"
