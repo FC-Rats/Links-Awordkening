@@ -30,7 +30,7 @@ $(function () {
                         data: { game: JSON.stringify(game) },
                         success: function (data) {
                             if (data.Insert) {
-                                window.location.href = window.location.pathname.replace("new-game.php", "game-display.php") + "?idJoin=" + data.Insert.idJoin;
+                                window.location.href = window.location.pathname.replace("new-game.php", "game-display.php") + "?idJoin=" + data.Insert;
                             }
                         },
                         error: function (data) {
