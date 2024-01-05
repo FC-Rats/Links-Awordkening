@@ -105,7 +105,7 @@ if (isset($_SESSION["idUser"])) {
             </div>
 
             <!-- Le contenu principal de la page va ici -->
-            <main role="main" class="col main-content py-4 px-3 px-md-5">
+            <main role="main" class="col main-content py-4 px-3 px-lg-5">
 
 <!--            <img src="../Assets/img/leaf-1.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
                 <img src="../Assets/img/leaf-2.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -280px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">
