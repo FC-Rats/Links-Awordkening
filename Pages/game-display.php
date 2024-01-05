@@ -9,8 +9,12 @@ if (!class_exists('Connection')) {
 }
 $game = $db->query("SELECT * FROM LA_GAME WHERE id = :id", array(array(':id', $_SESSION['idGame'])));
 $hostUser = $db->query("SELECT username FROM LA_USER WHERE id = :id", array(array(':id', $game[0]['idHost'])));
-print_r($game[0]['id']);
-print_r($_SESSION['idUser']);
+if (isset($_SESSION['score']) && !empty($_SESSION['score'])) {
+    $score = $db->query("UPDATE LA_SCORE SET score = :score WHERE idGame = :idGame", array(
+        array(":score", $_SESSION['score']),
+        array(":idGame", $game[0]['id'])
+    ));
+}
 ?>
 
 <!DOCTYPE html>
