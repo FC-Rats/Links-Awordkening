@@ -39,6 +39,7 @@ if ($insert === false) {
     $id_user = $getId[0]['id'];
     $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Création d'une partie"), array(":ip", getIP())));
     $idGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(':name', $game->getName()), array(':idHost', $_SESSION['idUser'])));
+    $score = $db->query("INSERT INTO LA_SCORE (idUser, idGame, score) VALUES (:idUser,:idGame,:score);", array(array(":idUser", $_SESSION['idUser']), array(":idGame", $idGame[0]['id']), array(":score", 0)));
     // session
     $_SESSION['idGame'] = $idGame[0]['id'];
     $response['Insert'] = $game->getIdJoin();
