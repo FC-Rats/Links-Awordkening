@@ -128,7 +128,7 @@ if (isset($_SESSION["idUser"])) {
                     </div>
                     <?php if (isset($_SESSION['idUser'])) { ?>
                         <div class="d-block d-xl-flex justify-content-evenly align-items-center" style="border-radius: 200px;">
-                            <img src="../Assets/img/oeil.png" alt="" style="width: 125px; ">
+                            <img src="../Assets/img/compte.png" alt="" style="width: 125px; ">
                             <div class="d-block d-md-flex justify-content-evenly flex-column h-100">
                                 <div class="my-5">
                                     <p>Pseudo</p>
@@ -178,6 +178,13 @@ if (isset($_SESSION["idUser"])) {
                             <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>
                         <?php } ?>
                     </div>
+                </div>
+                <div id="credits" class="text-center">
+                    <a href="credits.php">
+                        <button class="bg-coffee text-light p-3 rounded-5 border-0 mt-5">
+                            Credits
+                        </button>
+                    </a>
                 </div>
             </main>
         </div>
