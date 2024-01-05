@@ -8,11 +8,16 @@ if (!isset($_SESSION['score'])) {
     exit();
 }
 if (!class_exists('Connection')) {
-    include('connection-function.php');
+    include('../Includes/connection-function.php');
 }
 $game = $db->query("SELECT * FROM LA_GAME WHERE id = :id", array(array(':id', $_SESSION['idGame'])));
-$score = $db->query("INSERT INTO LA_SCORE (idUser, idGame, score) VALUES (:idUser,:idGame,:score);", array(array(":idUser", $_SESSION['idUser']), array(":idGame", $game[0]['id']), array(":score", $_SESSION['score'])));
-
+if (!empty($game)) {
+    $score = $db->query("UPDATE LA_SCORE SET score = :score WHERE idUser = :idUser AND idGame = :idGame;", array(
+        array(":score", $_SESSION['score']),
+        array(":idUser", $_SESSION['idUser']),
+        array(":idGame", $game[0]['id'])
+    ));
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
