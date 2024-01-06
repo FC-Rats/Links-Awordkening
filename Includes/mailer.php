@@ -1,5 +1,4 @@
 <?php
-$config = parse_ini_file('config.ini');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -13,24 +12,25 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once '_utils.php';
 
-function envoi_mail($to_email,$objet,$message, $config)
+function envoi_mail($to_email,$objet,$message)
 {
     $mail = new PHPMailer(true);
 
     try {
+        include('../configuration.php');
         //Server settings
         $mail->isSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = $config['mailer_username'];
-        $mail->Password = $config['mailer_password'];
+        $mail->Username = $config['PHPMailer']['mailadress'];;
+        $mail->Password = $config['PHPMailer']['mailpassword'];
         $mail->CharSet  = 'UTF-8';
         $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('projet.saebut@gmail.com', 'Links Awordkening');
+        $mail->setFrom($config['PHPMailer']['mailadress'], 'Links Awordkening');
         $mail->addAddress($to_email, 'Client');
 
         //Content à changer
@@ -55,10 +55,12 @@ function generateUniqueID($length)
     return $randomString;
 }
 
-function generateTokenLink($email,$config)
+function generateTokenLink($email)
 {
+    include('../configuration.php');
+
     $token = generateUniqueID(12);
-    $link = $config['link_host']."Pages/recuperation-password.php?token=";
+    $link = $config['links']['host']."Pages/recuperation-password.php?token=";
     $link .= $token;
     if (!class_exists('Connection')) {
         include('connection-function.php');
@@ -73,10 +75,12 @@ function generateTokenLink($email,$config)
     return $link;
 }
 
-function generateVerifyLink($email,$config)
+function generateVerifyLink($email)
 {
+    include('../configuration.php');
+
     $token = generateUniqueID(12);
-    $link = $config['link_host']."Includes/account-verify.php?token=";
+    $link = $config['links']['host']."Includes/account-verify.php?token=";
     $link .= $token;
     if (!class_exists('Connection')) {
         include('connection-function.php');

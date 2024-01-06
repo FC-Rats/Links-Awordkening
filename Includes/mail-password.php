@@ -8,7 +8,7 @@ if (isset($_POST['email'])) {
     $email = $_POST['email'];
 
     $objet = "Récuperation mot de passe";
-    $res= generateTokenLink($email, $config);
+    $res= generateTokenLink($email);
     if ($res != "") {
         $message = " Cher client, 
         <br> Il semble que vous avez oublié votre mot de passe.  
@@ -23,7 +23,7 @@ if (isset($_POST['email'])) {
         <br><br> De la part de : projet.saebut@gmail.com";
     }
 
-    envoi_mail($email, $objet, $message, $config);
+    envoi_mail($email, $objet, $message);
     header("Location: ../Pages/mail-redirection-recover.php");
 } else {
     header("Location: ../Pages/recover.php");

@@ -13,7 +13,7 @@ if (!empty($_POST['username']) && !empty($_POST['birthYear']) && !empty($_POST['
 
         if (!empty($alreadyExist) && $alreadyExist[0]['id'] != $getpreviousEmail[0]['id']) {
 
-            envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "La modification de votre profil n'a pas pu aboutir car le mot de passe ou l'email existe déjà.", $config);
+            envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "La modification de votre profil n'a pas pu aboutir car le mot de passe ou l'email existe déjà.");
 
             if ($alreadyExist[0]['email'] == $_POST['email'] && $alreadyExist[0]['username'] == $_POST['username']) {
                 $response['Error'] = "L'adresse e-mail et le nom d'utilisateur existent déjà.";
@@ -35,7 +35,7 @@ if (!empty($_POST['username']) && !empty($_POST['birthYear']) && !empty($_POST['
             $query = $db->query($updateUser, $conditions);
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['email'] = $_POST['email'];
-            envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "Votre profil a bien été modifié.", $config);
+            envoi_mail($getpreviousEmail[0]['email'], "Modification de votre profil", "Votre profil a bien été modifié.");
             $id_user = $getpreviousEmail[0]['id'];
             $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:datetime,:log,:ip);", array(array(":id", $id_user), array(":datetime", date('Y-m-d H:i:s')), array(":log", "Modification du profil"), array(":ip", getIP())));
             $response['Success'] = "Votre profil a bien été modifié.";

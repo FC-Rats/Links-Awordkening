@@ -27,7 +27,7 @@ $message = " Cher client,
 <br><br> De la part de :
 <br> L'équipe Links Awordkening";
 
-envoi_mail($getId[0]["email"], $objet, $message, $config);
+envoi_mail($getId[0]["email"], $objet, $message);
 
 header("Location: ../Pages/login.php");
 ?>
