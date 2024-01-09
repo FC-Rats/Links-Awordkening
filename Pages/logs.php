@@ -3,6 +3,7 @@
 } 
 include '../Includes/_utils.php';
 redirectionConnection();
+redirectionNotAdmin();
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ redirectionConnection();
                             <tr>
                                 <th>Identifiant utilisateur</th>
                                 <th>Pseudo utilisateur</th>
-                                <th>Trace</th>
+                                <th>Date Heure</th>
                                 <th>IP</th>
                                 <th>Trace</th>
                             </tr>

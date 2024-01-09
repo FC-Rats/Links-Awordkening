@@ -48,6 +48,14 @@ function redirectionConnection() {
     }
 }
 
+function redirectionNotAdmin() {
+    if ($_SESSION['isAdmin'] != 1) {
+        header('Location: ../Pages/index.php');
+        exit();
+    }
+}
+
+
 function unsetGameSessionVariable() {
     unsetWordChartSessionVariable();
     unsetScoreSessionVariable();
