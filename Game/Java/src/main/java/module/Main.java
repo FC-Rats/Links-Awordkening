@@ -1,8 +1,7 @@
 package module;
 
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Classe principale du programme.
@@ -12,18 +11,16 @@ public class Main {
     /**
      * Point d'entrée du programme.
      *
-     * @param args Les arguments en ligne de commande (idPlayer, startWord, endWord).
+     * @param args Prends en argument l'id du joueur pour lire et créer les fichiers à son nom.
      */
     public static void main(String[] args) {
         // Vérifier le nombre d'arguments
-        if (args.length != 3) {
-            System.err.println("Usage: java Main idPlayer startWord endWord");
+        if (args.length != 1) {
+            System.err.println("Usage: java Main idPlayer");
             System.exit(1);
         }
 
         String idPlayer = args[0];
-        String startWord = args[1];
-        String endWord = args[2];
 
         String inputFile = "Java/src/files/input/" + idPlayer + ".txt";
         String outputFile = "Java/src/files/output/" + idPlayer + ".txt";
@@ -32,11 +29,19 @@ public class Main {
         try {
             Tree tree = new Tree();
 
-            // Charger l'arbre depuis le fichier de sauvegarde
+            // Charger l'arbre depuis le fichier de sauvegarde<
             List<Edge> edges = loadEdgesFromSaveFile(saveFile);
 
             // Lire les arêtes du fichier d'entrée et les ajouter à l'arbre
-            List<Edge> newEdges = FileReaderWriter.readEdgesFromFile(inputFile);
+            Map<String, Object> data = FileReaderWriter.readDataFromFile(inputFile);
+            
+            //On récupère les données dans les variables nécessaires
+            @SuppressWarnings("unchecked")
+			List<Edge> newEdges = (List<Edge>) data.get("edges");
+            String startWord = data.get("startWord").toString();
+            String endWord = data.get("endWord").toString();
+            
+            //On ajoute les nouveaux liens
             edges.addAll(newEdges);
             tree.addEdges(edges);
 

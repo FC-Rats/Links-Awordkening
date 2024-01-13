@@ -1,0 +1,4 @@
+chat;chien
+cheval;
+chat:4795;chien:1422;
+chat,chien,0.60;cheval,chat,0.74;cheval,chien,0.72;

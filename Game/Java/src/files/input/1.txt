@@ -1,4 +1,0 @@
-chien;chat;0.38
-chien;mouton;0.78
-chien;kellian;0.33
-chien;clavier;0.55

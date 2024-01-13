@@ -1,2 +1,0 @@
-chien;mouton;0.78
-score:0.78
