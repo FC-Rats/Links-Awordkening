@@ -1,0 +1,4 @@
+chien;chat
+lapin
+chien:1285805;chat:1670324;lapin:4887244
+chien,chat,0.73;lapin,chien,0.60;lapin,chat,0.64;
