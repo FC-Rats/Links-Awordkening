@@ -7,27 +7,36 @@ int main(int argc, char *argv[]) {
     const char *dictionnary_filename;
     char *word1;
     char *word2;
+    char *iduser;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n-BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
         dictionnary_filename = "./datafiles/dic.lex";
         word1 = "chien";
         word2 = "chat"; 
-        printf("%s %s %s\n",dictionnary_filename,word1,word2);
+        iduser = "./datafiles/game.txt";
+        printf("%s %s %s %s\n",dictionnary_filename,word1,word2,iduser);
     }
     else if (argc==2 && strcmp("--help", argv[1])==0){
-        printf("Usage: exec <dico.lex> <word1> <word2>\n");
-        printf("where dico.lex le dictionnaire lexicographique, word1 le mot dentree, word2 le deuxieme mot dentree\n");
+        printf("Usage: exec <dico.lex> <word1> <word2> <(iduser)>\n");
+        printf("where dico.lex le dictionnaire lexicographique, word1 le mot dentree, word2 le deuxieme mot dentree, iduser pour que chaque game soit par rapport a un id precis\n");
         exit(0);
     }
-    else if (argc != 4) {
-        printf("Mauvais usage de la fonction \n");
-        return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
-    } 
-    else {
+    else if (argc == 4){
         dictionnary_filename = argv[1];
         word1 = argv[2];
         word2 = argv[3];
+        iduser = "./datafiles/game.txt";
+    } 
+    else if (argc == 5){
+        dictionnary_filename = argv[1];
+        word1 = argv[2];
+        word2 = argv[3];
+        iduser = strcat(argv[4], ".txt");
+    }
+    else {
+        printf("Mauvais usage de la fonction \n");
+        return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
@@ -50,7 +59,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    writeToFileBeginGame("./datafiles/game.txt", word1, word2,offset1,offset2);
+    writeToFileBeginGame(iduser, word1, word2,offset1,offset2);
 
     return 0; 
 }

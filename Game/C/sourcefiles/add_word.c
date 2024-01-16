@@ -6,25 +6,33 @@
 int main(int argc, char *argv[]) {
     const char *dictionnary_filename;
     char *word1;
+    char *iduser;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n -BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
         dictionnary_filename = "./datafiles/dic.lex";
         word1 = "lapin";
-        printf("%s %s\n",dictionnary_filename,word1);
+        iduser = "./datafiles/game.txt";
+        printf("%s %s %s\n",dictionnary_filename,word1);
     }
     else if (argc==2 && strcmp("--help", argv[1])==0){
-        printf("Usage: exec <dico.lex> <word>\n");
-        printf("where dico.lex le dictionnaire lexicogrpahique et word le mot a ajouter dans la partie\n");
+        printf("Usage: exec <dico.lex> <word> <(iduser)>\n");
+        printf("where dico.lex le dictionnaire lexicogrpahique et word le mot a ajouter dans la partie, iduser pour que chaque game soit par rapport a un id precis\n");
         exit(0);
     }
-    else if (argc != 3) {
-        printf("Mauvais usage de la fonction \n");
-        return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
-    }
-    else {
+    else if (argc == 3){
         dictionnary_filename = argv[1];
         word1 = argv[2];
+        iduser = "./datafiles/game.txt";
+    } 
+    else if (argc == 4){
+        dictionnary_filename = argv[1];
+        word1 = argv[2];
+        iduser = strcat(argv[3], ".txt");
+    }
+    else {
+        printf("Mauvais usage de la fonction \n");
+        return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
@@ -42,7 +50,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    addWordToFile("./datafiles/game.txt", word1,offset1);
+    addWordToFile(iduser, word1,offset1);
 
     return 0; 
 }
