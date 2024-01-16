@@ -36,7 +36,7 @@ class Connection {
         catch (PDOException $e) {
             throw new Exception("Erreur lors de la connexion à la base de données: " . $e->getMessage());
         }
-    }
+    } 
 
     /**
      * Permet de paramétrer et d'exécuter directement une requête SQL.
