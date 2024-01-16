@@ -67,7 +67,7 @@ if (isset($_SESSION['score']) && !empty($_SESSION['score'])) {
 
     </div>
         <div id="container" class="rounded-3 my-2" style="text-align: center; border: 1px var(--viridian) solid;"></div>
-        <form action="../Game/game.php" method="post" class="text-center">
+        <form action="../Game/addWord.php" method="post" class="text-center">
             <label for="mot" class="fs-4">Rentrez un mot :</label>
             <input name="mot" id="mot">
             <button type="submit"

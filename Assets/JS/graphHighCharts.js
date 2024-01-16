@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: "../Game/game.php",
+        url: "../Game/observerWordsChart.php",
         type: "POST",
         dataType: "JSON",
         data: { },
@@ -30,11 +30,19 @@ $(function () {
                     plotOptions: {
                         networkgraph: {
                             layoutAlgorithm: {
-                                enableSimulation: true
+                                enableSimulation: false // Désactive la simulation physique
+                            },
+                            link: {
+                                lineWidth: 2 // Épaisseur de la ligne
+                            },
+                            node: {
+                                draggable: false // Désactive le déplacement des nœuds
                             }
                         }
                     },
                     series: [{
+                        allowPointSelect: false, // Désactive la sélection des points
+                        draggable: false, // Désactive le déplacement des points
                         marker: {
                             radius: 30
                         },

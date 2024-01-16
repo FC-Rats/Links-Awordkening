@@ -24,8 +24,10 @@ gcc "./sourcefiles/lev_similarity.c" "./sourcefiles/functions.c" -I"./headers" -
 gcc "./sourcefiles/new_game.c" "./sourcefiles/functions.c" -I"./headers" -lm -o "./exec_WINDOWS/new_game"
 
 .\exec_WINDOWS\new_game.exe .\datafiles\dic.lex cri lapin
+.\exec_WINDOWS\new_game.exe .\datafiles\dic.lex cri lapin path/to/file/idUser.txt
 
 ## Ajouter un mot à la partie (add_word)
 gcc "./sourcefiles/add_word.c" "./sourcefiles/functions.c" -I"./headers" -lm -o "./exec_WINDOWS/add_word"
 
 .\exec_WINDOWS\add_word.exe .\datafiles\dic.lex lèvre
+.\exec_WINDOWS\add_word.exe .\datafiles\dic.lex lèvre path/to/file/idUser.txt
