@@ -48,7 +48,6 @@ if ($insert === false) {
 }
 
 // ---initialise Game---
-xdebug_break();
 //création du fichier de partie
 $startingAndEndingWord = explode(" ", exec("bash Game/bash/random_words.sh 2"));
 $startingWord = $startingAndEndingWord[0];

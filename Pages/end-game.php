@@ -33,11 +33,11 @@ if (!empty($game)) {
 
     <p class="fs-4">Vous avez fait un score de <span class="fs-1 fw-bold"><?= $_SESSION['score'] ?></span> points !</p>
 
-    <a href="index.php">
-        <button class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button">&larr; Retour à l'écran
-            principal
+    <form method="post" action="../Game/endGameProcessor.php">
+        <button type="submit" name="retour" class="btn rounded-5 bg-coffee m-5 px-4 text-white fs-5 beautiful-button">
+            &larr; Retour à l'écran principal
         </button>
-    </a>
+    </form>
 </div>
 
 <?php include '../Includes/importFooter.php'; ?>

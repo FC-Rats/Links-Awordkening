@@ -38,5 +38,4 @@ if (file_exists($path) && filesize($path) > 0) {
 echo "<br>";
 print_r($_SESSION['WordsChart']);
 print_r($_SESSION['score']);
-xdebug_break();
 header('Location: ../Pages/game-display.php?idJoin='. $_SESSION['idJoin']);
