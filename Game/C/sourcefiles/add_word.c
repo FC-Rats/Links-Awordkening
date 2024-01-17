@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     const char *dictionnary_filename;
     char *word1;
     char *iduser;
-    const char *wordfile;
+    char *wordfile;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n -BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
