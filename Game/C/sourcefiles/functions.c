@@ -590,7 +590,7 @@ double calculScalaire(int offsetword1,int offsetword2,char *wordfilename){
         fread(&vecteur2[a], sizeof(float), 1, file);
         //printf("%f\t",vecteur2[a]);
     }
-
+    fclose(file);
     double len1 = 0;
     double len2 = 0;
     double produit = 0;
@@ -663,7 +663,7 @@ void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1,
  * @param word1 Mot à ajouter.
  * @param offset1 Offset du mot dans le fichier Word2Vec.
  */
-void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename) {
+void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, char *dictionnary_filename) {
     FILE *file = fopen(filename, "r+");
     if (!file) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -746,7 +746,7 @@ void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename) 
         token = strtok(NULL, ";");
     }
 
-    FILE* dictionnary = fopen("./datafiles/dic.lex", "rb");
+    FILE* dictionnary = fopen(dictionnary_filename, "rb");
     if (!dictionnary) {
         perror("Erreur lors de l'ouverture du dictionnaire");
         exit(EXIT_FAILURE);

@@ -25,9 +25,13 @@ gcc "./sourcefiles/new_game.c" "./sourcefiles/functions.c" -I"./headers" -lm -o 
 
 .\exec_WINDOWS\new_game.exe .\datafiles\dic.lex cri lapin
 .\exec_WINDOWS\new_game.exe .\datafiles\dic.lex cri lapin path/to/file/idUser.txt
+./C/exec_WINDOWS/new_game ./C/datafiles/dic.lex cri lapin ./C/datafiles/idUser.txt ./C/datafiles/words.bin
 
 ## Ajouter un mot à la partie (add_word)
 gcc "./sourcefiles/add_word.c" "./sourcefiles/functions.c" -I"./headers" -lm -o "./exec_WINDOWS/add_word"
 
 .\exec_WINDOWS\add_word.exe .\datafiles\dic.lex lèvre
-.\exec_WINDOWS\add_word.exe .\datafiles\dic.lex lèvre path/to/file/idUser.txt
+.\exec_WINDOWS\add_word.exe .\datafiles\dic.lex lèvre path/to/file/idUser path/to/words.bin
+
+./exec_WINDOWS/add_word.exe ./datafiles/dic.lex lèvre path/to/file/idUser path/to/words.bin
+./C/exec_WINDOWS/add_word ./C/datafiles/dic.lex animal ./C/datafiles/idUser.txt ./C/datafiles/words.bin

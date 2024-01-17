@@ -14,7 +14,8 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
     
     $output = [];
     $returnCode = 0;
-    exec("./C/exec_WINDOWSCadd_word ./C/datafiles/dic.lex $newWord ./C/datafiles/to/file/$idUser.txt", $output, $returnCode);
+    xdebug_break();
+    exec(".\\C\\exec_WINDOWS\\add_word .\\C\\datafiles\\dic.lex $newWord .\\C\\datafiles\\$idUser .\\C\\datafiles\\words.bin", $output, $returnCode); // marche pas
 
     echo "Output: " . implode("\n", $output) . "\n";
     echo "Return Code: $returnCode\n";

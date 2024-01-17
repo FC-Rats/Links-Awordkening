@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Liste de mots 
-words=("Chat" "Chien" "Poisson" "Lapin" "Poule" "Vache" "Cochon" "Chèvre" "Mouton" "Cheval")
+words=("chat" "chien" "poisson" "lapin" "poule" "vache" "cochon" "chèvre" "mouton" "cheval")
 
 # Vérifier le nombre d'arguments
 if [ "$#" -lt 1 ]; then

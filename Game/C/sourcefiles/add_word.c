@@ -31,8 +31,9 @@ int main(int argc, char *argv[]) {
     else if (argc == 5){
         dictionnary_filename = argv[1];
         word1 = argv[2];
-        iduser = strcat(argv[3], ".txt");
+        iduser = argv[3];
         wordfile = argv[4];
+        printf("dictionnary_filename : %s \n word1 : %s\n iduser: %s\n wordfile : %s\n", argv[1], argv[2], argv[3], argv[4]);
     }
     else {
         printf("Mauvais usage de la fonction \n");
@@ -54,7 +55,8 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    addWordToFile(iduser, word1,offset1,wordfile);
+    printf("dictionnary_filename : %s \n word1 : %s\n iduser: %s\n wordfile : %s\n", dictionnary_filename, word1, iduser, wordfile);
+    addWordToFile(iduser, word1,offset1,wordfile, dictionnary_filename);
 
     return 0; 
 }

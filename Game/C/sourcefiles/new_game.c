@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         dictionnary_filename = argv[1];
         word1 = argv[2];
         word2 = argv[3];
-        iduser = strcat(argv[4], ".txt");
+        iduser = argv[4];
         wordfile = argv[5];
     }
     else {
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
         printf("Mot non trouvé dans le dictionnaire");
         exit(EXIT_FAILURE);
     }
-
+    //printf("idUser : %s \n word1 : %s\n word2: %s\n offset1 : %d\n offset2 : %d\n wordfile : %s\n", iduser, word1, word2, offset1, offset2, wordfile);
     writeToFileBeginGame(iduser, word1, word2,offset1,offset2,wordfile);
 
     return 0; 

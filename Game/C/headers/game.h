@@ -167,6 +167,6 @@ double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char 
 void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2,char *wordfilename);
 
 // Ajoute un mot au fichier de partie
-void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename);
+void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, char *dictionnary_filename);
 
 #pragma endregion  NewGame
