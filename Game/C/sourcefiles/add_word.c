@@ -7,12 +7,14 @@ int main(int argc, char *argv[]) {
     const char *dictionnary_filename;
     char *word1;
     char *iduser;
+    const char *wordfile;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n -BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
         dictionnary_filename = "./datafiles/dic.lex";
         word1 = "lapin";
         iduser = "./datafiles/game.txt";
+        wordfile = "./datafiles/words.bin";
         printf("%s %s %s\n",dictionnary_filename,word1);
     }
     else if (argc==2 && strcmp("--help", argv[1])==0){
@@ -20,15 +22,17 @@ int main(int argc, char *argv[]) {
         printf("where dico.lex le dictionnaire lexicogrpahique et word le mot a ajouter dans la partie, iduser pour que chaque game soit par rapport a un id precis\n");
         exit(0);
     }
-    else if (argc == 3){
-        dictionnary_filename = argv[1];
-        word1 = argv[2];
-        iduser = "./datafiles/game.txt";
-    } 
     else if (argc == 4){
         dictionnary_filename = argv[1];
         word1 = argv[2];
+        iduser = "./datafiles/game.txt";
+        wordfile = "./datafiles/words.bin";
+    } 
+    else if (argc == 5){
+        dictionnary_filename = argv[1];
+        word1 = argv[2];
         iduser = strcat(argv[3], ".txt");
+        wordfile = argv[4];
     }
     else {
         printf("Mauvais usage de la fonction \n");
@@ -50,7 +54,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    addWordToFile(iduser, word1,offset1);
+    addWordToFile(iduser, word1,offset1,wordfile);
 
     return 0; 
 }

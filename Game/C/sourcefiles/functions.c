@@ -568,8 +568,8 @@ double levenshtein(char * S, char * T) {
  * @param offsetword2 Offset du deuxième mot dans le fichier Word2Vec.
  * @return double Produit scalaire normalisé entre -1 et 1.
  */
-double calculScalaire(int offsetword1,int offsetword2){ 
-    FILE *file = fopen("datafiles/words.bin", "rb");
+double calculScalaire(int offsetword1,int offsetword2,char *wordfilename){ 
+    FILE *file = fopen(wordfilename, "rb");
     if (!file)
     {
         perror("Erreur lors de l'ouverture du fichier Word2Vec");
@@ -621,8 +621,8 @@ double calculScalaire(int offsetword1,int offsetword2){
  * @param offset2 Offset du deuxième mot dans le fichier Word2Vec.
  * @return double Score de similarité normalisé entre 0 et 1.
  */
-double calculSimilarity(char *word1, char *word2, int offset1, int offset2){
-    double calcul = max(levenshtein(word1,word2),calculScalaire(offset1,offset2));
+double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char *wordfilename){
+    double calcul = max(levenshtein(word1,word2),calculScalaire(offset1,offset2,wordfilename));
     return calcul;
 }
 
@@ -644,14 +644,14 @@ double calculSimilarity(char *word1, char *word2, int offset1, int offset2){
  * @param offset1 Offset du premier mot dans le fichier Word2Vec.
  * @param offset2 Offset du deuxième mot dans le fichier Word2Vec.
  */
-void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2) {
+void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2,char *wordfilename) {
     FILE *file = fopen(filename, "w");
     
     fprintf(file, "%s;%s", word1,word2); //line 1
     fprintf(file, "\n\n"); //line 2 vide car 0 mot ajouté
     fprintf(file, "%s:%i;%s:%i", word1, offset1,word2,offset2); // line 3
     fprintf(file, "\n"); 
-    fprintf(file, "%s,%s,%0.2f;", word1, word2, calculSimilarity(word1,word2,offset1,offset2)); //line 4
+    fprintf(file, "%s,%s,%0.2f;", word1, word2, calculSimilarity(word1,word2,offset1,offset2,wordfilename)); //line 4
 
     fclose(file);
 }
@@ -663,7 +663,7 @@ void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1,
  * @param word1 Mot à ajouter.
  * @param offset1 Offset du mot dans le fichier Word2Vec.
  */
-void addWordToFile(char *filename, char *word1, int offset1) {
+void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename) {
     FILE *file = fopen(filename, "r+");
     if (!file) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -758,7 +758,7 @@ void addWordToFile(char *filename, char *word1, int offset1) {
     for (int j = 0; j < i; j++) {
         if (strcmp(listemots[j], word1) != 0) {
             int offsetWord = searchWordInStaticTree(&st, listemots[j]);
-            fprintf(file, "%s,%s,%0.2f;", word1, listemots[j], calculSimilarity(listemots[j], word1,offset1,offsetWord));
+            fprintf(file, "%s,%s,%0.2f;", word1, listemots[j], calculSimilarity(listemots[j], word1,offset1,offsetWord,wordfilename));
         }
     }
 

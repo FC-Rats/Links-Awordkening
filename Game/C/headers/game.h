@@ -142,13 +142,13 @@ int get(LevArray a, int indexS, int indexT);
 double levenshtein(char * S, char * T);
 
 // Fonction pour calculer la distance semantique
-double calculScalaire(int offsetword1,int offsetword2);
+double calculScalaire(int offsetword1,int offsetword2,char *wordfilename);
 
 // Fonction pour calculer le maximum de deux entiers
 double max(double a, double b);
 
 // Assembler levenstein et calculScalaire pour retourner la similarite max de deux mots
-double calculSimilarity(char *word1, char *word2, int offset1, int offset2);
+double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char *wordfilename);
 
 #pragma endregion Similarite
 
@@ -164,9 +164,9 @@ double calculSimilarity(char *word1, char *word2, int offset1, int offset2);
 */
 
 // Ecris le fichier de partie
-void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2);
+void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2,char *wordfilename);
 
 // Ajoute un mot au fichier de partie
-void addWordToFile(char *filename, char *word1, int offset1);
+void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename);
 
 #pragma endregion  NewGame
