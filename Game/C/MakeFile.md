@@ -82,3 +82,7 @@ gcc "./sourcefiles/add_word.c" "./sourcefiles/functions.c" -I"./headers" -lm -o 
 `./C/exec_WINDOWS/new_game ./C/datafiles/dic.lex cri lapin ./C/datafiles/idUser.txt ./C/datafiles/words.bin`
 
 `./C/exec_WINDOWS/add_word ./C/datafiles/dic.lex animal ./C/datafiles/idUser.txt ./C/datafiles/words.bin`
+
+`.\C\exec_WINDOWS\new_game .\C\datafiles\dic.lex cri lapin .\C\datafiles\idUser.txt .\C\datafiles\words.bin`
+
+`.\C\exec_WINDOWS\add_word .\C\datafiles\dic.lex animal .\C\datafiles\idUser.txt .\C\datafiles\words.bin`
