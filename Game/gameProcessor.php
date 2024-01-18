@@ -29,7 +29,7 @@ if (file_exists($path) && filesize($path) > 0) {
         } else {
             $scoreArray = explode(':', $ligne);
             if (isset($scoreArray[1])) {
-                $_SESSION['score'] += $scoreArray[1] * 100;
+                $_SESSION['score'] = $scoreArray[1] * 100;
             }
         }
     }
@@ -39,3 +39,4 @@ echo "<br>";
 print_r($_SESSION['WordsChart']);
 print_r($_SESSION['score']);
 header('Location: ../Pages/game-display.php?idJoin='. $_SESSION['idJoin']);
+exit();

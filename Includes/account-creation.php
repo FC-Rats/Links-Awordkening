@@ -46,4 +46,5 @@ if (isset($_POST["username"]) && isset($_POST["birthYear"]) && isset($_POST["ema
     }
 } else {
     header("Location: ../Pages/creation.php");
+    exit();
 }

@@ -1,4 +1,5 @@
-<?php if (!isset($_SESSION)) {
+<?php 
+if (!isset($_SESSION)) {
     session_start();
 }
 include '../Includes/_utils.php';
@@ -14,6 +15,10 @@ if (isset($_SESSION['score']) && !empty($_SESSION['score'])) {
         array(":score", $_SESSION['score']),
         array(":idGame", $game[0]['id'])
     ));
+}
+
+if ($_SESSION['coupRestant'] == 0) {
+    header('Location: end-game.php');
 }
 ?>
 
@@ -63,6 +68,10 @@ if (isset($_SESSION['score']) && !empty($_SESSION['score'])) {
                 <p class="mb-2">Score</p>
                 <h2 class="fs-1"><?= isset($_SESSION['score']) ? $_SESSION['score'] : 0 ?></h2>
             </div>
+            <div class="text-center mb-4">
+                <p class="mb-2">Coups restant</p>
+                <h2 class="fs-1"><?=$_SESSION['coupRestant']?></h2>
+            </div>
         </div>
 
     </div>
@@ -71,13 +80,21 @@ if (isset($_SESSION['score']) && !empty($_SESSION['score'])) {
             <label for="mot" class="fs-4">Rentrez un mot :</label>
             <input name="mot" id="mot">
             <button type="submit"
-                    class="btn rounded-5 bg-viridian m-2 m-md-5 px-4 py-2 py-md-3 text-white fs-5 fs-md-4 beautiful-button">
+                    class="btn rounded-5 bg-viridian m-2 m-md-3 px-4 py-2 py-md-3 text-white fs-5 fs-md-2 beautiful-button">
                 Valider
             </button>
+            <div class="container mt-5">
+                <?php if (!empty($_SESSION['errorCode']) && isset($_SESSION['errorCode'])) : ?>
+                    <div class="alert alert-danger bg-danger rounded-5">
+                        <strong class="text-white">
+                            <?= $_SESSION['errorCode']; ?>
+                        </strong>
+                    </div>
+                <?php endif; ?>
+            </div>
         </form>
     </div>
 </div>
-<a href="end-game.php">fin de partie</a>
 
 <?php include '../Includes/importFooter.php'; ?>
 <script src="../Assets/JS/graphHighCharts.js"></script>

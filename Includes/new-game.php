@@ -50,16 +50,18 @@ if ($insert === false) {
 // ---initialise Game---
 //création du fichier de partie
 $startingAndEndingWord = explode(" ", exec("bash ../Game/bash/random_words.sh 2"));
-$startingWord = escapeshellarg($startingAndEndingWord[0]);
-$endingWord = escapeshellarg($startingAndEndingWord[1]);
+$startingWord = $startingAndEndingWord[0];
+$endingWord = $startingAndEndingWord[1];
 $_SESSION["startingWord"] = $startingWord;
 $_SESSION["endingWord"] = $endingWord;
 $output = [];
 $returnCode = 0;
 $_SESSION['score'] = 0;
 $idUser = $_SESSION['idUser'];
-$currentDirectory = getcwd();
-$commande = "..\\Game\\C\\exec_WINDOWS\\new_game ..\\Game\\C\\datafiles\\dic.lex $startingWord $endingWord ..\\Game\\C\\datafiles\\$idUser ..\\Game\\C\\datafiles\\words.bin";
+$_SESSION['coupRestant'] = 10;
+$_SESSION['wordList'] = array($startingWord, $endingWord);
+$_SESSION['errorCode'] = "";
+$commande = "..\\Game\\C\\exec_WINDOWS\\new_game ..\\Game\\C\\datafiles\\dic.lex $startingWord $endingWord ..\\Game\\C\\datafiles\\$idUser.txt ..\\Game\\C\\datafiles\\words.bin";
 exec($commande,  $output, $returnCode);
 echo "Output: " . implode("\n", $output) . "\n";
 echo "Return Code: $returnCode\n";

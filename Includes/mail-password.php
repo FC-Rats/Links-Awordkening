@@ -25,6 +25,8 @@ if (isset($_POST['email'])) {
 
     envoi_mail($email, $objet, $message);
     header("Location: ../Pages/mail-redirection-recover.php");
+    exit();
 } else {
     header("Location: ../Pages/recover.php");
+    exit();
 }
