@@ -28,7 +28,7 @@ class Connection {
 
     public function connection() {
         try {
-        $bd = new PDO('mysql:host='.$this->host.';dbname='.$this->db, 
+        $bd = new PDO('mysql:host='.$this->host.';dbname='.$this->db.';charset=utf8mb4', 
                                     $this->login, 
                                     $this->password);
         $this->connec = $bd;
