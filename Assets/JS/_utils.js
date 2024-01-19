@@ -8,6 +8,10 @@ function padNumber(number) {
     return (number < 10 ? '0' : '') + number;
 }
 
+function booleanToText(boolean) {
+    return (boolean == 1 ? 'Oui' : 'Non');
+}
+
 function renderText(column, customFormatter = null) {
     return function (data, type, row, meta) {
         var formattedData = (customFormatter) ? customFormatter(row[column]) : row[column];
