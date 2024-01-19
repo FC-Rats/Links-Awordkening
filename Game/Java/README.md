@@ -17,14 +17,14 @@ Le module Java aussi appelé moteur de chaîne à pour objectif de créer un arb
 ### - Compilation -
 Si le .jar n'existe pas, il suffit de taper cette commande à la racine du projet `Java` :
 ```bash
-mvn clean install
+mvn clean package
 ```
 ### - Exécution -
 Une fois compilé il vous suffit d'appeler le fichier .jar comme ceci (n'oubliez pas l'argument) :
 ```bash
-java -jar <PATH TO JAR>/<NAME>.jar <ID_USER>
+java -jar <PATH TO JAR>/<NAME-VERSION>.jar <ID_USER>
 ```
 A titre d'exemple dans notre code en se plaçant dans le dossier `Game` on effectue :
 ```bash
-java -jar Java/target/chainEngine-1.0-SNAPSHOT.jar 1478
+java -jar Java/target/ChainEngine-2.0.jar 1478
 ```

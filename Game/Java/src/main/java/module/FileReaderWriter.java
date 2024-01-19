@@ -8,11 +8,35 @@ import java.util.*;
  */
 public class FileReaderWriter {
 	
+	public static List<Edge> readEdgesFromFile(String filePath) throws IOException {
+        List<Edge> edges = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length == 3) {
+                    String wordSrc = parts[0].trim();
+                    String wordDest = parts[1].trim();
+                    double similarity = Double.parseDouble(parts[2].trim());
+
+                    Edge edge = new Edge(wordSrc, wordDest, similarity);
+                    edges.add(edge);
+                } else {
+                    System.err.println("Skipping invalid line: " + line);
+                }
+            }
+        }
+
+        return edges;
+    }
+
     /**
      * Lit un fichier texte et renvoie une liste d'arêtes.
      *
      * @param filePath Chemin du fichier texte.
-     * @return Une map contenant les données du fichier d'entrée (mot de début, mot de fin, nouveau mot et liste des liens avec similarités).
+     * @return data Map contenant les données du fichier d'entrée (mot de début, mot de fin, nouveau mot et liste des liens avec similarités.
      * @throws IOException En cas d'erreur d'entrée/sortie lors de la lecture du fichier.
      */
     public static Map<String, Object> readDataFromFile(String filePath) throws IOException {
@@ -28,7 +52,7 @@ public class FileReaderWriter {
 	
 	        // Lecture de la deuxième ligne
 	        String[] secondLineWords = reader.readLine().split(";");
-	        String newWord = (secondLineWords.length >= 1 && !secondLineWords[0].toString().equals("")) ? secondLineWords[0] : firstLineWords[0];
+	        String newWord = (secondLineWords.length >= 1 && !secondLineWords[0].toString().equals("")) ? secondLineWords[secondLineWords.length - 1] : firstLineWords[0];
 	        data.put("newWord", newWord);
 	
 	        // Ignore la troisième ligne
@@ -71,7 +95,7 @@ public class FileReaderWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         	List<Edge> treeEdges = tree.findPath(startWord, endWord);
             for (Edge edge : treeEdges) {
-                writer.write(edge.getWordSrc() + "," + edge.getWordDest() + "," + edge.getSimilarity());
+                writer.write(edge.getWordSrc() + ";" + edge.getWordDest() + ";" + edge.getSimilarity());
                 writer.newLine();
             }
             
