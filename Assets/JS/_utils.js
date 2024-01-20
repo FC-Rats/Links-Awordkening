@@ -17,11 +17,11 @@ function getAction(idUser, isAdmin) {
 }
 
 function getUserEmote(idUser) {
-    return '<button class="btn btn-sm btn-outline-danger" title="Rétrograder à utilisateur" alt="Rétrograder à utilisateur" onclick="downgradeToUser(' + idUser + ')"><i class="fa-solid fa-user"></i></button>';
+    return '<button class="btn btn-sm btn-outline-danger" title="Rétrograder à utilisateur" alt="Rétrograder à utilisateur" onclick="downgradeToUser(' + idUser + ')"><i class="fas fa-user"></i></button>';
 }
 
 function getLockEmote(idUser) {
-    return '<button class="btn btn-sm btn-outline-danger" title="Passer administrateur" alt="Passer administrateur" onclick="passToAdmin(' + idUser + ')"><i class="fa-solid fa-lock"></i></button>';
+    return '<button class="btn btn-sm btn-outline-danger" title="Passer administrateur" alt="Passer administrateur" onclick="passToAdmin(' + idUser + ')"><i class="fas fa-lock"></i></button>';
 }
 
 function renderText(column, customFormatter = null, secondColumn = null) {

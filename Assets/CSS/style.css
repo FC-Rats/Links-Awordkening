@@ -42,8 +42,8 @@ h3 {
     font-family: 'Nanum Myeongjo', serif!important;
 }
 
-* {
-    font-family: 'Nanum Gothic', sans-serif!important;
+*:not(.fa):not(.fas):not(.fa-solid) {
+    font-family: 'Nanum Gothic', sans-serif !important;
 }
 /*
 p,
@@ -54,6 +54,8 @@ a,
 li,
 button
 */
+
+
 .bg-viridian {
     background-color: var(--viridian)!important;
 }

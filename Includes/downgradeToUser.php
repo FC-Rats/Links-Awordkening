@@ -12,7 +12,7 @@ $response = [];
 
 if (isset($_POST['idUser'])) {
     $id = $_POST['idUser'];
-    $db->query("UPDATE LA_USER SET admin = 1 WHERE id = :idUser", [[":idUser", $id]]);
+    $db->query("UPDATE LA_USER SET admin = 0 WHERE id = :idUser", [[":idUser", $id]]);
     $response['Success'] = true;
 } else {
     header('Location: ../Pages/adminListUsers.php');
