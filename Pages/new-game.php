@@ -106,9 +106,6 @@ if (!empty($_SESSION['errorCode'])) {
       document.getElementById(id).click();
     }
 </script>
-<script>
-    var link = "<?php echo $config["links"]["host"]; ?>";
-</script>
 <script src="../Assets/JS/new-game.js"></script>
 </body>
 

@@ -9,6 +9,8 @@ if (isset($_POST['mot']) && empty($_POST['mot'])) {
     exit();
 }
 
+include '../Includes/_utils.php';
+
 if (isset($_POST['mot']) && !empty($_POST['mot'])) {
     $newWord = strtolower($_POST['mot']);
     $idUser = $_SESSION['idUser'];
@@ -16,6 +18,7 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
     $output = [];
     $returnCode = 0;
     exec(".\\C\\exec_WINDOWS\\add_word .\\C\\datafiles\\dic.lex $newWord .\\C\\datafiles\\$idUser.txt .\\C\\datafiles\\words.bin", $output, $returnCode); // marche pas
+    //exec(file_build_path(".","C","exec_WINDOWS","add_word"). " " . file_build_path(".","C","datafiles","dic.lex"). " " . $newWord . " " . file_build_path(".","C","datafiles","$idUser.txt"). " " . file_build_path(".","C","datafiles","words.bin"), $output, $returnCode);
 
     echo "Output: " . implode("\n", $output) . "\n";
     echo "Return Code: $returnCode\n";

@@ -61,6 +61,7 @@ $_SESSION['coupRestant'] = 10;
 $_SESSION['wordList'] = array($startingWord, $endingWord);
 $_SESSION['errorCode'] = "";
 $commande = "..\\Game\\C\\exec_WINDOWS\\new_game ..\\Game\\C\\datafiles\\dic.lex $startingWord $endingWord ..\\Game\\C\\datafiles\\$idUser.txt ..\\Game\\C\\datafiles\\words.bin";
+//$commande = file_build_path("..","Game","C","exec_WINDOWS","new_game") . " " . file_build_path("..","Game","C","datafiles","dic.lex") . " " . $startingWord . " " . $endingWord . " " . file_build_path("..","Game","C","datafiles","$idUser.txt") . " " . file_build_path("..","Game","C","datafiles","words.bin");
 exec($commande,  $output, $returnCode);
 echo "Output: " . implode("\n", $output) . "\n";
 echo "Return Code: $returnCode\n";
