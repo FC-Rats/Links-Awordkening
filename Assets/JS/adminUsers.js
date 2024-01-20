@@ -28,7 +28,7 @@ function listDatas() {
                     { data: 'email', render: renderText('email') },
                     { data: 'verified', render: renderText('verified', booleanToText) },
                     { data: 'admin', render: renderText('admin', booleanToText) },
-                    { data: 'id', render: renderText('id') } //to change
+                    { data: 'id', render: renderText('id', getAction, 'admin')}
                 ],
                 order: [[0, 'asc']],
                 dom:
@@ -44,6 +44,42 @@ function listDatas() {
                     url: "../Assets/json/table.json",
                 },
             });
+        }
+    });
+}
+
+function passToAdmin(idUser) {
+    $.ajax({
+        url: '../Includes/passToAdmin.php',
+        type: 'POST',
+        dataType: "JSON",
+        data: {
+            idUser: idUser
+        },
+        success: function (data) {
+            if (data.Success) {
+                listDatas();
+            } else {
+                console.log(data);
+            }
+        }
+    });
+}
+
+function downgradeToUser(idUser) {
+    $.ajax({
+        url: '../Includes/downgradeToUser.php',
+        type: 'POST',
+        dataType: "JSON",
+        data: {
+            idUser: idUser
+        },
+        success: function (data) {
+            if (data.Success) {
+                listDatas();
+            } else {
+                console.log(data);
+            }
         }
     });
 }

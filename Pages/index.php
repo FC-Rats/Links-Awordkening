@@ -175,6 +175,7 @@ if (isset($_SESSION["idUser"])) {
                             <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
                             <?php if ($_SESSION['isAdmin'] == 1) {?>
                             <a href="logs.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Accéder aux 500 dernières traces</button></a>
+                            <a href="adminListUsers.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Gérer les utilisateurs</button></a>
                             <?php } ?>
                         <?php } else { ?>
                             <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>
