@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
     int offset1 = searchWordInStaticTree(&st, word1);
     if (offset1 == -1){
         printf("Mot non trouvé dans le dictionnaire");
+        // return 1;
         exit(EXIT_FAILURE);
     }
 

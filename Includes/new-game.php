@@ -46,7 +46,7 @@ if ($insert === false) {
     $response['Insert'] = $game->getIdJoin();
     echo json_encode($response);
 }
-
+$idUser = $_SESSION['idUser'];
 // ---initialise Game---
 //création du fichier de partie
 $startingAndEndingWord = explode(" ", exec("bash ../Game/bash/random_words.sh 2"));
@@ -57,7 +57,6 @@ $_SESSION["endingWord"] = $endingWord;
 $output = [];
 $returnCode = 0;
 $_SESSION['score'] = 0;
-$idUser = $_SESSION['idUser'];
 $_SESSION['coupRestant'] = 10;
 $_SESSION['wordList'] = array($startingWord, $endingWord);
 $_SESSION['errorCode'] = "";

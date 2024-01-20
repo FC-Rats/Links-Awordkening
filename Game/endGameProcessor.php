@@ -8,8 +8,9 @@ if (isset($_POST['retour'])) {
     $fichierC = "./C/datafiles/$idUser.txt";
     $fichierJavaInput = "./Java/src/files/input/$idUser.txt";
     $fichierJavaOutput = "./Java/src/files/output/$idUser.txt";
+    $fichierser = "./Java/src/files/save/$idUser.txt";
 
-    if (unlink($fichierC) && unlink($fichierJavaInput) && unlink($fichierJavaOutput)) {
+    if (unlink($fichierC) && unlink($fichierJavaInput) && unlink($fichierJavaOutput) && unlink($fichierser)) {
         echo 'Les fichiers a été supprimés avec succès.';
     } else {
         echo 'Une erreur s\'est produite lors de la suppression des fichiers.';
@@ -19,6 +20,7 @@ if (isset($_POST['retour'])) {
     unset($_SESSION['WordsChart']);
     unset($_SESSION['wordList']);
     unset($_SESSION['errorCode']);
+    unset($_SESSION['relevantWord']);
     // supprimer l'objet Game ?
 
     header('Location: ../Pages/index.php'); // Rediriger l'utilisateur vers index.php
