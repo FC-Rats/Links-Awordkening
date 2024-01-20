@@ -12,7 +12,7 @@ if (!isset($_GET['token'])) {
 
 <head>
     <meta charset='utf-8'>
-    <title>Form</title>
+    <title>Modifier votre mot de passe</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
     <?php include '../Includes/importHeader.php'; ?>
