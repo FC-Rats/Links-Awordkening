@@ -13,6 +13,25 @@ body {
     --tan: #D2B48C;
 }
 
+::-webkit-scrollbar {
+    width: 12px; /* largeur de la scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent; /* couleur de fond de la scrollbar */
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--viridian); /* couleur de la poignée de la scrollbar */
+    width: 15px;
+}
+
+/* masque les flèches de la scrollbar */
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: none;
+}
 .bg-viridian {
     background-color: var(--viridian)!important;
 }
@@ -58,9 +77,9 @@ body {
 }
 
 .beautiful-button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)!important;
     border: 0!important;
     outline: none!important;
-    box-shadow: none!important;
 }
 
 @media (max-width: 576px) {

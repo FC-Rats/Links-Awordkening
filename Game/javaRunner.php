@@ -1,6 +1,6 @@
 <?php
     $output=null;
-    $command = "java -jar Java/target/ChainEngine-1.0-SNAPSHOT.jar $idUser";
+    $command = "java -jar Java/target/ChainEngine-2.5.jar $idUser";
     $returnCode = 0;
 
     $output=null;

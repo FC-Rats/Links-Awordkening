@@ -706,7 +706,7 @@ void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, 
     if (strlen(line2) == 0 || line2[0] == '\n') {
         fprintf(file, "%s;", word1);
     } else {
-        fprintf(file, "%s;%s;", line2, word1);
+        fprintf(file, "%s%s;", line2, word1);
     }
     fprintf(file, "\n");
 

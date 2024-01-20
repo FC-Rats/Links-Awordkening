@@ -95,7 +95,7 @@ public class FileReaderWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         	List<Edge> treeEdges = tree.findPath(startWord, endWord);
             for (Edge edge : treeEdges) {
-                writer.write(edge.getWordSrc() + ";" + edge.getWordDest() + ";" + edge.getSimilarity());
+                writer.write(edge.getWordSrc() + "," + edge.getWordDest() + "," + edge.getSimilarity());
                 writer.newLine();
             }
             

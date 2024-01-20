@@ -4,11 +4,21 @@ if (!isset($_SESSION)) {
 }
 
 if (isset($_POST['mot']) && empty($_POST['mot'])) {
+    $_SESSION['errorCode'] = "Veuillez entrer un mot";
     header('Location: ../Pages/game-display.php');
+    exit();
 }
 
 if (isset($_POST['mot']) && !empty($_POST['mot'])) {
     $newWord = strtolower($_POST['mot']);
+    $idUser = $_SESSION['idUser'];
+    // Créer une nouvelle entrée avec le nouveau mot
+    $output = [];
+    $returnCode = 0;
+    exec(".\\C\\exec_WINDOWS\\add_word .\\C\\datafiles\\dic.lex $newWord .\\C\\datafiles\\$idUser.txt .\\C\\datafiles\\words.bin", $output, $returnCode); // marche pas
+
+    echo "Output: " . implode("\n", $output) . "\n";
+    echo "Return Code: $returnCode\n";
     // Vérifier si le mot est déjà utilisé
     if (in_array($newWord, $_SESSION['wordList'])) {
         $_SESSION['errorCode'] = "Mot déjà utilisé";
@@ -24,20 +34,16 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
         $_SESSION['errorCode'] = "Le mot ne doit pas contenir de caractères spéciaux";
         header("Location: ../Pages/game-display.php");
         exit();
+    } elseif($returnCode == 1) {
+        $_SESSION['errorCode'] = "Le mot que vous avez entré n'existe pas ou est mal orthographié";
+        header("Location: ../Pages/game-display.php");
+        exit();
     } else {
         $_SESSION['errorCode'] = "";
         // Continuer le traitement si nécessaire
     }
     array_push($_SESSION['wordList'] , $newWord);
     $_SESSION['coupRestant']--;
-    $idUser = $_SESSION['idUser'];
-    // Créer une nouvelle entrée avec le nouveau mot
-    $output = [];
-    $returnCode = 0;
-    exec(".\\C\\exec_WINDOWS\\add_word .\\C\\datafiles\\dic.lex $newWord .\\C\\datafiles\\$idUser.txt .\\C\\datafiles\\words.bin", $output, $returnCode); // marche pas
-
-    echo "Output: " . implode("\n", $output) . "\n";
-    echo "Return Code: $returnCode\n";
     header('Location: gameProcessor.php');
     exit();
 }

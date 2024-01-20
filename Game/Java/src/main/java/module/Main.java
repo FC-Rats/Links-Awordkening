@@ -22,9 +22,9 @@ public class Main {
 
         String idPlayer = args[0];
 
-        String inputFile = "src/files/input/" + idPlayer + ".txt";
-        String outputFile = "src/files/output/" + idPlayer + ".txt";
-        String saveFile = "src/files/save/" + idPlayer + ".ser";
+        String inputFile = "Java/src/files/input/" + idPlayer + ".txt";
+        String outputFile = "Java/src/files/output/" + idPlayer + ".txt";
+        String saveFile = "Java/src/files/save/" + idPlayer + ".ser";
 
         try {
             Tree tree = new Tree();

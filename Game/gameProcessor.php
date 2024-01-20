@@ -15,7 +15,7 @@ if (copy($ancienChemin, $nouveauChemin)) {
 }
 
 include './javaRunner.php';
-
+$countPreviousWordChart = (isset($_SESSION['WordsChart'])) ? count($_SESSION['WordsChart']) : 0;
 $_SESSION['WordsChart'] = [];
 $path = "Java/src/files/output/$idUser.txt";
 if (file_exists($path) && filesize($path) > 0) {
@@ -35,7 +35,8 @@ if (file_exists($path) && filesize($path) > 0) {
     }
     fclose($ressource); // Assurez-vous de fermer le fichier après avoir fini de le lire.
 }
-echo "<br>";
+
+$_SESSION['relevantWord'] = ($countPreviousWordChart == count($_SESSION['WordsChart'])) ? true : false;
 print_r($_SESSION['WordsChart']);
 print_r($_SESSION['score']);
 header('Location: ../Pages/game-display.php?idJoin='. $_SESSION['idJoin']);

@@ -5,6 +5,36 @@ if (!isset($_SESSION)) {
 include '../Includes/_utils.php';
 unsetGameSessionVariable();
 include("../configuration.php");
+//supprimer les fichiers de partie de l'utilisateur
+$idUser = $_SESSION['idUser'];
+$fichierC = "../Game/C/datafiles/$idUser.txt";
+$fichierJavaInput = "../Game/Java/src/files/input/$idUser.txt";
+$fichierJavaOutput = "../Game/Java/src/files/output/$idUser.txt";
+$fichierser = "../Game/Java/src/files/save/$idUser.ser";
+if (file_exists($fichierC) && file_exists($fichierJavaInput) && file_exists($fichierJavaOutput) && file_exists($fichierser)) {
+unlink($fichierC) && unlink($fichierJavaInput) && unlink($fichierJavaOutput) && unlink($fichierser);
+}
+
+// Vérifier et vider la variable de session si elle est définie
+if (!empty($_SESSION['score'])) {
+    $_SESSION['score'] = null;
+}
+
+if (!empty($_SESSION['WordsChart'])) {
+    $_SESSION['WordsChart'] = null;
+}
+
+if (!empty($_SESSION['wordList'])) {
+    $_SESSION['wordList'] = null;
+}
+
+if (!empty($_SESSION['errorCode'])) {
+    $_SESSION['errorCode'] = "";
+}
+
+if (!empty($_SESSION['errorCode'])) {
+    $_SESSION['relevantWord'] = null;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,13 +66,15 @@ include("../configuration.php");
                 </div>
 
                 <div class="py-3 col-12 d-flex flex-row align-items-center justify-content-evenly text-light">
-                    <div class="d-flex flex-row col-6 justify-content-evenly">
-                        <label for="gameType">Un joueur</label>
-                        <input type="radio" class="col-1" name="gameType" id="SinglePlayer" value="SinglePlayer">
-                    </div>
-                    <div class="d-flex flex-row col-6 justify-content-evenly">
-                        <label for="gameType">Multijoueur</label>
-                        <input type="radio" class="col-1" name="gameType" id="MultiPlayer" value="MultiPlayer">
+                    <div class="py-3 col-12 d-flex flex-row align-items-center justify-content-evenly text-light">
+                        <div class="d-flex flex-row col-6 justify-content-evenly">
+                            <label for="SinglePlayer" onclick="labelButtonClick('SinglePlayerLabel')">Un joueur</label>
+                            <input type="radio" class="col-1" name="gameType" id="SinglePlayer" value="SinglePlayer">
+                        </div>
+                        <div class="d-flex flex-row col-6 justify-content-evenly">
+                            <label for="MultiPlayer" onclick="labelButtonClick('MultiPlayerLabel')">Multijoueur</label>
+                            <input type="radio" class="col-1" name="gameType" id="MultiPlayer" value="MultiPlayer">
+                        </div>
                     </div>
                 </div>
 
@@ -68,6 +100,11 @@ include("../configuration.php");
 
 
 <?php include '../Includes/importFooter.php'; ?>
+<script>
+    function labelButtonClick(id) {
+      document.getElementById(id).click();
+    }
+</script>
 <script>
     var link = "<?php echo $config["links"]["host"]; ?>";
 </script>
