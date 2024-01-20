@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include '../Includes/_utils.php';
+redirectionConnection();
 unsetGameSessionVariable();
 include("../configuration.php");
 //supprimer les fichiers de partie de l'utilisateur
