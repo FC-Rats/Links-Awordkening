@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 body {
     margin: 0;
     background-image: url(../img/fond.png)!important;
@@ -32,6 +35,25 @@ body {
 ::-webkit-scrollbar-button:end:increment {
     display: none;
 }
+
+h1,
+h2,
+h3 {
+    font-family: 'Nanum Myeongjo', serif!important;
+}
+
+* {
+    font-family: 'Nanum Gothic', sans-serif!important;
+}
+/*
+p,
+span,
+h4,
+div,
+a,
+li,
+button
+*/
 .bg-viridian {
     background-color: var(--viridian)!important;
 }
