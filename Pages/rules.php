@@ -29,18 +29,18 @@
 
                 <h3>Proposition de Mots :</h3>
                 <ul>
-                    <li>Suggérez des mots liés sémantiquement et orthographiquement au mot précédent.</li>
+                    <li>Suggérez des mots liés sémantiquement et orthographiquement aux autres mots afin de former de nouveaux liens.</li>
                     <li>Soyez original et explorez des associations surprenantes.</li>
                 </ul>
 
                 <h3>Score et Classement :</h3>
                 <ul>
-                    <li>Chaque mot ajouté contribue à votre score total.</li>
+                    <li>Chaque mot ajouté peut contribuer à votre score total si celui-ci permet d'améliorer votre score actuel.</li>
                     <li>Votre score dépend de la qualité de la chaîne de mots créée.</li>
                     <li>Consultez le classement pour voir comment vous vous démarquez.</li>
                 </ul>
 
-                <h3>Parties Multijoueurs :</h3>
+                <h3>Parties Multijoueurs (Non disponible)</h3>
                 <ul>
                     <li>Rejoignez des parties avec vos amis ou d'autres joueurs.</li>
                     <li>Soyez compétitif pour gagner la partie !</li>
@@ -59,13 +59,13 @@
                     <li>Analysez vos succès et améliorez-vous au fil du temps.</li>
                 </ul>
 
-                <h3>Communauté :</h3>
+                <h3>Communauté (Non disponible)</h3>
                 <ul>
                     <li>Partagez vos meilleures chaînes de mots sur les réseaux sociaux.</li>
                     <li>Echangez avec vos amis via les messages.</li>
                 </ul>
 
-                <h3>Jouer! :</h3>
+                <h3>Jouer ! :</h3>
                 <ul>
                     <li>L'objectif principal est de s'amuser et d'explorer de nouvelles associations de mots.</li>
                     <li>Stimulez votre créativité et découvrez des chaînes de mots uniques.</li>
