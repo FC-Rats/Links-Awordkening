@@ -8,13 +8,12 @@ if (isset($_POST['retour'])) {
     $fichierC = "./C/datafiles/$idUser.txt";
     $fichierJavaInput = "./Java/src/files/input/$idUser.txt";
     $fichierJavaOutput = "./Java/src/files/output/$idUser.txt";
-    $fichierser = "./Java/src/files/save/$idUser.txt";
+    $fichierser = "./Java/src/files/save/$idUser.ser";
 
-    if (unlink($fichierC) && unlink($fichierJavaInput) && unlink($fichierJavaOutput) && unlink($fichierser)) {
-        echo 'Les fichiers a été supprimés avec succès.';
-    } else {
-        echo 'Une erreur s\'est produite lors de la suppression des fichiers.';
-    }
+    unlink($fichierC);
+    unlink($fichierJavaInput);
+    unlink($fichierJavaOutput);
+    unlink($fichierser);
     // supprimer les données de la session de la partie
     unset($_SESSION['score']);
     unset($_SESSION['WordsChart']);

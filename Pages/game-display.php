@@ -96,11 +96,11 @@ if ($_SESSION['coupRestant'] == 0) {
             </div class="">
             <div id="container" class="rounded-3 my-2" style="text-align: center; border: 1px var(--viridian) solid;">
             </div>
-            <form action="../Game/addWord.php" method="post" class="text-center mx-5">
+            <form action="../Game/addWord.php" method="post" class="text-center mx-5 d-flex justify-content-center">
                 <div class="container mt-4 d-flex flex-column align-items-center">
                     <label for="mot" class="fs-4">Rentrez un mot :</label>
                     <div class="input-group d-flex justify-content-center">
-                        <input type="text" id="mot" name="mot" class="p-2" maxlength="40">
+                        <input type="text" id="mot" name="mot" class="p-2" maxlength="40" autocomplete="off">
                         <button type="submit"
                             class="btn rounded-5 bg-viridian beautiful-button mx-2 py-2 px-3 fs-5 text-white">
                             Valider
@@ -109,7 +109,7 @@ if ($_SESSION['coupRestant'] == 0) {
                 </div>
                 <div class="container mt-5">
                     <?php if (!empty($_SESSION['errorCode']) && isset($_SESSION['errorCode'])) { ?>
-                        <div class="alert alert-danger bg-danger rounded-5">
+                        <div class="alert alert-danger bg-danger rounded-5 d-inline-block">
                             <strong class="text-white">
                                 <?= $_SESSION['errorCode']; ?>
                             </strong>
