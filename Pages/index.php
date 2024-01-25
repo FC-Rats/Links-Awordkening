@@ -118,7 +118,7 @@ if (isset($_SESSION["idUser"])) {
                 <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">-->
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
-                        <img src="../Assets/img/logoLA.png" alt="Logo du site">
+                        <img src="../Assets/img/logoLA.png" alt="Logo du site" class="img-fluid">
                         <a href="new-game.php" class="text-light"><button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button></a>
                     </div>
                 </header>
