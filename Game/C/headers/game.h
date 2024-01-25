@@ -34,7 +34,7 @@
 */
 
 // Définition du type child Sibling Tree (CSTree)
-typedef wchar_t Element;
+typedef char Element;
 
 typedef struct node {
     Element elem;
@@ -83,7 +83,7 @@ int siblingLookupStatic(StaticTreeWithOffset* st, Element e, int from, int len);
 */
 
 // Inserer un mot de Word2Vec dans le CSTree
-CSTree insert(CSTree t, const char* mot, int offset);
+CSTree insert(CSTree tree, const char* mot, int offset);
 
 // Fonction pour convertir CSTree en StaticTree : Remplir les cells du tableau
 void fill_array_cells_with_offset(StaticTreeWithOffset* st, CSTree t, int index_for_t, int nSiblings, int* reserved_cells) ;
@@ -142,13 +142,13 @@ int get(LevArray a, int indexS, int indexT);
 double levenshtein(char * S, char * T);
 
 // Fonction pour calculer la distance semantique
-double calculScalaire(int offsetword1,int offsetword2,char *wordfilename);
+double calculScalaire(int offsetword1,int offsetword2, char * wordsfile);
 
 // Fonction pour calculer le maximum de deux entiers
 double max(double a, double b);
 
 // Assembler levenstein et calculScalaire pour retourner la similarite max de deux mots
-double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char *wordfilename);
+double calculSimilarity(char *word1, char *word2, int offset1, int offset2, char * wordsfile);
 
 #pragma endregion Similarite
 
@@ -164,9 +164,9 @@ double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char 
 */
 
 // Ecris le fichier de partie
-void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2,char *wordfilename);
+void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2, char * wordsfile);
 
 // Ajoute un mot au fichier de partie
-void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, char *dictionnary_filename);
+void addWordToFile(char *filename, char *word1, int offset1, char *wordsfile, char *dictionary_filename);
 
 #pragma endregion  NewGame

@@ -4,7 +4,7 @@
 #include "../headers/game.h"
 
 int main(int argc, char *argv[]) {
-    const char *dictionnary_filename;
+    char *dictionnary_filename;
     char *word1;
     char *iduser;
     char *wordfile;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
         word1 = argv[2];
         iduser = argv[3];
         wordfile = argv[4];
-        printf("dictionnary_filename : %s \n word1 : %s\n iduser: %s\n wordfile : %s\n", argv[1], argv[2], argv[3], argv[4]);
+        //printf("dictionnary_filename : %s \n word1 : %s\n iduser: %s\n wordfile : %s\n", argv[1], argv[2], argv[3], argv[4]);
     }
     else {
         printf("Mauvais usage de la fonction \n");

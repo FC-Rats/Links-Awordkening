@@ -8,10 +8,11 @@ int main(int argc, char * argv[]) {
     const char *dictionnary_filename;
     char *word1;
     char *word2;
+    char *wordsfile;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n -BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
-        dictionnary_filename = "./datafiles/dic.lex";
+        dictionnary_filename = ".Dev_Efficace/datafiles/dic.lex";
         word1 = "chien";
         word2 = "chat"; 
         printf("%s %s %s\n",dictionnary_filename,word1,word2);
@@ -27,8 +28,9 @@ int main(int argc, char * argv[]) {
     }
     else {
         dictionnary_filename = argv[1];
-        word1 = argv[2];
-        word2 = argv[3];
+        wordsfile = argv[2];
+        word1 = argv[3];
+        word2 = argv[4];
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
@@ -51,7 +53,7 @@ int main(int argc, char * argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Score de similarite semantique : %0.2f\n",calculScalaire(offsetword1, offsetword2));
+    printf("Score de similarite semantique : %0.2f\n",calculScalaire(offsetword1, offsetword2, wordsfile));
 
     return 0;
 }

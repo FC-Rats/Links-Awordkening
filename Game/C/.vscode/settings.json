@@ -4,6 +4,7 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "dictionnary.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "game.h": "c"
     }
 }

@@ -17,8 +17,8 @@ if (isset($_POST['mot']) && !empty($_POST['mot'])) {
     // Créer une nouvelle entrée avec le nouveau mot
     $output = [];
     $returnCode = 0;
-    //exec(".\\C\\exec_WINDOWS\\add_word .\\C\\datafiles\\dic.lex $newWord .\\C\\datafiles\\$idUser.txt .\\C\\datafiles\\words.bin", $output, $returnCode); // marche pas
-    exec(file_build_path(".","C","exec_WINDOWS","add_word"). " " . file_build_path(".","C","datafiles","dic.lex"). " " . $newWord . " " . file_build_path(".","C","datafiles","$idUser.txt"). " " . file_build_path(".","C","datafiles","words.bin"), $output, $returnCode);
+    //exec("./C/executables/add_word ./C/datafiles/dic.lex chaton ./C/datafiles/39.txt ./C/datafiles/words.bin", $output, $returnCode); // marche pas
+    exec(file_build_path(".","C","executables","add_word"). " " . file_build_path(".","C","datafiles","dic.lex"). " " . $newWord . " " . file_build_path(".","C","datafiles","$idUser.txt"). " " . file_build_path(".","C","datafiles","words.bin"), $output, $returnCode);
 
     // Vérifier si le mot est déjà utilisé
     if (in_array($newWord, $_SESSION['wordList'])) {

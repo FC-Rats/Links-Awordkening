@@ -113,7 +113,7 @@ int siblingLookupStatic(StaticTreeWithOffset *st, Element e, int from, int len){
         //printf("Lettre %c nsblings : %d\n", st->nodeArray[from].elem, len);
     }
     for (int i = from; i < from + len; i++){
-        //printf("searched : %c = %c ", st->nodeArray[i].elem, e);
+        //printf("Search : %c = %c  \n", e, st->nodeArray[i].elem);
         //printf(" equal : %i\n", e == st->nodeArray[i].elem);
         if (st->nodeArray[i].elem == e)
         {
@@ -133,64 +133,6 @@ int siblingLookupStatic(StaticTreeWithOffset *st, Element e, int from, int len){
 
     =======================================
 */
-
-/**
- * @brief Retourne la longueur en octets d'un caractère UTF-8 à partir de son premier octet.
- * 
- * @param first_byte Premier octet du caractère UTF-8.
- * @return int Longueur en octets du caractère UTF-8. -1 si le format est invalide.
- */
-int utf8_char_length(unsigned char first_byte)
-{
-    if ((first_byte & 0x80) == 0)
-    {
-        return 1;
-    }
-    else if ((first_byte & 0xE0) == 0xC0)
-    {
-        return 2;
-    }
-    else if ((first_byte & 0xF0) == 0xE0)
-    {
-        return 3;
-    }
-    else if ((first_byte & 0xF8) == 0xF0)
-    {
-        return 4;
-    }
-    else
-    {
-        // Invalid UTF-8
-        return -1;
-    }
-}
-
-/**
- * @brief Convertit un caractère UTF-8 en un caractère large (wchar_t).
- * 
- * @param word Pointeur vers le premier octet du caractère UTF-8.
- * @param char_length Longueur en octets du caractère UTF-8.
- * @return wchar_t Caractère large résultant de la conversion.
- */
-wchar_t convertUtf8(wchar_t *word, int char_length)
-{
-    wchar_t combinedWord;
-    if (char_length == 1)
-    {
-        combinedWord = (wchar_t)(*word);
-    }
-    else if (char_length == 2)
-    {
-        combinedWord = ((wchar_t)(*word & 0x1F) << 6) | (wchar_t)(*(word + 1) & 0x3F);
-    }
-    else
-    {
-        combinedWord = L'\0';
-    }
-    return combinedWord;
-}
-
-
 /**
  * @brief Insère un mot dans un arbre CSTree.
  * 
@@ -202,24 +144,18 @@ wchar_t convertUtf8(wchar_t *word, int char_length)
 CSTree insert(CSTree t, const char *mot, int offset)
 {
     CSTree currentNode = t;
-    wchar_t wideMot[50];
-    mbstowcs(wideMot, mot, 50);
-    wchar_t wide; 
 
-    for (int i = 0; wideMot[i] != '\0'; i++)
+    for (int i = 0; mot[i] != '\0'; i++)
     {
-        int char_length = utf8_char_length(wideMot[i]);
-        wide = convertUtf8(&wideMot[i], char_length);
 
         if (i == 0)
         {
-            currentNode = sortContinue(&currentNode, towlower(wide), -1);
+            currentNode = sortContinue(&currentNode, towlower(mot[i]), -1);
         }
         else
         {
-            currentNode = sortContinue(&(currentNode->firstChild), towlower(wide), -1);
+            currentNode = sortContinue(&(currentNode->firstChild), towlower(mot[i]), -1);
         }
-        i += char_length - 1;
     }
 
     currentNode->firstChild = sortContinue(&(currentNode->firstChild), '\0', offset);
@@ -316,6 +252,7 @@ void exportStaticTreeWithOffsetToFile(StaticTreeWithOffset *st, const char *file
     fclose(file);
 }
 
+
 /**
  * @brief Construit un dictionnaire Word2Vec à partir d'un fichier binaire.
  * 
@@ -346,7 +283,7 @@ CSTree buildWord2VecDictionaryFromFile(const char *filename)
     vocab = (char *)malloc(words * max_w * sizeof(char));
     M = (float *)malloc(words * size * sizeof(float));
 
-    if (vocab == NULL || M == NULL)
+    if (vocab == NULL)
     {
         printf("Erreur lors de l'allocation mémoire pour le dictionnaire Word2Vec\n");
         exit(EXIT_FAILURE);
@@ -429,11 +366,9 @@ int searchWordInStaticTree(StaticTreeWithOffset *st, const char *word)
 {
     int i = 0;
     int from = 1;
-    wchar_t wide; 
     do
     {
-        mbstowcs(&wide, &word[i], 1);
-        from = siblingLookupStatic(st, wide, from, NONE);
+        from = siblingLookupStatic(st, word[i], from, NONE);
         //printf("Debug: i=%d, lowerlettre=%c, from=%d\n", i, wide, from);
         i++;
     } while (word[i] != '\0' && from != NONE);
@@ -568,8 +503,8 @@ double levenshtein(char * S, char * T) {
  * @param offsetword2 Offset du deuxième mot dans le fichier Word2Vec.
  * @return double Produit scalaire normalisé entre -1 et 1.
  */
-double calculScalaire(int offsetword1,int offsetword2,char *wordfilename){ 
-    FILE *file = fopen(wordfilename, "rb");
+double calculScalaire(int offsetword1,int offsetword2,char *wordsfile){ 
+    FILE *file = fopen(wordsfile, "rb");
     if (!file)
     {
         perror("Erreur lors de l'ouverture du fichier Word2Vec");
@@ -621,8 +556,11 @@ double calculScalaire(int offsetword1,int offsetword2,char *wordfilename){
  * @param offset2 Offset du deuxième mot dans le fichier Word2Vec.
  * @return double Score de similarité normalisé entre 0 et 1.
  */
-double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char *wordfilename){
-    double calcul = max(levenshtein(word1,word2),calculScalaire(offset1,offset2,wordfilename));
+double calculSimilarity(char *word1, char *word2, int offset1, int offset2, char *wordsfile){
+    double lev = levenshtein(word1,word2);
+    double sem = calculScalaire(offset1,offset2, wordsfile);
+    printf("Score : Lev %0.2f | Sem %0.2f | Total %0.2f\n", lev, sem, (lev+sem)/2);
+    double calcul = (lev+sem)/2;
     return calcul;
 }
 
@@ -644,14 +582,14 @@ double calculSimilarity(char *word1, char *word2, int offset1, int offset2,char 
  * @param offset1 Offset du premier mot dans le fichier Word2Vec.
  * @param offset2 Offset du deuxième mot dans le fichier Word2Vec.
  */
-void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2,char *wordfilename) {
+void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1, int offset2, char *wordsfile) {
     FILE *file = fopen(filename, "w");
     
     fprintf(file, "%s;%s", word1,word2); //line 1
     fprintf(file, "\n\n"); //line 2 vide car 0 mot ajouté
     fprintf(file, "%s:%i;%s:%i", word1, offset1,word2,offset2); // line 3
     fprintf(file, "\n"); 
-    fprintf(file, "%s,%s,%0.2f;", word1, word2, calculSimilarity(word1,word2,offset1,offset2,wordfilename)); //line 4
+    fprintf(file, "%s,%s,%0.2f;", word1, word2, calculSimilarity(word1,word2,offset1,offset2, wordsfile)); //line 4
 
     fclose(file);
 }
@@ -663,7 +601,7 @@ void writeToFileBeginGame(char *filename, char *word1, char *word2, int offset1,
  * @param word1 Mot à ajouter.
  * @param offset1 Offset du mot dans le fichier Word2Vec.
  */
-void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, char *dictionnary_filename) {
+void addWordToFile(char *filename, char *word1, int offset1, char *wordsfile, char *dictionary_filename) {
     FILE *file = fopen(filename, "r+");
     if (!file) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -746,7 +684,7 @@ void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, 
         token = strtok(NULL, ";");
     }
 
-    FILE* dictionnary = fopen(dictionnary_filename, "rb");
+    FILE* dictionnary = fopen(dictionary_filename, "rb");
     if (!dictionnary) {
         perror("Erreur lors de l'ouverture du dictionnaire");
         exit(EXIT_FAILURE);
@@ -758,7 +696,7 @@ void addWordToFile(char *filename, char *word1, int offset1,char *wordfilename, 
     for (int j = 0; j < i; j++) {
         if (strcmp(listemots[j], word1) != 0) {
             int offsetWord = searchWordInStaticTree(&st, listemots[j]);
-            fprintf(file, "%s,%s,%0.2f;", word1, listemots[j], calculSimilarity(listemots[j], word1,offset1,offsetWord,wordfilename));
+            fprintf(file, "%s,%s,%0.2f;", word1, listemots[j], calculSimilarity(listemots[j], word1,offset1,offsetWord, wordsfile));
         }
     }
 

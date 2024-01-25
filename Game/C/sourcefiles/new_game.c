@@ -54,16 +54,16 @@ int main(int argc, char *argv[]) {
 
     int offset1 = searchWordInStaticTree(&st, word1);
     if (offset1 == -1){
-        printf("Mot non trouvé dans le dictionnaire");
+        printf("Mot non trouvé dans le dictionnaire 1");
         exit(EXIT_FAILURE);
     }
     int offset2 = searchWordInStaticTree(&st, word2);
     if (offset2 == -1){
-        printf("Mot non trouvé dans le dictionnaire");
+        printf("Mot non trouvé dans le dictionnaire 2");
         exit(EXIT_FAILURE);
     }
-    //printf("idUser : %s \n word1 : %s\n word2: %s\n offset1 : %d\n offset2 : %d\n wordfile : %s\n", iduser, word1, word2, offset1, offset2, wordfile);
-    writeToFileBeginGame(iduser, word1, word2,offset1,offset2,wordfile);
+    printf("idUser : %s \n word1 : %s\n word2: %s\n offset1 : %d\n offset2 : %d\n wordfile : %s\n", iduser, word1, word2, offset1, offset2, wordfile);
+    writeToFileBeginGame(iduser, word1, word2, offset1, offset2, wordfile);
 
     return 0; 
 }
