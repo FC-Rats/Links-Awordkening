@@ -12,6 +12,7 @@
     <title>Création de compte</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php include '../Includes/importHeader.php'; ?>
 </head>
 

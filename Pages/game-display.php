@@ -34,6 +34,7 @@ if ($_SESSION['coupRestant'] == 0) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Partie</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php include '../Includes/importHeader.php'; ?>
     <!--<link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/loadingScreen.css'>-->
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/game-display.css'>

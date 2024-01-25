@@ -47,6 +47,7 @@ if (!empty($_SESSION['errorCode'])) {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/new-game.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/form.css'>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php include '../Includes/importHeader.php'; ?>
 </head>
 

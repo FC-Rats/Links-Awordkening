@@ -19,6 +19,7 @@ redirectionNotAdmin();
     ?>
     <link rel='stylesheet' href='../Assets/CSS/table.css'>
     <link rel='stylesheet' href='../Assets/CSS/jquery.dataTables.min.css'>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
 </head>
 
 <body>
