@@ -28,7 +28,7 @@ class Connection {
 
     public function connection() {
         try {
-        $bd = new PDO('mysql:host='.$this->host.';dbname='.$this->db, 
+        $bd = new PDO('mysql:host='.$this->host.';dbname='.$this->db.';charset=utf8mb4', 
                                     $this->login, 
                                     $this->password);
         $this->connec = $bd;
@@ -36,7 +36,7 @@ class Connection {
         catch (PDOException $e) {
             throw new Exception("Erreur lors de la connexion à la base de données: " . $e->getMessage());
         }
-    }
+    } 
 
     /**
      * Permet de paramétrer et d'exécuter directement une requête SQL.

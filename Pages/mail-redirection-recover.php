@@ -9,6 +9,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Oubli mot de passe</title>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php include '../Includes/importHeader.php'; ?>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>

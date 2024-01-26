@@ -12,6 +12,7 @@ include('./mailer.php');
 
 if (!isset($_POST['token']) || !isset($_POST['password'])) {
     header("Location: ../Pages/recover.php");
+    exit();
 }
 
 $token = $_POST['token'];
@@ -30,4 +31,5 @@ $message = " Cher client,
 envoi_mail($getId[0]["email"], $objet, $message);
 
 header("Location: ../Pages/login.php");
+exit();
 ?>

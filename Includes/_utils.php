@@ -41,6 +41,10 @@ function isValidPassword($password) {
     return true;
 }
 
+function file_build_path(...$segments) {
+    return join(DIRECTORY_SEPARATOR, $segments);
+}
+
 function redirectionConnection() {
     if (!isset($_SESSION["idUser"]) || !isset($_SESSION["username"])) {
         header('Location: ../Pages/login.php');

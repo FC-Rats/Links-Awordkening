@@ -1,0 +1,10 @@
+{
+    "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "dictionnary.h": "c",
+        "cstdlib": "c",
+        "game.h": "c"
+    }
+}

@@ -16,6 +16,7 @@ include("../Includes/getStats.php");
     <title>Vos parties</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <?php include '../Includes/importHeader.php'; ?>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <link rel='stylesheet' href='../Assets/CSS/table.css'>
     <link rel='stylesheet' href='../Assets/CSS/jquery.dataTables.min.css'>
 </head>

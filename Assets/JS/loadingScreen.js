@@ -30,5 +30,5 @@ function hideLoadingScreen() {
   // Exemple d'utilisation :
   setTimeout(function() {
     hideLoadingScreen();
-  }, 3000); // Simule un chargement pendant 1.5 secondes
+  }, 2000); // Simule un chargement pendant 1.5 secondes
   

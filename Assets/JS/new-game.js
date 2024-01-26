@@ -30,10 +30,11 @@ $(function () {
                         data: { game: JSON.stringify(game) },
                         success: function (data) {
                             if (data.Insert) {
-                                window.location.href = window.location.pathname.replace("new-game.php", "game-display.php") + "?idJoin=" + data.Insert;
+                                window.location.href = window.location.pathname.replace("Pages/new-game.php", "Game/gameProcessor.php");
                             }
                         },
                         error: function (data) {
+                            window.location.href = window.location.pathname.replace("Pages/new-game.php", "Game/gameProcessor.php");
                             console.log(data);
                         },
                     });

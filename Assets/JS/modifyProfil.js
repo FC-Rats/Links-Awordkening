@@ -22,7 +22,7 @@ function modifyUser() {
         dataType: "JSON",
         data: { "username": username, "birthYear": birthYear, "email": email },
         success: function (data) {
-            debugger;
+            //debugger;
             console.log(data);
             if (data.Error) {
                 alert(data.Error);

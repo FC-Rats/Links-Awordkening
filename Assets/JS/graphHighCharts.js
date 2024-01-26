@@ -1,28 +1,40 @@
 $(function () {
     $.ajax({
-        url: "../Game/game.php",
+        url: "../Game/observerWordsChart.php",
         type: "POST",
         dataType: "JSON",
-        data: { },
+        data: {},
         success: function (data) {
             if (data.WordsChart) {
                 var keys = Object.keys(data.WordsChart);
-            
-                var seriesData = keys.map(function(key) {
+
+                var seriesData = keys.map(function (key) {
                     return {
-                        "from": data.WordsChart[key][0],
-                        "to": data.WordsChart[key][1],
+                        "from": new TextDecoder('utf-8').decode(new TextEncoder().encode(data.WordsChart[key][0])), // marche pas
+                        "to": new TextDecoder('utf-8').decode(new TextEncoder().encode(data.WordsChart[key][1])),
                         "label": parseInt(data.WordsChart[key][2])
                     };
                 });
-            
+
                 Highcharts.chart('container', {
                     title: {
                         text: '' // Remplacez par le nom que vous voulez
                     },
                     chart: {
                         type: 'networkgraph',
-                        backgroundColor: 'transparent',
+                        backgroundColor: '#ffffff77',
+                        events: {
+                            load: function () {
+                                var nodes = this.series[0].nodes;
+                                for (var i = 0; i < nodes.length; i++) {
+                                    nodes[i].update({
+                                        color: '#547E5E',
+                                        borderColor: '#2B5C4A', // marche pas 
+                                        borderWidth: 2 // marche pas
+                                    });
+                                }
+                            }
+                        }
                     },
                     credits: {
                         enabled: false // Désactive le lien Highcharts.com
@@ -30,18 +42,39 @@ $(function () {
                     plotOptions: {
                         networkgraph: {
                             layoutAlgorithm: {
-                                enableSimulation: true
+                                enableSimulation: false, // Désactive la simulation physique
+                                direction: 'horizontal' // Force une disposition horizontale
+                            },
+                            link: {
+                                lineWidth: 2 // Épaisseur de la ligne
+                            },
+                            node: {
+                                allowPointSelect: false,
+                                draggable: false, // Désactive le déplacement des nœuds
+                                opacity: 1
+                            }
+                        },
+                        series: {
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
                             }
                         }
                     },
                     series: [{
+                        allowPointSelect: false, // Désactive la sélection des points
+                        draggable: false, // Désactive le déplacement des points
                         marker: {
-                            radius: 30
+                            radius: 40
                         },
                         dataLabels: {
                             enabled: true,
                             allowOverlap: true,
-                            linkFormat: '{point.label}'
+                            linkFormat: '{point.label}',
+                            style: {
+                                fontSize: '15px' // Ajustez la taille de police selon vos besoins
+                            }
                         },
                         data: seriesData
                     }]

@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $id_user), array(":time", date('Y-m-d H:i:s')), array(":log", "Connexion"), array(":ip", getIP())));
                     header("Location: ../Pages/index.php");
+                    exit();
                 } else {
                     echo "Mot de passe incorrect.";
                 }
@@ -34,7 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         header("Location: ../Pages/login.php");
+        exit();
     }
 } else {
     header("Location: ../Pages/login.php");
+    exit();
 }

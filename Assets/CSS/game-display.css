@@ -1,0 +1,14 @@
+#container {
+    backdrop-filter: blur(10px);
+}
+
+.game-and-score {
+    background-color: #547e5e79;
+    border: 1px #2B5C4A solid;
+    backdrop-filter: blur(5px);
+}
+
+#mot {
+    width: 250px!important;
+    border-radius: 100px!important;
+}

@@ -16,8 +16,10 @@ if (isset($_POST['email'])) {
 
     envoi_mail($email,$objet,$message);
     header("Location: ../Pages/mail-redirection.php");
+    exit();
 } else {
     header("Location: ../Pages/index.php");
+    exit();
 }
 
 ?>

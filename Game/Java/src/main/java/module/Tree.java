@@ -118,7 +118,7 @@ public class Tree {
         if (currentWord.equals(endWord)) {
             return true;
         }
-
+        
         // Itère sur les voisins du mot actuel
         Map<String, Double> neighbors = adjMatrice.get(currentWord);
         if (neighbors != null) {
@@ -146,7 +146,6 @@ public class Tree {
      * @return Le score final entre les deux mots.
      */
     public double getFinalScore(String startWord, String endWord) {
-    	// Trouver le chemin entre le mot de départ et le mot d'arrivée dans le graphe et obtenir la similarité de l'arête ayant la plus faible similarité dans le chemin.
     	return Collections.min(this.findPath(startWord, endWord)).getSimilarity();
     }
     

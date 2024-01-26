@@ -23,6 +23,7 @@ if (isset($_SESSION["idUser"])) {
     <title>Accueil</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../Assets/CSS/navbar.css'>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php
     include '../Includes/importHeader.php';
     ?>
@@ -117,8 +118,7 @@ if (isset($_SESSION["idUser"])) {
                 <img src="../Assets/img/leaf-8.svg" alt="" class="position-fixed" style="width: 500px; height: 500px; bottom: -50px; right: 0%; overflow-x: hidden; user-select:none; pointer-events: none; z-index:9">-->
                 <header class="section d-flex justify-content-center align-items-center ">
                     <div class="text-center">
-                        <h1 class="h1 pt-5" id="home">Links Awordkening : </h1>
-                        <h2 class="h2 pb-5 fst-italic">Where Words Unite</h2>
+                        <img src="../Assets/img/logoLA.png" alt="Logo du site" class="img-fluid">
                         <a href="new-game.php" class="text-light"><button class="btn fs-2 px-4 rounded-5 bg-tan" type="submit">Jouer !</button></a>
                     </div>
                 </header>
@@ -175,6 +175,7 @@ if (isset($_SESSION["idUser"])) {
                             <a href="recover.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Modifier mon mot de passe</button></a>
                             <?php if ($_SESSION['isAdmin'] == 1) {?>
                             <a href="logs.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Accéder aux 500 dernières traces</button></a>
+                            <a href="adminListUsers.php" class="my-5"><button class="bg-coffee text-light p-3 rounded-5 border-0">Gérer les utilisateurs</button></a>
                             <?php } ?>
                         <?php } else { ?>
                             <p class="fst-italic text-center fs-5 ">Connectez-vous pour voir les vos données de profil.</p>

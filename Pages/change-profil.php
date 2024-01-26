@@ -16,6 +16,7 @@ if (isset($_SESSION["idUser"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changer mon profil</title>
+    <link rel="icon" href="../Assets/img/iconeLA.ico">
     <?php include '../Includes/importHeader.php'; ?>
 </head>
 <body>

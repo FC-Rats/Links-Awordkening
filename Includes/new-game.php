@@ -17,6 +17,7 @@ function genererCodeAleatoire()
     for ($i = 0; $i < 4; $i++) {
         $chaineAleatoire .= $caracteres[rand(0, strlen($caracteres) - 1)];
     }
+    $_SESSION['idJoin'] = $chaineAleatoire;
     return $chaineAleatoire;
 }
 
@@ -45,3 +46,20 @@ if ($insert === false) {
     $response['Insert'] = $game->getIdJoin();
     echo json_encode($response);
 }
+$idUser = $_SESSION['idUser'];
+// ---initialise Game---
+//création du fichier de partie
+$startingAndEndingWord = explode(" ", exec("bash ../Game/bash/random_words.sh 2"));
+$startingWord = $startingAndEndingWord[0];
+$endingWord = $startingAndEndingWord[1];
+$_SESSION["startingWord"] = $startingWord;
+$_SESSION["endingWord"] = $endingWord;
+$output = [];
+$returnCode = 0;
+$_SESSION['score'] = 0;
+$_SESSION['coupRestant'] = 10;
+$_SESSION['wordList'] = array($startingWord, $endingWord);
+$_SESSION['errorCode'] = "";
+//$commande = "../Game/C/executables/new_game ../Game/C/datafiles/dic.lex chat chien ../Game/C/datafiles/39.txt ../Game/C/datafiles/words.bin;
+$commande = file_build_path("..","Game","C","executables","new_game") . " " . file_build_path("..","Game","C","datafiles","dic.lex") . " " . $startingWord . " " . $endingWord . " " . file_build_path("..","Game","C","datafiles","$idUser.txt") . " " . file_build_path("..","Game","C","datafiles","words.bin");
+exec($commande,  $output, $returnCode);
