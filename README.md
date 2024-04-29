@@ -7,3 +7,8 @@ SAE BUT 2 - Jeu liens mots
 ## Installation :
 `npm install`
 `npm start`
+
+
+### annexes
+Pour convertir un fichier du format Windows (CRLF) au format Unix (LF), utilisez la commande 
+`dos2unix fichier.txt`
