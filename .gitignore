@@ -4,3 +4,4 @@ config.ini
 Game/Java\ Module/.idea/
 .idea/
 .vscode/*
+frontend/node_modules/
