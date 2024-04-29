@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     // Chargement de l'arbre statique depuis le fichier .lex
     StaticTreeWithOffset st = loadStaticTreeWithOffsetFromFile(dictionnary);
 
-    int findedword = searchWordInStaticTree(&st, word_to_lookup);
+    int findedword = searchWordInStaticTree(&st, (unsigned char*)word_to_lookup);
     printf("\nMot %s trouve, son offset est de %i\n",word_to_lookup,findedword);
 
     fclose(dictionnary);

@@ -5,6 +5,23 @@
         "*.embeddedhtml": "html",
         "dictionnary.h": "c",
         "cstdlib": "c",
-        "game.h": "c"
+        "bit": "c",
+        "array": "c",
+        "bitset": "c",
+        "deque": "c",
+        "list": "c",
+        "map": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "__debug": "c",
+        "algorithm": "c",
+        "ostream": "c",
+        "__hash_table": "c",
+        "__tree": "c",
+        "functional": "c",
+        "iterator": "c",
+        "queue": "c"
     }
 }
