@@ -8,7 +8,7 @@ export interface Infogame {
 
 export const ComponentInfoGame: React.FC<{ item: Infogame }> = ({ item }) => {
   return (
-    <div className="component">
+    <div className="component-info-game">
       <div className="title">{item.title}</div>
       <div className="info">{item.info}</div>
     </div>

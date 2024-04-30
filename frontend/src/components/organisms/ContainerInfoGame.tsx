@@ -16,8 +16,8 @@ export const ContainerInfoGame = () => {
   }, []);
 
   return (
-    <div className="wrapper">
-        <div className="frame">
+    <div className="wrapper-info-game">
+        <div className="frame-info-game">
         {gameinfos.map((game, index) => (
             <ComponentInfoGame key={index} item={game} />
         ))}

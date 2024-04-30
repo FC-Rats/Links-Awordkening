@@ -1,11 +1,11 @@
-.component {
+.component-info-game {
   height: 20%;
   position: relative;
   width: 40%;
+  color: var(--parchment);
 }
 
-.component .title {
-  color: #ffffff;
+.component-info-game .title {
   font-size: 1rem;
   font-weight: 400;
   left: 0;
@@ -14,8 +14,7 @@
   white-space: nowrap;
 }
 
-.component .info {
-  color: #ffffff;
+.component-info-game .info {
   font-size: 1.2rem;
   font-weight: 700;
   left: 10px;
@@ -24,7 +23,7 @@
   white-space: nowrap;
 }
 
-.frame {
+.frame-info-game {
   padding: 2%;
   align-items: flex-start;
   display: flex;
@@ -35,10 +34,32 @@
   height: 135px;
 }
 
-.wrapper {
+.wrapper-info-game {
   background-color: var(--brunswickGreen);
   border-radius: 15px;
   box-shadow: 0 4px 4px #00000040;
   height: 150px;
   width: 30%;
+}
+
+@media (max-width: 1000px) {
+  .wrapper-info-game {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapper-info-game {
+    height: auto;
+  }
+
+  .frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 17px;
+    height: auto;
+  }
 }
