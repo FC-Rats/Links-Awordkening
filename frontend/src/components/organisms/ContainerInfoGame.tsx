@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ComponentInfoGame, Infogame } from "../molecules/ComponentInfoGame";
-import "../../assets/css/style.css";
 import gameData from "../../assets/data/GameInfo.json";
 
 export const ContainerInfoGame = () => {

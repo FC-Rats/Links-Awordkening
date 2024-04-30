@@ -1,6 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css";
-import "../../assets/css/infogames.css";
+import "../../assets/css/ComponentInfoGame.css";
 
 export interface Infogame {
   title: string;
