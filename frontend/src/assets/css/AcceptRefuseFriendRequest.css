@@ -1,0 +1,31 @@
+.acceptRefuseFriendRequest-accept {
+    background-color: var(--brunswickGreen)!important;
+}
+
+.acceptRefuseFriendRequest-accept:hover {
+    background-color: var(--brunswickGreen-hover)!important;
+}
+
+.acceptRefuseFriendRequest-accept:active {
+    background-color: var(--brunswickGreen-active)!important;
+}
+
+.acceptRefuseFriendRequest-accept:focus {
+    background-color: var(--brunswickGreen-focus)!important;
+}
+
+.acceptRefuseFriendRequest-refuse {
+    background-color: var(--auburn)!important;
+}
+
+.acceptRefuseFriendRequest-refuse:hover {
+    background-color: var(--auburn-hover)!important;
+}
+
+.acceptRefuseFriendRequest-refuse:active {
+    background-color: var(--auburn-active)!important;
+}
+
+.acceptRefuseFriendRequest-refuse:focus {
+    background-color: var(--auburn-focus)!important;
+}

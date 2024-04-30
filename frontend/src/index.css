@@ -16,11 +16,37 @@ code {
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 :root {
+  /* Base colors */
   --viridian: #547E5E;
   --brunswickGreen: #2B5C4A;
   --coffee: #6A5138;
   --parchment: #F4E9CD;
   --tan: #D2B48C;
+  --auburn: #912D2D;
+
+  /* Hover variants (slightly lighter) */
+  --viridian-hover: #668f70;
+  --brunswickGreen-hover: #3e6d5b;
+  --coffee-hover: #7a604b;
+  --parchment-hover: #f5f1de;
+  --tan-hover: #e3c6a1;
+  --auburn-hover: #a24343;
+
+  /* Active variants (slightly darker) */
+  --viridian-active: #43654a;
+  --brunswickGreen-active: #23493a;
+  --coffee-active: #58492e;
+  --parchment-active: #e3dbbe;
+  --tan-active: #ba9b6c;
+  --auburn-active: #7a2424;
+
+  /* Focus variants (a mix between lighter and darker for visibility) */
+  --viridian-focus: #5a7b59;
+  --brunswickGreen-focus: #2d554f;
+  --coffee-focus: #6b4b3a;
+  --parchment-focus: #ece3c7;
+  --tan-focus: #cfb188;
+  --auburn-focus: #962f2f;
 }
 
 ::-webkit-scrollbar {

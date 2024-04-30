@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Button from '@mui/material/Button';
+import '../../assets/css/AcceptRefuseFriendRequest.css';
 
-function AcceptRefuseFriendRequest() {
+function AcceptRefuseFriendRequest(props: {isAcceptingButton: Boolean}) {
   return (
-    <div>AcceptRefuseFriendRequest</div>
+    <Button onClick={(e) => console.log(e)} className={props.isAcceptingButton === true ? "acceptRefuseFriendRequest acceptRefuseFriendRequest-accept" : "acceptRefuseFriendRequest acceptRefuseFriendRequest-refuse"} variant="contained">{props.isAcceptingButton === true ? "Accepter" : "Refuser"}</Button>
   )
 }
 
