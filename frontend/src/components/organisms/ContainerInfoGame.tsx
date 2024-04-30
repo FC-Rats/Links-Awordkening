@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ComponentInfoGame, Infogame } from "../molecules/ComponentInfoGame";
+import { ComponentInfoGame, GameInfo } from "../molecules/ComponentInfoGame";
 import gameData from "../../assets/data/GameInfo.json";
 
 export const ContainerInfoGame = () => {
-  const [gameinfos, setGameInfos] = useState<Infogame[]>([]);
+  const [gameinfos, setGameInfos] = useState<GameInfo[]>([]);
 
   useEffect(() => {
-    const gamesData: Infogame[] = [
+    const gamesData: GameInfo[] = [
         { title: "ID de la partie", info: gameData[0].info },
         { title: "Nom de la partie", info: gameData[1].info },
         { title: "Coups restants", info: gameData[2].info },

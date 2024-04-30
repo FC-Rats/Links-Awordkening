@@ -53,7 +53,7 @@
     height: auto;
   }
 
-  .frame {
+  .frame-info-game  {
     display: flex;
     flex-direction: column;
     align-items: center;

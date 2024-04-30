@@ -1,12 +1,8 @@
 import React from "react";
 import "../../assets/css/ComponentInfoGame.css";
+import { GameInfo } from "../types/GameInfo";
 
-export interface Infogame {
-  title: string;
-  info: string;
-}
-
-export const ComponentInfoGame: React.FC<{ item: Infogame }> = ({ item }) => {
+export const ComponentInfoGame: React.FC<{ item: GameInfo }> = ({ item }) => {
   return (
     <div className="component-info-game">
       <div className="title">{item.title}</div>
@@ -14,4 +10,6 @@ export const ComponentInfoGame: React.FC<{ item: Infogame }> = ({ item }) => {
     </div>
   );
 };
+
+export type { GameInfo };
 
