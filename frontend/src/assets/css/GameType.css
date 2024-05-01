@@ -1,0 +1,8 @@
+.card-GameType {
+    background-color: var(--parchment)!important;
+    width: 150px;
+}
+
+.avatar-GameType {
+    background-color: var(--viridian)!important;
+}
