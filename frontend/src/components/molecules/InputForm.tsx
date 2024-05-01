@@ -5,19 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { InputFormProps } from "../types/InputFormProps";
 
-interface InputFormProps {
-    name: string;
-    value?: string;
-    setSearch?: (value: string) => void;
-    label: string;
-    required?: boolean;
-    type?:string;
-    min?: number;
-    max?: number;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // Ajoutez cette ligne
-
-}
 
 export const InputForm = ({name, value, setSearch, label, required, type, min, max, onChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
