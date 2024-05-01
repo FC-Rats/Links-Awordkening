@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+:root {
+  --viridian: #547E5E;
+  --brunswickGreen: #2B5C4A;
+  --coffee: #6A5138;
+  --parchment: #F4E9CD;
+  --tan: #D2B48C;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

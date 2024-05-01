@@ -1,0 +1,7 @@
+.input-form {
+    background-color: var(--parchment);
+    margin: 10px!important;
+    color: var(--coffee);
+    font-weight: 500;
+    width: 90%;
+}
