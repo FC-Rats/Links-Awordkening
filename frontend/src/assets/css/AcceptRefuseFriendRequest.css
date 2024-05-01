@@ -1,17 +1,17 @@
 .acceptRefuseFriendRequest-accept {
-    background-color: var(--brunswickGreen)!important;
+    background-color: var(--viridian)!important;
 }
 
 .acceptRefuseFriendRequest-accept:hover {
-    background-color: var(--brunswickGreen-hover)!important;
+    background-color: var(--viridian-hover)!important;
 }
 
 .acceptRefuseFriendRequest-accept:active {
-    background-color: var(--brunswickGreen-active)!important;
+    background-color: var(--viridian-active)!important;
 }
 
 .acceptRefuseFriendRequest-accept:focus {
-    background-color: var(--brunswickGreen-focus)!important;
+    background-color: var(--viridian-focus)!important;
 }
 
 .acceptRefuseFriendRequest-refuse {
