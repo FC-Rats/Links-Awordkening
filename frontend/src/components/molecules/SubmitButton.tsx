@@ -7,6 +7,6 @@ export const SubmitButton = (props:{text:string;}) => {
 
 
     return (
-        <Button variant="contained" className="submit-button" type="submit">{props.text}</Button>
+        <Button variant="contained" className="submit-button" type="submit" size="large">{props.text}</Button>
     );
 };

@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 .App {
   text-align: center;
 }
 
 :root {
+  --asparagus: #82a14e;
+  --hunterGreen: #4D6C48;
   --viridian: #547E5E;
   --brunswickGreen: #2B5C4A;
   --coffee: #6A5138;
@@ -10,14 +15,14 @@
   --tan: #D2B48C;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 
 body {
     margin: 0;
     /*background-image: url(/public/fond.png)!important;*/
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: var(--parchment);
 }
 
 ::-webkit-scrollbar {

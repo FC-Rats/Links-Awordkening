@@ -12,7 +12,7 @@ function SearchFriends() {
 
   return (
     <Stack spacing={{ xs: 1, sm: 2 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-      <InputForm value={search} setSearch={setSearch} isAPasswordInput={false} label='SearchFriend' />
+      <InputForm name="searchFriend" value={search} setSearch={setSearch} label='SearchFriend' />
       <Button variant="contained">Contained</Button>       {/* to replace with a component */}
     </Stack>
   )

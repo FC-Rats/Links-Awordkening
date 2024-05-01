@@ -7,28 +7,31 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 interface InputFormProps {
-    isAPasswordInput?: boolean; // Prop facultative avec ? avant le :
+    name: string;
     value?: string;
-    setSearch: (value: string) => void;
+    setSearch?: (value: string) => void;
     label: string;
     required?: boolean;
+    type?:string;
+    min?: number;
+    max?: number;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // Ajoutez cette ligne
+
 }
 
-export const InputForm = ({ isAPasswordInput, value, setSearch, label, required }: InputFormProps) => {
+export const InputForm = ({name, value, setSearch, label, required, type, min, max, onChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
-
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
     return (
         <div>
-            {/*TODO: style, image, font */}
-            {isAPasswordInput ? (
+            {type==="password" ? (
                 <TextField
-                label={label}
+                label={required ? `${label}*` : label}
                 className="input-form" 
-                type={showPassword ? "text" : "password"}
+                type={type}
                 variant="outlined"
                 InputProps={{
                     endAdornment: (
@@ -43,16 +46,18 @@ export const InputForm = ({ isAPasswordInput, value, setSearch, label, required 
                         </InputAdornment>
                     ),
                 }}
+                onChange={onChange}
             />
             ) : (
                 <>
                     <TextField 
                         className="input-form" 
                         label={required ? `${label}*` : label} 
-                        type="text" 
+                        type={type}
                         variant="outlined" 
-                        value={value ? value : ""} 
-                        onChange={(e) => setSearch(e.target.value)}
+                        inputProps={{ min, max }} // Ajout de min et max ici
+                        onChange={onChange}
+                        // onChange={setSearch ? ((e) => setSearch(e.target.value)) : ()}
                     />
 
                 </>
