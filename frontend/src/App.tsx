@@ -5,6 +5,7 @@ import { ComponentEndGame } from './components/molecules/ComponentEndGame';
 import AcceptRefuseFriendRequest from './components/molecules/AcceptRefuseFriendRequest';
 import SearchFriends from './components/molecules/SearchFriends';
 import { ContainerInfoPlayer } from './components/organisms/ContainerInfoPlayer';
+import { ComponentListWords } from './components/molecules/ComponentListWords';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <ContainerInfoPlayer/>
       <ContainerInfoGame />
       </div>
+      <ComponentListWords />
 {/*       <ComponentEndGame/>
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{"id": 3, "username": "Lolo"}}/>
       <SearchFriends /> */}
