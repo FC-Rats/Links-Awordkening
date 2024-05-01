@@ -22,23 +22,30 @@ export const ContainerInfoPlayer = () => {
   }, []);
 
   return (
-    <div className="wrapper-info-player">
-      <div className="frame-info-player">
-        {playersInfos.length == 1 ? (
-          <ComponentPlayerInfo
-            item={playersInfos[0]}
-            isMulti={false}
-          />
-        ) : (
-          playersInfos.map((player, index) => (
+    <>
+      {playersInfos.length === 1 ? (
+        <div className="wrapper-info-player-single">
+          <div className="frame-info-player">
             <ComponentPlayerInfo
-              key={index}
-              isMulti={true}
-              item={player}
+              item={playersInfos[0]}
+              isMulti={false}
             />
-          ))
-        )}
-      </div>
-    </div>
+          </div>
+        </div>
+      ) : (
+        <div className="wrapper-info-player-multi">
+          <div className="frame-info-player">
+            {playersInfos.map((player, index) => (
+              <ComponentPlayerInfo
+                key={index}
+                isMulti={true}
+                item={player}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
+  
 };
