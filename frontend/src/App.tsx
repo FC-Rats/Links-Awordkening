@@ -9,11 +9,13 @@ import { ComponentListWords } from './components/molecules/ComponentListWords';
 import StateFriendRequest from './components/molecules/StateFriendRequest';
 import Stack from '@mui/material/Stack';
 import GameType from './components/molecules/GameType';
+import {CenteredTitle} from './components/molecules/CenteredTitle';
 
 
 function App() {
   return (
     <div className="App">
+      <CenteredTitle text="Links Awordkening"/>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <ContainerInfoPlayer />
         <ContainerInfoGame />
