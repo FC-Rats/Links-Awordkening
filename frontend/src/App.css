@@ -10,37 +10,105 @@
   --tan: #D2B48C;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+body {
+    margin: 0;
+    /*background-image: url(/public/fond.png)!important;*/
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar {
+    width: 12px; /* largeur de la scrollbar */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+::-webkit-scrollbar-track {
+    background-color: transparent; /* couleur de fond de la scrollbar */
+    width: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar-thumb {
+    background-color: var(--viridian); /* couleur de la poignée de la scrollbar */
+    width: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* masque les flèches de la scrollbar */
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: none;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Nanum Myeongjo', serif!important;
+}
+
+p,
+span,
+h4,
+div,
+a,
+li,
+button{
+    font-family: 'Nanum Gothic', sans-serif !important;
+}
+
+
+.bg-viridian {
+    background-color: var(--viridian)!important;
+}
+
+.bg-brunswickGreen {
+    background-color: var(--brunswickGreen)!important;
+}
+
+.bg-coffee {
+    background-color: var(--coffee)!important;
+}
+
+.bg-parchment {
+    background-color: var(--parchment)!important;
+}
+
+.bg-tan {
+    background-color: var(--tan)!important;
+}
+
+.viridian {
+    color: var(--viridian)!important;
+}
+
+.brunswickGreen {
+    color: var(--brunswickGreen)!important;
+}
+
+.coffee {
+    color: var(--coffee)!important;
+}
+
+.parchment {
+    color: var(--parchment)!important;
+}
+
+.tan {
+    color: var(--tan)!important;
+}
+
+.section {
+    min-height: 100vh;
+}
+
+.beautiful-button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)!important;
+    border: 0!important;
+    outline: none!important;
+}
+
+@media (max-width: 576px) {
+    .custom-text-wrap {
+        word-wrap: break-word;
+    }
 }
