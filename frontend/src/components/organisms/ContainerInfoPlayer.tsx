@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
-import ImgCompte from "../../assets/img/compte.png";
 
 export const ContainerInfoPlayer = () => {
+  var ImgCompte = "/img/compte.png";
   const [playersInfos, setPlayersInfos] = useState<PlayerInfo[]>([]);
-
   useEffect(() => {
     const player: PlayerInfo[] = [
       { player_name: "Joueur 1", player_score: 100, player_url: ImgCompte },

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ImgLA from "../../assets/img/LARectPA.png";
 import "../../assets/css/ComponentEndGame.css";
 
 export const ComponentEndGame = () => {
@@ -13,7 +12,7 @@ export const ComponentEndGame = () => {
     return (
         <>
             <div className="wrapper-end-game">
-                <img className="img-end-game" src={ImgLA} alt="Bravo" />
+                <img className="img-end-game" src={"../../../public/img/LARectPA.png"} alt="Bravo" />
                 <div className="title">Bravo !</div>
                 {score !== null && <div className="info">Votre score : {score}</div>}
             </div>
