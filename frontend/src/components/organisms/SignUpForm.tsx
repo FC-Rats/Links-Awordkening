@@ -22,7 +22,7 @@ export const SignUpForm = () => {
 
     return (
         <div className="form-container">
-            <div className="form">
+            <form className="form" method="post" action="">
                 <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
                 <InputForm name="pseudo" label={"Pseudo"} type="text" required onChange={handleInputChange}/>
                 <InputForm name="year" label={"Année de naissance"} type="number" min={1900} max={2024} required onChange={handleInputChange}/>
@@ -39,7 +39,7 @@ export const SignUpForm = () => {
                 </ul> */}
                 <SubmitButton text={"S'inscrire"}/>
                 <Link text='Vous possésez un compte ? Se connecter' url=''/>
-            </div>
+            </form>
         </div>
     );
 };

@@ -18,13 +18,13 @@ export const SignInForm = () => {
 
     return (
         <div className="form-container">
-            <div className="form">
+            <form className="form" method="post" action="">
                 <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
                 <InputForm name="pseudo" label={"Pseudo"} required onChange={handleInputChange}/>
                 <InputForm name="password" label={"Mot de passe"} type="password" required onChange={handleInputChange}/>
                 <SubmitButton text={"Se connecter"}/>
                 <Link text='Pas de compte ? S’inscrire' url=''/>
-            </div>
+            </form>
         </div>
     );
 };
