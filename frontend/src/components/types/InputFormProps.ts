@@ -7,5 +7,5 @@ export interface InputFormProps {
     type?:string;
     min?: number;
     max?: number;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
+    onInputChange?: (name: string, value: any) => void;
 }

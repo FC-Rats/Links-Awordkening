@@ -9,19 +9,24 @@ export const SignInForm = () => {
     const [formData, setFormData] = useState({
         pseudo: '',
         password: '',
-
     });
-    const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
-        const { name, value } = event.target;
+
+    const handleInputChange = (name: string, value: any) => {
         setFormData({ ...formData, [name]: value });
+    };
+    
+
+    const handleSubmit = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        console.log(formData);
     };
 
     return (
         <div className="form-container">
-            <form className="form" method="post" action="">
+            <form className="form" method="post" onSubmit={handleSubmit}>
                 <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
-                <InputForm name="pseudo" label={"Pseudo"} required onChange={handleInputChange}/>
-                <InputForm name="password" label={"Mot de passe"} type="password" required onChange={handleInputChange}/>
+                <InputForm name="pseudo" label={"Pseudo"} required onInputChange={handleInputChange}/>
+                <InputForm name="password" label={"Mot de passe"} type="password" required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Se connecter"}/>
                 <Link text='Pas de compte ? S’inscrire' url=''/>
             </form>

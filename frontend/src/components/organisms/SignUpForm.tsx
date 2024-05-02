@@ -13,22 +13,27 @@ export const SignUpForm = () => {
         password: '',
         passwordConfirmation: '',
     });
-    const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
-        const { name, value } = event.target;
+
+    const handleInputChange = (name: string, value: any) => {
         setFormData({ ...formData, [name]: value });
+    };
+    
+    const handleSubmit = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        console.log(formData); 
     };
 
 
 
     return (
         <div className="form-container">
-            <form className="form" method="post" action="">
+            <form className="form" method="post" onSubmit={handleSubmit}>
                 <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
-                <InputForm name="pseudo" label={"Pseudo"} type="text" required onChange={handleInputChange}/>
-                <InputForm name="year" label={"Année de naissance"} type="number" min={1900} max={2024} required onChange={handleInputChange}/>
-                <InputForm name="email" label={"Email"} type="email" required onChange={handleInputChange}/>
-                <InputForm name="password" label={"Mot de passe"} type="password" required onChange={handleInputChange}/>
-                <InputForm name="passwordConfirmation" label={"confirmez le mot de passe"} type="password" required onChange={handleInputChange}/>
+                <InputForm name="pseudo" label={"Pseudo"} type="text" required onInputChange={handleInputChange}/>
+                <InputForm name="year" label={"Année de naissance"} type="number" min={1900} max={2024} required onInputChange={handleInputChange}/>
+                <InputForm name="email" label={"Email"} type="email" required onInputChange={handleInputChange}/>
+                <InputForm name="password" label={"Mot de passe"} type="password" required onInputChange={handleInputChange}/>
+                <InputForm name="passwordConfirmation" label={"confirmez le mot de passe"} type="password" required onInputChange={handleInputChange}/>
                 {/* <p>Doit contenir au moins: </p>
                 <ul>
                     <li>12 caractères</li>

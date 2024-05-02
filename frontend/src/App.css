@@ -22,7 +22,7 @@ body {
     /*background-image: url(/public/fond.png)!important;*/
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: var(--parchment);
+    background-color: var(--tan);
 }
 
 ::-webkit-scrollbar {

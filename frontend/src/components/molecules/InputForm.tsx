@@ -8,10 +8,16 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InputFormProps } from "../types/InputFormProps";
 
 
-export const InputForm = ({name, value, setSearch, label, required, type, min, max, onChange }: InputFormProps) => {
+export const InputForm = ({name, value, setSearch, label, required, type, min, max, onInputChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (onInputChange) {
+            onInputChange(event.target.name, event.target.value);
+        }
     };
 
     return (
@@ -22,6 +28,8 @@ export const InputForm = ({name, value, setSearch, label, required, type, min, m
                 className="input-form" 
                 type={type}
                 variant="outlined"
+                value={value}
+                name={name}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -35,17 +43,20 @@ export const InputForm = ({name, value, setSearch, label, required, type, min, m
                         </InputAdornment>
                     ),
                 }}
-                onChange={onChange}
+                onChange={handleChange}
             />
             ) : (
                 <>
                     <TextField 
+                    
                         className="input-form" 
                         label={required ? `${label}*` : label} 
                         type={type}
                         variant="outlined" 
                         inputProps={{ min, max }} // Ajout de min et max ici
-                        onChange={onChange}
+                        onChange={handleChange}
+                        value={value}
+                        name={name}
                         // onChange={setSearch ? ((e) => setSearch(e.target.value)) : ()}
                     />
 

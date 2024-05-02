@@ -37,6 +37,8 @@ function App() {
         < GameType type='solo' />
         < GameType type='multi' />
       </Stack>
+      <SignIn/>
+      <SignUp/>
     </div>
   );
 }
