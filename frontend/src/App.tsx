@@ -13,6 +13,8 @@ import {CenteredTitle} from './components/molecules/CenteredTitle';
 import {Link} from './components/molecules/Link';
 import {SignIn} from './components/templates/SignIn';
 import { SignUp } from './components/templates/SignUp';
+import { CaseHomePage } from './components/molecules/CaseHomePage';
+import { CaseHomePageContainer } from './components/organisms/CaseHomePageContainer';
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
       </Stack>
       <SignIn/>
       <SignUp/>
+      <CaseHomePageContainer/>
     </div>
   );
 }
