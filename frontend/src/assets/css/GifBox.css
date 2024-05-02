@@ -1,0 +1,12 @@
+.gif-box-rule {
+    height: 150px;
+    width: 150px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.gif {
+    height: 100%;
+    width: auto;
+    border-radius: 5px;
+}

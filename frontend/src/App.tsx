@@ -9,18 +9,22 @@ import { ComponentListWords } from './components/molecules/ComponentListWords';
 import StateFriendRequest from './components/molecules/StateFriendRequest';
 import Stack from '@mui/material/Stack';
 import GameType from './components/molecules/GameType';
-import {CenteredTitle} from './components/molecules/CenteredTitle';
-import {Link} from './components/molecules/Link';
-import {SignIn} from './components/templates/SignIn';
+import { CenteredTitle } from './components/molecules/CenteredTitle';
+import { Link } from './components/molecules/Link';
+import { SignIn } from './components/templates/SignIn';
 import { SignUp } from './components/templates/SignUp';
 import { CaseHomePage } from './components/molecules/CaseHomePage';
 import { CaseHomePageContainer } from './components/organisms/CaseHomePageContainer';
+import { GifBox } from './components/molecules/GifBox';
+import { RuleBox } from './components/molecules/RuleBox';
+import { ContainerRuleGifBox } from './components/organisms/ContainerRuleGifBox';
+import { Rules } from './components/templates/Rules';
 
 
 function App() {
   return (
     <div className="App">
- <CenteredTitle text="Links Awordkening"/>
+      <CenteredTitle text="Links Awordkening" />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <ContainerInfoPlayer />
         <ContainerInfoGame />
@@ -39,9 +43,10 @@ function App() {
         < GameType type='solo' />
         < GameType type='multi' />
       </Stack>
-      <SignIn/>
-      <SignUp/>
-      <CaseHomePageContainer/>
+      <SignIn />
+      <SignUp />
+      <CaseHomePageContainer />
+      <Rules/>
     </div>
   );
 }
