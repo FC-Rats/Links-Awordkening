@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: phpwithjava:latest  #image build on elboyo
+    ports:
+      - "6225:80" 
+    volumes:
+      - /srv/dev-disk-by-uuid-edbd084c-2085-4a70-a40f-f86d66ad0efa/www/linksawordkening:/var/www/html
+    restart: 'unless-stopped'
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 100M
+    networks:
+     - db
+
+networks:
+  db:
+    external:
+      name: db_db
+#db isolation
+#use "db" or "192.168.1.45" for access
+#try to use db it's better.
