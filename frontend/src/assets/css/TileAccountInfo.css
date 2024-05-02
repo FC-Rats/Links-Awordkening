@@ -1,0 +1,58 @@
+.tile-account-info {
+    background-color: var(--parchment);
+    margin: 20px; 
+    height: auto; 
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.tile-account-info * {
+    font-weight: bold;
+}
+
+.tile-account-info .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 10px;
+}
+.tile-account-info .text-content * {
+    text-align: left; 
+}
+
+.tile-account-info .text-content h2 {
+    font-size: 2rem; 
+}
+
+.tile-account-info .text-content .value {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.tile-account-info img.responsive-image {
+    max-width: 200px;
+    height: auto; 
+}
+@media screen and (max-width: 768px) {
+    .tile-account-info {
+        flex-direction: column;
+        height: auto; 
+    }
+
+    .tile-account-info .text-content {
+        margin-bottom: 10px; 
+    }
+
+    .tile-account-info .text-content h2 {
+        font-size: 1.5rem; 
+    }
+
+    .tile-account-info .text-content .value {
+        font-size: 2.5rem;
+    }
+}
