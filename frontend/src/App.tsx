@@ -19,6 +19,7 @@ import { GifBox } from './components/molecules/GifBox';
 import { RuleBox } from './components/molecules/RuleBox';
 import { ContainerRuleGifBox } from './components/organisms/ContainerRuleGifBox';
 import { Rules } from './components/templates/Rules';
+import ContainerFriendRequests from './components/organisms/ContainerFriendRequests';
 
 
 function App() {
@@ -33,12 +34,7 @@ function App() {
       <ComponentEndGame />
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{ "id": 3, "username": "Lolo" }} />
       <SearchFriends />
-      <Stack spacing={2}>
-        <StateFriendRequest friend={{ "id": 3, "username": "Lolo" }} />
-        <StateFriendRequest friend={{ "id": 4, "username": "Lna" }} />
-        <StateFriendRequest friend={{ "id": 5, "username": "Léo" }} />
-        <StateFriendRequest friend={{ "id": 10, "username": "Keke" }} />
-      </Stack>
+      <ContainerFriendRequests friends={[{ "id": 3, "username": "Lolo" }, { "id": 4, "username": "Lna" }, { "id": 5, "username": "Léo" }, { "id": 10, "username": "Keke" }]} />
       <Stack spacing={2} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
         < GameType type='solo' />
         < GameType type='multi' />
@@ -46,7 +42,7 @@ function App() {
       <SignIn />
       <SignUp />
       <CaseHomePageContainer />
-      <Rules/>
+      <Rules />
     </div>
   );
 }
