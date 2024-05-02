@@ -20,6 +20,7 @@ import { RuleBox } from './components/molecules/RuleBox';
 import { ContainerRuleGifBox } from './components/organisms/ContainerRuleGifBox';
 import { Rules } from './components/templates/Rules';
 import ContainerFriendRequests from './components/organisms/ContainerFriendRequests';
+import { TileAccountInfo } from './components/molecules/TileAccountInfo';
 
 
 function App() {
