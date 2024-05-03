@@ -17,7 +17,7 @@ export const ContainerInfoPlayer = () => {
         { player_name: "Joueur 2", player_score: 100, player_url: ImgCompte },
         { player_name: "Joueur 2", player_score: 100, player_url: ImgCompte },
     ];
-    setPlayersInfos(player);
+    setPlayersInfos(players);
   }, []);
 
   return (

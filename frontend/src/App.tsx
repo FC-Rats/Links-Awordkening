@@ -21,6 +21,7 @@ import { ContainerRuleGifBox } from './components/organisms/ContainerRuleGifBox'
 import { Rules } from './components/templates/Rules';
 import ContainerFriendRequests from './components/organisms/ContainerFriendRequests';
 import { TileAccountInfo } from './components/molecules/TileAccountInfo';
+import { ContainerEndGame } from './components/organisms/ContainerEndGame';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         <ContainerInfoGame />
       </div>
       <ComponentListWords />
-      <ComponentEndGame />
+      <ContainerEndGame />
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{ "id": 3, "username": "Lolo" }} />
       <SearchFriends />
       <ContainerFriendRequests friends={[{ "id": 3, "username": "Lolo" }, { "id": 4, "username": "Lna" }, { "id": 5, "username": "Léo" }, { "id": 10, "username": "Keke" }]} />
