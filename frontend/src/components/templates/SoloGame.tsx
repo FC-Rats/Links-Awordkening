@@ -17,9 +17,12 @@ export const SoloGame = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <ComponentListWords />
-                <div id="graph"></div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <div id="graph"></div>
+                    <SubmitWord />
+                </div>
             </div>
-            <SubmitWord/>
+
         </>
 
     );

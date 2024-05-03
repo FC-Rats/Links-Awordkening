@@ -23,6 +23,11 @@ import { TileAccountInfo } from './components/molecules/TileAccountInfo';
 import { ContainerEndGame } from './components/organisms/ContainerEndGame';
 import ModifyUser from './components/organisms/ModifyUser';
 import { SoloGame } from './components/templates/SoloGame';
+import { ForgotPassword } from './components/templates/ForgotPassword';
+import { ChangePassword } from './components/templates/ChangePassword';
+import { RedirectButton } from './components/molecules/RedirectButton';
+import { HomePage } from './components/templates/HomePage';
+import { ChangeParameters } from './components/templates/ChangeParameters';
 
 
 function App() {
@@ -49,6 +54,10 @@ function App() {
       <TileAccountInfo title={'Parties Jouées'} value={25} subTitle={'au total'} imgUrl={'https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg'} imgAlt={'raccoooooon'}/>
       <ModifyUser />
       <SoloGame/>
+      <ForgotPassword/>
+      <ChangePassword/>
+      <HomePage/>
+      <ChangeParameters/>
     </div>
   );
 }
