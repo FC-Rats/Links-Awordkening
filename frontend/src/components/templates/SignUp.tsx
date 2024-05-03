@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CenteredTitle } from "../molecules/CenteredTitle";
+import { CenteredTitle } from "../atoms/CenteredTitle";
 import { SignUpForm } from "../organisms/SignUpForm";
 
 
