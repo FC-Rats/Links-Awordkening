@@ -22,6 +22,7 @@ import { Rules } from './components/templates/Rules';
 import ContainerFriendRequests from './components/organisms/ContainerFriendRequests';
 import { TileAccountInfo } from './components/molecules/TileAccountInfo';
 import { ContainerEndGame } from './components/organisms/ContainerEndGame';
+import ModifyUser from './components/organisms/ModifyUser';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
       <CaseHomePageContainer />
       <Rules />
       <TileAccountInfo title={'Parties Jouées'} value={25} subTitle={'au total'} imgUrl={'https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg'} imgAlt={'raccoooooon'}/>
+      <ModifyUser />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { InputForm } from './InputForm';
 import { useState } from 'react'
+import '../../assets/css/AcceptRefuseFriendRequest.css';
 
 function SearchFriends() {
   const [search, setSearch] = useState('');
@@ -12,8 +13,8 @@ function SearchFriends() {
 
   return (
     <Stack spacing={{ xs: 1, sm: 2 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-      <InputForm name="searchFriend" value={search} setSearch={setSearch} label='SearchFriend' />
-      <Button variant="contained">Contained</Button>       {/* to replace with a component */}
+      <InputForm name="searchFriend" value={search} setSearch={setSearch} label='Chercher des amis' />
+      <Button onClick={(e) => console.log(e, search)} className="acceptRefuseFriendRequest acceptRefuseFriendRequest-accept" variant="contained">Chercher</Button>
     </Stack>
   )
 }
