@@ -2,6 +2,7 @@ package module;
 
 import java.io.*;
 import java.util.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Classe pour lire un fichier texte pour le tranformer en arbre et pour écrire l'arbre sous forme de fichier texte.
@@ -43,7 +44,7 @@ public class FileReaderWriter {
     	Map<String, Object> data = new HashMap<>();
     	
     	try {
-	        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+	        BufferedReader reader = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8));
 	
 	        // Lecture de la première ligne
 	        String[] firstLineWords = reader.readLine().split(";");
@@ -92,7 +93,7 @@ public class FileReaderWriter {
      * @throws IOException En cas d'erreur d'entrée/sortie lors de l'écriture dans le fichier.
      */
     public static void writeTreeToFile(Tree tree, String filePath, String startWord, String endWord) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, StandardCharsets.UTF_8))) {
         	List<Edge> treeEdges = tree.findPath(startWord, endWord);
             for (Edge edge : treeEdges) {
                 writer.write(edge.getWordSrc() + "," + edge.getWordDest() + "," + edge.getSimilarity());
