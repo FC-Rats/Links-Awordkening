@@ -1,8 +1,14 @@
 .input-form {
     background-color: var(--parchment);
-    margin: 10px!important;
+    margin: 10px 2px!important;
     color: var(--coffee);
     font-weight: 500;
     width: 90%;
+    border-radius: 5px;
+}
+
+.contour-input-form {
+    background-color: var(--parchment);
+    margin: 10px!important;
     border-radius: 5px;
 }

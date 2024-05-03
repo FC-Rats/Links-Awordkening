@@ -33,7 +33,7 @@ export const SignUpForm = () => {
                 <InputForm name="year" label={"Année de naissance"} type="number" min={1900} max={2024} required onInputChange={handleInputChange}/>
                 <InputForm name="email" label={"Email"} type="email" required onInputChange={handleInputChange}/>
                 <InputForm name="password" label={"Mot de passe"} type="password" required onInputChange={handleInputChange}/>
-                <InputForm name="passwordConfirmation" label={"confirmez le mot de passe"} type="password" required onInputChange={handleInputChange}/>
+                <InputForm name="passwordConfirmation" label={"Confirmez le mot de passe"} type="password" required onInputChange={handleInputChange}/>
                 {/* <p>Doit contenir au moins: </p>
                 <ul>
                     <li>12 caractères</li>

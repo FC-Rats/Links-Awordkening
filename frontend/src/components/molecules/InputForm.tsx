@@ -21,7 +21,7 @@ export const InputForm = ({name, value, setSearch, label, required, type, min, m
     };
 
     return (
-        <div>
+        <div className="contour-input-form">
             {type==="password" ? (
                 <TextField
                 label={required ? `${label}*` : label}
@@ -30,6 +30,19 @@ export const InputForm = ({name, value, setSearch, label, required, type, min, m
                 variant="outlined"
                 value={value}
                 name={name}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: 'transparent', // retire le bord en état normal
+                        },
+                        '&:hover fieldset': {
+                            borderColor: 'transparent', // bord visible au survol
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: 'transparent', // bord plus visible quand l'input est focus
+                        },
+                    }
+                }}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -57,6 +70,19 @@ export const InputForm = ({name, value, setSearch, label, required, type, min, m
                         onChange={handleChange}
                         value={value}
                         name={name}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'transparent', // retire le bord en état normal
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'transparent', // bord visible au survol
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'transparent', // bord plus visible quand l'input est focus
+                                },
+                            }
+                        }}
                         // onChange={setSearch ? ((e) => setSearch(e.target.value)) : ()}
                     />
 
