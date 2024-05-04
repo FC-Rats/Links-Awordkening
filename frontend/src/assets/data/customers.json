@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1001,
+    "email": "noreen@gmail.com",
+    "user": {
+      "name": "Noreen Jolley",
+      "profilPicture": "noreen.jpg"
+    },
+    "tokenR": "1234567890",
+    "visibility": "public",
+    "verified": true,
+    "admin": false,
+    "averageScore": 88,
+    "birthYear": 1985
+  },
+  {
+    "id": 1002,
+    "email": "arturo@outlook.com",
+    "user": {
+      "name": "Arturo Annon",
+      "profilPicture": "arturo.jpg"
+    },
+    "tokenR": null,
+    "visibility": "private",
+    "verified": false,
+    "admin": true,
+    "averageScore": 92,
+    "birthYear": 1990
+  },
+  {
+    "id": 1003,
+    "email": "mabel@yahoo.com",
+    "user": {
+      "name": "Mabel Joy",
+      "profilPicture": "mabel.jpg"
+    },
+    "tokenR": "987654321",
+    "visibility": "friends",
+    "verified": true,
+    "admin": false,
+    "averageScore": 75,
+    "birthYear": 1974
+  },
+  {
+    "id": 1004,
+    "email": "luke@gmail.com",
+    "user": {
+      "name": "Luke Skywalker",
+      "profilPicture": "luke.jpg"
+    },
+    "tokenR": "1122334455",
+    "visibility": "public",
+    "verified": false,
+    "admin": true,
+    "averageScore": 85,
+    "birthYear": 1982
+  },
+  {
+    "id": 1005,
+    "email": "jean@icloud.com",
+    "user": {
+      "name": "Jean Valjean",
+      "profilPicture": "jean.jpg"
+    },
+    "tokenR": "1212121212",
+    "visibility": "private",
+    "verified": true,
+    "admin": false,
+    "averageScore": 95,
+    "birthYear": 1975
+  },
+  {
+    "id": 1006,
+    "email": "bella@live.com",
+    "user": {
+      "name": "Bella Swan",
+      "profilPicture": "bella.jpg"
+    },
+    "tokenR": null,
+    "visibility": "friends",
+    "verified": false,
+    "admin": true,
+    "averageScore": 68,
+    "birthYear": 1989
+  },
+  {
+    "id": 1007,
+    "email": "chris@example.com",
+    "user": {
+      "name": "Chris Redfield",
+      "profilPicture": "chris.jpg"
+    },
+    "tokenR": "2345678901",
+    "visibility": "public",
+    "verified": true,
+    "admin": false,
+    "averageScore": 74,
+    "birthYear": 1978
+  },
+  {
+    "id": 1008,
+    "email": "diana@royal.uk",
+    "user": {
+      "name": "Diana Spencer",
+      "profilPicture": "diana.jpg"
+    },
+    "tokenR": "3456789012",
+    "visibility": "private",
+    "verified": false,
+    "admin": true,
+    "averageScore": 89,
+    "birthYear": 1961
+  },
+  {
+    "id": 1009,
+    "email": "max@tech.io",
+    "user": {
+      "name": "Max Payne",
+      "profilPicture": "max.jpg"
+    },
+    "tokenR": null,
+    "visibility": "friends",
+    "verified": true,
+    "admin": false,
+    "averageScore": 79,
+    "birthYear": 1976
+  },
+  {
+    "id": 1010,
+    "email": "lara@croft.com",
+    "user": {
+      "name": "Lara Croft",
+      "profilPicture": "lara.jpg"
+    },
+    "tokenR": "4567890123",
+    "visibility": "public",
+    "verified": false,
+    "admin": true,
+    "averageScore": 83,
+    "birthYear": 1968
+  },
+  {
+    "id": 1011,
+    "email": "tony@starkindustries.com",
+    "user": {
+      "name": "Tony Stark",
+      "profilPicture": "tony.jpg"
+    },
+    "tokenR": "5678901234",
+    "visibility": "private",
+    "verified": true,
+    "admin": false,
+    "averageScore": 99,
+    "birthYear": 1970
+  },
+  {
+    "id": 1012,
+    "email": "bruce@wayneenterprises.com",
+    "user": {
+      "name": "Bruce Wayne",
+      "profilPicture": "bruce.jpg"
+    },
+    "tokenR": null,
+    "visibility": "friends",
+    "verified": false,
+    "admin": true,
+    "averageScore": 88,
+    "birthYear": 1972
+  },
+  {
+    "id": 1013,
+    "email": "peter@dailybugle.net",
+    "user": {
+      "name": "Peter Parker",
+      "profilPicture": "peter.jpg"
+    },
+    "tokenR": "6789012345",
+    "visibility": "public",
+    "verified": true,
+    "admin": false,
+    "averageScore": 92,
+    "birthYear": 1991
+  },
+  {
+    "id": 1014,
+    "email": "natasha@shield.gov",
+    "user": {
+      "name": "Natasha Romanoff",
+      "profilPicture": "natasha.jpg"
+    },
+    "tokenR": "7890123456",
+    "visibility": "private",
+    "verified": false,
+    "admin": true,
+    "averageScore": 91,
+    "birthYear": 1984
+  },
+  {
+    "id": 1015,
+    "email": "steve@avengers.com",
+    "user": {
+      "name": "Steve Rogers",
+      "profilPicture": "steve.jpg"
+    },
+    "tokenR": null,
+    "visibility": "friends",
+    "verified": true,
+    "admin": false,
+    "averageScore": 95,
+    "birthYear": 1918
+  },
+  {
+    "id": 1016,
+    "email": "logan@xmen.org",
+    "user": {
+      "name": "Logan Howlett",
+      "profilPicture": "logan.jpg"
+    },
+    "tokenR": "8901234567",
+    "visibility": "public",
+    "verified": false,
+    "admin": true,
+    "averageScore": 87,
+    "birthYear": 1832
+  },
+  {
+    "id": 1017,
+    "email": "charles@xmen.org",
+    "user": {
+      "name": "Charles Xavier",
+      "profilPicture": "charles.jpg"
+    },
+    "tokenR": "9012345678",
+    "visibility": "private",
+    "verified": true,
+    "admin": false,
+    "averageScore": 93,
+    "birthYear": 1932
+  },
+  {
+    "id": 1018,
+    "email": "erik@brotherhood.net",
+    "user": {
+      "name": "Erik Lehnsherr",
+      "profilPicture": "erik.jpg"
+    },
+    "tokenR": null,
+    "visibility": "friends",
+    "verified": false,
+    "admin": true,
+    "averageScore": 85,
+    "birthYear": 1930
+  },
+  {
+    "id": 1019,
+    "email": "scott@xmen.org",
+    "user": {
+      "name": "Scott Summers",
+      "profilPicture": "scott.jpg"
+    },
+    "tokenR": "0123456789",
+    "visibility": "public",
+    "verified": true,
+    "admin": false,
+    "averageScore": 78,
+    "birthYear": 1960
+  },
+  {
+    "id": 1020,
+    "email": "jean@xmen.org",
+    "user": {
+      "name": "Jean Grey",
+      "profilPicture": "jean.jpg"
+    },
+    "tokenR": "1234567890",
+    "visibility": "private",
+    "verified": true,
+    "admin": true,
+    "averageScore": 90,
+    "birthYear": 1965
+  }
+]
