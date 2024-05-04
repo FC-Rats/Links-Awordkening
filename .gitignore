@@ -7,3 +7,4 @@ Game/Java\ Module/.idea/
 frontend/node_modules/
 frontend/package-lock.json
 frontend/package.json
+Game/C/datafiles/*.txt
