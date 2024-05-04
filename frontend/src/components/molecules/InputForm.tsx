@@ -8,7 +8,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InputFormProps } from "../types/InputFormProps";
 
 
-export const InputForm = ({name, value, setSearch, label, required, type, min, max, onInputChange }: InputFormProps) => {
+export const InputForm = ({name, value, label, required, type, min, max, onInputChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
