@@ -15,7 +15,14 @@ code {
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
+.App {
+  text-align: center;
+}
+
 :root {
+  --asparagus: #82a14e;
+  --hunterGreen: #4D6C48;
+  
   /* Base colors */
   --viridian: #547E5E;
   --brunswickGreen: #2B5C4A;
@@ -47,6 +54,22 @@ code {
   --parchment-focus: #ece3c7;
   --tan-focus: #cfb188;
   --auburn-focus: #962f2f;
+}
+
+body {
+  margin: 0;
+  background: url(../public/img/fond3.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: var(--tan);
+}
+
+@media (max-width: 600px) {
+  body {
+      background-image:none!important;
+  }
 }
 
 ::-webkit-scrollbar {

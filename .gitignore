@@ -5,3 +5,5 @@ Game/Java\ Module/.idea/
 .idea/
 .vscode/*
 frontend/node_modules/
+frontend/package-lock.json
+frontend/package.json

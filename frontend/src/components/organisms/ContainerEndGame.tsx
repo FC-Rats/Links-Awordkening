@@ -15,16 +15,16 @@ export const ContainerEndGame = () => {
     ];
   
     const players: PlayerInfo[] = [
-      { player_name: "JoueurduDark77777", player_score: 78, player_url: ImgCompte },
-      { player_name: "Joueur 2", player_score: 100, player_url: ImgCompte },
-      { player_name: "Joueur 3", player_score: 15, player_url: ImgCompte },
-      { player_name: "Joueur 4", player_score: 95, player_url: ImgCompte },
+      { player_name: "InkyYuu", player_score: 88, player_url: ImgCompte },
+      { player_name: "Léwow", player_score: 100, player_url: ImgCompte },
+      { player_name: "Lolooooooooooo", player_score: 15, player_url: ImgCompte },
+      { player_name: "Dark_LNA_Du_77", player_score: 95, player_url: ImgCompte },
     ];
 
-    const multi = true;
+    const notmulti = false;
 
     console.log(playersolo.length);
-    if (multi) {
+    if (notmulti) {
       setScore(playersolo[0].player_score);
       setPlayersInfos(playersolo);
     } else {
