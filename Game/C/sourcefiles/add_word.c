@@ -4,9 +4,10 @@
 #include "../headers/game.h"
 
 int main(int argc, char *argv[]) {
-    const char *dictionnary_filename;
+    char *dictionnary_filename;
     char *word1;
     char *idUser;
+    char *wordfile;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n -BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
@@ -15,11 +16,11 @@ int main(int argc, char *argv[]) {
         printf("%s %s\n",dictionnary_filename,word1);
     }
     else if (argc==2 && strcmp("--help", argv[1])==0){
-        printf("Usage: exec <dico.lex> <word> <nom fichier>\n");
+        printf("Usage: exec <dico.lex> <word> <nom fichier> <words.bin>\n");
         printf("where dico.lex le dictionnaire lexicogrpahique et word le mot a ajouter dans la partie\n");
         exit(0);
     }
-    else if (argc != 4) {
+    else if (argc != 5) {
         printf("Mauvais usage de la fonction \n");
         return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
     }
@@ -27,6 +28,7 @@ int main(int argc, char *argv[]) {
         dictionnary_filename = argv[1];
         word1 = argv[2];
         idUser = argv[3];
+        wordfile = argv[4];
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
@@ -44,7 +46,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    addWordToFile(idUser, word1,offset1);
+    addWordToFile(idUser, word1,offset1, dictionnary_filename, wordfile);
 
     return 0; 
 }
