@@ -7,6 +7,7 @@ int main(int argc, char *argv[]) {
     const char *dictionnary_filename;
     char *word1;
     char *word2;
+    char *idUser;
 
     if (argc == 1){
         printf("Ce programme a ete code par la team FC RATS:\n-BREDEAU Kellian\n-CHEVALIER Helena\n-COUTELLIER Loelia\n-DESSERTENNE Leo\nLancement d'une fonction de test avec les arguments :\n");
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
         dictionnary_filename = argv[1];
         word1 = argv[2];
         word2 = argv[3];
+        idUser = argv[4];
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
@@ -50,7 +52,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    writeToFileBeginGame("./datafiles/game.txt", word1, word2,offset1,offset2);
+    writeToFileBeginGame(idUser, word1, word2,offset1,offset2);
 
     return 0; 
 }
