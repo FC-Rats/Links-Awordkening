@@ -1,0 +1,11 @@
+.drawer-ModifyUser .MuiDrawer-paperAnchorRight {
+    background-color: var(--hunterGreen)!important;
+}
+
+.cross-ModifyUser {
+    color: black!important;
+}
+
+.form-ModifyUser {
+    padding: 25px;
+}

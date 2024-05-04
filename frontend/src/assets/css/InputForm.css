@@ -11,4 +11,7 @@
     background-color: var(--parchment);
     margin: 10px!important;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

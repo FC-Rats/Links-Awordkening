@@ -43,13 +43,13 @@ function App() {
       <SignUp />
       <CaseHomePageContainer />
       <Rules />
-      <TileAccountInfo title={'Parties Jouées'} value={25} subTitle={'au total'} imgUrl={'https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg'} imgAlt={'raccoooooon'}/>
-      <ModifyUser />
-      <SoloGame/>
-      <ForgotPassword/>
-      <ChangePassword/>
-      <HomePage/>
-      <ChangeParameters/>
+      <TileAccountInfo title={'Parties Jouées'} value={25} subTitle={'au total'} imgUrl={'https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg'} imgAlt={'raccoooooon'} />
+      <ModifyUser user={{"id": 1, "pseudo": "Lolo", "year": "2004", "email": "test@gmail.com", "visibility": "PRIVATE", "admin": true, "verified": true}} />
+      <SoloGame />
+      <ForgotPassword />
+      <ChangePassword />
+      <HomePage />
+      <ChangeParameters />
     </div>
   );
 }

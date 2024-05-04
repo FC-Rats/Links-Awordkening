@@ -2,25 +2,36 @@ import React, { useState, useEffect } from "react";
 import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { Stack } from "@mui/material";
 import { FormData } from '../types/ModifyUserFormData';
 import ModifyUserRadioGroup from "../molecules/ModifyUserRadioGroup";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import "../../assets/css/ModifyUser.css"
+import "../../assets/css/InputForm.css"
+import options from "../../assets/data/options.json"
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
 
-function ModifyUser() {
-  const [formData, setFormData] = useState<FormData>({
-    pseudo: '',
-    year: '',
-    email: '',
-    password: '',
-    passwordConfirmation: '',
-    admin: false,
-    verified: false
-  });
+function ModifyUser({user}: {user: FormData}) {
+  const [formData, setFormData] = useState<FormData>(user);
+
+  const [isDrawerOpened, setIsDrawerOpened] = React.useState(false);
+
+  const toggleDrawer =
+    (open: boolean) =>
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return;
+        }
+
+        setIsDrawerOpened(open);
+      };
 
   useEffect(() => {
     console.log(formData)
@@ -35,30 +46,56 @@ function ModifyUser() {
     console.log(formData);
   };
 
-  /*   const handleChangeAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({ ...formData, admin: event.target.value });
-    };
-  
-    const handleChangeVerfied = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({ ...formData, verified: event.target.value });
-    }; */
-
   return (
-    <div className="form-container">
-      <form className="form" method="post" onSubmit={handleSubmit}>
-        <Typography component="h2" variant="h4">
-          Modifer l'utilisateur
-        </Typography>
-        <InputForm name="pseudo" label="Pseudo" type="text" required onInputChange={handleInputChange} />
-        <InputForm name="year" label="Année de naissance" type="number" min={1900} max={2024} required onInputChange={handleInputChange} />
-        <InputForm name="email" label="Email" type="email" required onInputChange={handleInputChange} />
-        <Stack spacing={2} direction="column" flexWrap="wrap" justifyContent="center" alignItems="center">
-          <ModifyUserRadioGroup title="Admin" name="admin" value={formData.admin} onInputChange={handleInputChange} />
-          <ModifyUserRadioGroup title="Vérifié" name="verified" value={formData.verified} onInputChange={handleInputChange} />
-        </Stack>
-        <SubmitButton text="Valider" />
-      </form>
-    </div>
+    <>
+      <Button onClick={toggleDrawer(true)}>Modifier l'utilisateur</Button>
+      <Drawer
+        anchor={'right'}
+        className="drawer-ModifyUser"
+        open={isDrawerOpened}
+        onClose={toggleDrawer(false)}
+      >
+        <div className="">
+          <form className="form-ModifyUser" method="post" onSubmit={handleSubmit}>
+            <Stack spacing={2} direction="row" flexWrap="wrap" justifyContent="space-between" alignItems="center">
+              <Typography component="h2" variant="h5">
+                Modifer l'utilisateur
+              </Typography>
+              <Button onClick={toggleDrawer(false)}><CloseIcon fontSize="large" className="cross-ModifyUser" /></Button>
+            </Stack>
+            <InputForm name="pseudo" value={formData.pseudo} label="Pseudo" type="text" required onInputChange={handleInputChange} />
+            <InputForm name="year" value={formData.year} label="Année de naissance" type="number" min={1900} max={2024} required onInputChange={handleInputChange} />
+            <InputForm name="email" value={formData.email} label="Email" type="email" required onInputChange={handleInputChange} />
+            <div className="contour-input-form">
+              <Autocomplete disablePortal options={options} getOptionLabel={(option) => option.label} value={options.find(option => option.value === formData.visibility) || null} className='input-form' sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'transparent', // retire le bord en état normal
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'transparent', // bord visible au survol
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'transparent', // bord plus visible quand l'input est focus
+                  },
+                },
+                paddingY: 1,
+                width: "90%"
+              }}
+                renderInput={(params) => <TextField {...params} label="Visibilité" />}
+              />
+            </div>
+            <Stack spacing={2} direction="column" flexWrap="wrap" justifyContent="center" alignItems="center">
+              <ModifyUserRadioGroup title="Admin" name="admin" value={formData.admin} onInputChange={handleInputChange} />
+              <ModifyUserRadioGroup title="Vérifié" name="verified" value={formData.verified} onInputChange={handleInputChange} />
+            </Stack>
+            <Stack display="flex" justifyContent="center" alignItems="center">
+              <SubmitButton text="Valider" />
+            </Stack>
+          </form>
+        </div>
+      </Drawer>
+    </>
   );
 }
 

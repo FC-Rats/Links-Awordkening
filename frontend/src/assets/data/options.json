@@ -1,0 +1,5 @@
+[
+  { "label": "Privée", "value": "PRIVATE" },
+  { "label": "Publique", "value": "PUBLIC" },
+  { "label": "Amis", "value": "FRIENDS" }
+]
