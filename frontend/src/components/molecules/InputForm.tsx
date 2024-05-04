@@ -7,8 +7,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InputFormProps } from "../types/InputFormProps";
 
-
-export const InputForm = ({name, value, label, required, type, min, max, onInputChange }: InputFormProps) => {
+export const InputForm = ({name, value, label, required, type, min, max, defaultvalue, onInputChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -70,6 +69,7 @@ export const InputForm = ({name, value, label, required, type, min, max, onInput
                         onChange={handleChange}
                         value={value}
                         name={name}
+                        defaultValue={defaultvalue}
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
