@@ -7,5 +7,6 @@ export interface InputFormProps {
     type?:string;
     min?: number;
     max?: number;
+    defaultvalue? :string;
     onInputChange?: (name: string, value: any) => void;
 }

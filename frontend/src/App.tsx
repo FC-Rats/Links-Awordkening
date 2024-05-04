@@ -20,6 +20,7 @@ import { ForgotPassword } from './components/templates/ForgotPassword';
 import { ChangePassword } from './components/templates/ChangePassword';
 import { HomePage } from './components/templates/HomePage';
 import { ChangeParameters } from './components/templates/ChangeParameters';
+import { SetUpGame } from './components/templates/SetUpGame';
 
 
 function App() {
@@ -35,10 +36,7 @@ function App() {
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{ "id": 3, "username": "Lolo" }} />
       <SearchFriends />
       <ContainerFriendRequests friends={[{ "id": 3, "username": "Lolo" }, { "id": 4, "username": "Lna" }, { "id": 5, "username": "Léo" }, { "id": 10, "username": "Keke" }]} />
-      <Stack spacing={2} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-        < GameType type='solo' />
-        < GameType type='multi' />
-      </Stack>
+      <SetUpGame />
       <SignIn />
       <SignUp />
       <CaseHomePageContainer />
