@@ -15,17 +15,18 @@ int main(int argc, char *argv[]) {
         printf("%s %s\n",dictionnary_filename,word1);
     }
     else if (argc==2 && strcmp("--help", argv[1])==0){
-        printf("Usage: exec <dico.lex> <word>\n");
+        printf("Usage: exec <dico.lex> <word> <nom fichier>\n");
         printf("where dico.lex le dictionnaire lexicogrpahique et word le mot a ajouter dans la partie\n");
         exit(0);
     }
-    else if (argc != 3) {
+    else if (argc != 4) {
         printf("Mauvais usage de la fonction \n");
         return ERROR_INVALID_INPUT; // Code d'erreur personnalisé
     }
     else {
         dictionnary_filename = argv[1];
         word1 = argv[2];
+        idUser = argv[3];
     }
 
     FILE* dictionnary = fopen(dictionnary_filename, "rb");
