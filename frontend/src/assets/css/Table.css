@@ -1,0 +1,135 @@
+.datatable .p-paginator .p-paginator-current {
+    margin-left: auto;
+}
+
+.datatable .p-progressbar {
+    height: 0.5rem;
+    background-color: #d8dadc;
+}
+
+.datatable .p-progressbar .p-progressbar-value {
+    background-color: #607d8b;
+}
+
+.datatable .p-datepicker {
+    min-width: 25rem;
+}
+
+.datatable .p-datepicker td {
+    font-weight: 400;
+}
+
+.datatable .p-datatable.p-datatable-customers .p-datatable-header {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.datatable .p-datatable.p-datatable-customers .p-paginator {
+    padding: 1rem;
+}
+
+.datatable .p-datatable.p-datatable-customers .p-datatable-thead>tr>th {
+    text-align: left;
+}
+
+.datatable .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
+    text-transform: uppercase;
+}
+
+.datatable input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.datatable input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+    50% {
+        background-color: rgba(165, 165, 165, 0.3)
+    }
+    100% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+}
+
+.datatable .customer-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.datatable .customer-badge.visibility-public, .customer-badge.verified-true, .customer-badge.admin-true {
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.datatable .customer-badge.visibility-private, .customer-badge.verified-false, .customer-badge.admin-false {
+    background-color: #FFCDD2;
+    color: #C63737;
+}
+
+.datatable .customer-badge.visibility-friends {
+    background-color: #FFD8B2;
+    color: #805B36;
+}
+
+.datatable .image-text {
+    vertical-align: middle;
+    margin-left: .5rem;
+}
+
+.datatable .flag {
+    vertical-align: middle;
+}
+
+.datatable .p-multiselect-representative-option {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.datatable .p-multiselect-representative-option img {
+    vertical-align: middle;
+    width: 24px;
+}
+
+.datatable .p-multiselect-representative-option span {
+    margin-top: .125rem;
+}
+
+.datatable .p-column-filter {
+    width: 100%;
+}
+
+.datatable .card {
+    margin-bottom: 2rem;
+}
+
+.slider-averageScore {
+    display: flex!important;
+    align-items: center!important;
+    justify-content: space-between!important;
+    padding: 4px 0!important;
+}
+
+.title-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%!important;
+}

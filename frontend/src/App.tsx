@@ -19,6 +19,7 @@ import { ChangePassword } from './components/templates/ChangePassword';
 import { HomePage } from './components/templates/HomePage';
 import { ChangeParameters } from './components/templates/ChangeParameters';
 import { SetUpGame } from './components/templates/SetUpGame';
+import Table from './components/organisms/Table';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
       <ChangePassword />
       <HomePage />
       <ChangeParameters />
+      <Table />
     </div>
   );
 }
