@@ -4,8 +4,6 @@ import AcceptRefuseFriendRequest from './components/molecules/AcceptRefuseFriend
 import SearchFriends from './components/molecules/SearchFriends';
 import { ContainerInfoPlayer } from './components/organisms/ContainerInfoPlayer';
 import { ComponentListWords } from './components/molecules/ComponentListWords';
-import Stack from '@mui/material/Stack';
-import GameType from './components/molecules/GameType';
 import { CenteredTitle } from './components/atoms/CenteredTitle';
 import { SignIn } from './components/templates/SignIn';
 import { SignUp } from './components/templates/SignUp';

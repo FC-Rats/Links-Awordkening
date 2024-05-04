@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../assets/css/ComponentPlayerInfo.css";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { Avatar, Badge } from "@mui/material";

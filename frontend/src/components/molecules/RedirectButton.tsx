@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/RedirectButton.css";
-import Button from "@mui/material/Button/Button";
 
 export const RedirectButton = (props: { text: string; url: string; }) => {
     return (

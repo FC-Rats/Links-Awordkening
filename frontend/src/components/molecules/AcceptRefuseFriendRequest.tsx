@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import '../../assets/css/AcceptRefuseFriendRequest.css';
-import {FriendRequestProps} from '../types/FriendRequestProps';
 
 function AcceptRefuseFriendRequest(props: {isAcceptingButton: Boolean, friend: { id: number, username: string }}) {
   return (

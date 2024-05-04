@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PlayerInfo } from "../types/PlayerInfo";
-import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 import "../../assets/css/ComponentEndGame.css";
 import { ComponentEndGame } from "../molecules/ComponentEndGame";
 
@@ -35,7 +34,7 @@ export const ContainerEndGame = () => {
 
   return (
     <>
-      {playersInfos.length == 1 ? (
+      {playersInfos.length === 1 ? (
         <div className="wrapper-end-game">
             <img className="img-end-game" src={"/img/LARectPA.png"} alt="Bravo" />
             <div className="title">Bravo !</div>
@@ -50,7 +49,7 @@ export const ContainerEndGame = () => {
                 key={index}
                 isMulti={true}
                 item={player}
-                winner={index==0}
+                winner={index===0}
               />
             ))}
           </div>
