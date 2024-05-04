@@ -51,7 +51,7 @@ int main(int argc, char * argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Score de similarite semantique : %0.2f\n",calculScalaire(offsetword1, offsetword2));
+    printf("Score de similarite semantique : %0.2f\n",calculScalaire(offsetword1, offsetword2, "./datafiles/words.bin"));
 
     return 0;
 }
