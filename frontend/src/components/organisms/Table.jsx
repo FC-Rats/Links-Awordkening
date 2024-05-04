@@ -14,31 +14,34 @@ import { Button } from '@mui/material';
 import '../../assets/css/AcceptRefuseFriendRequest.css';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import SearchIcon from '@mui/icons-material/Search';
-import { UserInfo } from '../types/UserInfo';
 
-export const Table = () => {
-    // DATA DES GENS
-    const [customers, setCustomers] = useState<UserInfo[]>(customersData);
-    // DATA DES GENS SI FILTERS
+function Table() {
+    const [customers, setCustomers] = useState(customersData);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    // LES FILTRES
     const [filters, setFilters] = useState({
-        'global': { value: "", matchMode: FilterMatchMode.CONTAINS },
-        'id': { operator: FilterOperator.AND, constraints: [{ value: "", matchMode: FilterMatchMode.EQUALS }] },
-        'email': { operator: FilterOperator.AND, constraints: [{ value: "", matchMode: FilterMatchMode.STARTS_WITH }] },
-        'user.name': { operator: FilterOperator.AND, constraints: [{ value: "", matchMode: FilterMatchMode.STARTS_WITH }] },
-        'birthYear': { operator: FilterOperator.AND, constraints: [{ value: "", matchMode: FilterMatchMode.EQUALS }] },
-        'tokenR': { operator: FilterOperator.AND, constraints: [{ value: "", matchMode: FilterMatchMode.STARTS_WITH }] },
-        'visibility': { operator: FilterOperator.OR, constraints: [{ value: "", matchMode: FilterMatchMode.EQUALS }] },
-        'verified': { operator: FilterOperator.OR, constraints: [{ value: "", matchMode: FilterMatchMode.EQUALS }] },
-        'admin': { operator: FilterOperator.OR, constraints: [{ value: "", matchMode: FilterMatchMode.EQUALS }] },
-        'averageScore': { value: "", matchMode: FilterMatchMode.BETWEEN }
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'id': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'email': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'user.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'birthYear': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'tokenR': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'visibility': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'verified': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'admin': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'averageScore': { value: null, matchMode: FilterMatchMode.BETWEEN }
     });
-
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [loading, setLoading] = useState(true);
-    // SLIDER DU SCORE MIN MAX
     const [scoreRange, setScoreRange] = useState({ min: 0, max: 100 });
+
+    useEffect(() => {
+        if (customers.length > 0) {
+            const scores = customers.map(customer => customer.averageScore);
+            const minScore = Math.min(...scores);
+            const maxScore = Math.max(...scores);
+            setScoreRange({ min: minScore, max: maxScore });
+        }
+    }, [customers]);
 
     const visibilities = [
         'private', 'public', 'friends'
@@ -49,25 +52,14 @@ export const Table = () => {
         { label: 'Non', value: 'false' }
     ];
 
-    // INIT
-    useEffect(() => {
-        if (customers.length > 0) { //Si le fetch renvoit des users
-            const scores = customers.map(customer => customer.averageScore);
-            const minScore = Math.min(...scores); // Minimum de score des joueurs
-            const maxScore = Math.max(...scores); // maximum de score des joueurs
-            setScoreRange({ min: minScore, max: maxScore }); // Changement des valeurs du slider
-        }
-    }, [customers]);
 
-    // FUTUR FETCH
     useEffect(() => {
         //fetchData() --> setCustomers;
         setLoading(false);
     }, []);
 
-
-    const onGlobalFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
         let _filters = { ...filters };
         _filters['global'].value = value;
 
@@ -88,7 +80,7 @@ export const Table = () => {
         )
     }
 
-    const userBodyTemplate = (rowData : UserInfo) => {
+    const userBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
                 <img alt="profilPicture" src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${rowData.user.profilPicture}`} width={30} />
@@ -101,15 +93,15 @@ export const Table = () => {
         return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} />
     }
 
-    const birthYearFilterTemplate = (options : string) => {
+    const birthYearFilterTemplate = (options) => {
         return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} />
     }
 
-    const visibilityBodyTemplate = (rowData : UserInfo) => {
+    const visibilityBodyTemplate = (rowData) => {
         return <span className={`customer-badge visibility-${rowData.visibility}`}>{rowData.visibility}</span>;
     }
 
-    const verifiedBodyTemplate = (rowData : UserInfo) => {
+    const verifiedBodyTemplate = (rowData) => {
         return (
             <span className={`customer-badge verified-${rowData.verified}`}>
                 {rowData.verified ? 'Oui' : 'Non'}
@@ -117,7 +109,7 @@ export const Table = () => {
         );
     }
 
-    const adminBodyTemplate = (rowData : UserInfo) => {
+    const adminBodyTemplate = (rowData) => {
         return (
             <span className={`customer-badge admin-${rowData.admin}`}>
                 {rowData.admin ? 'Oui' : 'Non'}
@@ -125,7 +117,7 @@ export const Table = () => {
         );
     }
 
-    const tokenRBodyTemplate = (rowData : UserInfo) => {
+    const tokenRBodyTemplate = (rowData) => {
         return rowData.tokenR ? rowData.tokenR : 'NULL';
     }
 
@@ -196,3 +188,5 @@ export const Table = () => {
         </>
     );
 }
+
+export default Table
