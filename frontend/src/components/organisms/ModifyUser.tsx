@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Typography from '@mui/material/Typography';
@@ -7,17 +7,24 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { Stack } from "@mui/material";
+import { FormData } from '../types/ModifyUserFormData';
+import ModifyUserRadioGroup from "../molecules/ModifyUserRadioGroup";
 
 function ModifyUser() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     pseudo: '',
     year: '',
     email: '',
     password: '',
     passwordConfirmation: '',
-    admin: '',
-    verified: ''
+    admin: false,
+    verified: false
   });
+
+  useEffect(() => {
+    console.log(formData)
+  }, [formData])
 
   const handleInputChange = (name: string, value: any) => {
     setFormData({ ...formData, [name]: value });
@@ -28,13 +35,13 @@ function ModifyUser() {
     console.log(formData);
   };
 
-  const handleChangeAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, admin: event.target.value });
-  };
-
-  const handleChangeVerfied = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, verified: event.target.value });
-  };
+  /*   const handleChangeAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, admin: event.target.value });
+    };
+  
+    const handleChangeVerfied = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, verified: event.target.value });
+    }; */
 
   return (
     <div className="form-container">
@@ -45,30 +52,10 @@ function ModifyUser() {
         <InputForm name="pseudo" label="Pseudo" type="text" required onInputChange={handleInputChange} />
         <InputForm name="year" label="Année de naissance" type="number" min={1900} max={2024} required onInputChange={handleInputChange} />
         <InputForm name="email" label="Email" type="email" required onInputChange={handleInputChange} />
-        <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">Admin</FormLabel>
-          <RadioGroup sx={{ display: 'flex', flexDirection: 'row' }}
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="admin"
-            value={formData.admin}
-            onChange={handleChangeAdmin}
-          >
-            <FormControlLabel value={true} control={<Radio />} label="Oui" />
-            <FormControlLabel value={false} control={<Radio />} label="Non" />
-          </RadioGroup>
-        </FormControl>
-        <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">Vérifié</FormLabel>
-          <RadioGroup sx={{ display: 'flex', flexDirection: 'row' }}
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="verified"
-            value={formData.verified}
-            onChange={handleChangeVerfied}
-          >
-            <FormControlLabel value={true} control={<Radio />} label="Oui" />
-            <FormControlLabel value={false} control={<Radio />} label="Non" />
-          </RadioGroup>
-        </FormControl>
+        <Stack spacing={2} direction="column" flexWrap="wrap" justifyContent="center" alignItems="center">
+          <ModifyUserRadioGroup title="Admin" name="admin" value={formData.admin} onInputChange={handleInputChange} />
+          <ModifyUserRadioGroup title="Vérifié" name="verified" value={formData.verified} onInputChange={handleInputChange} />
+        </Stack>
         <SubmitButton text="Valider" />
       </form>
     </div>
