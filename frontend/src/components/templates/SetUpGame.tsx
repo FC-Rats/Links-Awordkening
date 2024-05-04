@@ -11,9 +11,12 @@ export const SetUpGame = () => {
     const [multiSelected, setMultiSelected] = useState(true);
 
     const [formData, setFormData] = useState({
-        type: '',
-        nomPartie: '',
-        nombreJoueurs: '',
+        IDJoin: 'ADDE', //Formule aléatoire
+        nameGame: '', 
+        coupsRestants: '10', //A définir
+        nameHost: '', // A récupérer de la session
+        type: 'multi', //default value
+        nombreJoueurs: '2', // default value
     });
 
     const handleSoloClick = () => {
@@ -48,7 +51,7 @@ export const SetUpGame = () => {
 
             <Grid container spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
                     <Grid item xs={12} sm={formData.type !== 'solo' ? 2 : 4}>
-                        <InputForm name="nomPartie" label={"Nom de la partie"} required={true} onInputChange={handleInputChange} />
+                        <InputForm name="nameGame" label={"Nom de la partie"} required={true} onInputChange={handleInputChange} />
                     </Grid>
                     {formData.type !== 'solo' && (
                         <Grid item xs={12} sm={2}>
