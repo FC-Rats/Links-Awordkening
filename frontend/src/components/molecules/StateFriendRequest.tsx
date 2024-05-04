@@ -8,9 +8,10 @@ import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
 import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 import '../../assets/css/StateFriendRequest.css'
+import {FriendRequestProps} from '../types/FriendRequestProps'
 
 
-function StateFriendRequest(props: { friend: { id: number, username: string } }) {
+function StateFriendRequest({ friend }: FriendRequestProps) {
   return (
     <Card sx={{ display: 'flex', width: '100%' }} className='card-StateFriendRequest'>
       <CardContent sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, width: '100%', flexWrap: 'wrap' }}>
@@ -21,12 +22,12 @@ function StateFriendRequest(props: { friend: { id: number, username: string } })
             src="/broken-image.jpg"
           />
           <Typography component="span" variant="h6">
-            {props.friend.username}
+            {friend.username}
           </Typography>
         </Box>
         <CardActions>
-          <AcceptRefuseFriendRequest isAcceptingButton={false} friend={props.friend} />
-          <AcceptRefuseFriendRequest isAcceptingButton={true} friend={props.friend} />
+          <AcceptRefuseFriendRequest isAcceptingButton={false} friend={friend} />
+          <AcceptRefuseFriendRequest isAcceptingButton={true} friend={friend} />
         </CardActions>
       </CardContent>
     </Card>

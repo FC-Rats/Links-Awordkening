@@ -1,10 +1,8 @@
 import React from 'react'
 import StateFriendRequest from '../molecules/StateFriendRequest';
 import Stack from '@mui/material/Stack';
+import {ContainerFriendRequestsProps} from '../types/ContainerFriendRequestsProps'
 
-interface ContainerFriendRequestsProps {
-    friends: { id: number; username: string }[];
-}
 
 function ContainerFriendRequests({ friends }: ContainerFriendRequestsProps) {
     return (

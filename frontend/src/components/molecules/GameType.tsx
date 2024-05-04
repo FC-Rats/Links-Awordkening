@@ -6,10 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import '../../assets/css/GameType.css'
-
-interface GameTypeProps {
-  type: 'solo' | 'multi';
-}
+import { GameTypeProps } from "../types/GameTypeProps";
 
 function GameType({ type }: GameTypeProps) {
   return (
