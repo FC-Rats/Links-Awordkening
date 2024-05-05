@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "date": "2024-05-01",
+      "name_game": "Chess",
+      "type": "solo",
+      "players": null,
+      "score": 3,
+      "givenwords": ["king", "queen", "bishop"],
+      "outputwords": ["checkmate", "rook", "pawn"]
+    },
+    {
+      "id": 2,
+      "date": "2024-04-30",
+      "name_game": "Scrabble",
+      "type": "multi",
+      "players": ["Charlie", "David", "Eve"],
+      "score": 150,
+      "givenwords": ["apple", "banana", "cherry"],
+      "outputwords": ["orange", "grape", "kiwi"]
+    },
+    {
+      "id": 3,
+      "date": "2024-04-29",
+      "name_game": "Monopoly",
+      "type": "solo",
+      "players": null,
+      "score": 2000,
+      "givenwords": ["train", "ticket"],
+      "outputwords": ["property", "money", "bankruptcy"]
+    },
+    {
+      "id": 4,
+      "date": "2024-04-28",
+      "name_game": "Catan",
+      "type": "multi",
+      "players": ["Henry", "Isabel"],
+      "score": 9,
+      "givenwords": ["brick", "wood", "sheep"],
+      "outputwords": ["settlement", "road", "city"]
+    },
+    {
+      "id": 5,
+      "date": "2024-04-27",
+      "name_game": "Poker",
+      "type": "multi",
+      "players": ["Liam", "Mia", "Noah"],
+      "score": 500,
+      "givenwords": ["train", "ticket"],
+      "outputwords": ["flush", "straight", "full house"]
+    }
+  ]
+  

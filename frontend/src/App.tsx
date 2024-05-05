@@ -20,15 +20,17 @@ import { HomePage } from './components/templates/HomePage';
 import { ChangeParameters } from './components/templates/ChangeParameters';
 import { SetUpGame } from './components/templates/SetUpGame';
 import Table from './components/organisms/Table';
-import { UserDataTable } from './components/organisms/DataTable';
 import customer from './assets/data/customers.json';
+import historique from './assets/data/historique.json';
+import { HistoriqueDataTable } from './components/molecules/HistoriqueDataTable';
+import { UserDataTable } from './components/molecules/UserDataTable';
 
 function App() {
   return (
     <div className="App">
       <CenteredTitle text="Links Awordkening" />
+      <HistoriqueDataTable data={historique} />
       <UserDataTable data={customer} />
-
       <ContainerEndGame />
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{ "id": 3, "username": "Lolo" }} />
       <SearchFriends />

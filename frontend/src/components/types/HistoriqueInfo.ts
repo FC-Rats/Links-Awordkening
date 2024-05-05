@@ -1,6 +1,6 @@
 export interface HistoriqueInfo {
     id: number;
-    date: Date;
+    date: string;
     name_game: string;
     type : string;
     players : null | string[];

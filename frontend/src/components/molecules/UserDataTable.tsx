@@ -1,10 +1,7 @@
-import * as React from 'react';
-import { DataGrid, GridRowsProp, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridCellParams } from '@mui/x-data-grid';
 import { UserInfo } from '../types/UserInfo';
-import { HistoriqueInfo } from '../types/HistoriqueInfo'; 
 import '../../assets/css/DataTable.css';
 import { Chip, styled } from '@mui/material';
-import { BadgeOutlined } from '@mui/icons-material';
 
 const renderVisibilityCell = (value: string) => {
     let badgeColor = '';
@@ -86,50 +83,5 @@ export const UserDataTable = ({ data }: { data: UserInfo[] }) => {
                 }} 
                 pageSizeOptions={[5, 10, 25]}/>
     );
-}
-
-export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
-    const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'date', headerName: 'Date', width: 200 },
-        { field: 'name_game', headerName: 'Name Game', width: 200 },
-        { field: 'type', headerName: 'Type', width: 150 },
-        { field: 'score', headerName: 'Score', width: 150 },
-    ];
-
-    const rows: GridRowsProp = data.map((historique) => ({
-        id: historique.id,
-        date: historique.date,
-        name_game: historique.name_game,
-        type: historique.type,
-        score: historique.score
-    }));
-
-    return (
-        <div style={{ height: 300, width: '100%' }}>
-            <DataGrid
-                rows={rows} 
-                columns={columns}
-                slots={{ toolbar: GridToolbar }}
-                slotProps={{
-                    toolbar: {
-                    showQuickFilter: true,
-                    },
-                }}
-                initialState={{
-                    filter: {
-                filterModel: {
-                    items: [],
-                    quickFilterValues: [],
-                },
-                },
-                    pagination: { paginationModel: { pageSize: 5 } },
-                }} 
-                pageSizeOptions={[5, 10, 25]}/>
-        </div>
-    );
-}
-function useStyles() {
-    throw new Error('Function not implemented.');
 }
 
