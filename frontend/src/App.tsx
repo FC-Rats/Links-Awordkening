@@ -20,17 +20,15 @@ import { HomePage } from './components/templates/HomePage';
 import { ChangeParameters } from './components/templates/ChangeParameters';
 import { SetUpGame } from './components/templates/SetUpGame';
 import Table from './components/organisms/Table';
-
+import { UserDataTable } from './components/organisms/DataTable';
+import customer from './assets/data/customers.json';
 
 function App() {
   return (
     <div className="App">
       <CenteredTitle text="Links Awordkening" />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <ContainerInfoPlayer />
-        <ContainerInfoGame />
-      </div>
-      <ComponentListWords />
+      <UserDataTable data={customer} />
+
       <ContainerEndGame />
       <AcceptRefuseFriendRequest isAcceptingButton={true} friend={{ "id": 3, "username": "Lolo" }} />
       <SearchFriends />
@@ -47,7 +45,6 @@ function App() {
       <ChangePassword />
       <HomePage />
       <ChangeParameters />
-      <Table />
     </div>
   );
 }

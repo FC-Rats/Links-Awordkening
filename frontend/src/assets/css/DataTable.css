@@ -1,0 +1,35 @@
+.MuiDataGrid-root {
+    background-color: var(--parchment);
+}
+
+.MuiDataGrid-root .MuiDataGrid-toolbarContainer .MuiButton-root {
+    color: var(--coffee);
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaders {
+    --DataGrid-containerBackground: var(--coffee);
+    --DataGrid-color: var(--tan);
+    --unstable_DataGrid-radius: 15px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+    --DataGrid-color: var(--tan);
+    color:  var(--tan);
+}
+
+.MuiDataGrid-root .MuiDataGrid-row {
+    background-color: var(--parchment);
+    color: var(--coffee);
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,.MuiDataGrid-root .MuiDataGrid-cell:focus {
+    outline: solid var(--coffee) 1px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+    background-color: var(--tan)!important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row:hover {
+    background-color: var(--tan)!important;
+}
