@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Rules } from './components/templates/Rules';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -17,7 +19,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/app" element={<App />} />
+          {/* <Route path="/survey" element={<Survey />} /> */}
+          <Route path="*" element={<Rules />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
