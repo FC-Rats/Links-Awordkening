@@ -6,4 +6,5 @@ export interface FormData {
     visibility: string;
     admin: boolean;
     verified: boolean;
+    averageScore: number;
 }

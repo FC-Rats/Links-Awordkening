@@ -7,13 +7,13 @@ import EditIcon from '@mui/icons-material/Edit';
 const renderVisibilityCell = (value: string) => {
   let badgeColor = '';
   switch (value) {
-    case 'public':
+    case 'PUBLIC':
       badgeColor = 'aqua';
       break;
-    case 'private':
+    case 'PRIVATE':
       badgeColor = 'red';
       break;
-    case 'friends':
+    case 'FRIENDS':
       badgeColor = 'green';
       break;
     default:
@@ -34,11 +34,11 @@ const StyledVisibilityChip = styled('div')({
   borderRadius: '5px',
 });
 
-export const UserDataTable = ({ data }: { data: UserInfo[] }) => {
+export const UserDataTable = ({ data, onUserEdit }: { data: UserInfo[], onUserEdit: (user: UserInfo) => void }) => {
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', type: 'number', width: 150 },
-    { field: 'user_name', headerName: 'Name', width: 300 },
-    { field: 'birthYear', headerName: 'Année de naissance', width: 200 },
+    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'birthYear', headerName: 'Année de naissance', width: 200, type: 'string' },
     { field: 'email', headerName: 'Email', width: 300 },
     { field: 'verified', headerName: 'Compte vérifié', type: 'boolean', width: 200 },
     {
@@ -56,7 +56,7 @@ export const UserDataTable = ({ data }: { data: UserInfo[] }) => {
       headerName: 'Modifier l\'utilisateur',
       width: 200,
       renderCell: (params: GridCellParams) => (
-        <IconButton onClick={() => console.log(params.row)}>
+        <IconButton onClick={() => onUserEdit(params.row)}>
           <EditIcon />
         </IconButton>
       ),
@@ -66,7 +66,7 @@ export const UserDataTable = ({ data }: { data: UserInfo[] }) => {
   const rows: GridRowsProp = data.map((user) => ({
     id: user.id,
     email: user.email,
-    user_name: user.user.name,
+    name: user.name,
     tokenR: user.tokenR,
     visibility: user.visibility,
     verified: user.verified,

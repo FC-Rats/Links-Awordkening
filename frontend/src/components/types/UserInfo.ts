@@ -1,11 +1,9 @@
 export interface UserInfo {
     id: number;
     email: string;
-    user: {
-        name: string;
-        profilPicture?: string;
-    };
-    birthYear: number;
+    name: string;
+    profilPicture?: string;
+    birthYear: string;
     tokenR: string | null;
     visibility: string;
     verified: boolean;
