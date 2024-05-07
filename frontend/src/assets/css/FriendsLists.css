@@ -1,0 +1,40 @@
+.waiting-friends, .list-friends {
+    width: 90%;
+    margin: auto;
+}
+
+.waiting-friends {
+    margin-bottom: 12px;
+}
+
+.searchbar .contour-input-form{
+    width: 60%;
+}
+
+.horizontal {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 1%;
+    text-align: center;
+    color: var(--coffee-active);
+}
+
+.horizontal:before,
+.horizontal:after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 50%;
+    background: var(--coffee-active);
+    position: absolute;
+    top: 12px;
+}
+
+.horizontal:before {
+    left: -50%;
+}
+
+.horizontal:after {
+    right: -50%;
+}

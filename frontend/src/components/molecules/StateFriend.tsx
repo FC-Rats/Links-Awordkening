@@ -9,9 +9,10 @@ import Box from '@mui/material/Box';
 import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 import '../../assets/css/StateFriendRequest.css'
 import {FriendRequestProps} from '../types/FriendRequestProps'
+import RetirerFriend from './RetirerFriend';
 
 
-function StateFriend({ friend }: FriendRequestProps) {
+function StateFriendRequest({ friend }: FriendRequestProps) {
   return (
     <Card sx={{ display: 'flex', width: '100%' }} className='card-StateFriendRequest'>
       <CardContent sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, width: '100%', flexWrap: 'wrap' }}>
@@ -26,12 +27,11 @@ function StateFriend({ friend }: FriendRequestProps) {
           </Typography>
         </Box>
         <CardActions>
-          <AcceptRefuseFriendRequest isAcceptingButton={false} friend={friend} />
-          <AcceptRefuseFriendRequest isAcceptingButton={true} friend={friend} />
+          <RetirerFriend friend={friend} />
         </CardActions>
       </CardContent>
     </Card>
   )
 }
 
-export default StateFriend
+export default StateFriendRequest
