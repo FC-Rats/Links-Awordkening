@@ -24,6 +24,7 @@ import customer from './assets/data/customers.json';
 import historique from './assets/data/historique.json';
 import { HistoriqueDataTable } from './components/molecules/HistoriqueDataTable';
 import { UserDataTable } from './components/molecules/UserDataTable';
+import { Nav } from './components/molecules/Nav';
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
       <ChangePassword />
       <HomePage />
       <ChangeParameters />
+      <Table />
+      <Nav/>
     </div>
   );
 }
