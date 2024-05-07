@@ -6,9 +6,9 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'date', headerName: 'Date', width: 200 },
-        { field: 'name_game', headerName: 'Name Game', width: 200 },
-        { field: 'type', headerName: 'Type', width: 150 },
-        { field: 'players', headerName: 'Players', width: 200, renderCell: (params: GridCellParams) => {
+        { field: 'name_game', headerName: 'Name Game', width: 230 },
+        { field: 'type', headerName: 'Type', width: 110 },
+        { field: 'players', headerName: 'Players', width: 300, renderCell: (params: GridCellParams) => {
             if (params.value === null) {
                 return "";
             } else {
@@ -16,10 +16,10 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
             }
         }},
         { field: 'score', headerName: 'Score', width: 150 },
-        { field: 'givenwords', headerName: 'Given Words', width: 200, renderCell: (params: GridCellParams) => {
+        { field: 'givenwords', headerName: 'Given Words', width: 220, renderCell: (params: GridCellParams) => {
             return (params.value as string[]).join(', ');
         }},
-        { field: 'outputwords', headerName: 'Output Words', width: 200, renderCell: (params: GridCellParams) => {
+        { field: 'outputwords', headerName: 'Output Words', width: 480, renderCell: (params: GridCellParams) => {
             return (params.value as string[]).join(', ');
         }},
     ];

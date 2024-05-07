@@ -1,13 +1,13 @@
 .tile-account-info {
     background-color: var(--parchment);
     margin: 20px; 
-    height: auto; 
+    height: 23vh; 
     max-width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 15px;
-    padding: 15px;
+    color: var(--coffee-active);
 }
 
 .tile-account-info * {
@@ -27,6 +27,7 @@
 
 .tile-account-info .text-content h2 {
     font-size: 2rem; 
+    font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 .tile-account-info .text-content .value {

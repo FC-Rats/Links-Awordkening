@@ -1,5 +1,7 @@
 .MuiDataGrid-root {
     background-color: var(--parchment);
+    margin: auto;
+    width: 98%;
 }
 
 .MuiDataGrid-root .MuiDataGrid-toolbarContainer .MuiButton-root {
