@@ -1,3 +1,6 @@
 .centered-logo {
     width: 50%;
+    display: flex;
+    margin: auto;
+    margin-top: 5%;
 }

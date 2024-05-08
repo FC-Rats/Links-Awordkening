@@ -59,6 +59,7 @@
     justify-content: space-evenly;
     flex-wrap: nowrap;
     align-items: center;
+    margin: auto;
 }
 
 @media (max-width: 1100px) {

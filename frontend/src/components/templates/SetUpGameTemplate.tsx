@@ -59,7 +59,9 @@ export const SetUpGameTemplate = () => {
                         </Grid>
                     )}
                 </Grid>
+                <div style={{ textAlign: "center" }} >
                 <SubmitButton text={"Jouer"} />
+                </div>
             </form>
         </>
     );

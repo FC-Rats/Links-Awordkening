@@ -11,11 +11,11 @@ export const SoloGameTemplate = () => {
     return (
         <>
             <CenteredTitle text="Partie Solo" />
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                 <ContainerInfoPlayer />
                 <ContainerInfoGame />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                 <ComponentListWords />
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                     <div id="graph"></div>
