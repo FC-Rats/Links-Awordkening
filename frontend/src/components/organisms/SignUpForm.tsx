@@ -14,7 +14,7 @@ export const SignUpForm = () => {
         passwordConfirmation: '',
     });
 
-    const handleInputChange = (name: string, value: any) => {
+    const handleInputChange = (name: string, value: string) => {
         setFormData({ ...formData, [name]: value });
     };
     

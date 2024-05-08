@@ -8,7 +8,7 @@ import '../../assets/css/AcceptRefuseFriendRequest.css';
 function SubmitWord() {
     const [word, setWord] = useState("");
 
-    const handleInputChange = (name: string, value: any) => {
+    const handleInputChange = (name: string, value: string) => {
         setWord(value);
     };
 
