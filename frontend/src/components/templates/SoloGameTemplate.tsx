@@ -6,7 +6,7 @@ import { ComponentListWords } from "../molecules/ComponentListWords";
 import SubmitWord from "../molecules/SubmitWord";
 
 
-export const SoloGame = () => {
+export const SoloGameTemplate = () => {
 
     return (
         <>

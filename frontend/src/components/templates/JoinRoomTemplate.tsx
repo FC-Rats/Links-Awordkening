@@ -5,7 +5,7 @@ import FormJoinRoom from "../organisms/FormJoinRoom";
 import { CenteredLogo } from "../atoms/CenteredLogo";
 
 
-export const JoinRoom = () => {
+export const JoinRoomTemplate = () => {
 
 
     return (

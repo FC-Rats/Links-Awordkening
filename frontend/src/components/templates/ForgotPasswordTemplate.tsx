@@ -3,7 +3,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ForgotpasswordForm } from "../organisms/ForgotPasswordForm";
 
 
-export const ForgotPassword = () => {
+export const ForgotPasswordTemplate = () => {
 
 
     return (

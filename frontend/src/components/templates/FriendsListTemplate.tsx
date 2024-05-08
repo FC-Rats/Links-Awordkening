@@ -7,7 +7,7 @@ import "../../assets/css/FriendsLists.css";
 import { Stack } from "@mui/material";
 
 
-export const FriendsList = () => {
+export const FriendsListTemplate = () => {
     return (
        <>
         <CenteredTitle text="Liste d'amis"/>

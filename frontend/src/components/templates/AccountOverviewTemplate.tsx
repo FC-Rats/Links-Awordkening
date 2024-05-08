@@ -5,7 +5,7 @@ import { HistoriqueDataTable } from "../molecules/HistoriqueDataTable";
 import { TileTopWords } from "../molecules/TileTopWords";
 import { AccountStatProps } from "../types/AccountStatProps";
 
-export const AccountOverview = ( data : AccountStatProps) => {
+export const AccountOverviewTemplate = ( data : AccountStatProps) => {
 
     return (
        <>

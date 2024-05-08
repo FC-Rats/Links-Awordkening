@@ -6,7 +6,7 @@ import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Grid from '@mui/material/Grid';
 
-export const SetUpGame = () => {
+export const SetUpGameTemplate = () => {
     const [soloSelected, setSoloSelected] = useState(false);
     const [multiSelected, setMultiSelected] = useState(true);
 

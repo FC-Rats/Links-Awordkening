@@ -3,7 +3,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ChangePasswordForm } from "../organisms/ChangePasswordForm";
 
 
-export const ChangePassword = () => {
+export const ChangePasswordTemplate = () => {
 
 
     return (

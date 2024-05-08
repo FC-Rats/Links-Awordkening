@@ -3,7 +3,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ChangeParametersForm } from "../organisms/ChangeParametersForm";
 
 
-export const ChangeParameters = () => {
+export const ChangeParametersTemplate = () => {
 
 
     return (

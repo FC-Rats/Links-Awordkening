@@ -7,7 +7,7 @@ import customers from '../../assets/data/customers.json';
 import "../../assets/css/ModifyUser.css"
 import "../../assets/css/InputForm.css"
 
-function Admin() {
+function AdminTemplate() {
     const [selectedUser, setSelectedUser] = useState<UserInfo | null>(null);
     const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
@@ -38,4 +38,4 @@ function Admin() {
     )
 }
 
-export default Admin
+export default AdminTemplate

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ContainerEndGame } from "../organisms/ContainerEndGame";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 
-export const EndGame = () => {
+export const EndGameTemplate = () => {
 
     return (
        <>

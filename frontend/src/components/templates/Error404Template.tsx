@@ -3,7 +3,7 @@ import { CenteredLogo } from "../atoms/CenteredLogo";
 import Stack from "@mui/material/Stack/Stack";
 
 
-export const Error404 = (props:{url:string}) => {
+export const Error404Template = (props:{url:string}) => {
 
     return (
        <>

@@ -5,7 +5,7 @@ import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
 
 
-export const HomePage = () => {
+export const HomePageTemplate = () => {
 
 
     return (

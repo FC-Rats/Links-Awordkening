@@ -3,7 +3,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { SignInForm } from "../organisms/SignInForm";
 
 
-export const SignIn = () => {
+export const SignInTemplate = () => {
 
 
     return (

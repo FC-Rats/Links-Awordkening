@@ -3,7 +3,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { SignUpForm } from "../organisms/SignUpForm";
 
 
-export const SignUp = () => {
+export const SignUpTemplate = () => {
 
 
     return (

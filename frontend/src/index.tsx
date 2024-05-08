@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Rules } from './components/templates/Rules';
+import { RulesTemplate } from './components/templates/RulesTemplate';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -23,7 +23,7 @@ root.render(
       <Routes>
         <Route path="/app" element={<App />} />
           {/* <Route path="/survey" element={<Survey />} /> */}
-          <Route path="*" element={<Rules />} />
+          <Route path="*" element={<RulesTemplate />} />
       </Routes>
     </Router>
   </React.StrictMode>
