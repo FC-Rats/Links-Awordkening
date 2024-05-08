@@ -5,7 +5,7 @@ import { Error404Template } from './components/templates/Error404Template';
 
 function App() {
   return (
-    <Error404Template url={"fzoei"}/>
+    <></>
   );
 }
 
