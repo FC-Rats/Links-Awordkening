@@ -44,10 +44,8 @@
   {
     "id": 1004,
     "email": "luke@gmail.com",
-
       "name": "Luke Skywalker",
       "profilPicture": "luke.jpg",
-
     "tokenR": "1122334455",
     "visibility": "PUBLIC",
     "verified": false,

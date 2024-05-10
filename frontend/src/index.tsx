@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { RulesPage } from './components/pages/RulesPage';
 import { AccountOverviewPage } from './components/pages/AccountOverviewPage';
+import { AccountParametersPage } from './components/pages/AccountParametersPage';
 import { AdminPage } from './components/pages/AdminPage';
 import { ChangeParametersPage } from './components/pages/ChangeParametersPage';
 import { ChangePasswordPage } from './components/pages/ChangePasswordPage';
@@ -35,6 +36,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/account" element={<AccountOverviewPage />} />
+        <Route path="/account-param" element={<AccountParametersPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/change-paramters" element={<ChangeParametersPage />} />
         <Route path="/change-password" element={<ChangePasswordPage />} />

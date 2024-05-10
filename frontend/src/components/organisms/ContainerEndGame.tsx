@@ -4,7 +4,7 @@ import "../../assets/css/ComponentEndGame.css";
 import { ComponentEndGame } from "../molecules/ComponentEndGame";
 
 export const ContainerEndGame = () => {
-  const ImgCompte = "/img/compte.png"; 
+  const ImgCompte = "/img/profilepictures/coconut.jpg"; 
   const [playersInfos, setPlayersInfos] = useState<PlayerInfo[]>([]);
   const [score, setScore] = useState<number | null>(null);
 
@@ -51,13 +51,13 @@ export const ContainerEndGame = () => {
     <>
       {playersInfos.length === 1 ? (
         <div className="wrapper-end-game">
-            <img className="img-end-game" src={"/img/LARectPA.png"} alt="Bravo" />
+            <img className="img-end-game" src={"/img/swatches/LARectPA.png"} alt="Bravo" />
             <div className="title">Bravo !</div>
             {score !== null && <div className="info">Votre score : {score}</div>}
         </div>
       ) : (
         <div className="wrapper-end-game">
-            <img className="img-end-game" src={"/img/LARectPA.png"} alt="Bravo" />
+            <img className="img-end-game" src={"/img/swatches/LARectPA.png"} alt="Bravo" />
           <div className="frame-info-player-end-game">
             {playersInfos.map((player, index) => (
               <ComponentEndGame

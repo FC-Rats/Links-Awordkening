@@ -28,7 +28,7 @@ export const SignUpForm = () => {
     return (
         <div className="form-container">
             <form className="form" method="post" onSubmit={handleSubmit}>
-                <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
+                <img src="/img/swatches/LARectPA.png" alt="logo Links Awordkening" />
                 <InputForm name="pseudo" label={"Pseudo"} type="text" required onInputChange={handleInputChange}/>
                 <InputForm name="year" label={"Année de naissance"} type="number" min={1900} max={2024} required onInputChange={handleInputChange}/>
                 <InputForm name="email" label={"Email"} type="email" required onInputChange={handleInputChange}/>

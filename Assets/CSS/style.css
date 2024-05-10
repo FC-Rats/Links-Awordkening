@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-body {
-    margin: 0;
-    background-image: url(../img/fond.png)!important;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 :root {
     --viridian: #547E5E;
     --brunswickGreen: #2B5C4A;

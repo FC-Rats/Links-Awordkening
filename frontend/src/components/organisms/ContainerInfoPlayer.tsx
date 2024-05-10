@@ -3,7 +3,7 @@ import { PlayerInfo } from "../types/PlayerInfo";
 import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 
 export const ContainerInfoPlayer = () => {
-  var ImgCompte = "/img/compte.png";
+  var ImgCompte = "/img/profilepictures/coconut.jpg";
   const [playersInfos, setPlayersInfos] = useState<PlayerInfo[]>([]);
   useEffect(() => {
     const player: PlayerInfo[] = [

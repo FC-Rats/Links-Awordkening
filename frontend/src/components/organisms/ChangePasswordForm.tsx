@@ -24,7 +24,7 @@ export const ChangePasswordForm = () => {
     return (
         <div className="form-container">
             <form className="form" method="post" onSubmit={handleSubmit}>
-                <img src="/img/LARectPA.png" alt="logo Links Awordkening" />
+                <img src="/img/swatches/LARectPA.png" alt="logo Links Awordkening" />
                 <InputForm name="password" label={"Mot de passe"}  type="password" required onInputChange={handleInputChange}/>
                 <InputForm name="passwordConfirmation" label={"Confirmez le mot de passe"}  type="password" required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Enregistrer le mot de passe"}/>

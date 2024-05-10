@@ -1,0 +1,45 @@
+.container-account-params{
+    margin: auto !important;
+    display: flex !important;
+    align-content: stretch;
+    justify-content: center;
+    width: 40% !important;
+    background-color: var(--hunterGreen);
+    border-radius: 50px;
+    box-shadow: 0 4px 4px #00000040;
+    padding: 2% 1% 6% 1%;
+    color: var(--parchment);
+    align-items: center;
+}
+
+.container-account-params-edit {
+    margin: auto!important;
+    display: flex!important;
+    flex-direction: row!important;
+    align-content: center;
+    justify-content: center;
+    width: 40%!important;
+    background-color: var(--hunterGreen);
+    border-radius: 50px;
+    box-shadow: 0 4px 4px #00000040;
+    padding: 2% 1% 6% 1%;
+    color: var(--parchment);
+}
+
+.avatar-account {
+    width: 250px!important;
+    height: auto!important;
+}
+
+.select-profile-pic img{
+    width: 250px!important;
+    border-radius: 50%;
+}
+
+.h5-account {
+    font-size: 3rem!important;
+}
+
+.p-account {
+    font-size: 2rem!important;
+}

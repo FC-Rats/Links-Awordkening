@@ -12,16 +12,16 @@ export const AccountOverviewTemplate = ({ data }: { data: AccountStatProps }) =>
        <Grid container spacing={2}>
             <Grid container item xs={9}>
                 <Grid item xs={6}>
-                    <TileAccountInfo title={"Partie jouées"} value={data.statGameCount} subTitle={"au total"} imgUrl={"/img/Videogame asset.png"} imgAlt={"Manette de jeux"}/>
+                    <TileAccountInfo title={"Partie jouées"} value={data.statGameCount} subTitle={"au total"} imgUrl={"/img/icons/Videogame asset.png"} imgAlt={"Manette de jeux"}/>
                 </Grid>
                 <Grid item xs={6}>
-                    <TileAccountInfo title={"Meilleur score"} value={data.statBestScore} subTitle={"sur toutes le parties"} imgUrl={"/img/Trophy.png"} imgAlt={"Trophée"}/>
+                    <TileAccountInfo title={"Meilleur score"} value={data.statBestScore} subTitle={"sur toutes le parties"} imgUrl={"/img/icons/Trophy.png"} imgAlt={"Trophée"}/>
                 </Grid>
                 <Grid item xs={6}>
-                    <TileAccountInfo title={"Score total"} value={data.statTotalScore} subTitle={"sur total"} imgUrl={"/img/Trending up.png"} imgAlt={"Ligne montante"}/>
+                    <TileAccountInfo title={"Score total"} value={data.statTotalScore} subTitle={"sur total"} imgUrl={"/img/icons/Trending up.png"} imgAlt={"Ligne montante"}/>
                 </Grid>
                 <Grid item xs={6}>
-                    <TileAccountInfo title={"Score moyen"} value={data.statAverageScore} subTitle={"sur toutes les parties"} imgUrl={"/img/Assessment.png"} imgAlt={"Statistique"}/>
+                    <TileAccountInfo title={"Score moyen"} value={data.statAverageScore} subTitle={"sur toutes les parties"} imgUrl={"/img/icons/Assessment.png"} imgAlt={"Statistique"}/>
                 </Grid>
             </Grid>
             <Grid container item xs={3}>

@@ -70,27 +70,27 @@ nav.open .nav-content span {
 }
 
 i.btn-plus {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i.btn-presentation {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i.btn-competences {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i.btn-parcours {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i.btn-alternance {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i.btn-liens {
-    background-image: url(../../../public/img/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);
 }
 
 i {

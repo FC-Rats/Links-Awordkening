@@ -58,7 +58,7 @@ code {
 
 body {
   margin: 0;
-  background: url(../public/img/fond3.png) no-repeat center center fixed; 
+  background: url(../public/img/background/fond3.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

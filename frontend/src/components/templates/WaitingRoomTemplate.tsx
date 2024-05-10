@@ -6,7 +6,7 @@ import "../../assets/css/WaitingRoom.css"
 import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 
 export const WaitingRoomTemplate = () => {
-    var ImgCompte = "/img/compte.png";
+    var ImgCompte = "/img/profilepictures/coconut.jpg";
 
     const gameinfo = [
         { "IDJoin": "1PV4" , "nameGame": "Game exe", "coupsRestants": "12", "nameHost" : "Lolo", "type" : "Multiplayer", 'nombremaxjoueurs' : 3  },
