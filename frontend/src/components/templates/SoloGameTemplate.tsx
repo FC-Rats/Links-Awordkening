@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ContainerInfoPlayer } from "../organisms/ContainerInfoPlayer";
 import { ContainerInfoGame } from "../organisms/ContainerInfoGame";
 import { ComponentListWords } from "../molecules/ComponentListWords";
 import SubmitWord from "../molecules/SubmitWord";
-
 
 export const SoloGameTemplate = () => {
 
