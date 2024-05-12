@@ -1,5 +1,6 @@
 import { AccountOverviewTemplate } from "../templates/AccountOverviewTemplate";
 import { AccountStatProps } from "../types/AccountStatProps";
+import table from "../../assets/data/historique.json"
 
 export const AccountOverviewPage = () => {
 
@@ -9,7 +10,7 @@ export const AccountOverviewPage = () => {
         "statAverageScore" : 2,
         "statTotalScore" : 2,
         "words": ["test1", "test2"],
-        "table": [],
+        "table": table,
     }
 
     return (

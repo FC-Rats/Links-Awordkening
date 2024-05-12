@@ -52,5 +52,89 @@
     "admin": true,
     "averageScore": 85,
     "birthYear": "1982"
+  },
+  {
+    "id": 1254,
+    "email": "arturo@outlook.com",
+
+      "name": "Arturo Annon",
+      "profilPicture": "arturo.jpg",
+
+    "tokenR": null,
+    "visibility": "PRIVATE",
+    "verified": false,
+    "admin": true,
+    "averageScore": 92,
+    "birthYear": "1990"
+  },
+  {
+    "id": 1236,
+    "email": "mabel@yahoo.com",
+
+      "name": "Mabel Joy",
+      "profilPicture": "mabel.jpg",
+
+    "tokenR": "987654321",
+    "visibility": "FRIENDS",
+    "verified": true,
+    "admin": false,
+    "averageScore": 75,
+    "birthYear": "1974"
+  },
+  {
+    "id": 1952,
+    "email": "arturo@outlook.com",
+
+      "name": "Arturo Annon",
+      "profilPicture": "arturo.jpg",
+
+    "tokenR": null,
+    "visibility": "PRIVATE",
+    "verified": false,
+    "admin": true,
+    "averageScore": 92,
+    "birthYear": "1990"
+  },
+  {
+    "id": 1266,
+    "email": "mabel@yahoo.com",
+
+      "name": "Mabel Joy",
+      "profilPicture": "mabel.jpg",
+
+    "tokenR": "987654321",
+    "visibility": "FRIENDS",
+    "verified": true,
+    "admin": false,
+    "averageScore": 75,
+    "birthYear": "1974"
+  },
+  {
+    "id": 1025,
+    "email": "arturo@outlook.com",
+
+      "name": "Arturo Annon",
+      "profilPicture": "arturo.jpg",
+
+    "tokenR": null,
+    "visibility": "PRIVATE",
+    "verified": false,
+    "admin": true,
+    "averageScore": 92,
+    "birthYear": "1990"
+  },
+  {
+    "id": 1555,
+    "email": "mabel@yahoo.com",
+
+      "name": "Mabel Joy",
+      "profilPicture": "mabel.jpg",
+
+    "tokenR": "987654321",
+    "visibility": "FRIENDS",
+    "verified": true,
+    "admin": false,
+    "averageScore": 75,
+    "birthYear": "1974"
   }
 ]

@@ -6,6 +6,7 @@ import ModifyUser from '../organisms/ModifyUser';
 import customers from '../../assets/data/customers.json';
 import "../../assets/css/ModifyUser.css"
 import "../../assets/css/InputForm.css"
+import { CenteredTitle } from '../atoms/CenteredTitle';
 
 function AdminTemplate() {
     const [selectedUser, setSelectedUser] = useState<UserInfo | null>(null);
@@ -25,6 +26,7 @@ function AdminTemplate() {
 
     return (
         <div>
+            <CenteredTitle text={'Page Administrateur'} />
             <UserDataTable data={customers} onUserEdit={handleUserEdit} />
             <Drawer
                 className="drawer-ModifyUser"

@@ -55,7 +55,7 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
                 },
                     pagination: { paginationModel: { pageSize: 5 } },
                 }} 
-                pageSizeOptions={[5, 10, 25]}/>
+                pageSizeOptions={[5, 10]}/>
         </div>
     );
 }

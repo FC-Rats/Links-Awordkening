@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { LogsDataTable } from '../molecules/LogsDataTable';
-import customers from '../../assets/data/customers.json';
+import logs from '../../assets/data/logs.json';
+import { CenteredTitle } from '../atoms/CenteredTitle';
 
 function LogsTemplate() {
 
     return (
         <div>
-            <LogsDataTable  data={customers} />
+            <CenteredTitle text={'Logs du jeu'} />
+            <LogsDataTable data={logs} />
         </div>
     )
 }
