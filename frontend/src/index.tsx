@@ -19,6 +19,7 @@ import { SignInPage } from './components/pages/SignInPage';
 import { SignUpPage } from './components/pages/SignUpPage';
 import { SoloGamePage } from './components/pages/SoloGamePage';
 import { Error404Page } from './components/pages/Error404Page';
+import { Logs } from './components/pages/Logs';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -50,6 +51,7 @@ root.render(
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/game" element={<SoloGamePage />} />
+        <Route path="/logs" element={<Logs />} />
         <Route path="*" element={<Error404Page />} />
       </Routes>
     </Router>
