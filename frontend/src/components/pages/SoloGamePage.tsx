@@ -28,7 +28,7 @@ export const SoloGamePage = () => {
         async function fetchData() {
             setIsDataLoading(true)
             try {
-                const response = await fetch(`http://localhost/Links-Awordkening/Includes/test.php`)
+                const response = await fetch(`http://localhost/Links-Awordkening/api/Log/test.php`)
                 const data = await response.json()
                 setData(data)
                 console.log(data)
