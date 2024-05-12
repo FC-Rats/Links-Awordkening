@@ -66,6 +66,6 @@ class Connection {
     }
 }
 
-include('../configuration.php');
+include('../../configuration.php');
 $db = new Connection($config['database']['host'],$config['database']['db'],$config['database']['login'],$config['database']['password']);
 ?>
