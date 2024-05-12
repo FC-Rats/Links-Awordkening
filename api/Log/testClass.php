@@ -7,6 +7,7 @@ if (!class_exists('Connection')) {
 
 include('../Data/JSONable.php');
 include('../Data/Log.php');
+include '../Includes/core.php';
 
 $response = [];
 
