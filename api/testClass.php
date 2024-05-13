@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 session_start();
 
 if (!class_exists('Connection')) {
-    include('../../Includes/connection-function.php');
+    include('../Includes/connection-function.php');
 }
 
-include('../../Data/JSONable.php');
-include('../../Data/Log.php');
+include('../Data/JSONable.php');
+include('../Data/Log.php');
 
 if (isset($_SERVER['HTTP_ORIGIN'])) { 
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");

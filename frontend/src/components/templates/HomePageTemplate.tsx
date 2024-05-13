@@ -8,16 +8,16 @@ export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        const url = 'http://localhost/Links-Awordkening/api/Log/testClass.php'; // Correction de l'URL
+        const url = 'http://localhost/Links-Awordkening/api/users/'; // Correction de l'URL
         const data = { "idUser": 145, "dateTime": "11-11-1999 12:02:00", "log": "Testing", "ip": "12.0.0.2" };
 
         try {
             const response = await fetch(url, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify( {log : data})
+                /* body: JSON.stringify( {log : data}) */
             });
 
             if (response.ok) {
