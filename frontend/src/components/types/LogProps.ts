@@ -3,5 +3,5 @@ export interface LogProps {
     idUser: number;
     dateTime: string;
     log : string;
-    ip : string;
+    ip : string | null;
 }

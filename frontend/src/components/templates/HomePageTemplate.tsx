@@ -12,7 +12,7 @@ export const HomePageTemplate = () => {
         //const apiUrl = process.env.REACT_APP_API_KEY;
         //console.log(apiUrl);
 
-        const url = 'http://localhost/Links-Awordkening/api/user/'; // Correction de l'URL
+        const url = 'http://localhost/Links-Awordkening/api/log/'; // Correction de l'URL
         const data = { "idUser": 145, "dateTime": "11-11-1999 12:02:00", "log": "Testing", "ip": "12.0.0.2" };
 
         try {

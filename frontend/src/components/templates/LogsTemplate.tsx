@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { LogsDataTable } from '../molecules/LogsDataTable';
-import logs from '../../assets/data/logs.json';
 import { CenteredTitle } from '../atoms/CenteredTitle';
+import { LogProps } from '../types/LogProps';
 
-function LogsTemplate() {
+function LogsTemplate( { logs } : { logs: LogProps[] }) {
 
     return (
         <div>

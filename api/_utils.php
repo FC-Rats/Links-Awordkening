@@ -83,3 +83,42 @@ function unsetWordChartSessionVariable() {
         unset($_SESSION['WordsChart']);
     }
 }
+
+function getQuery($sql, $conditions) {
+    if (count($_GET) >= 1) {
+        foreach ($_GET as $key => $value) {
+            if (!isset($keys[$key])) {
+                $keys[$key] = [];
+            }
+            $tmp = explode(",", $value);
+            foreach ($tmp as $t) {
+                $keys[$key][] = $t;
+            }
+        }
+        $sql .= " WHERE ";
+        $y = 0;
+        foreach ($keys as $key => $values) {
+            if ($y > 0) {
+                $sql .= " AND ";
+            }
+            if (count($values) > 1) {
+                $sql .= "(";
+                $i = 0;
+                foreach ($values as $value) {
+                    $conditions[] = [":" . $key . $i, $value];
+                    if ($i > 0) {
+                        $sql .= " OR ";
+                    }
+                    $sql .= $key . " = :" . $key . $i;
+                    $i++;
+                }
+                $sql .= ")";
+            } else {
+                $conditions[] = [":" . $key, $values[0]];
+                $sql .= $key . " = :" . $key;
+            }
+            $y++;
+        }
+    }
+    return [$sql, $conditions];
+}

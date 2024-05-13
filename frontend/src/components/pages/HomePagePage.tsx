@@ -1,7 +1,6 @@
 import { HomePageTemplate } from "../templates/HomePageTemplate";
 
 
-
 export const HomePagePage = () => {
 
 
