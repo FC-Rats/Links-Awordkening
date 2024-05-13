@@ -4,9 +4,9 @@ import { UserInfo } from '../types/UserInfo';
 import { AccountViewMode } from '../organisms/AccountViewMode';
 import "../../assets/css/AccountParameters.css"
 
-export const AccountParametersTemplate = ({ data }: { data: UserInfo }) => {
+export const AccountParametersTemplate = ({ user }: { user: UserInfo }) => {
   const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState<UserInfo>(data);
+  const [formData, setFormData] = useState<UserInfo>(user);
   const [selectedImage, setSelectedImage] = useState<string>(formData.profilPicture);
 
   const handleInputChange = (name: string, value: string | boolean) => {

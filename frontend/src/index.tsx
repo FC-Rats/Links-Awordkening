@@ -20,6 +20,8 @@ import { SignUpPage } from './components/pages/SignUpPage';
 import { SoloGamePage } from './components/pages/SoloGamePage';
 import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
+import { AppContext } from './components/hooks/AppContext';
+import { UserInfo } from './components/types/UserInfo';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -32,8 +34,23 @@ document.head.appendChild(link);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const testUser: UserInfo = {
+  "id": 1004,
+  "email": "luke@gmail.com",
+  "name": "Luke Skywalker",
+  "profilPicture": "/img/profilepictures/coconut.jpg",
+  "tokenR": "1122334455",
+  "visibility": "PUBLIC",
+  "verified": false,
+  "admin": true,
+  "averageScore": 85,
+  "birthYear": "1982",
+}
+
 root.render(
   <React.StrictMode>
+    <AppContext.Provider value={testUser}>
     <Router>
       <Routes>
         <Route path="/account" element={<AccountOverviewPage />} />
@@ -55,6 +72,7 @@ root.render(
         <Route path="*" element={<Error404Page />} />
       </Routes>
     </Router>
+    </AppContext.Provider>
   </React.StrictMode>
 );
 
