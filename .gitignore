@@ -4,6 +4,8 @@ config.ini
 Game/Java\ Module/.idea/
 .idea/
 .vscode/*
+frontend/config.env
+frontend/src/env.d.ts
 frontend/node_modules/
 frontend/package-lock.json
 frontend/package.json

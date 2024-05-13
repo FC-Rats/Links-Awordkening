@@ -26,5 +26,5 @@ if (empty($verificationCode)) {
     echo "Le score est : $score";
 
     $lastId = $db->query("SELECT LAST_INSERT_ID();");
-    $addScore = $db->query("INSERT INTO Stats (idUser, idGame, score) VALUES (:idUser, :idGame, :score)", array(array(":idUser", $_POST["idUser"]), array(":idGame", $lastId), array(":score", $score)));
+    $addScore = $db->query("INSERT INTO LA_SCORE (idUser, idGame, score) VALUES (:idUser, :idGame, :score)", array(array(":idUser", $_POST["idUser"]), array(":idGame", $lastId), array(":score", $score)));
 }

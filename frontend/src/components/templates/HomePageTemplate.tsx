@@ -8,6 +8,10 @@ export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
+        const apiUrl = process.env.REACT_APP_API_URL;
+        console.log("hello");
+        console.log(apiUrl);
+
         const url = 'http://localhost/Links-Awordkening/api/users/'; // Correction de l'URL
         const data = { "idUser": 145, "dateTime": "11-11-1999 12:02:00", "log": "Testing", "ip": "12.0.0.2" };
 

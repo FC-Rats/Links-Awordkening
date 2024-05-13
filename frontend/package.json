@@ -15,7 +15,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.96",
-    "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "primereact": "^10.6.3",
     "react": "^18.3.1",
@@ -49,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.2"
   }
 }
