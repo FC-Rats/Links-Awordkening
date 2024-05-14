@@ -18,8 +18,11 @@ DELETE: DELETE - Dans l'url
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Traitement pour la méthode GET
-        $users = $db->query("SELECT * FROM LA_GAME");
-        echo json_encode($users);
+        $res = getQuery("SELECT * FROM LA_GAME", []);
+        $sql = $res[0];
+        $conditions = $res[1];
+        $games = $db->query($sql, $conditions);
+        echo json_encode($games);
         break;
     case 'POST':
         // Traitement pour la méthode POST
