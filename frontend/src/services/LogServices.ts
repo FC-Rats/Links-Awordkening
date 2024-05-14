@@ -1,5 +1,6 @@
+const url = `${process.env.REACT_APP_API_URL}log/`;
+
 export async function getLogs(params?: Record<string, string | number | Array<string | number> | Array<string | string>>) {
-    const url = `${process.env.REACT_APP_API_URL}log/`;
     const queryString = params
     ? Object.entries(params)
         .map(([key, value]) => {
@@ -17,6 +18,29 @@ export async function getLogs(params?: Record<string, string | number | Array<st
             headers: {
                 'Content-Type': 'application/json',
             },
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Réponse du serveur : ', responseData);
+            return responseData;
+        } else {
+            console.error('Erreur lors de la requête : ', response.status);
+            return response.status;
+        }
+    } catch (error) {
+        console.error('Une erreur s\'est produite : ', error);
+    }
+}
+
+export async function createLog(logData: Record<string, string | number>) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(logData),
         });
 
         if (response.ok) {

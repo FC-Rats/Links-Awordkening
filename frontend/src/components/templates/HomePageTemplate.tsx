@@ -3,36 +3,47 @@ import { CenteredLogo } from "../atoms/CenteredLogo";
 import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
+import { createLog } from "../../services/LogServices";
 
 export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        // TEST DES VARIABLES ENV
-        //const apiUrl = process.env.REACT_APP_API_KEY;
-        //console.log(apiUrl);
+        /*  TEST POSTS    
+        
+        createScore({
+            idUser: '11',
+            idGame: '2',
+        });
 
-        const url = 'http://localhost/Links-Awordkening/api/log/'; // Correction de l'URL
-        const data = { "idUser": 145, "dateTime": "11-11-1999 12:02:00", "log": "Testing", "ip": "12.0.0.2" };
+        createGame({
+            idJoin: 'Ab1S',
+            idHost: '11',
+            name: "Nom de la partie",
+            type: "MultiPlayer",
+            maxPlayer: 4,
+            active: 1
+        });
 
-        try {
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                /* body: JSON.stringify( {log : data}) */
-            });
+        createUser({
+            username: 'EncoreMoi',
+            birthYear: '2004',
+            email: 'lnalabest2@gmail.com',
+            password: 'Ann1vers@ire',
+        });
 
-            if (response.ok) {
-                const responseData = await response.json();
-                console.log('Réponse du serveur : ', responseData);
-            } else {
-                console.error('Erreur lors de la requête : ', response.status);
-            }
-        } catch (error) {
-            console.error('Une erreur s\'est produite : ', error);
-        }
+        createFriend({
+            id_user: '11',
+            id_friend : '35',
+            state: 0,
+        });
+
+        createLog({
+            idUser: '11',
+            log: 'Vérification',
+        }); 
+        
+        */
     };
 
     return (

@@ -8,6 +8,8 @@ if (!class_exists('Connection')) {
 }
 
 require_once('../_utils.php');
+include('../../Data/JSONable.php');
+include('../../Data/Log.php');
 
 // Vérification de la méthode de requête
 /*
@@ -19,6 +21,7 @@ DELETE: DELETE - Dans l'url
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
+        // Traitement pour la méthode GET
         $res = getQuery("SELECT * FROM LA_LOG", []);
         $sql = $res[0];
         $conditions = $res[1];
@@ -27,6 +30,32 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         // Traitement pour la méthode POST
+        // ON récupère les informations à remplir
+        $jsonData = file_get_contents('php://input');
+        // Si y a -> sinon erreur
+        if (!empty($jsonData)) {
+            $data = json_decode($jsonData, true);
+        
+            // Conversion des données JSON en objet PHP
+            list($log, $jsonError) = Log::getJsonData($data); 
+        
+            // Création du tableau des valeurs des paramètres pour la requête SQL
+            $logdata = array(
+                array(":id", $log->getIdUser()),
+                array(":time", date('Y-m-d H:i:s')), // HEURE ACTUELLE
+                array(":log", $log->getLog()),
+                array(":ip", getIP($log->getIdUser())) // IP DE LA PERSONNE
+            );
+            // Exécution de la requête SQL
+            $req = $db->query(
+                "INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id, :time, :log, :ip)", $logdata);
+            $res = [];
+            $res['Log'] = $logdata;
+            echo json_encode($res);
+        } else {
+            // Aucune donnée n'a été envoyée dans le corps de la requête
+            echo json_encode(["error" => "Aucune donnée n'a été envoyée dans le corps de la requête."]);
+        }
         break;
     case 'PUT':
         // Traitement pour la méthode PUT
