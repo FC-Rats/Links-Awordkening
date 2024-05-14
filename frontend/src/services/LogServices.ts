@@ -1,6 +1,5 @@
-export async function getLogs(params?: Record<string, string | number | Array<string | number>>) {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const url = `${apiUrl}log/`;
+export async function getLogs(params?: Record<string, string | number | Array<string | number> | Array<string | string>>) {
+    const url = `${process.env.REACT_APP_API_URL}log/`;
     const queryString = params
     ? Object.entries(params)
         .map(([key, value]) => {
