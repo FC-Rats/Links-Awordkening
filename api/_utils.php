@@ -138,3 +138,11 @@ function getQueryUpdate($sql, $data) {
     }
     return [$sql, $conditions];
 }
+
+function passwordVerifyFunction($db, $username, $password) {
+    $connectionVerif = $db->query("SELECT password, verified FROM LA_USER WHERE username = :username", array(array(":username", $username)));
+    if (count($connectionVerif) == 1 && password_verify($password, $connectionVerif[0]['password']) && $connectionVerif[0]['verified'] == 1) {
+        return true;
+    }
+    return false;
+}
