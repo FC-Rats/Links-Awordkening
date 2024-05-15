@@ -47,7 +47,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 );
                 // Exécution de la requête SQL
                 $req = $db->query(
-                    "INSERT INTO LA_FRIEND (id_user, id_friend, state) VALUES (:idUser, :idFriend, :state)", $friendData);
+                    "INSERT INTO LA_FRIEND (idUser, idFriend, state) VALUES (:idUser, :idFriend, :state)", $friendData);
                 $res = [];
                 $res['Friend'] = $friendData;
                 echo json_encode($res);
@@ -58,6 +58,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'PUT':
         // Traitement pour la méthode PUT
+        $jsonData = file_get_contents('php://input');
+        if (!empty($jsonData)) {
+            $data = json_decode($jsonData, true);
+            if (isset($data['idUser']) && isset($data['idFriend']) ) { // empêche la modif de toutes les lignes
+                // CREATION DU UPDATE
+                $res = getQueryUpdate("UPDATE LA_FRIEND", $data);
+                $sql = $res[0];
+                $conditions = $res[1];
+                // WHERE SCORE = IDUSER et IDGAME
+                $sql .= " WHERE ";
+                $sql .= "idUser = :idUser AND idFriend = :idFriend";
+                $scoredb = $db->query($sql, $conditions);
+                echo json_encode($scoredb);
+            } else {
+                echo json_encode(["error" => "Mauvais format de données"]);
+            }
+        } else {
+            // Aucune donnée n'a été envoyée dans le corps de la requête
+            echo json_encode(["error" => "Aucune donnée n'a été envoyée dans le corps de la requête."]);
+        }
         break;
     case 'DELETE':
         // Traitement pour la méthode DELETE

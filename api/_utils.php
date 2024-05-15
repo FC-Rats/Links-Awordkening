@@ -122,3 +122,19 @@ function getQuery($sql, $conditions) {
     }
     return [$sql, $conditions];
 }
+
+function getQueryUpdate($sql, $data) {
+    $sql .= " SET ";
+    $conditions = array();
+    $updateCount = count($data);
+    $index = 0;
+    foreach ($data as $key => $value) {
+        $sql .= "$key = :$key";
+        $conditions[] = [":" . $key, $value];
+        if ($index < $updateCount - 1) {
+            $sql .= " , ";
+        }
+        $index++;
+    }
+    return [$sql, $conditions];
+}
