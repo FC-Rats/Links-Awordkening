@@ -9,8 +9,14 @@ import { InputFormProps } from "../types/InputFormProps";
 
 export const InputForm = ({name, value, label, required, type, min, max, defaultvalue, onInputChange }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
+    const [typefield, setTypeField] = useState(type);
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
+        if (typefield == "password") {
+            setTypeField("text");
+        } else {
+            setTypeField("password");
+        }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +31,7 @@ export const InputForm = ({name, value, label, required, type, min, max, default
                 <TextField
                 label={required ? `${label}*` : label}
                 className="input-form" 
-                type={type}
+                type={typefield}
                 variant="outlined"
                 value={value}
                 name={name}
