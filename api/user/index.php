@@ -8,8 +8,8 @@ if (!class_exists('Connection')) {
 }
 
 require_once('../_utils.php');
-include('../../Data/JSONable.php');
-include('../../Data/User.php');
+include('../../data/JSONable.php');
+include('../../data/User.php');
 
 // Vérification de la méthode de requête
 /*

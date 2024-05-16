@@ -5,8 +5,8 @@ if (!class_exists('Connection')) {
     include('../Includes/connection-function.php');
 }
 include('./_utils.php');
-include('../Data/JSONable.php');
-include('../Data/Game.php');
+include('../data/JSONable.php');
+include('../data/Game.php');
 
 $response = [];
 
