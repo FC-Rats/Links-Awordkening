@@ -30,40 +30,42 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         // Traitement pour la méthode POST
-            // ON récupère les informations à remplir
-            $jsonData = file_get_contents('php://input');
-            // Si y a -> sinon erreur
-            if (!empty($jsonData)) {
-                $data = json_decode($jsonData, true);
-            
-                // Conversion des données JSON en objet PHP
-                list($friend, $jsonError) = Friend::getJsonData($data); 
-            
-                // Création du tableau des valeurs des paramètres pour la requête SQL
-                $friendData = array(
-                    array(":idUser", $friend->getId_user()),
-                    array(":idFriend", $friend->getId_Friend()),
-                    array(":state", $friend->getState())
-                );
-                // Exécution de la requête SQL
-                $req = $db->query(
-                    "INSERT INTO LA_FRIEND (idUser, idFriend, state) VALUES (:idUser, :idFriend, :state)", $friendData);
-                $res = [];
-                $res['Friend'] = $friendData;
-                echo json_encode($res);
-            } else {
-                // Aucune donnée n'a été envoyée dans le corps de la requête
-                echo json_encode(["error" => "Aucune donnée n'a été envoyée dans le corps de la requête."]);
-            }
+        // ON récupère les informations à remplir
+        $jsonData = file_get_contents('php://input');
+        // Si y a -> sinon erreur
+        if (!empty($jsonData)) {
+            $data = json_decode($jsonData, true);
+
+            // Conversion des données JSON en objet PHP
+            list($friend, $jsonError) = Friend::getJsonData($data);
+
+            // Création du tableau des valeurs des paramètres pour la requête SQL
+            $friendData = array(
+                array(":idUser", $friend->getId_user()),
+                array(":idFriend", $friend->getId_Friend()),
+                array(":state", $friend->getState())
+            );
+            // Exécution de la requête SQL
+            $req = $db->query(
+                "INSERT INTO LA_FRIEND (idUser, idFriend, state) VALUES (:idUser, :idFriend, :state)",
+                $friendData
+            );
+            $res = [];
+            $res['Friend'] = $friendData;
+            echo json_encode($res);
+        } else {
+            // Aucune donnée n'a été envoyée dans le corps de la requête
+            echo json_encode(["error" => "Aucune donnée n'a été envoyée dans le corps de la requête."]);
+        }
         break;
     case 'PUT':
         // Traitement pour la méthode PUT
         $jsonData = file_get_contents('php://input');
         if (!empty($jsonData)) {
             $data = json_decode($jsonData, true);
-            if (isset($data['idUser']) && isset($data['idFriend']) ) { // empêche la modif de toutes les lignes
+            if (isset($data['idUser']) && isset($data['idFriend'])) { // empêche la modif de toutes les lignes
                 // CREATION DU UPDATE
-                $res = getQueryUpdate("UPDATE LA_FRIEND", $data);
+                $res = updateQuery("UPDATE LA_FRIEND", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME
@@ -81,6 +83,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'DELETE':
         // Traitement pour la méthode DELETE
+        if (isset($data['idFriend'])) {
+            $delete = $db->query(
+                "DELETE FROM LA_FRIEND WHERE idFriend = :idFriend",
+                [[":idFriend", $_GET['idFriend']]]
+            );
+            echo json_encode($delete);
+        } else {
+            echo json_encode(["error" => "Id manquant dans la requête DELETE"]);
+        }
         break;
     default:
         // Méthode non autorisée
@@ -88,5 +99,3 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode(array("message" => "Méthode non autorisée."));
         break;
 }
-
-?>

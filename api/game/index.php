@@ -74,7 +74,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $data = json_decode($jsonData, true);
             if (isset($data['id']) ) { // empêche la modif de toutes les lignes
                 // CREATION DU UPDATE
-                $res = getQueryUpdate("UPDATE LA_GAME", $data);
+                $res = updateQuery("UPDATE LA_GAME", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME
@@ -89,9 +89,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             // Aucune donnée n'a été envoyée dans le corps de la requête
             echo json_encode(["error" => "Aucune donnée n'a été envoyée dans le corps de la requête."]);
         }
-        break;
-    case 'DELETE':
-        // Traitement pour la méthode DELETE
         break;
     default:
         // Méthode non autorisée

@@ -123,7 +123,7 @@ function getQuery($sql, $conditions) {
     return [$sql, $conditions];
 }
 
-function getQueryUpdate($sql, $data) {
+function updateQuery($sql, $data) {
     $sql .= " SET ";
     $conditions = array();
     $updateCount = count($data);
