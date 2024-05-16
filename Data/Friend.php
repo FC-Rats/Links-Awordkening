@@ -2,31 +2,31 @@
 if (!class_exists("Friend", false)) {
     class Friend extends JSONable
     {
-        protected $id_user;
-        protected $id_friend;
+        protected $idUser;
+        protected $idFriend;
         protected $state;
         protected $users;
         protected $errorData;
 
         public function __construct()
         {
-            $this->id_user = 0;
-            $this->id_friend = 0;
+            $this->idUser = 0;
+            $this->idFriend = 0;
             $this->state = 0;
             $this->users = [];
             $this->errorData = null;
         }
 
         // Gets
-        public function getId_user():int { return $this->id_user; }
-        public function getId_friend():int { return $this->id_friend; }
+        public function getIdUser():int { return $this->idUser; }
+        public function getIdFriend():int { return $this->idFriend; }
         public function getState():int { return $this->state; }
         public function getUsers():array { return $this->users; }
         public function getErrorData() { return $this->errorData; }
 
         // Sets
-        public function setId_user(int $id_user) { $this->id_user = $id_user; }
-        public function setId_friend(int $id_friend) { $this->id_friend = $id_friend; }
+        public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+        public function setIdFriend(int $idFriend) { $this->idFriend = $idFriend; }
         public function setState(int $state) { $this->state = $state; }
         public function setUsers(array $users) { $this->users = $users; }
         public function setErrorData($errorData) { $this->errorData = $errorData; }

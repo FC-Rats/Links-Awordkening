@@ -41,8 +41,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             // Création du tableau des valeurs des paramètres pour la requête SQL
             $friendData = array(
-                array(":idUser", $friend->getId_user()),
-                array(":idFriend", $friend->getId_Friend()),
+                array(":idUser", $friend->getIdUser()),
+                array(":idFriend", $friend->getIdFriend()),
                 array(":state", $friend->getState())
             );
             // Exécution de la requête SQL
