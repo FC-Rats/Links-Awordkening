@@ -100,3 +100,33 @@ export async function updateFriend(FriendData: Record<string, string | number>) 
     }
 }
 
+
+/**
+ * @function deleteFriend
+ * @description Supprime une ressource membre dans la ressource collection en utilisant les instructions du corps de la requête.  
+ * 
+ * @param params 
+ * @returns {JSON} - Réponse de la requête 
+ */
+export async function deleteFriend(id: number) {
+    const queryString = `${encodeURIComponent('idFriend')}=${encodeURIComponent(id)}`;
+    try {
+        const response = await fetch(`${url}?${queryString}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Réponse du serveur : ', responseData);
+            return responseData;
+        } else {
+            console.error('Erreur lors de la requête : ', response.status);
+            return response.status;
+        }
+    } catch (error) {
+        console.error('Une erreur s\'est produite : ', error);
+    }
+}
