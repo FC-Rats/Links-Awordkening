@@ -1,5 +1,12 @@
 const url = `${process.env.REACT_APP_API_URL}user/`;
 
+/**
+ * @function getUsers
+ * @description Récupère les URI des ressources membres de la ressource collection dans le corps de la réponse.  
+ * 
+ * @param params 
+ * @returns {JSON} - Réponse de la requête
+ */
 export async function getUsers(params?: Record<string, string | number | Array<string | number>>) {
     const queryString = params
     ? Object.entries(params)
@@ -33,6 +40,13 @@ export async function getUsers(params?: Record<string, string | number | Array<s
     }
 }
 
+/**
+ * @function createUser
+ * @description Crée une ressource membre dans la ressource collection en utilisant les instructions du corps de la requête. 
+ * 
+ * @param userData 
+ * @returns {JSON} - Réponse de la requête
+ */
 export async function createUser(userData : Record<string, string | number>) {
     try {
         const response = await fetch(url, {
@@ -56,7 +70,13 @@ export async function createUser(userData : Record<string, string | number>) {
     }
 }
 
-
+/**
+ * @function updateUser
+ * @description Met à jour toutes les représentations des ressources membres de la ressource collection en utilisant les instructions du corps de la requête.
+ * 
+ * @param userData 
+ * @returns {JSON} - Réponse de la requête
+ */
 export async function updateUser(userData : Record<string, string | number>) {
     try {
         const response = await fetch(url, {

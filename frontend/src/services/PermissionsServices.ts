@@ -1,6 +1,13 @@
 import { getUsers } from "./UserServices";
 
-export async function passwordverify(formData: { username: string; password: string; }) {
+/**
+ * @function passwordVerify
+ * @description On vérifie l'égalité entre le mot de passe du form et celui de la db
+ *
+ * @param formData username et password de l'utilisateur
+ * @returns {boolean} le mot de passe est bon ou non
+ */
+export async function passwordVerify(formData: { username: string; password: string; }) {
     try {
         const url = `${process.env.REACT_APP_API_URL}user/password-verify.php`;
         const response = await fetch(url, {
@@ -24,13 +31,20 @@ export async function passwordverify(formData: { username: string; password: str
     }
 }
 
+/**
+ * @function accountConnection
+ * @description On vérifie si les identifiants de connexions sont bons
+ *
+ * @param formData username et password de l'utilisateur
+ * @returns {boolean} ce sont des identifiants de connexion valides ou non
+ */
 export async function accountConnection(formData: { username: string; password: string; }) {
     try {
         const userResponse = await getUsers({ username: formData.username });
         if (!userResponse) {
             throw new Error('Username INVALIDE');
         }
-        const passwordResponse = await passwordverify({
+        const passwordResponse = await passwordVerify({
             username: formData.username,
             password: formData.password
         });
@@ -43,3 +57,24 @@ export async function accountConnection(formData: { username: string; password: 
         return { error: 'Une erreur s\'est produite lors de la connexion.' };
     }
 }
+
+/**
+ * @function accountInscription
+ * @description Inscription de l'utilisateur dans la db
+ *
+ * @param formData infos l'utilisateur
+ * @returns {Promise:any} 
+ * 
+ * 1 - Vérification par IsValid des datas ? UtilsServices ? + Vérification email ou username pas dans la db !!!!  ? PermissionsServices ou UserServices ?
+ * 2 - createUser de UserServices formData ->  récup idUser
+ * 3 - createLog de LogServices ( idUser , 'création de compte' )
+ * 4 - sendMailverify de SendMailServices ( email )
+ */
+
+/**
+ * @function isAdmin
+ * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
+ * 
+ * @param username - user de l'utilisateur
+ * @returns {boolean}
+ */

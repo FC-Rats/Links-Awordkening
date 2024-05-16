@@ -1,5 +1,12 @@
 const url = `${process.env.REACT_APP_API_URL}score/`;
 
+/**
+ * @function getScores
+ * @description Récupère les URI des ressources membres de la ressource collection dans le corps de la réponse.  
+ * 
+ * @param params 
+ * @returns {JSON} - Réponse de la requête
+ */
 export async function getScores(params?: Record<string, string | number | Array<string | number>>) {
     const queryString = params
     ? Object.entries(params)
@@ -33,6 +40,13 @@ export async function getScores(params?: Record<string, string | number | Array<
     }
 }
 
+/**
+ * @function createScore
+ * @description Crée une ressource membre dans la ressource collection en utilisant les instructions du corps de la requête. 
+ * 
+ * @param ScoreData 
+ * @returns {JSON} - Réponse de la requête
+ */
 export async function createScore(ScoreData: Record<string, string | number>) {
     try {
         const response = await fetch(url, {
@@ -56,15 +70,21 @@ export async function createScore(ScoreData: Record<string, string | number>) {
     }
 }
 
-
-export async function updateFriend(FriendData: Record<string, string | number>) {
+/**
+ * @function updateScore
+ * @description Met à jour toutes les représentations des ressources membres de la ressource collection en utilisant les instructions du corps de la requête.
+ * 
+ * @param ScoreData 
+ * @returns {JSON} - Réponse de la requête
+ */
+export async function updateFriend(ScoreData: Record<string, string | number>) {
     try {
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(FriendData),
+            body: JSON.stringify(ScoreData),
         });
 
         if (response.ok) {
