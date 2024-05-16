@@ -4,6 +4,7 @@ import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
 import { createLog } from "../../services/LogServices";
+import { getIp, isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "../../services/UtilsServices";
 
 export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
@@ -44,6 +45,30 @@ export const HomePageTemplate = () => {
         }); 
         
         */
+       
+        // TESTS UTILS
+       let res = await getIp();
+       console.log(res); // TON IP
+        
+       console.log("USERNAMES")
+       console.log(isValidUsername("Hel")); // TRUE
+       console.log(isValidUsername("")); // FALSE
+       console.log(isValidUsername("He°l")); // FALSE
+
+       console.log("YEARS")
+       console.log(isValidBirthYear(2004)); // TRUE
+       console.log(isValidBirthYear(1)); // FALSE
+       console.log(isValidBirthYear(154444444)); // FALSE
+
+       console.log("EMAILS")
+       console.log(isValidEmail(2004+"")); // FALSE
+       console.log(isValidEmail("helena.che@out.fr")); // TRUE
+       console.log(isValidEmail("lna@gmail.com")); // TRUE
+
+       console.log("PASSWORDS")
+       console.log(isValidPassword(2004+"")); // FALSE
+       console.log(isValidPassword("Aaaa1444$$$$")); // TRUE
+       console.log(isValidPassword("Lolola_best77")); // TRUE
     };
 
     return (
