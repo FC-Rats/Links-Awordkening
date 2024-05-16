@@ -5,6 +5,8 @@ import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
 import { createLog } from "../../services/LogServices";
 import { getIp, isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "../../services/UtilsServices";
+import { Alert, Snackbar } from "@mui/material";
+import { AlertBox } from "../molecules/AlertBox";
 
 export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
@@ -69,6 +71,7 @@ export const HomePageTemplate = () => {
        console.log(isValidPassword(2004+"")); // FALSE
        console.log(isValidPassword("Aaaa1444$$$$")); // TRUE
        console.log(isValidPassword("Lolola_best77")); // TRUE
+       return 
     };
 
     return (
@@ -77,6 +80,7 @@ export const HomePageTemplate = () => {
             <form onSubmit={handleSubmit}>
                 <SubmitButton text={"Jouer"} />
             </form>
+            <AlertBox severity={'error'} open={true} message={"his is a success Alert inside a Snackbar!"}/>
             {/* TODO changer par un RedirectButton quand les routeurs seront faits */}
             {/* <CaseHomePageContainer /> */}
         </Stack>
