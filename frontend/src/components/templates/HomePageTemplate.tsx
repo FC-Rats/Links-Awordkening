@@ -80,7 +80,6 @@ export const HomePageTemplate = () => {
             <form onSubmit={handleSubmit}>
                 <SubmitButton text={"Jouer"} />
             </form>
-            <AlertBox severity={'error'} open={true} message={"his is a success Alert inside a Snackbar!"}/>
             {/* TODO changer par un RedirectButton quand les routeurs seront faits */}
             {/* <CaseHomePageContainer /> */}
         </Stack>

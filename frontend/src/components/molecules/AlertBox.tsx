@@ -3,29 +3,29 @@ import React from "react";
 
 type Severity = "error" | "success" | "info" | "warning" | undefined;
 
-export const AlertBox = (props: { severity: Severity; open: boolean ; message: string; }) => {
-    const [open, setOpen] = React.useState(props.open);
+interface AlertBoxProps {
+    severity: string;
+    open: boolean;
+    message: string;
+    handleClose: (event: React.SyntheticEvent | Event, reason?: string) => void;
+}
 
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-        return;
-    }
-    setOpen(false);
-    };
+export const AlertBox : React.FC<AlertBoxProps> = ({ severity, open, message, handleClose }) => {
+    let sev = severity as Severity;
 
     return (
         <Snackbar 
             open={open} 
-            autoHideDuration={8000}
+            autoHideDuration={4000}
             onClose={handleClose}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert
-                    severity = {props.severity}
+                    severity = {sev}
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    {props.message}
+                    {message}
                 </Alert>
         </Snackbar>
     );

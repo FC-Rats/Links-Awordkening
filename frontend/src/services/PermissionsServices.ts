@@ -38,24 +38,27 @@ export async function passwordVerify(formData: { username: string; password: str
  * @param formData username et password de l'utilisateur
  * @returns {boolean} ce sont des identifiants de connexion valides ou non
  */
-export async function accountConnection(formData: { username: string; password: string; }) {
+export async function accountConnection(formData: { username: string; password: string; }) : Promise<{ success: boolean; message: string; }> {
+    let success = false;
+    let message = '';
     try {
         const userResponse = await getUsers({ username: formData.username });
-        if (!userResponse) {
-            throw new Error('Username INVALIDE');
+        if (userResponse.length <= 0) {
+            return { success, message : "Nom d'utilisateur invalide" };
         }
         const passwordResponse = await passwordVerify({
             username: formData.username,
             password: formData.password
         });
-        if (!userResponse) {
-            throw new Error('MOT DE PASSE INVALIDE');
+        if (!passwordResponse.response) {
+            return { success, message : "Le mot de passe n'est pas valide" };
         }
-        return true;
+        success = true;
+        message = "Connexion établie";
     } catch (error) {
-        console.error(error);
-        return { error: 'Une erreur s\'est produite lors de la connexion.' };
+        message = 'Une erreur s\'est produite lors de la connexion.';
     }
+    return { success, message };
 }
 
 /**
