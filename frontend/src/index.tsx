@@ -20,7 +20,7 @@ import { SignUpPage } from './components/pages/SignUpPage';
 import { SoloGamePage } from './components/pages/SoloGamePage';
 import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
-import { AppContext } from './components/hooks/AppContext';
+import { AppContext, AppContextProvider } from './components/hooks/AppContext';
 import { UserInfo } from './components/types/UserInfo';
 
 // Titre des pages et l'icone
@@ -50,7 +50,7 @@ const testUser: UserInfo = {
 
 root.render(
   <React.StrictMode>
-    <AppContext.Provider value={testUser}>
+    <AppContextProvider>
     <Router>
       <Routes>
         <Route path="/account" element={<AccountOverviewPage />} />
@@ -72,7 +72,7 @@ root.render(
         <Route path="*" element={<Error404Page />} />
       </Routes>
     </Router>
-    </AppContext.Provider>
+    </AppContextProvider>
   </React.StrictMode>
 );
 

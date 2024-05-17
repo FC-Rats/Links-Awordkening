@@ -4,9 +4,12 @@ import { AccountParametersTemplate } from "../templates/AccountParametersTemplat
 
 export const AccountParametersPage = () => {
 
-    const user = useUserContext();
+    const {user} = useUserContext();
 
-    return (
+    if (!user) {
+        return <div>Loading...</div>; // ou un autre composant de chargement/erreur
+    }
+    return ( 
         <>
             <CenteredTitle text={"Votre compte"}/>
             <AccountParametersTemplate user={user} />
