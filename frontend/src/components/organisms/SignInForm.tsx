@@ -3,6 +3,7 @@ import { InputForm } from "../molecules/InputForm";
 import { Link } from "../atoms/Link";
 import { SubmitButton } from "../molecules/SubmitButton";
 import "../../assets/css/Form.css"
+import { useNavigate } from "react-router-dom";
 
 interface SignInProps {
     onSubmit: () => void;
@@ -26,7 +27,7 @@ export const SignInForm : React.FC<SignInProps> = ({ onSubmit, onInputChange }) 
                 <InputForm name="username" label={"Pseudo"} required onInputChange={handleInputChange}/>
                 <InputForm name="password" label={"Mot de passe"} type="password" required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Se connecter"}/>
-                <Link text='Pas de compte ? S’inscrire' url=''/>
+                <Link text='Pas de compte ? S’inscrire' url="/sign-up"/>
             </form>
         </div>
     );

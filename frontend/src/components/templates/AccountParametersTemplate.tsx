@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AccountEditMode from '../organisms/AccountEditMode';
 import { UserInfo } from '../types/UserInfo';
 import { AccountViewMode } from '../organisms/AccountViewMode';
 import "../../assets/css/AccountParameters.css"
+import { AlertBox } from '../molecules/AlertBox';
 
-export const AccountParametersTemplate = ({ user }: { user: UserInfo }) => {
-  const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState<UserInfo>(user);
-  const [selectedImage, setSelectedImage] = useState<string>(formData.profilPicture);
-
-  const handleInputChange = (name: string, value: string | boolean) => {
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
+interface AccountParametersTemplateProps {
+  user: UserInfo;
+  editMode: boolean;
+  formData: UserInfo;
+  selectedImage: string;
+  alertBox: {
+    severity: string;
+    open: boolean;
+    message: string;
   };
+  handleInputChange: (name: string, value: string | boolean) => void;
+  handleSubmit: (event: React.FormEvent) => void;
+  handleCancel: () => void;
+  handleAlert: (event: React.SyntheticEvent | Event, reason?: string) => void;
+  setSelectedImage: React.Dispatch<React.SetStateAction<string>>;
+  handleEdit: () => void;
+}
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log('Form submitted:', formData);
-    setEditMode(false);
-  };
-
-  const handleCancel = () => {
-    setEditMode(false);
-  };
-
+export const AccountParametersTemplate: React.FC<AccountParametersTemplateProps> = ({
+  user,
+  editMode,
+  formData,
+  selectedImage,
+  alertBox,
+  handleInputChange,
+  handleSubmit,
+  handleCancel,
+  handleAlert,
+  setSelectedImage,
+  handleEdit
+}) => {
   return (
     <div>
+      <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
       {editMode ? (
         <AccountEditMode
           formData={formData}
@@ -40,7 +51,7 @@ export const AccountParametersTemplate = ({ user }: { user: UserInfo }) => {
       ) : (
         <AccountViewMode
           formData={formData}
-          setEditMode={setEditMode}
+          handleEdit={handleEdit}
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { UserInfo } from '../types/UserInfo';
 
-export const AccountViewMode = ({ formData, setEditMode }: { formData: UserInfo; setEditMode: React.Dispatch<React.SetStateAction<boolean>>; }) => {
+export const AccountViewMode = ({ formData, handleEdit }: { formData: UserInfo; handleEdit: () => void; }) => {
   return (
     <div>
       <Grid container spacing={2} className="container-account-params">
@@ -16,7 +16,7 @@ export const AccountViewMode = ({ formData, setEditMode }: { formData: UserInfo;
           <Typography className="p-account">Birth Year: {formData.birthYear}</Typography>
           <Typography className="p-account">Visibility: {formData.visibility}</Typography>
         </Grid>
-        <IconButton onClick={() => setEditMode(true)}><EditIcon fontSize="large" /></IconButton>
+        <IconButton onClick={handleEdit}><EditIcon fontSize="large" /></IconButton>
       </Grid>
     </div>
   );

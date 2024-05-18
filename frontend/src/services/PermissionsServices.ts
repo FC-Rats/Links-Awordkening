@@ -1,6 +1,7 @@
+import { UserInfo } from "../components/types/UserInfo";
 import { createLog } from "./LogServices";
 import { sendMail } from "./SendMailsServices";
-import { createUser, getUsers } from "./UserServices";
+import { createUser, getUsers, updateUser } from "./UserServices";
 import { isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "./UtilsServices";
 
 /**
@@ -41,27 +42,53 @@ export async function passwordVerify(formData: { username: string; password: str
  * @param formData username et password de l'utilisateur
  * @returns {boolean} ce sont des identifiants de connexion valides ou non
  */
-export async function accountConnection(formData: { username: string; password: string; }) : Promise<{ success: boolean; message: string; }> {
+export async function accountConnection(formData: { username: string; password: string; }) : Promise<{ success: boolean; message: string; data: UserInfo }> {
     let success = false;
     let message = '';
+    let dataUser = {
+        id: 0,
+        email: "",
+        name: "",
+        profilPicture: "",
+        birthYear: "",
+        tokenR: null,
+        visibility: "",
+        verified: false,
+        admin: false,
+        averageScore: 0
+    };
     try {
         const userResponse = await getUsers({ username: formData.username });
         if (userResponse.length <= 0) {
-            return { success, message : "Nom d'utilisateur invalide" };
+            return { success, message : "Nom d'utilisateur invalide", data : dataUser};
         }
         const passwordResponse = await passwordVerify({
             username: formData.username,
             password: formData.password
         });
         if (!passwordResponse.response) {
-            return { success, message : "Le mot de passe n'est pas valide" };
+            return { success, message : "Le mot de passe n'est pas valide", data : dataUser};
         }
         success = true;
         message = "Connexion établie";
+        // CREATION CONTEXTE
+        dataUser = ({
+            id: userResponse[0]['id'],
+            email: userResponse[0]['email'],
+            name: userResponse[0]['username'],
+            profilPicture: userResponse[0]['profilPicture'],
+            tokenR: userResponse[0]['tokenR'],
+            visibility: userResponse[0]['visibility'],
+            verified: userResponse[0]['verified'],
+            admin: userResponse[0]['admin'],
+            averageScore: 12, // COMMENT CALCULER l'AVG SCORE
+            birthYear: userResponse[0]['birthYear']
+        });
+
     } catch (error) {
         message = 'Une erreur s\'est produite lors de la connexion.';
     }
-    return { success, message };
+    return { success, message, data : dataUser};
 }
 
 /**
@@ -137,6 +164,51 @@ export async function formValidation(formData: { username: string; birthYear : s
     return { success, message };
 }
 
+/**
+ * @function accountUpdate
+ * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
+ * 
+ * @param username - user de l'utilisateur
+ * @returns {boolean}
+ */
+export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : Promise<{ success: boolean; message: string; typeError : string | undefined }> {
+    let success = false;
+    let message = '';
+    let typeError = 'error';
+    if (!isValidUsername(formData.name)) { return { success, message : "Le Pseudo ne doit pas contenir de caractères spéciaux " , typeError : "warning"}; }
+    else if (!isValidBirthYear(formData.birthYear)) { return { success, message : "La date de naissance est invalide" , typeError : "warning"}; }
+    else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide" , typeError : "warning"}; }
+    // 1 bis - Vérification que l'username ou l'email n'est dans la db
+    try {
+        if (prevInfo.name != formData.name) {
+            const userVerifResponse = await getUsers({ username: formData.name });
+            if (userVerifResponse.length > 0) { return { success, message : "Ce nom d'utilisateur est déjà utilisé", typeError : "warning" }; }
+        } else if (prevInfo.email != formData.email) {
+            const emailVerifResponse = await getUsers({ email: formData.email });
+            if (emailVerifResponse.length > 0) { return { success, message : "L'adresse mail est déjà utilisée", typeError : "warning" }; }
+        }
+        // 2 - createUser de UserServices formData ->  récup idUser
+        let user = await updateUser({
+            id : formData.id,
+            username: formData.name,
+            birthYear: formData.birthYear,
+            profilPicture : formData.profilPicture,
+            email: formData.email,
+            visibility : formData.visibility
+        });
+        //3 - createLog de LogServices ( idUser , 'création de compte' )
+        createLog({
+            idUser: formData.id,
+            log: 'Modification du compte',
+        }); 
+        success = true;
+        message = "Modification correctement effectuée";
+        typeError = "success";
+    } catch (error) {
+        message = 'Une erreur s\'est produite lors de la connexion.';
+    }
+    return { success, message, typeError };
+}
 
 /**
  * @function isAdmin

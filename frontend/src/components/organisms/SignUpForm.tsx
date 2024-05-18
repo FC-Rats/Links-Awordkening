@@ -37,7 +37,7 @@ export const SignUpForm :  React.FC<FormsProps> = ({ onSubmit, onInputChange }) 
                     <li>1Les mots de passe doivent être identiques</li>
                 </ul> */}
                 <SubmitButton text={"S'inscrire"}/>
-                <Link text='Vous possésez un compte ? Se connecter' url=''/>
+                <Link text='Vous possésez un compte ? Se connecter' url="/sign-in"/>
             </form>
         </div>
     );

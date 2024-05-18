@@ -4,8 +4,6 @@ import { UserInfo } from "../types/UserInfo";
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
-
-
 interface AppContextProviderProps {
   children: ReactNode;
 }

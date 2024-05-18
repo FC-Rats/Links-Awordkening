@@ -2,8 +2,13 @@ import { useState } from "react";
 import { accountConnection } from "../../services/PermissionsServices";
 import { SignInTemplate } from "../templates/SignInTemplate";
 import { AlertBox } from "../molecules/AlertBox";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../hooks/AppContext";
+import { UserInfo } from "../types/UserInfo";
 
 export const SignInPage : React.FC = () => {
+    const navigate = useNavigate();
+    const { logIn } = useUserContext(); 
 
     /* SNACK BAR - ALERT HANDLING */
     const [alertBox, setAlertBox] = useState({
@@ -48,8 +53,14 @@ export const SignInPage : React.FC = () => {
                  severity : 'success',
                  open: true,
                  message : data.message
-            }));      
+            }));
+            handleSuccessfulLogin(data.data);
         }
+    };
+
+    const handleSuccessfulLogin = (userData: UserInfo) => {
+        logIn(userData);
+        navigate("/account-param");
     };
 
     const handleInputChange = (name: string, value: string) => {
