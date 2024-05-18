@@ -1,11 +1,6 @@
 <?php
 
-session_start();
-
-include('./mailer.php');
-
-if (isset($_POST['email'])) {
-    $email = $_POST['email'];
+function handlePasswordRecovery($email) {
 
     $objet = "Récuperation mot de passe";
     $res= generateTokenLink($email);
@@ -24,9 +19,5 @@ if (isset($_POST['email'])) {
     }
 
     envoi_mail($email, $objet, $message);
-    header("Location: ../Pages/mail-redirection-recover.php");
-    exit();
-} else {
-    header("Location: ../Pages/recover.php");
     exit();
 }

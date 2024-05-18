@@ -1,4 +1,7 @@
-import { getUsers } from "./UserServices";
+import { createLog } from "./LogServices";
+import { sendMail } from "./SendMailsServices";
+import { createUser, getUsers } from "./UserServices";
+import { isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "./UtilsServices";
 
 /**
  * @function passwordVerify
@@ -73,6 +76,67 @@ export async function accountConnection(formData: { username: string; password: 
  * 3 - createLog de LogServices ( idUser , 'création de compte' )
  * 4 - sendMailverify de SendMailServices ( email )
  */
+export async function accountInscription(formData: { username: string; birthYear : string; email: string; password: string; passwordConfirmation : string; }) : Promise<{ success: boolean; message: string; typeError : string | undefined }> {
+    let success = false;
+    let message = '';
+    let typeError = 'error';
+    // 1 - Vérification par IsValid des datas ? UtilsServices ?
+    let validation = await formValidation(formData);
+    if (!validation.success) { return { success, message : validation.message, typeError : "warning"} }
+    // 1 bis - Vérification que l'username ou l'email n'est dans la db
+    try {
+        const userVerifResponse = await getUsers({ username: formData.username });
+        if (userVerifResponse.length > 0) { return { success, message : "Ce nom d'utilisateur est déjà utilisé", typeError : "warning" }; }
+        const emailVerifResponse = await getUsers({ email: formData.email });
+        if (emailVerifResponse.length > 0) { return { success, message : "L'adresse mail est déjà utilisée", typeError : "warning" }; }
+        // 2 - createUser de UserServices formData ->  récup idUser
+        let user = await createUser({
+            username: formData.username,
+            birthYear: formData.birthYear,
+            email: formData.email,
+            password: formData.password,
+        });
+        //3 - createLog de LogServices ( idUser , 'création de compte' )
+        createLog({
+            idUser: user.lastId[0][0],
+            log: 'Inscription',
+        }); 
+        //4 - sendMailverify de SendMailServices ( email )
+        sendMail({
+            email : formData.email,
+            action : "verify"
+        }) 
+        success = true;
+        message = "Inscription terminée ! Vérifiez vos mails pour le lien de confirmation";
+        typeError = "success";
+    } catch (error) {
+        message = 'Une erreur s\'est produite lors de la connexion.';
+    }
+    return { success, message, typeError };
+}
+
+/**
+ * @function formValidation
+ * @description Vérifier si les infos sont valides
+ *
+ * @param formData infos l'utilisateur
+ * @returns {Promise:any} 
+ */
+export async function formValidation(formData: { username: string; birthYear : string; email: string; password: string; passwordConfirmation : string; }) : Promise<{ success: boolean; message: string; }> {
+    let success = false;
+    let message = '';
+    // 1 - Vérification par IsValid des datas ? UtilsServices ?
+    if (!isValidUsername(formData.username)) { return { success, message : "Le Pseudo ne doit pas contenir de caractères spéciaux " }; }
+    else if (!isValidBirthYear(formData.birthYear)) { return { success, message : "La date de naissance est invalide" }; }
+    else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide" }; }
+    else if (!isValidPassword(formData.password) && !isValidPassword(formData.passwordConfirmation)) { return { success, message : "Le mot de passe n'est pas valide, il doit être entre 12 et 40 caractère, contenir une majuscule, une minscule, un chiffre et un caractère spécial " }; }
+    else if (formData.password != formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre" }; }
+    else {
+        success = true;
+    }
+    return { success, message };
+}
+
 
 /**
  * @function isAdmin

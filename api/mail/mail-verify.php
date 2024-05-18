@@ -1,10 +1,6 @@
 <?php
 
-include('./mailer.php');
-
-if (isset($_POST['email'])) {
-    $email = $_POST['email'];
-    $idUser = $_SESSION['idUser'];
+function handlePasswordVerify($email) {
 
     $objet = "Vérification de compte";
     $message = " Cher client, 
@@ -15,11 +11,6 @@ if (isset($_POST['email'])) {
     <br><br> De la part de : projet.saebut@gmail.com";
 
     envoi_mail($email,$objet,$message);
-    header("Location: ../Pages/mail-redirection.php");
     exit();
-} else {
-    header("Location: ../Pages/index.php");
-    exit();
-}
+} 
 
-?>

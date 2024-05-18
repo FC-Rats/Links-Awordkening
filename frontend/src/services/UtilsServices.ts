@@ -24,7 +24,7 @@ export async function getIp() {
  * @returns {boolean} valide ou non
  */
 export function isValidUsername(username: string) : boolean {
-    let regex = /^[A-Za-z0-9_!@#$%^&*()\-_=+{};:<.>]+$/i;
+    let regex = /^[A-Za-z][A-Za-z0-9_]{2,29}$/i;
     return regex.test(username);
 }
 
@@ -36,7 +36,7 @@ export function isValidUsername(username: string) : boolean {
  * @param {number} birthYear
  * @returns {boolean} valide ou non
  */
-export function isValidBirthYear(birthYear: number) : boolean {
+export function isValidBirthYear(birthYear: string) : boolean {
     let regex = /\d\d\d\d/i;
     return regex.test(birthYear.toString());
 }
@@ -63,6 +63,6 @@ export function isValidEmail(email: string) : boolean {
  * @returns {boolean} valide ou non
  */
 export function isValidPassword(mdp: string) : boolean {
-    var regex = /^(?=.*[0-9])(?=.*[!@#$%^&€_+~&*])[a-zA-Z0-9!@#$%^&€_+~&*]{12,}$/; // {12} = plus de 12 caractères  
+    var regex = /^(?=.*[0-9])(?=.*[!@#$%^&€_+~&*])[a-zA-Z0-9!@#$%^&€_+~&*]{12,40}$/; // {12} = plus de 12 caractères  
     return regex.test(mdp);
 }

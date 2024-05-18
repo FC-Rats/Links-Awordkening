@@ -58,9 +58,9 @@ export const HomePageTemplate = () => {
        console.log(isValidUsername("He°l")); // FALSE
 
        console.log("YEARS")
-       console.log(isValidBirthYear(2004)); // TRUE
-       console.log(isValidBirthYear(1)); // FALSE
-       console.log(isValidBirthYear(154444444)); // FALSE
+       console.log(isValidBirthYear("2004")); // TRUE
+       console.log(isValidBirthYear("1")); // FALSE
+       console.log(isValidBirthYear("154444444")); // FALSE
 
        console.log("EMAILS")
        console.log(isValidEmail(2004+"")); // FALSE
