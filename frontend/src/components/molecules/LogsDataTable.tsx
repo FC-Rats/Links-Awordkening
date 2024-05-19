@@ -1,4 +1,4 @@
-import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridRowsProp, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import '../../assets/css/DataTable.css';
 import { LogProps } from '../types/LogProps';
 

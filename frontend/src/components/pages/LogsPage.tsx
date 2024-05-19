@@ -8,16 +8,10 @@ export const LogsPage = () => {
     const [status, setStatus] = useState<number | null>(null);
     const [error, setError] = useState<Error | null>(null);
 
-    const params = {
-        idUser: [11, 35],
-        // dateTime: '2023-10-06 16:05:15',
-        log: 'Inscription',
-    };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getLogs(params);
+                const response = await getLogs();
                 if (Array.isArray(response)) {
                     setLogs(response);
                 } else if (typeof response === 'number') {
