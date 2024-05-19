@@ -59,7 +59,7 @@ if (!function_exists('generateTokenLink')) {
         include('../../configuration.php');
 
         $token = generateUniqueID(12);
-        $link = $config['links']['host']."Pages/recuperation-password.php?token=";
+        $link = $config['links']['host']."change-password?token=";
         $link .= $token;
 
         global $db;
@@ -78,7 +78,7 @@ if (!function_exists('generateVerifyLink')) {
         include('../../configuration.php');
 
         $token = generateUniqueID(12);
-        $link = $config['links']['host']."Includes/account-verify.php?token=";
+        $link = $config['links']['host']."sign-in?token=";
         $link .= $token;
         global $db;
 

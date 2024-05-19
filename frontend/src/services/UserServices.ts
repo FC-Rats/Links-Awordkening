@@ -79,7 +79,7 @@ export async function createUser(userData : Record<string, string | number>) {
  * @param userData 
  * @returns {JSON} - Réponse de la requête
  */
-export async function updateUser(userData : Record<string, string | number>) {
+export async function updateUser(userData : Record<string, string | number | null>) {
     try {
         const response = await fetch(url, {
             method: 'PUT',

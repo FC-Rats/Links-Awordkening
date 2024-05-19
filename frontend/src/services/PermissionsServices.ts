@@ -211,6 +211,41 @@ export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : P
 }
 
 /**
+ * @function accountVerify
+ * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
+ * 
+ * @param token - user de l'utilisateur
+ * @returns {boolean}
+ */
+export async function accountVerify(token : string) {
+    let success = false;
+    let message = '';
+    try {
+        // 1 - Si il existe un compte à verify 0, et token à token
+        const userResponse = await getUsers({ tokenR : token , verified : 0 });
+        if (userResponse.length <= 0) {
+            return { success, message : "Il y a un problème avec la vérification"};
+        }
+        // 2 - Si il y a, on update le verify et 
+        updateUser({ 
+            id : userResponse[0]['id'], 
+            tokenR : null, 
+            verified : 1 
+        });
+        createLog({
+            idUser: userResponse[0]['id'],
+            log: 'Vérification',
+        }); 
+        success = true;
+        message = "Connexion établie";
+    } catch (error) {
+        message = 'Une erreur s\'est produite lors de la vérification de votre compte.';
+    }
+    return { success, message};
+}
+
+
+/**
  * @function isAdmin
  * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
  * 

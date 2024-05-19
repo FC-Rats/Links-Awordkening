@@ -1,21 +1,43 @@
-import { useState } from "react";
-import { accountConnection } from "../../services/PermissionsServices";
+import { useEffect, useState } from "react";
+import { accountConnection, accountVerify } from "../../services/PermissionsServices";
 import { SignInTemplate } from "../templates/SignInTemplate";
 import { AlertBox } from "../molecules/AlertBox";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "../hooks/AppContext";
 import { UserInfo } from "../types/UserInfo";
 
 export const SignInPage : React.FC = () => {
     const navigate = useNavigate();
     const { logIn } = useUserContext(); 
-
+    const url = new URLSearchParams(useLocation().search);
+    const [hasVerified, setHasVerified] = useState(false); // State to track if verification has been done
     /* SNACK BAR - ALERT HANDLING */
     const [alertBox, setAlertBox] = useState({
         severity: "success",
         open: false,
         message: '',
     });
+
+    useEffect(() => {
+        const verifyAccount = async () => {
+          const token = url.get('token');
+          if (token && !hasVerified) {
+            console.log(token);
+            const data = await accountVerify(token);
+            if (!data.success) {
+              setAlertBox(prevState => ({
+                ...prevState,
+                severity: 'error',
+                open: true,
+                message: data.message
+              }));
+            }
+            setHasVerified(true); // Set to true after verification
+          }
+        };
+    
+        verifyAccount();
+      }, [url, hasVerified]);
 
     /**
      * @description Permet de fermer automatique l'Alertbox au bout de 4 secondes
