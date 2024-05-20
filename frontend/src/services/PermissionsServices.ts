@@ -79,8 +79,8 @@ export async function accountConnection(formData: { username: string; password: 
             profilPicture: userResponse[0]['profilPicture'],
             tokenR: userResponse[0]['tokenR'],
             visibility: userResponse[0]['visibility'],
-            verified: userResponse[0]['verified'],
-            admin: userResponse[0]['admin'],
+            verified: userResponse[0]['verified'] === 1 ? true : false,
+            admin: userResponse[0]['admin'] === 1 ? true : false,
             averageScore: 12, // COMMENT CALCULER l'AVG SCORE
             birthYear: userResponse[0]['birthYear']
         });
@@ -134,7 +134,7 @@ export async function accountInscription(formData: { username: string; birthYear
             action : "verify"
         }) 
         success = true;
-        message = "Inscription terminée ! Vérifiez vos mails pour le lien de confirmation";
+        message = "Inscription terminée ! N'oubliez pas de vérifier vos e-mails pour le lien de confirmation (Pensez à vérifier les spams)";
         typeError = "success";
     } catch (error) {
         message = 'Une erreur s\'est produite lors de la connexion.';

@@ -43,3 +43,9 @@
 .p-account {
     font-size: 2rem!important;
 }
+
+@media (max-width: 1100px) {
+    .container-account-params{
+        width: 100%!important;
+    }
+}

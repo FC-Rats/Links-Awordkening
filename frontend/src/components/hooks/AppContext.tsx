@@ -8,24 +8,11 @@ interface AppContextProviderProps {
     children: ReactNode;
 }
 
-const testUser: UserInfo = {
-    id: 1004,
-    email: "luke@gmail.com",
-    name: "Luke Skywalker",
-    profilPicture: "/img/profilepictures/coconut.jpg",
-    tokenR: "1122334455",
-    visibility: "PUBLIC",
-    verified: false,
-    admin: true,
-    averageScore: 85,
-    birthYear: "1982",
-};
-
 export function AppContextProvider({ children }: AppContextProviderProps) {
     const [user, setUser] = useState<UserInfo | undefined>(() => {
         // Get user data from localStorage if it exists
         const userData = localStorage.getItem('user');
-        return userData ? JSON.parse(userData) : testUser; // Replace testUser with undefined if needed
+        return userData ? JSON.parse(userData) : undefined; // Replace testUser with undefined if needed
     });
 
     const logIn = (userData: UserInfo) => {

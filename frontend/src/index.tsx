@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { RulesPage } from './components/pages/RulesPage';
 import { AccountOverviewPage } from './components/pages/AccountOverviewPage';
 import { AccountParametersPage } from './components/pages/AccountParametersPage';
@@ -35,43 +35,49 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const testUser: UserInfo = {
-  "id": 1004,
-  "email": "luke@gmail.com",
-  "name": "Luke Skywalker",
-  "profilPicture": "/img/profilepictures/coconut.jpg",
-  "tokenR": "1122334455",
-  "visibility": "PUBLIC",
-  "verified": false,
-  "admin": true,
-  "averageScore": 85,
-  "birthYear": "1982",
-}
+const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  const user = useContext(AppContext);
+  console.log(user?.user);
+  if (!user?.user) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+const RequireAuthAdmin: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  const user = useContext(AppContext);
+  console.log(user?.user?.admin);
+  if (!user?.user?.admin == true) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
 
 root.render(
   <React.StrictMode>
     <AppContextProvider>
-    <Router>
-      <Routes>
-        <Route path="/account" element={<AccountOverviewPage />} />
-        <Route path="/account-param" element={<AccountParametersPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/change-paramters" element={<ChangeParametersPage />} />
-        <Route path="/change-password" element={<ChangePasswordPage />} />
-        <Route path="/end-game" element={<EndGamePage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/friends" element={<FriendsListPage />} />
-        <Route path="/" element={<HomePagePage />} />
-        <Route path="/join-room" element={<JoinRoomPage />} />
-        <Route path="/rules" element={<RulesPage />} />
-        <Route path="/set-up-game" element={<SetUpGamePage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/game" element={<SoloGamePage />} />
-        <Route path="/logs" element={<LogsPage />} />
-        <Route path="*" element={<Error404Page />} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePagePage />} />
+          <Route path="*" element={<Error404Page />} />
+          <Route path="/account" element={<RequireAuth><AccountOverviewPage /></RequireAuth>} />
+          <Route path="/account-param" element={<RequireAuth><AccountParametersPage /></RequireAuth>} />
+          <Route path="/admin" element={<RequireAuthAdmin><AdminPage /></RequireAuthAdmin>} />
+          <Route path="/change-paramters" element={<RequireAuthAdmin><ChangeParametersPage /></RequireAuthAdmin>} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/end-game" element={<RequireAuth><EndGamePage /></RequireAuth>} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/friends" element={<RequireAuth><FriendsListPage /></RequireAuth>} />
+          <Route path="/join-room" element={<RequireAuth><JoinRoomPage /></RequireAuth>} />
+          <Route path="/rules" element={<RulesPage />} />
+          <Route path="/set-up-game" element={<RequireAuth><SetUpGamePage /></RequireAuth>} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/game" element={<RequireAuth><SoloGamePage /></RequireAuth>} />
+          <Route path="/logs" element={<RequireAuthAdmin><LogsPage /></RequireAuthAdmin>} />
+        </Routes>
+      </Router>
     </AppContextProvider>
   </React.StrictMode>
 );

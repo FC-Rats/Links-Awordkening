@@ -7,11 +7,14 @@ import { createLog } from "../../services/LogServices";
 import { getIp, isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "../../services/UtilsServices";
 import { Alert, Snackbar } from "@mui/material";
 import { AlertBox } from "../molecules/AlertBox";
+import { useUserContext } from "../hooks/AppContext";
 
 export const HomePageTemplate = () => {
+    const { logOut } = useUserContext(); 
+
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-
+        logOut();
         /*  TEST POSTS    
         
         createScore({
