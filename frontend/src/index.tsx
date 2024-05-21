@@ -53,7 +53,6 @@ const RequireAuthAdmin: React.FC<{ children: JSX.Element }> = ({ children }) => 
   return children;
 };
 
-
 root.render(
   <React.StrictMode>
     <AppContextProvider>

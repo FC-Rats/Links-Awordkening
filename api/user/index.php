@@ -68,6 +68,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (!empty($jsonData)) {
             $data = json_decode($jsonData, true);
             if (isset($data['id']) ) { // empêche la modif de toutes les lignes
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 // CREATION DU UPDATE
                 $res = updateQuery("UPDATE LA_USER", $data);
                 $sql = $res[0];

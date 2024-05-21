@@ -10,7 +10,7 @@ if (!class_exists('Connection')) {
 require_once('../_utils.php');
 require_once('./mail-password.php');
 require_once('./mail-verify.php');
-require_once('./update-password.php');
+require_once('./mail-update-password.php');
 include('./mailer.php');
 
 $request = json_decode(file_get_contents('php://input'), true);

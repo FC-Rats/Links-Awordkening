@@ -134,7 +134,7 @@ export async function accountInscription(formData: { username: string; birthYear
             action : "verify"
         }) 
         success = true;
-        message = "Inscription terminée ! N'oubliez pas de vérifier vos e-mails pour le lien de confirmation (Pensez à vérifier les spams)";
+        message = "Inscription terminée ! N'oubliez pas de vérifier vos mails pour le lien de confirmation (Pensez à vérifier les spams)";
         typeError = "success";
     } catch (error) {
         message = 'Une erreur s\'est produite lors de la connexion.';
@@ -244,11 +244,67 @@ export async function accountVerify(token : string) {
     return { success, message};
 }
 
-
 /**
- * @function isAdmin
- * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
+ * @function accountForgotPassword
+ * @description Envoi un mail
  * 
- * @param username - user de l'utilisateur
+ * @param email - user de l'utilisateur
  * @returns {boolean}
  */
+export async function accountForgotPassword(emailform : string) {
+    let success = false;
+    let message = '';
+    try {
+        // 1 - Si il existe un compte 
+        const userResponse = await getUsers({ email: emailform });
+        if (userResponse.length <= 0) {
+            return { success, message : "Il n'existe aucun compte avec cette adresse email"};
+        }
+        // 2 - Si il y a, on envoi
+        sendMail({
+            email : emailform,
+            action : "recovery"
+        }) 
+        success = true;
+        message = "Vérifier vos mails pour le lien de confirmation (Pensez à vérifier les spams)";
+    } catch (error) { 
+        message = 'Une erreur s\'est produite lors de la vérification de votre compte.';
+    }
+    return { success, message};
+}
+
+
+/**
+ * @function accountUpdate
+ * @description Vérification si l'utilisateur est admin pour lui donner les droits correspondants - Accès aux pages admin ou modifications
+ * 
+ * @param formData
+ * @returns {boolean}
+ */
+export async function accountChangePassword(formData: { token: string, password: string; passwordConfirmation: string; }) : Promise<{ success: boolean; message: string; typeError : string | undefined }> {
+    let success = false;
+    let message = '';
+    let typeError = 'success';
+    try {
+        const userResponse = await getUsers({ tokenR : formData.token });
+        if (userResponse.length <= 0) {
+            return { success, message : "Erreur de Token", typeError : "error"};
+        }
+        else if (!isValidPassword(formData.password) && !isValidPassword(formData.passwordConfirmation)) { return { success, message : "Le mot de passe n'est pas valide, il doit être entre 12 et 40 caractère, contenir une majuscule, une minscule, un chiffre et un caractère spécial " ,typeError : "warning"}; }
+        else if (formData.password != formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre", typeError : "warning" }; }
+        updateUser({ 
+            id : userResponse[0]['id'], 
+            tokenR : null, 
+            password : formData.password
+        });
+        sendMail({
+            email : userResponse[0]['email'],
+            action : "update"
+        }) 
+        success = true;
+        message = "Changement réussi établie";
+    } catch (error) {
+        message = 'Une erreur s\'est produite lors de la connexion.';
+    }
+    return { success, message, typeError};
+}

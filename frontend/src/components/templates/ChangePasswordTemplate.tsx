@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ChangePasswordForm } from "../organisms/ChangePasswordForm";
 
+interface FormProps {
+    onSubmit: () => void;
+    onInputChange: (name: string, value: string) => void;
+}
 
-export const ChangePasswordTemplate = () => {
-
+export const ChangePasswordTemplate : React.FC<FormProps> = ({ onSubmit, onInputChange }) => {
 
     return (
        <>
        <CenteredTitle text="Modification du mot de passe"/>
-       <ChangePasswordForm/>
+       <ChangePasswordForm onInputChange={onInputChange} onSubmit={onSubmit}/>
        </>
     );
 };

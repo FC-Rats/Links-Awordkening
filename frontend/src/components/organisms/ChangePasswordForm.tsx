@@ -4,21 +4,20 @@ import { Link } from "../atoms/Link";
 import { SubmitButton } from "../molecules/SubmitButton";
 import "../../assets/css/Form.css"
 
+interface ForgotFormProps {
+    onSubmit: () => void;
+    onInputChange: (name: string, value: string) => void;
+}
 
-export const ChangePasswordForm = () => {
-    const [formData, setFormData] = useState({
-        password: '',
-        passwordConfirmation: '',
-    });
+export const ChangePasswordForm : React.FC<ForgotFormProps> = ({ onSubmit, onInputChange }) =>{
 
-    const handleInputChange = (name: string, value: string) => {
-        setFormData({ ...formData, [name]: value });
-    };
-    
-
-    const handleSubmit = (event: { preventDefault: () => void; }) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formData);
+        onSubmit();
+    };
+
+    const handleInputChange =  (name: string, value: string) => {
+        onInputChange(name, value);
     };
 
     return (

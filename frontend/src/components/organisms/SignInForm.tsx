@@ -28,6 +28,8 @@ export const SignInForm : React.FC<SignInProps> = ({ onSubmit, onInputChange }) 
                 <InputForm name="password" label={"Mot de passe"} type="password" required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Se connecter"}/>
                 <Link text='Pas de compte ? S’inscrire' url="/sign-up"/>
+                <br></br>
+                <Link text='Mot de passe oublié ?' url="/forgot-password"/>
             </form>
         </div>
     );
