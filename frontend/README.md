@@ -44,3 +44,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+# credits
+<a href="https://www.flaticon.com/fr/icones-gratuites/domicile" title="domicile icônes">Domicile icônes créées par Dave Gandy - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/utilisateur" title="utilisateur icônes">Utilisateur icônes créées par Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/la-personne" title="la personne icônes">La personne icônes créées par edt.im - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/manette" title="manette icônes">Manette icônes créées par Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/ui" title="ui icônes">Ui icônes créées par meaicon - Flaticon</a>

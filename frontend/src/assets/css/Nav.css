@@ -42,6 +42,10 @@ nav.open .toggle-btn {
     transform: rotate(0deg);
 }
 
+.nav-link {
+    cursor: pointer;
+}
+
 .nav-content span {
     position: absolute;
     transition: all 0.6s ease;
@@ -69,28 +73,28 @@ nav.open .nav-content span {
     opacity: 1;
 }
 
+i.btn-home {
+    background-image: url(../../../public/img/icons/home.png);
+}
+
+i.btn-set-up-game {
+    background-image: url(../../../public/img/icons/new-game.png);
+}
+
+i.btn-friends {
+    background-image: url(../../../public/img/icons/friends.png);
+}
+
+i.btn-account {
+    background-image: url(../../../public/img/icons/account.png);
+}
+
+i.btn-log-out {
+    background-image: url(../../../public/img/icons/log-out.png);
+}
+
 i.btn-plus {
-    background-image: url(../../../public/img/icons/plus.png);
-}
-
-i.btn-presentation {
-    background-image: url(../../../public/img/icons/plus.png);
-}
-
-i.btn-competences {
-    background-image: url(../../../public/img/icons/plus.png);
-}
-
-i.btn-parcours {
-    background-image: url(../../../public/img/icons/plus.png);
-}
-
-i.btn-alternance {
-    background-image: url(../../../public/img/icons/plus.png);
-}
-
-i.btn-liens {
-    background-image: url(../../../public/img/icons/plus.png);
+    background-image: url(../../../public/img/icons/plus.png);   
 }
 
 i {

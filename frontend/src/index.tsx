@@ -22,6 +22,7 @@ import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
 import { AppContext, AppContextProvider } from './components/hooks/AppContext';
 import { UserInfo } from './components/types/UserInfo';
+import { Nav } from './components/molecules/Nav';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -57,6 +58,7 @@ root.render(
   <React.StrictMode>
     <AppContextProvider>
       <Router>
+      <Nav/>
         <Routes>
           <Route path="/" element={<HomePagePage />} />
           <Route path="*" element={<Error404Page />} />
