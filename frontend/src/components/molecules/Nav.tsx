@@ -14,7 +14,6 @@ export const Nav = (props: {}) => {
     // user?.user si est connecté
     // user?.user?.admin == true si est admin
     // undefined si est pas connecté
-    console.log(user)
 
     const toggleNavBar = () => {
         setIsOpen(!isOpen);
