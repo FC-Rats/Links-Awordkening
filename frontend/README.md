@@ -52,3 +52,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 <a href="https://www.flaticon.com/fr/icones-gratuites/la-personne" title="la personne icônes">La personne icônes créées par edt.im - Flaticon</a>
 <a href="https://www.flaticon.com/fr/icones-gratuites/manette" title="manette icônes">Manette icônes créées par Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/fr/icones-gratuites/ui" title="ui icônes">Ui icônes créées par meaicon - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/compte" title="compte icônes">Compte icônes créées par SBTS2018 - Flaticon</a>
+<a href="https://www.flaticon.com/fr/icones-gratuites/engrenages" title="engrenages icônes">Engrenages icônes créées par Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/archive" title="archive icons">Archive icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/log-out" title="log out icons">Log out icons created by Pixel perfect - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/signup" title="signup icons">Signup icons created by riajulislam - Flaticon</a>

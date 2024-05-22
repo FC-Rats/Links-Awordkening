@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 .App {
@@ -98,7 +98,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: 'Nanum Myeongjo', serif !important;
+  font-family:  "Playfair Display", serif !important;
 }
 
 p,

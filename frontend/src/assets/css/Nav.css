@@ -3,7 +3,7 @@ nav {
     top: 20px;
     left: 0;
     width: 80px;
-    height: 150px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,6 +95,30 @@ i.btn-log-out {
 
 i.btn-plus {
     background-image: url(../../../public/img/icons/plus.png);   
+}
+
+i.btn-admin {
+    background-image: url(../../../public/img/icons/admin.png);   
+}
+
+i.btn-log-out {
+    background-image: url(../../../public/img/icons/log-out.png);   
+}
+
+i.btn-change-paramters {
+    background-image: url(../../../public/img/icons/change-paramters.png);   
+}
+
+i.btn-logs {
+    background-image: url(../../../public/img/icons/logs.png);   
+}
+
+i.btn-sign-in {
+    background-image: url(../../../public/img/icons/sign-in.png);   
+}
+
+i.btn-sign-up {
+    background-image: url(../../../public/img/icons/sign-up.png);   
 }
 
 i {
