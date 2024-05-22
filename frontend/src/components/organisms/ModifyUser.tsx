@@ -10,26 +10,43 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "../../assets/css/ModifyUser.css"
 import "../../assets/css/InputForm.css"
 import options from "../../assets/data/options.json"
-import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import { updateUser } from '../../services/UserServices';
 
-function ModifyUser({ user, onClose }: { user: UserInfo, onClose: () => void }) {
+function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () => void, setUsers: React.Dispatch<React.SetStateAction<UserInfo[]>> }) {
   const [formData, setFormData] = useState<UserInfo>(user);
 
-  useEffect(() => {
-    // Initialiser le formulaire chaque fois que l'utilisateur change
-    setFormData(user);
-  }, [user]);
-
   const handleInputChange = (name: string, value: any) => {
-    setFormData({ ...formData, [name]: value });
+    if (name === "admin" || name === "verified") {
+      value = value === "true";
+    }
+    setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const transformUserInfoToRecord = (userInfo: UserInfo): Record<string, string | number | null> => {
+    return {
+      id: userInfo.id,
+      email: userInfo.email,
+      username: userInfo.name,
+      tokenR: userInfo.tokenR,
+      visibility: userInfo.visibility,
+      verified: userInfo.verified ? 1 : 0, // Convertir boolean en number
+      admin: userInfo.admin ? 1 : 0, // Convertir boolean en number
+      birthYear: userInfo.birthYear,
+      password: userInfo.password || null
+    };
+  };
+
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    console.log(formData);
-    onClose(); // Fermer après soumission
+    const transformedData = transformUserInfoToRecord(formData);
+    const response = await updateUser(transformedData);
+    if (response.length === 0) {
+      setUsers(prevUsers => prevUsers.map(user => user.id === transformedData.id ? formData : user));
+    }
+    console.log('Réponse du service updateUser : ', response);
+    onClose();
   };
 
   return (

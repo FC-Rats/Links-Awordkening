@@ -37,20 +37,19 @@ const StyledVisibilityChip = styled('div')({
 export const UserDataTable = ({ data, onUserEdit }: { data: UserInfo[], onUserEdit: (user: UserInfo) => void }) => {
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', type: 'number', width: 150 },
-    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'name', headerName: 'Pseudo', width: 300 },
     { field: 'birthYear', headerName: 'Année de naissance', width: 200, type: 'string' },
     { field: 'email', headerName: 'Email', width: 300 },
     { field: 'verified', headerName: 'Compte vérifié', type: 'boolean', width: 200 },
     {
       field: 'visibility', headerName: 'Visibility', type: 'singleSelect', width: 130, valueOptions: [
-        'public',
-        'private',
-        'friends',
+        'PUBLIC',
+        'PRIVATE',
+        'FRIENDS',
       ],
       renderCell: (params) => renderVisibilityCell(params.value),
     },
     { field: 'admin', headerName: 'Compte administrateur', type: 'boolean', width: 200 },
-    { field: 'averageScore', headerName: 'Score Moyen', type: 'number', width: 200 },
     {
       field: 'modify',
       headerName: 'Modifier l\'utilisateur',
@@ -71,8 +70,8 @@ export const UserDataTable = ({ data, onUserEdit }: { data: UserInfo[], onUserEd
     visibility: user.visibility,
     verified: user.verified,
     admin: user.admin,
-    averageScore: user.averageScore,
     birthYear: user.birthYear,
+    password: user.password,
   }));
 
   return (

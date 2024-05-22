@@ -9,4 +9,5 @@ export interface UserInfo {
     verified: boolean;
     admin: boolean;
     averageScore: number;
+    password?: string;
 }
