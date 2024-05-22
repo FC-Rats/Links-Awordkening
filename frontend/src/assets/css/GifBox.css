@@ -5,6 +5,10 @@
     border-radius: 10px;
 }
 
+.gif-box-rule p {
+    text-align: center;
+} 
+
 .gif {
     height: 100%;
     width: auto;
