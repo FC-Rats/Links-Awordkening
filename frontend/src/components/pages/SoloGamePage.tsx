@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { SoloGameTemplate } from "../templates/SoloGameTemplate";
+import { SoloGameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 
 
 export const SoloGamePage = () => {
-    const [isDataLoading, setIsDataLoading] = useState(true);
+    const [isDataLoading, setIsDataLoading] = useState(false);
     const [data, setData] = useState([]);
     const [error, setError] = useState(false);
 
@@ -24,23 +24,23 @@ export const SoloGamePage = () => {
         }, []);
      */
 
-    useEffect(() => {
-        async function fetchData() {
-            setIsDataLoading(true)
-            try {
-                const response = await fetch(`http://localhost/Links-Awordkening/api/Log/test.php`)
-                const data = await response.json()
-                setData(data)
-                console.log(data)
-            } catch (err) {
-                console.log('===== error =====', err)
-                setError(true)
-            } finally {
-                setIsDataLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         setIsDataLoading(true)
+    //         try {
+    //             const response = await fetch(`http://localhost/Links-Awordkening/api/Log/test.php`)
+    //             const data = await response.json()
+    //             setData(data)
+    //             console.log(data)
+    //         } catch (err) {
+    //             console.log('===== error =====', err)
+    //             setError(true)
+    //         } finally {
+    //             setIsDataLoading(false)
+    //         }
+    //     }
+    //     fetchData()
+    // }, [])
 
     if (error) {
         return <span>Oups il y a eu un problème</span>

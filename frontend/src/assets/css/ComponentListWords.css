@@ -1,12 +1,17 @@
 .wrapper-list-words {
-    width: 15% ;
+    min-width: 250px ;
     border-radius: 15px;
-    height: 80vh;
+    min-height: 500px;
     background-color: var(--parchment);
     color: var(--coffee);
     font-weight: bolder;
     display: flex;
     flex-direction: column;
+    margin: 15px!important;
+
+}
+.wrapper-list-words h3 {
+    text-align: center;
 }
 
 .wrapper-list-words ol{
