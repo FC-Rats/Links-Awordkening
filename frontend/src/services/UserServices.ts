@@ -101,3 +101,39 @@ export async function updateUser(userData : Record<string, string | number | nul
         console.error('Une erreur s\'est produite : ', error);
     }
 }
+
+/**
+ * @function getStats
+ * @description Récupère les URI des ressources membres de la ressource collection dans le corps de la réponse.  
+ * 
+ * @param param
+ * @returns {JSON} - Réponse de la requête
+ */
+export async function getStats(param: Record<string, number | undefined>) {
+    const url = `${process.env.REACT_APP_API_URL}user/stats.php`;
+    const key = Object.keys(param)[0];
+    const value = param[key];
+    if (value === undefined) {
+        throw new Error('Missing parameter value');
+    }
+    const queryString = `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    try {
+        const response = await fetch(`${url}?${queryString}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Réponse du serveur : ', responseData);
+            return responseData;
+        } else {
+            console.error('Erreur lors de la requête : ', response.status);
+            return response.status;
+        }
+    } catch (error) {
+        console.error('Une erreur s\'est produite : ', error);
+    }
+}

@@ -77,7 +77,7 @@ export async function createScore(ScoreData: Record<string, string | number>) {
  * @param ScoreData 
  * @returns {JSON} - Réponse de la requête
  */
-export async function updateFriend(ScoreData: Record<string, string | number>) {
+export async function updateScore(ScoreData: Record<string, string | number>) {
     try {
         const response = await fetch(url, {
             method: 'PUT',

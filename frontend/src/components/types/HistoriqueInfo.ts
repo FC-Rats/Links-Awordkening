@@ -1,10 +1,9 @@
 export interface HistoriqueInfo {
     id: number;
-    date: string;
-    name_game: string;
+    dateTime: string;
+    name: string;
     type : string;
-    players : null | string[];
+    idHost : number;
     score: number;
-    givenwords : string[];
-    outputwords : string[];
+    words : string[];
 }

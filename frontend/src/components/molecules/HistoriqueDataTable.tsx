@@ -1,61 +1,71 @@
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridCellParams } from '@mui/x-data-grid';
-import { HistoriqueInfo } from '../types/HistoriqueInfo'; 
+import { HistoriqueInfo } from '../types/HistoriqueInfo';
 import '../../assets/css/DataTable.css';
 
 export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'date', headerName: 'Date', width: 200 },
-        { field: 'name_game', headerName: 'Name Game', width: 230 },
+        { field: 'dateTime', headerName: 'Date', width: 200 },
+        { field: 'name', headerName: 'Name Game', width: 230 },
         { field: 'type', headerName: 'Type', width: 110 },
-        { field: 'players', headerName: 'Players', width: 300, renderCell: (params: GridCellParams) => {
-            if (params.value === null) {
-                return "";
-            } else {
-                return (params.value as string[]).join(', ');
+        { field: 'idHost', headerName: 'Host', width: 110 },
+/*         {
+            field: 'players', headerName: 'Players', width: 300, renderCell: (params: GridCellParams) => {
+                if (params.value === null) {
+                    return "";
+                } else {
+                    return (params.value as string[]).join(', ');
+                }
             }
-        }},
+        }, */
         { field: 'score', headerName: 'Score', width: 150 },
-        { field: 'givenwords', headerName: 'Given Words', width: 220, renderCell: (params: GridCellParams) => {
-            return (params.value as string[]).join(', ');
-        }},
-        { field: 'outputwords', headerName: 'Output Words', width: 480, renderCell: (params: GridCellParams) => {
-            return (params.value as string[]).join(', ');
-        }},
+        {
+            field: 'words', headerName: 'Mots', width: 220, renderCell: (params: GridCellParams) => {
+                const value = params.value as string;
+
+                if (typeof value === 'string') {
+                    return value
+                        .split(',')
+                        .filter(word => word.trim() !== '' && word.trim() !== 'null' && word.trim() !== 'undefined')
+                        .join(', ');
+                }
+
+                return '';
+            }
+        }
     ];
 
     const rows: GridRowsProp = data.map((historique) => ({
         id: historique.id,
-        date: historique.date,
-        name_game: historique.name_game,
+        dateTime: historique.dateTime,
+        name: historique.name,
         type: historique.type,
-        players: historique.players,
+        idHost: historique.idHost,
         score: historique.score,
-        givenwords: historique.givenwords,
-        outputwords: historique.outputwords
+        words: historique.words
     }));
 
     return (
         <div style={{ height: 'auto', width: '100%' }}>
             <DataGrid
-                rows={rows} 
+                rows={rows}
                 columns={columns}
                 slots={{ toolbar: GridToolbar }}
                 slotProps={{
                     toolbar: {
-                    showQuickFilter: true,
+                        showQuickFilter: true,
                     },
                 }}
                 initialState={{
                     filter: {
-                filterModel: {
-                    items: [],
-                    quickFilterValues: [],
-                },
-                },
+                        filterModel: {
+                            items: [],
+                            quickFilterValues: [],
+                        },
+                    },
                     pagination: { paginationModel: { pageSize: 5 } },
-                }} 
-                pageSizeOptions={[5, 10]}/>
+                }}
+                pageSizeOptions={[5, 10]} />
         </div>
     );
 }
