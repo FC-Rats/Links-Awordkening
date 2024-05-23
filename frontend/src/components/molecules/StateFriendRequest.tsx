@@ -3,35 +3,39 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
-import { green } from '@mui/material/colors';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
-import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 import '../../assets/css/StateFriendRequest.css'
 import {FriendRequestProps} from '../types/FriendRequestProps'
+import RetirerFriend from './RetirerFriend';
+import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 
+interface FriendsStatesProps {
+  acceptFriend : (id :number) => void;
+  refuseFriend : (id :number) => void;
+  friend : FriendRequestProps,
+}
 
-function StateFriend({ friend }: FriendRequestProps) {
+const StateFriendRequest : React.FC<FriendsStatesProps> = ({ refuseFriend, acceptFriend, friend }) => {
   return (
     <Card sx={{ display: 'flex', width: '100%' }} className='card-StateFriendRequest'>
       <CardContent sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, width: '100%', flexWrap: 'wrap' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Avatar
-            sx={{ bgcolor: green[700] }}
             alt="?"
-            src="/broken-image.jpg"
+            src={friend.profilPicture}
           />
           <Typography component="span" variant="h6">
             {friend.username}
           </Typography>
         </Box>
         <CardActions>
-          <AcceptRefuseFriendRequest isAcceptingButton={false} friend={friend} />
-          <AcceptRefuseFriendRequest isAcceptingButton={true} friend={friend} />
+          <AcceptRefuseFriendRequest isAcceptingButton={false} friend={friend} acceptFriend={acceptFriend} refuseFriend={refuseFriend}/>
+          <AcceptRefuseFriendRequest isAcceptingButton={true} friend={friend} refuseFriend={refuseFriend} acceptFriend={acceptFriend} />
         </CardActions>
       </CardContent>
     </Card>
   )
 }
 
-export default StateFriend
+export default StateFriendRequest

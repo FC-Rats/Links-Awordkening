@@ -1,3 +1,3 @@
 export interface FriendRequestProps {
-    friend: { id: number; username: string };
+    id: number; username: string, profilPicture: string;
 }

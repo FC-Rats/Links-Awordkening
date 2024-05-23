@@ -22,7 +22,6 @@ export const AlertBox : React.FC<AlertBoxProps> = ({ severity, open, message, ha
             >
                 <Alert
                     severity = {sev}
-                    variant="filled"
                     sx={{ width: '100%' }}
                 >
                     {message}

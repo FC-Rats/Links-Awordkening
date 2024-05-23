@@ -1,3 +1,3 @@
 export interface ContainerFriendRequestsProps {
-    friends: { id: number; username: string }[];
+    friends: { id: number; username: string, profilPicture: string }[];
 }

@@ -83,10 +83,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'DELETE':
         // Traitement pour la méthode DELETE
-        if (isset($data['idFriend'])) {
+        if (isset($_GET['idFriend']) && isset($_GET['idUser'])) {
             $delete = $db->query(
-                "DELETE FROM LA_FRIEND WHERE idFriend = :idFriend",
-                [[":idFriend", $_GET['idFriend']]]
+                "DELETE FROM LA_FRIEND WHERE idFriend = :idFriend AND idUser = :idUser",
+                [[":idFriend", $_GET['idFriend']],[":idUser", $_GET['idUser']]]
             );
             echo json_encode($delete);
         } else {

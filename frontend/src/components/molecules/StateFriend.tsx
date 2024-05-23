@@ -11,27 +11,30 @@ import '../../assets/css/StateFriendRequest.css'
 import {FriendRequestProps} from '../types/FriendRequestProps'
 import RetirerFriend from './RetirerFriend';
 
+interface FriendsStatesProps {
+  deleteFriend : (id :number) => void;
+  friend : FriendRequestProps,
+}
 
-function StateFriendRequest({ friend }: FriendRequestProps) {
+const StateFriend : React.FC<FriendsStatesProps> = ({ deleteFriend, friend }) => {
   return (
     <Card sx={{ display: 'flex', width: '100%' }} className='card-StateFriendRequest'>
       <CardContent sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, width: '100%', flexWrap: 'wrap' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Avatar
-            sx={{ bgcolor: green[700] }}
             alt="?"
-            src="/broken-image.jpg"
+            src={friend.profilPicture}
           />
           <Typography component="span" variant="h6">
             {friend.username}
           </Typography>
         </Box>
         <CardActions>
-          <RetirerFriend friend={friend} />
+          <RetirerFriend friend={friend} deleteFriendFromList={deleteFriend}/>
         </CardActions>
       </CardContent>
     </Card>
   )
 }
 
-export default StateFriendRequest
+export default StateFriend
