@@ -1,4 +1,6 @@
 const url = `${process.env.REACT_APP_API_URL}log/`;
+const token = localStorage.getItem("token");
+
 /**
  * @function getLogs
  * @description Récupère les URI des ressources membres de la ressource collection dans le corps de la réponse.  
@@ -19,11 +21,17 @@ export async function getLogs(params?: Record<string, string | number | Array<st
         .join('&')
     : '';
     try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(`${url}?${queryString}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {

@@ -1,5 +1,6 @@
 <?php
 include_once('../cors.php');
+include_once('../../configuration.php');
 
 session_start();
 

@@ -1,5 +1,6 @@
 <?php
 include_once('../cors.php');
+include_once('../../configuration.php');
 
 session_start();
 
@@ -18,6 +19,8 @@ POST: INSERT - Dans body
 PUT: UPDATE - Dans body
 DELETE: DELETE - Dans l'url
 */
+
+include_once('../validate.php');
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -63,6 +66,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'PUT':
+        validateJWT($config, $authorizationHeader);
         // Traitement pour la méthode PUT
         $jsonData = file_get_contents('php://input');
         if (!empty($jsonData)) {

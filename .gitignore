@@ -12,3 +12,4 @@ frontend/package.json
 Game/C/datafiles/*.txt
 Game/server/env-py/
 Game/server/classes/__pycache__
+api/vendor

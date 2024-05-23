@@ -76,13 +76,14 @@ export const SignInPage : React.FC = () => {
                  open: true,
                  message : data.message
             }));
-            handleSuccessfulLogin(data.data);
+            handleSuccessfulLogin(data.data,data.token);
         }
     };
 
-    const handleSuccessfulLogin = (userData: UserInfo) => {
-        logIn(userData);
-        navigate("/account-param");
+    const handleSuccessfulLogin = (userData: UserInfo, token:string) => {
+        logIn(userData,token);
+        navigate("/");
+        window.location.reload();
     };
 
     const handleInputChange = (name: string, value: string) => {

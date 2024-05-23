@@ -1,5 +1,6 @@
 <?php
 include_once('../cors.php');
+include_once('../../configuration.php');
 
 session_start();
 
@@ -18,6 +19,9 @@ POST: INSERT - Dans body
 PUT: UPDATE - Dans body
 DELETE: DELETE - Dans l'url
 */
+
+include_once('../validate.php');
+validateJWT($config, $authorizationHeader);
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':

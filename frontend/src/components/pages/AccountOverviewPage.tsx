@@ -6,16 +6,13 @@ import { getStats } from "../../services/UserServices";
 import { AppContext } from "../hooks/AppContext";
 
 const createAccountStatProps = (response: any[]): AccountStatProps => {
-    // Calculer le nombre de jeux
     const statGameCount = response.length;
 
-    // Extraire les scores
     const scores = response.map(item => item.score);
     const statBestScore = Math.max(...scores);
     const statTotalScore = scores.reduce((acc, score) => acc + score, 0);
     const statAverageScore = parseFloat((statTotalScore / statGameCount).toFixed(2));
 
-    // Compter les occurrences de chaque mot
     const wordOccurrences: { [key: string]: number } = {};
     response.forEach(item => {
         if (item.words) {
@@ -30,7 +27,6 @@ const createAccountStatProps = (response: any[]): AccountStatProps => {
         }
     });
 
-    // Trier les mots par fréquence et en prendre les 5 premiers
     const sortedWords = Object.entries(wordOccurrences)
         .sort((a, b) => b[1] - a[1])
         .map(entry => entry[0]);

@@ -42,9 +42,10 @@ export async function passwordVerify(formData: { username: string; password: str
  * @param formData username et password de l'utilisateur
  * @returns {boolean} ce sont des identifiants de connexion valides ou non
  */
-export async function accountConnection(formData: { username: string; password: string; }) : Promise<{ success: boolean; message: string; data: UserInfo }> {
+export async function accountConnection(formData: { username: string; password: string; }) : Promise<{ success: boolean; message: string; data: UserInfo; token:string }> {
     let success = false;
     let message = '';
+    let token = '';
     let dataUser = {
         id: 0,
         email: "",
@@ -60,14 +61,17 @@ export async function accountConnection(formData: { username: string; password: 
     try {
         const userResponse = await getUsers({ username: formData.username });
         if (userResponse.length <= 0) {
-            return { success, message : "Nom d'utilisateur invalide", data : dataUser};
+            return { success, message : "Nom d'utilisateur invalide", data : dataUser, token};
         }
         const passwordResponse = await passwordVerify({
             username: formData.username,
             password: formData.password
         });
-        if (!passwordResponse.response) {
-            return { success, message : "Le mot de passe n'est pas valide", data : dataUser};
+        if (passwordResponse.error) {
+            return { success, message : "Le mot de passe n'est pas valide", data : dataUser, token};
+        } else if (passwordResponse.token) {
+            token = passwordResponse.token;
+            console.log(token);
         }
         success = true;
         message = "Connexion établie";
@@ -85,10 +89,13 @@ export async function accountConnection(formData: { username: string; password: 
             birthYear: userResponse[0]['birthYear']
         });
 
+        // token en context
+
     } catch (error) {
+        success = false;
         message = 'Une erreur s\'est produite lors de la connexion.';
     }
-    return { success, message, data : dataUser};
+    return { success, message, data : dataUser, token};
 }
 
 /**

@@ -1,4 +1,3 @@
-import { Visibility } from "@mui/icons-material";
 import { getUsers } from "./UserServices";
 import { ContainerFriendRequestsProps } from "../components/types/ContainerFriendRequestsProps";
 

@@ -7,6 +7,9 @@ if (!class_exists('Connection')) {
     include('../../Includes/connection-function.php');
 }
 
+include_once('../validate.php');
+validateJWT($config, $authorizationHeader);
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Si des données sont présentes dans la requête

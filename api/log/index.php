@@ -1,5 +1,6 @@
 <?php
 include_once('../cors.php');
+include_once('../../configuration.php');
 
 session_start();
 
@@ -19,8 +20,11 @@ PUT: UPDATE - Dans body
 DELETE: DELETE - Dans l'url
 */
 
+include_once('../validate.php');
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
+        validateJWT($config, $authorizationHeader);
         // Traitement pour la méthode GET
         $res = getQuery("SELECT * FROM LA_LOG", []);
         $sql = $res[0];
@@ -58,6 +62,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'PUT':
+        validateJWT($config, $authorizationHeader);
         // Traitement pour la méthode PUT
         $jsonData = file_get_contents('php://input');
         if (!empty($jsonData)) {

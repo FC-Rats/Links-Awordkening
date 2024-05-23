@@ -1,5 +1,7 @@
 <?php
 include_once('../cors.php');
+include_once('../authenticate.php');
+include_once('../../configuration.php');
 
 session_start();
 
@@ -16,7 +18,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (!empty($jsonData)) {
             $data = json_decode($jsonData, true);
             $res = passwordVerifyFunction($db, $data['username'], $data['password']);
-            echo json_encode(["response" => $res]);
+            if ($res) {
+                echo json_encode(["token" => hasValidCredentials($data['username'], $config)]);
+            } else {
+                echo json_encode(["error" => "Mot de passe incorrect"]);
+            }
         } else {
             echo json_encode(["error" => "Données non compatibles"]);
         }

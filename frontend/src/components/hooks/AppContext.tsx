@@ -14,24 +14,32 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         const userData = localStorage.getItem('user');
         return userData ? JSON.parse(userData) : undefined; // Replace testUser with undefined if needed
     });
+    const [token, setToken] = useState<string | undefined>();
 
-    const logIn = (userData: UserInfo) => {
+    const logIn = (userData: UserInfo, token:string) => {
+        setToken(token);
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', JSON.stringify(token));
     };
 
     const logOut = () => {
         setUser(undefined);
+        setToken(undefined);
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        window.location.reload();
     };
 
     useEffect(() => {
         if (user) {
             localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', JSON.stringify(token));
         } else {
             localStorage.removeItem('user');
+            localStorage.removeItem('token');
         }
-    }, [user]);
+    }, [user,token]);
 
     return (
         <AppContext.Provider value={{ user, logIn, logOut }}>
