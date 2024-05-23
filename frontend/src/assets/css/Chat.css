@@ -1,0 +1,18 @@
+#chatbox {
+    width: 300px;
+    background: #d2b48c7c;
+    padding: 0.5rem;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.chat-msg {
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+    color: white;
+}
+
+.chat-nickname {
+    color: red;
+    font-weight: bold;
+}
