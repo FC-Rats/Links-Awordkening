@@ -52,7 +52,7 @@ const SearchFriends: React.FC<SearchFriendsProps> = ({ onSubmit, onInputChange, 
           isOptionEqualToValue={(option, value) => option.id === value.id}
           renderInput={(params) => <TextField {...params} label="Chercher un ami" />}
         />
-        <SubmitButton text="Chercher"></SubmitButton>
+        <SubmitButton text="Ajouter"></SubmitButton>
       </Stack>
     </form>
   );

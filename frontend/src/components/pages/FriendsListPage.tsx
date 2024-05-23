@@ -31,63 +31,64 @@ export const FriendsListPage = () => {
         }));        
     };
 
+    const fetchPublicFriends = async () => {
+      const data = await selectPublicFriends(user?.user?.id || 0);
+        setDataUsers(data.dataUser);
+    };
+
+    const fetchPendingFriends = async () => {
+      const data = await selectPendingFriends(user?.user?.id || 0);
+        setDataPendingFriends(data.dataUser);
+    };
+
+    const fetchFriends = async () => {
+      const data = await selectListFriends(user?.user?.id || 0);
+        setDataFriends(data.dataUser);
+    };     
+
     /* Listes de users */
     useEffect(() => {
-        const fetchPublicFriends = async () => {
-          const data = await selectPublicFriends(user?.user?.id || 0);
-          if (data.success) {
-            setDataUsers(data.dataUser);
-          }
-        };
-        const fetchPendingFriends = async () => {
-          const data = await selectPendingFriends(user?.user?.id || 0);
-          if (data.success){
-            setDataPendingFriends(data.dataUser);
-          }
-        };
-        const fetchFriends = async () => {
-          const data = await selectListFriends(user?.user?.id || 0);
-          if (data.success) {
-            setDataFriends(data.dataUser);
-          }
-        };        
-    
         fetchPublicFriends();
         fetchPendingFriends();
         fetchFriends();
-      }, [user?.user?.id]);
+    }, []);
 
-      
+    const refreshData = async () => {
+        await fetchPublicFriends();
+        await fetchPendingFriends();
+        await fetchFriends();
+    };
+
     const handleSubmit = async () => {
         console.log("ADD");
         if(user?.user?.id !== undefined && search != 0){
-          console.log(user?.user?.id,search);
-          const data = await RequestFriends(user?.user?.id,search); // Fonction de connexion
-          console.log(data);
-          if (!data.success) {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'error',
-                   open: true,
-                   message : data.message
-              }));      
-          } else {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'success',
-                   open: true,
-                   message : data.message
-              }));
-              window.location.reload();
+            console.log(user?.user?.id,search);
+            const data = await RequestFriends(user?.user?.id, search); // Fonction de connexion
+            console.log(data);
+            if (!data.success) {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'error',
+                    open: true,
+                    message : data.message
+                }));      
+            } else {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'success',
+                    open: true,
+                    message : data.message
+                }));
+                await refreshData();
+            }
         }
-      }
     };
 
     const handleInputChange = (value: number | undefined) => {
         if (value == undefined) {
-          setSearch(0);
+            setSearch(0);
         } else {
-          setSearch(value);
+            setSearch(value);
         }
     };
 
@@ -95,80 +96,80 @@ export const FriendsListPage = () => {
         console.log("DELETE");
         console.log(id);
         if(user?.user?.id !== undefined){
-          console.log(user?.user?.id,id);
-          const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
-          console.log(data);
-          if (!data.success) {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'error',
-                   open: true,
-                   message : data.message
-              }));      
-          } else {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'success',
-                   open: true,
-                   message : data.message
-              }));
-              window.location.reload();
+            console.log(user?.user?.id,id);
+            const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
+            console.log(data);
+            if (!data.success) {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'error',
+                    open: true,
+                    message : data.message
+                }));      
+            } else {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'success',
+                    open: true,
+                    message : data.message
+                }));
+                await refreshData();
+            }
         }
-      }
     };
 
     const handleRefuseFriend  = async (id: number) => {
         console.log("REFUSE");
         console.log(id);
         if(user?.user?.id !== undefined){
-          const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
-          console.log(data);
-          if (!data.success) {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'error',
-                   open: true,
-                   message : data.message
-              }));      
-          } else {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'success',
-                   open: true,
-                   message : data.message
-              }));
-              window.location.reload();
+            const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
+            console.log(data);
+            if (!data.success) {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'error',
+                    open: true,
+                    message : data.message
+                }));      
+            } else {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'success',
+                    open: true,
+                    message : data.message
+                }));
+                await refreshData();
+            }
         }
-      }
     };
 
     const handleAcceptFriend = async (id: number) =>  {
         console.log("ACCEPT");
         console.log(id);
         if(user?.user?.id !== undefined){
-          const data = await acceptFriends(user?.user?.id,id); // Fonction de connexion
-          console.log(data);
-          if (!data.success) {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'error',
-                   open: true,
-                   message : data.message
-              }));      
-          } else {
-              setAlertBox(prevState => ({
-                  ...prevState,
-                   severity : 'success',
-                   open: true,
-                   message : data.message
-              }));
-              window.location.reload();
-        }
-      } 
-    }
+            const data = await acceptFriends(user?.user?.id,id); // Fonction de connexion
+            console.log(data);
+            if (!data.success) {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'error',
+                    open: true,
+                    message : data.message
+                }));      
+            } else {
+                setAlertBox(prevState => ({
+                    ...prevState,
+                    severity : 'success',
+                    open: true,
+                    message : data.message
+                }));
+                await refreshData();
+            }
+        } 
+    };
 
     return (
-       <>
+        <>
             <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
             <FriendsListTemplate  
                 onInputChange={handleInputChange} 
@@ -176,8 +177,10 @@ export const FriendsListPage = () => {
                 deleteFriend={handleDeleteFriend}
                 acceptFriend={handleAcceptFriend}
                 refuseFriend={handleRefuseFriend}
-                dataFriends={dataFriends} dataPendingFriends={dataPendingFriends} dataUsers={dataUsers}
+                dataFriends={dataFriends} 
+                dataPendingFriends={dataPendingFriends} 
+                dataUsers={dataUsers}
             />
-       </>
+        </>
     );
-}
+};
