@@ -1,4 +1,5 @@
 const url = `${process.env.REACT_APP_API_URL}game/`;
+const token = localStorage.getItem("token");
 
 /**
  * @function getGames
@@ -20,11 +21,17 @@ export async function getGames(params?: Record<string, string | number | Array<s
         .join('&')
     : '';
     try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(`${url}?${queryString}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {
@@ -49,11 +56,17 @@ export async function getGames(params?: Record<string, string | number | Array<s
  */
 export async function createGame(GameData : Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(GameData),
         });
 
@@ -79,11 +92,17 @@ export async function createGame(GameData : Record<string, string | number>) {
  */
 export async function updateGame(GameData : Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
+            method: 'POST',
+            headers: headers,
             body: JSON.stringify(GameData),
         });
 

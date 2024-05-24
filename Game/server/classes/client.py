@@ -80,9 +80,11 @@ class WebsocketClient:
             self.nickname = nickname
         id = args.get('id')
         if id :
+            print(f"{self.id} en delete")
             del self.server.clients[self.id]
             self.id = id
             self.server.clients[self.id] = self
+        print(f"{self.id} connecté")
 
     async def join_chat(self):
         """

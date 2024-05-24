@@ -86,11 +86,17 @@ export async function createLog(logData: Record<string, string | number>) {
  */
 export async function updateLog(logData: Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(logData),
         });
 

@@ -109,7 +109,7 @@ export async function updateUser(userData : Record<string, string | number | nul
  * @returns {JSON} - Réponse de la requête
  */
 export async function getStats(param: Record<string, number | undefined>) {
-    const url = `${process.env.REACT_APP_API_URL}user/stats.php`;
+    const urlstat = `${url}stats.php`;
     const key = Object.keys(param)[0];
     const value = param[key];
     if (value === undefined) {
@@ -117,11 +117,17 @@ export async function getStats(param: Record<string, number | undefined>) {
     }
     const queryString = `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
     try {
-        const response = await fetch(`${url}?${queryString}`, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${urlstat}?${queryString}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {

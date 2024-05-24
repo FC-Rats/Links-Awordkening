@@ -2,6 +2,7 @@ import { getUsers } from "./UserServices";
 import { ContainerFriendRequestsProps } from "../components/types/ContainerFriendRequestsProps";
 
 const url = `${process.env.REACT_APP_API_URL}friend/`;
+const token = localStorage.getItem("token");
 
 /**
  * @function getFriends
@@ -23,11 +24,17 @@ export async function getFriends(params?: Record<string, string | number | Array
         .join('&')
     : '';
     try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(`${url}?${queryString}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {
@@ -52,14 +59,20 @@ export async function getFriends(params?: Record<string, string | number | Array
  */
 export async function createFriend(FriendData: Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(FriendData),
         });
-
+        
         if (response.ok) {
             const responseData = await response.json();
             console.log('Réponse du serveur : ', responseData);
@@ -82,11 +95,17 @@ export async function createFriend(FriendData: Record<string, string | number>) 
  */
 export async function updateFriend(FriendData: Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(FriendData),
         });
 
@@ -115,11 +134,17 @@ export async function deleteFriend(id: number, idFriend: number) {
 
     const queryString = `${encodeURIComponent('idFriend')}=${encodeURIComponent(idFriend)}&${encodeURIComponent('idUser')}=${encodeURIComponent(id)}`;
     try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(`${url}?${queryString}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {

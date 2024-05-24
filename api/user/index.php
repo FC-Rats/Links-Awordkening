@@ -66,7 +66,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'PUT':
-        validateJWT($config, $authorizationHeader);
         // Traitement pour la méthode PUT
         $jsonData = file_get_contents('php://input');
         if (!empty($jsonData)) {

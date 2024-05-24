@@ -1,4 +1,5 @@
 const url = `${process.env.REACT_APP_API_URL}score/`;
+const token = localStorage.getItem("token");
 
 /**
  * @function getScores
@@ -20,11 +21,17 @@ export async function getScores(params?: Record<string, string | number | Array<
         .join('&')
     : '';
     try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(`${url}?${queryString}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
         });
 
         if (response.ok) {
@@ -49,11 +56,17 @@ export async function getScores(params?: Record<string, string | number | Array<
  */
 export async function createScore(ScoreData: Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(ScoreData),
         });
 
@@ -79,11 +92,17 @@ export async function createScore(ScoreData: Record<string, string | number>) {
  */
 export async function updateScore(ScoreData: Record<string, string | number>) {
     try {
-        const response = await fetch(url, {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${url}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(ScoreData),
         });
 

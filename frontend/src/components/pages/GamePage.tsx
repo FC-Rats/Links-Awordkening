@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { SoloGameTemplate } from "../templates/GameTemplate";
+import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
 import { AppContext } from "../hooks/AppContext";
 import { AlertBox } from "../molecules/AlertBox";
 
-export const SoloGamePage = () => {
+export const GamePage = () => {
     /* SNACK BAR - ALERT HANDLING */
     const [alertBox, setAlertBox] = useState({
         severity: "success",
@@ -25,7 +25,10 @@ export const SoloGamePage = () => {
                 open: false,
         }));        
     };
-    
+
+    /* GAME STATE */
+    const [hasGameStarted, setHasGameStarted] = useState(false);
+
     /* LOADER */
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -33,7 +36,8 @@ export const SoloGamePage = () => {
 
     /* WEBSOCKETS */
     const user = useContext(AppContext);
-    const ws = useRef<WebSocket | null>(null);
+    const wsc = useRef<WebSocket | null>(null);
+    const wsg = useRef<WebSocket | null>(null);
     const [connected, setConnected] = useState(false);
 
     /* Tchat */
@@ -62,7 +66,6 @@ export const SoloGamePage = () => {
     const updateGraphWithNewWord = (word: string) => {
         setNewWord(word);
     };
-
 
     /*     useEffect(() => {
             setIsDataLoading(true);
@@ -199,7 +202,7 @@ export const SoloGamePage = () => {
             ) : (
                 <>
                 <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
-                <SoloGameTemplate 
+                <GameTemplate 
                 newWord={newWord} 
                 updateGraphWithNewWord={updateGraphWithNewWord} 
                 toggleChatVisibility={toggleChatVisibility} 

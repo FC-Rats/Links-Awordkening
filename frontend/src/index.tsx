@@ -17,7 +17,7 @@ import { JoinRoomPage } from './components/pages/JoinRoomPage';
 import { SetUpGamePage } from './components/pages/SetUpGamePage';
 import { SignInPage } from './components/pages/SignInPage';
 import { SignUpPage } from './components/pages/SignUpPage';
-import { SoloGamePage } from './components/pages/SoloGamePage';
+import { GamePage } from './components/pages/GamePage';
 import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
 import { AppContext, AppContextProvider } from './components/hooks/AppContext';
@@ -38,7 +38,6 @@ const root = ReactDOM.createRoot(
 
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const user = useContext(AppContext);
-  console.log(user?.user);
   if (!user?.user) {
     return <Navigate to="/" replace />;
   }
@@ -47,7 +46,6 @@ const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
 
 const RequireAuthAdmin: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const user = useContext(AppContext);
-  console.log(user?.user?.admin);
   if (!user?.user?.admin == true) {
     return <Navigate to="/" replace />;
   }
@@ -75,7 +73,7 @@ root.render(
           <Route path="/set-up-game" element={<RequireAuth><SetUpGamePage /></RequireAuth>} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/game" element={<RequireAuth><SoloGamePage /></RequireAuth>} />
+          <Route path="/game" element={<RequireAuth><GamePage /></RequireAuth>} />
           <Route path="/logs" element={<RequireAuthAdmin><LogsPage /></RequireAuthAdmin>} />
         </Routes>
       </Router>

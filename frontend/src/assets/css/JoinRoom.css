@@ -1,0 +1,12 @@
+.JoinTitle h1{
+    margin-top: 1rem!important;
+}
+
+.form-join {
+    align-items: flex-start!important;
+}
+
+.btn-join{
+    align-items: flex-start!important;
+    padding: 0!important;
+}

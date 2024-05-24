@@ -21,7 +21,7 @@ interface GameTemplateProps {
     SumbitMessageChat: () => void;
 }
 
-export const SoloGameTemplate: React.FC<GameTemplateProps> = ({
+export const GameTemplate: React.FC<GameTemplateProps> = ({
     newWord,
     updateGraphWithNewWord,
     toggleChatVisibility,

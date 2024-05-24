@@ -3,6 +3,7 @@ import { createLog } from "./LogServices";
 import { sendMail } from "./SendMailsServices";
 import { createUser, getUsers, updateUser } from "./UserServices";
 import { isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "./UtilsServices";
+const token = localStorage.getItem("token");
 
 /**
  * @function passwordVerify

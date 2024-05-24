@@ -6,7 +6,7 @@ require_once('../vendor/autoload.php');
 function hasValidCredentials($name, $config) {
     $secret_Key  = $config['JWT']['secretKey'];
     $date   = new DateTimeImmutable();
-    $expire_at     = $date->modify('+6 minutes')->getTimestamp();
+    $expire_at     = $date->modify('+1200 minutes')->getTimestamp();
     $domainName = $config['JWT']['domainName'];
     $username   = $name;
 

@@ -1,18 +1,9 @@
-import React from "react";
 import { CenteredLogo } from "../atoms/CenteredLogo";
-import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
-import { createLog, getLogs } from "../../services/LogServices";
-import { getIp, isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "../../services/UtilsServices";
-import { Alert, Snackbar } from "@mui/material";
-import { AlertBox } from "../molecules/AlertBox";
-import { useUserContext } from "../hooks/AppContext";
-import { getUsers } from "../../services/UserServices";
+import { getLogs } from "../../services/LogServices";
 
 export const HomePageTemplate = () => {
-    const { logOut } = useUserContext(); 
-
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         /*  TEST POSTS    
