@@ -14,7 +14,11 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         const userData = localStorage.getItem('user');
         return userData ? JSON.parse(userData) : undefined; // Replace testUser with undefined if needed
     });
-    const [token, setToken] = useState<string | undefined>();
+    const [token, setToken] = useState<string | undefined>(() => {
+        // Get user data from localStorage if it exists
+        const tokenData = localStorage.getItem('token');
+        return tokenData ? JSON.parse(tokenData) : undefined; // Replace testUser with undefined if needed
+    });
 
     const logIn = (userData: UserInfo, token:string) => {
         setToken(token);
