@@ -10,7 +10,7 @@ class Game:
         self.id = id
         self.code = code 
         self.server = server
-        self.players = {} #{id_joueur : class Player}
+        self.players = {}  # {id_joueur : class Player}
         self.max_player = max_player
         self.turn_duration = timedelta(minutes=2)
         self.start_time = None
@@ -30,8 +30,8 @@ class Game:
         asyncio.create_task(self.check_time())
 
         words_game = await self.get_start_words()
-        for id, player in self.players.items():
-            player['word_chain'].extend(words_game)
+        for player in self.players.values():
+            player.word_chain.extend(words_game)
 
     async def check_time(self):
         while datetime.now() < self.end_time:
@@ -44,4 +44,4 @@ class Game:
 
     async def end_game(self):
         self.game_started = False
-        self.server.end_game(self.id)
+        await self.server.end_game(self.id)

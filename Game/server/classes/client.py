@@ -62,7 +62,10 @@ class WebsocketClient:
         if self.nickname:
             message = args.get('message')
             if message:
-                await self.server.send_to_all(id, f"{self.nickname}: {message}")
+                await self.server.send_to_all(self.id, self.dump_data({
+                    'action': 'send_message',
+                    'args': {'message': f"{self.nickname}: {message}"}
+                }))
 
     async def leave_chat(self):
         if self.nickname:
