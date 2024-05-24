@@ -1,8 +1,5 @@
-import React from "react";
 import "../../assets/css/Link.css"
 import { LinkProps } from "../types/LinkProps"; 
-
-
 
 export const Link = (props:LinkProps) => {
 

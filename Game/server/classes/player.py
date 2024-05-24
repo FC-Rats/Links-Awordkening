@@ -26,7 +26,7 @@ class Player :
         elif re.search(r'\d', word):
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Le mot a déjà été utilisé !'}
+                'args': {'return': 'error', 'msg': 'Le mot ne doit pas contenir de nombres !'}
             }
         elif re.search(r'[^\w]', word, re.UNICODE):
             return {

@@ -36,13 +36,13 @@ class WebsocketClient:
 
     async def handle_game(self, action, args):
         if action == "create_game":
-            await self.server.create_game(self.id, args.get('max_player'))
+            await self.server.create_game(self.id, self.websocket, args.get('max_player'))
         elif action == "join_game":
             await self.server.join_game(self.id, args.get('game_code'))
         elif action == "leave_game":
             await self.server.leave_game(self.id)
         elif action == "add_word":
-            await self.server.leave_game(self.id, self.websocket, args.get('word'))
+            await self.server.add_word(self.id, self.websocket, args.get('word'))
 
     async def send_data(self, args):
         nickname = args.get('nickname')
@@ -70,7 +70,7 @@ class WebsocketClient:
                 'action': 'leave_chat',
                 'args': {'return': 'success'}
             }))
-
+ 
     def load_data(self, data):
         try:
             return json.loads(data)

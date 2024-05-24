@@ -2,3 +2,20 @@
     width: 100%;
     max-width: 100%;
 }
+
+.css-1bm40f8-MuiStack-root>:not(style)~:not(style) {
+    margin-left: 16px;
+    padding: 7% 20px;
+}
+
+.graph {
+    flex-grow: 2;
+}
+
+.graph .container {
+    width: 100%;
+}
+
+.item-game {
+    flex-grow: 1;
+}

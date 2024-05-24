@@ -1,4 +1,3 @@
-import React from 'react';
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { UserInfo } from '../types/UserInfo';

@@ -1,6 +1,4 @@
-import React from "react";
 import "../../assets/css/CenteredLogo.css"
-
 
 export const CenteredLogo = () => {
 

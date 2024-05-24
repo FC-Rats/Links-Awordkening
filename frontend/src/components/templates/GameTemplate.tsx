@@ -29,17 +29,23 @@ export const SoloGameTemplate = () => {
                 <ContainerInfoPlayer />
                 <ContainerInfoGame />
             </Stack>
-            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
+            <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
+                <div className="item-game">
                 <ComponentListWords />
+                </div>
+                <div className="graph">
+                <Graph newWord={newWord}/>
+                </div>
+            </Stack>
+            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <Stack id="container-graph-submit" direction="column" spacing={2} alignItems="center" justifyContent="center">
-                    <Graph newWord={newWord}/>
                     <SubmitWord onSubmitWord={updateGraphWithNewWord} />
                 </Stack>
             </Stack>
-            <IconButton onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem', backgroundColor: "#547E5E"}}>
+            <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem'}}>
                 <ChatIcon />
             </IconButton>
-            <div style={{ position: 'fixed', bottom: '5rem', right: '1rem', display: isChatVisible ? 'block' : 'none'}}>
+            <div className={isChatVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', right: '1rem'}}>
                 <ChatComponent />
             </div>
         </Stack>

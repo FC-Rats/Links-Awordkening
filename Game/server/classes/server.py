@@ -33,18 +33,22 @@ class WebsocketServer:
             await client.handler(websocket)
         finally:
             del self.clients[client.id]
-            if client.game_id:
-                await self.remove_player_from_game(client.id)
+            if self.players[client.id]:
+                await self.leave_game(client.id)
 
         print(f"Utilisateur {client.id} déconnecté.")
 
-    async def create_game(self, client_id, max_player):
+    async def create_game(self, client_id, websocket, max_player):
         game_id = uuid4()
         game_code = self.generate_unique_code()
         game = Game(self, game_id, game_code, max_player)
         game.players[client_id] = Player(client_id)
         self.players[client_id] = game_id
         self.games[game_id] = game
+        await websocket.send(self.dump_data({
+                'action': 'create_game',
+                'args ': {'return': 'success', 'idJoin' : game_code }
+            }))
 
     async def join_game(self, client_id, game_code):
         for game_id, game in self.games.items():

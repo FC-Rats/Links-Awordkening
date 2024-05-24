@@ -1,6 +1,4 @@
-import React from "react";
 import "../../assets/css/CenteredTitle.css"
-
 
 export const CenteredTitle = (props:{text:string;}) => {
 
