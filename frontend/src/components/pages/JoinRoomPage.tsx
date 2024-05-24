@@ -36,7 +36,7 @@ export const JoinRoomPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const context = useContext(AppContext);
+/*   const context = useContext(AppContext);
   const { initializeWSG, closeWSG, saveWSG } = useUserContext();
   const [connected, setConnected] = useState(false);
 
@@ -114,7 +114,12 @@ export const JoinRoomPage = () => {
     };
     context?.wsgCurrent?.current?.send(JSON.stringify(data));
   };
+ */
 
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    console.log(formData);
+  };
   return (
     <>
       <AlertBox

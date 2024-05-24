@@ -42,7 +42,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     }, [user,token]);
 
     return (
-        <AppContext.Provider value={{ user, logIn, logOut }}>
+        <AppContext.Provider value={{ user, logIn, logOut, token }}>
             {children}
         </AppContext.Provider>
     );
