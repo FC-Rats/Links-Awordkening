@@ -9,18 +9,27 @@ import Graph from "../molecules/Graph";
 import { Stack, IconButton } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import "../../assets/css/GameTemplate.css";
+import { Message } from "../types/Message";
 
-export const SoloGameTemplate = () => {
-    const [newWord, setNewWord] = useState("");
-    const [isChatVisible, setIsChatVisible] = useState(false);
+interface GameTemplateProps {
+    newWord: string;
+    updateGraphWithNewWord: (word: string) => void;
+    toggleChatVisibility: () => void;
+    isChatVisible: boolean;
+    messages: Message[];
+    onInputChangeChat: (name: string, value: string) => void;
+    SumbitMessageChat: () => void;
+}
 
-    const updateGraphWithNewWord = (word: string) => {
-        setNewWord(word);
-    };
-
-    const toggleChatVisibility = () => {
-        setIsChatVisible(!isChatVisible);
-    };
+export const SoloGameTemplate: React.FC<GameTemplateProps> = ({
+    newWord,
+    updateGraphWithNewWord,
+    toggleChatVisibility,
+    isChatVisible,
+    messages,
+    onInputChangeChat,
+    SumbitMessageChat
+    }) => {
 
     return (
         <Stack direction="column" spacing={2}>
@@ -46,7 +55,7 @@ export const SoloGameTemplate = () => {
                 <ChatIcon />
             </IconButton>
             <div className={isChatVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', right: '1rem'}}>
-                <ChatComponent />
+                <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
             </div>
         </Stack>
     );
