@@ -53,21 +53,30 @@ class Player :
                 result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
                 if result.returncode == 0 :
+                    new_chart = []
                     if os.path.exists(new_path) and os.path.getsize(new_path) > 0:
                         with open(new_path, 'r') as file:
                             for line in file:
                                 elements = line.strip().split(',')
                                 if len(elements) > 1:
                                     new_entry = elements
-                                    self.chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
+                                    new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
                                 else :
                                     score = line.strip().split(':')
                                     self.score = int(float(score[1]) * 100)
-
-                        return {
-                            'action': 'add_word',
-                            'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
-                        }
+                        
+                        if new_chart == self.chart :
+                            return {
+                                'action': 'add_word',
+                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c'}
+                            }
+                        
+                        else :
+                            self.chart = new_chart
+                            return {
+                                'action': 'add_word',
+                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
+                            }
                 else :
                     return {
                         'action': 'add_word',
