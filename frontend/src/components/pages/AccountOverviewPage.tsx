@@ -8,6 +8,17 @@ import { AppContext } from "../hooks/AppContext";
 const createAccountStatProps = (response: any[]): AccountStatProps => {
     const statGameCount = response.length;
 
+    if (statGameCount === 0) {
+        return {
+            statGameCount,
+            statBestScore: 0,
+            statAverageScore: 0,
+            statTotalScore: 0,
+            words: [],
+            table: [],
+        };
+    }
+
     const scores = response.map(item => item.score);
     const statBestScore = Math.max(...scores);
     const statTotalScore = scores.reduce((acc, score) => acc + score, 0);

@@ -24,6 +24,12 @@ function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () =
     setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
   };
 
+  const handleAutocompleteChange = (event: any, value: { label: string; value: string } | null) => {
+    if (value) {
+      setFormData(prevFormData => ({ ...prevFormData, visibility: value.value }));
+    }
+  };
+
   const transformUserInfoToRecord = (userInfo: UserInfo): Record<string, string | number | null> => {
     return {
       id: userInfo.id,
@@ -83,6 +89,7 @@ function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () =
             options={options}
             getOptionLabel={(option) => option.label}
             value={options.find(option => option.value === formData.visibility) || null}
+            onChange={handleAutocompleteChange}
             renderInput={(params) => <TextField {...params} label="Visibilité" />}
           />
         </div>

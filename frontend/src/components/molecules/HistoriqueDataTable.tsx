@@ -9,15 +9,6 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
         { field: 'name', headerName: 'Name Game', width: 230 },
         { field: 'type', headerName: 'Type', width: 110 },
         { field: 'idHost', headerName: 'Host', width: 110 },
-/*         {
-            field: 'players', headerName: 'Players', width: 300, renderCell: (params: GridCellParams) => {
-                if (params.value === null) {
-                    return "";
-                } else {
-                    return (params.value as string[]).join(', ');
-                }
-            }
-        }, */
         { field: 'score', headerName: 'Score', width: 150 },
         {
             field: 'words', headerName: 'Mots', width: 220, renderCell: (params: GridCellParams) => {
