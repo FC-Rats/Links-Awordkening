@@ -58,7 +58,9 @@ class WebsocketClient:
         :param action: Action à effectuer
         :param args: Arguments de l'action
         """
-        if action == "create_game":
+        if action == "send_data":
+            await self.send_data(args)
+        elif action == "create_game":
             await self.server.create_game(self.id, self.websocket, args.get('max_player'))
         elif action == "join_game":
             await self.server.join_game(self.id, args.get('game_code'))
