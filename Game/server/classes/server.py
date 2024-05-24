@@ -96,6 +96,12 @@ class WebsocketServer:
                         'args': {'return': 'error', 'msg': 'La partie est pleine !'}
                     }))
                     return
+            else:
+                await self.clients[client_id].websocket.send(self.dump_data({
+                    'action': 'join_game',
+                    'args': {'return': 'error', 'msg': 'La partie a déjà commencé !'}
+                }))
+                return
         await self.clients[client_id].websocket.send(self.dump_data({
             'action': 'join_game',
             'args': {'return': 'error', 'msg': 'Partie introuvable !'}
