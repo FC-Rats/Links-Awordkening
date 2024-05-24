@@ -6,13 +6,14 @@ import os
 
 class Player: 
 
-    def __init__(self, id) -> None:
+    def __init__(self, id, game_id) -> None:
         """
         Initialise un nouveau joueur.
 
         :param id: ID unique du joueur
         """
         self.id = id  # ID unique du joueur
+        self.game_id = game_id # ID de la game dans lequel le joueur se trouve
         self.score = 0  # Score initial du joueur
         self.attempts = 10  # Nombre de tentatives restantes
         self.word_chain = []  # Liste des mots ajoutés par le joueur

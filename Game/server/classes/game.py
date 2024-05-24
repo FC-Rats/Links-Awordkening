@@ -53,7 +53,11 @@ class Game:
 
         await self.server.send_to_all(self.id, self.server.dump_data({
             'action': 'start_game',
-            'args': {'return': 'success'}
+            'args': {
+                'return': 'success',
+                'players': list(self.players.keys()),
+                'end_time': self.end_time.isoformat()
+            }
         }))
 
     async def check_time(self):
@@ -61,6 +65,9 @@ class Game:
         Vérifie le temps restant pour la partie.
         """
         while datetime.now() < self.end_time:
+            if await self.check_all_attempts_exhausted():
+                await self.end_game()
+                return
             await asyncio.sleep(10)
         await self.end_game()
 
@@ -82,3 +89,11 @@ class Game:
         """
         self.game_started = False
         await self.server.end_game(self.id)
+
+    async def check_all_attempts_exhausted(self):
+        """
+        Vérifie si tous les joueurs ont épuisé leurs tentatives.
+
+        :return: True si tous les joueurs ont épuisé leurs tentatives, sinon False
+        """
+        return all(player.attempts == 0 for player in self.players.values())

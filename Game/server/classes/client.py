@@ -24,32 +24,11 @@ class WebsocketClient:
         :param websocket: WebSocket du client
         """
         self.websocket = websocket
-        if websocket.path == "/chat":
-            async for data in websocket:
-                msg = self.load_data(data)
-                if 'action' in msg:
-                    await self.handle_chat(msg['action'], msg.get('args', {}))
         if websocket.path == "/game":
             async for data in websocket:
                 msg = self.load_data(data)
                 if 'action' in msg:
                     await self.handle_game(msg['action'], msg.get('args', {}))
-
-    async def handle_chat(self, action, args):
-        """
-        Gère les actions de chat.
-
-        :param action: Action à effectuer
-        :param args: Arguments de l'action
-        """
-        if action == "send_data":
-            await self.send_data(args)
-        elif action == "join_chat":
-            await self.join_chat()
-        elif action == "send_message":
-            await self.send_message(args)
-        elif action == "leave_chat":
-            await self.leave_chat()
 
     async def handle_game(self, action, args):
         """
@@ -60,8 +39,12 @@ class WebsocketClient:
         """
         if action == "send_data":
             await self.send_data(args)
+        elif action == "send_message":
+            await self.server.send_message(self.id, args)
         elif action == "create_game":
             await self.server.create_game(self.id, self.websocket, args.get('max_player'))
+        elif action == "start_game":
+            await self.server.start_game(self.id)
         elif action == "join_game":
             await self.server.join_game(self.id, args.get('game_code'))
         elif action == "leave_game":
@@ -80,43 +63,11 @@ class WebsocketClient:
             self.nickname = nickname
         id = args.get('id')
         if id :
-            print(f"{self.id} en delete")
             del self.server.clients[self.id]
             self.id = id
             self.server.clients[self.id] = self
-        print(f"{self.id} connecté")
-
-    async def join_chat(self):
-        """
-        Permet au client de rejoindre le chat.
-        """
         await self.websocket.send(self.dump_data({
-            'action': 'join_chat',
-            'args': {'return': 'success'}
-        }))
-
-    async def send_message(self, args):
-        """
-        Envoie un message de chat à tous les utilisateurs.
-
-        :param args: Arguments contenant le message à envoyer
-        """
-        message = args.get('message')
-        if message:
-            await self.server.send_to_all(self.id, self.dump_data({
-                'action': 'send_message',
-                'args': {
-                    'message': message,
-                    'nickname': self.nickname
-                }
-            }))
-
-    async def leave_chat(self):
-        """
-        Permet au client de quitter le chat.
-        """
-        await self.websocket.send(self.dump_data({
-            'action': 'leave_chat',
+            'action': 'send_data',
             'args': {'return': 'success'}
         }))
 

@@ -22,7 +22,7 @@ class WebsocketServer:
         self.port = port
         self.clients = {}  # Dictionnaire pour stocker les clients connectés (client_id : Client)
         self.games = {}  # Dictionnaire pour stocker les parties en cours (game_id : Game)
-        self.players = {}  # Dictionnaire pour mapper les clients aux parties (client_id : game_id)
+        self.players = {}  # Dictionnaire pour mapper les clients aux parties (client_id / player_id : Player)
 
     async def run(self, future):
         """
@@ -53,6 +53,23 @@ class WebsocketServer:
 
         print(f"Utilisateur {client.id} déconnecté.")
 
+    async def send_message(self, client_id, args):
+        """
+        Envoie un message de chat à tous les utilisateurs de la partie. 
+
+        :param args: Arguments contenant le message à envoyer
+        """
+        message = args.get('message')
+        client = self.clients[client_id]
+        if message and client_id in self.players:
+            await self.server.send_to_all(client_id, self.dump_data({
+                'action': 'send_message',
+                'args': {
+                    'message': message,
+                    'nickname': client.nickname
+                }
+            }))
+
     async def create_game(self, client_id, websocket, max_player):
         """
         Crée une nouvelle partie.
@@ -64,8 +81,9 @@ class WebsocketServer:
         game_id = uuid4()  # Génère un ID unique pour la partie
         game_code = self.generate_unique_code()  # Génère un code unique pour la partie
         game = Game(self, client_id, game_id, game_code, max_player)
-        game.players[client_id] = Player(client_id)
-        self.players[client_id] = str(game_id)
+        player = Player(client_id, game_id)
+        game.players[client_id] = player
+        self.players[client_id] = player
         self.games[str(game_id)] = game
         await websocket.send(self.dump_data({
             'action': 'create_game',
@@ -82,9 +100,10 @@ class WebsocketServer:
         for game_id, game in self.games.items():
             if game.code == game_code and not game.game_started:
                 if len(game.players) < game.max_player:
-                    game.players[client_id] = Player(client_id)
-                    self.players[client_id] = game_id
-                    print(f"Utilisateur {client_id} a rejoint la partie !")
+                    player = Player(client_id, game_id)
+                    game.players[client_id] = player
+                    self.players[client_id] = player
+                    print(f"Utilisateur {client_id} a rejoint la partie {game_id}")
                     await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'join_game',
                         'args': {'return': 'success', 'idJoin': game_code}
@@ -107,36 +126,57 @@ class WebsocketServer:
             'args': {'return': 'error', 'msg': 'Partie introuvable !'}
         }))
 
+    async def start_game(self, client_id):
+        """
+        Permet à un client de démarrer une partie.
+
+        :param client_id: ID du client quittant la partie
+        """
+        player = self.players.get(client_id)
+        if not player:
+            return
+
+        game = self.games.get(str(player.game_id))
+        if not game:
+            return
+        
+        if game.host == client_id :
+            game.start_game()
+
     async def leave_game(self, client_id):
         """
         Permet à un client de quitter une partie.
 
         :param client_id: ID du client quittant la partie
         """
-        id_game = self.players[client_id]
-        game = self.games[id_game]
+        player = self.players.get(client_id)
+        if not player:
+            return
+        
+        game = self.games.get(str(player.game_id))
+        if not game:
+            return
 
-        if game.host == client_id :
-            clients_to_remove = [client_id for client_id, game_id in self.players.items() if game_id == id_game]
+        if game.host == client_id:
+            clients_to_remove = [client_id for client_id, player in self.players.items() if player.game_id == player.game_id]
 
             for client_id in clients_to_remove:
-                game = self.games[id_game]
                 client = self.clients[client_id]
                 await client.websocket.send(self.dump_data({
-                    'action': 'end_game',
+                    'action': 'leave_game',
                     'args': {
                         'return': 'error',
                         'msg': 'Le créateur de la partie a quitté. Fin prématurée de la partie'
                     }
                 }))
             del self.players[client_id]
-            del self.games[id_game]
+            del self.games[str(player.game_id)]
         
-        else :
+        else:
             del self.players[client_id]
             del game.players[client_id]
             if not game.players:
-                del self.games[id_game]
+                del self.games[str(player.game_id)]
 
     async def add_word(self, client_id, websocket, word):
         """
@@ -146,9 +186,15 @@ class WebsocketServer:
         :param websocket: WebSocket du client
         :param word: Mot à ajouter
         """
-        game_id = self.players[client_id]
-        game = self.games[game_id]
-        result = await game.players[client_id].add_word(word)
+        player = self.players.get(client_id)
+        if not player:
+            return
+
+        game = self.games.get(str(player.game_id))
+        if not game:
+            return
+
+        result = await player.add_word(word)
         await websocket.send(self.dump_data(result))
 
     async def end_game(self, id_game):
@@ -157,7 +203,7 @@ class WebsocketServer:
 
         :param id_game: ID de la partie à terminer
         """
-        clients_to_remove = [client_id for client_id, game_id in self.players.items() if game_id == id_game]
+        clients_to_remove = [client_id for client_id, player in self.players.items() if player.game_id == id_game]
 
         all_chart = {}
         for client_id in clients_to_remove:
@@ -188,11 +234,15 @@ class WebsocketServer:
         :param id_client: ID du client émetteur
         :param data: Données à envoyer
         """
-        id_game = self.players.get(id_client)
+        player = self.players.get(id_client)
+        if not player:
+            return
+
+        game_id = player.game_id
 
         clients_to_send = [
             client.websocket for client_id, client in self.clients.items()
-            if self.players.get(client_id) == id_game
+            if self.players.get(client_id) and self.players[client_id].game_id == game_id
         ]
 
         await websockets.broadcast(clients_to_send, data)
