@@ -63,7 +63,7 @@ class WebsocketServer:
         """
         game_id = uuid4()  # Génère un ID unique pour la partie
         game_code = self.generate_unique_code()  # Génère un code unique pour la partie
-        game = Game(self, game_id, game_code, max_player)
+        game = Game(self, client_id, game_id, game_code, max_player)
         game.players[client_id] = Player(client_id)
         self.players[client_id] = str(game_id)
         self.games[str(game_id)] = game
@@ -113,12 +113,30 @@ class WebsocketServer:
 
         :param client_id: ID du client quittant la partie
         """
-        game_id = self.players[client_id]
-        del self.players[client_id]
-        game = self.games[game_id]
-        del game.players[client_id]
-        if not game.players:
-            del self.games[game_id]
+        id_game = self.players[client_id]
+        game = self.games[id_game]
+
+        if game.host == client_id :
+            clients_to_remove = [client_id for client_id, game_id in self.players.items() if game_id == id_game]
+
+            for client_id in clients_to_remove:
+                game = self.games[id_game]
+                client = self.clients[client_id]
+                await client.websocket.send(self.dump_data({
+                    'action': 'end_game',
+                    'args': {
+                        'return': 'error',
+                        'msg': 'Le créateur de la partie a quitté. Fin prématurée de la partie'
+                    }
+                }))
+            del self.players[client_id]
+            del self.games[id_game]
+        
+        else :
+            del self.players[client_id]
+            del game.players[client_id]
+            if not game.players:
+                del self.games[id_game]
 
     async def add_word(self, client_id, websocket, word):
         """
