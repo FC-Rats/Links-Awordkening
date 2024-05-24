@@ -78,7 +78,9 @@ class WebsocketClient:
             self.nickname = nickname
         id = args.get('id')
         if id :
+            del self.server.clients[self.id]
             self.id = id
+            self.server.clients[self.id] = self
 
     async def join_chat(self):
         """
