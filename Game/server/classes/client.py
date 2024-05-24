@@ -6,12 +6,23 @@ from uuid import uuid4
 class WebsocketClient:
 
     def __init__(self, server):
+        """
+        Initialise un client WebSocket.
+
+        :param server: Instance du serveur WebSocket
+        """
         self.server = server
         self.websocket = None
         self.nickname = "anonymous"
-        self.id = uuid4()
+        self.id = uuid4()  # Génère un ID unique pour le client
+        # Exemple : uuid4() -> '123e4567-e89b-12d3-a456-426614174000'
 
     async def handler(self, websocket):
+        """
+        Gère les interactions avec le client.
+
+        :param websocket: WebSocket du client
+        """
         self.websocket = websocket
         if websocket.path == "/chat":
             async for data in websocket:
@@ -25,6 +36,12 @@ class WebsocketClient:
                     await self.handle_game(msg['action'], msg.get('args', {}))
 
     async def handle_chat(self, action, args):
+        """
+        Gère les actions de chat.
+
+        :param action: Action à effectuer
+        :param args: Arguments de l'action
+        """
         if action == "send_data":
             await self.send_data(args)
         elif action == "join_chat":
@@ -35,6 +52,12 @@ class WebsocketClient:
             await self.leave_chat()
 
     async def handle_game(self, action, args):
+        """
+        Gère les actions de jeu.
+
+        :param action: Action à effectuer
+        :param args: Arguments de l'action
+        """
         if action == "create_game":
             await self.server.create_game(self.id, self.websocket, args.get('max_player'))
         elif action == "join_game":
@@ -45,6 +68,11 @@ class WebsocketClient:
             await self.server.add_word(self.id, self.websocket, args.get('word'))
 
     async def send_data(self, args):
+        """
+        Envoie les données du client au serveur.
+
+        :param args: Arguments contenant les données à envoyer
+        """
         nickname = args.get('nickname')
         if nickname:
             self.nickname = nickname
@@ -53,32 +81,53 @@ class WebsocketClient:
             self.id = id
 
     async def join_chat(self):
+        """
+        Permet au client de rejoindre le chat.
+        """
         await self.websocket.send(self.dump_data({
             'action': 'join_chat',
             'args': {'return': 'success'}
         }))
 
     async def send_message(self, args):
-        if self.nickname:
-            message = args.get('message')
-            if message:
-                await self.server.send_to_all(self.id, self.dump_data({
-                    'action': 'send_message',
-                    'args': {'message': f"{self.nickname}: {message}"}
-                }))
+        """
+        Envoie un message de chat à tous les utilisateurs.
+
+        :param args: Arguments contenant le message à envoyer
+        """
+        message = args.get('message')
+        if message:
+            await self.server.send_to_all(self.id, self.dump_data({
+                'action': 'send_message',
+                'args': {
+                    'message': message,
+                    'nickname': self.nickname
+                }
+            }))
 
     async def leave_chat(self):
-        if self.nickname:
-            await self.websocket.send(self.dump_data({
-                'action': 'leave_chat',
-                'args': {'return': 'success'}
-            }))
- 
+        """
+        Permet au client de quitter le chat.
+        """
+        await self.websocket.send(self.dump_data({
+            'action': 'leave_chat',
+            'args': {'return': 'success'}
+        }))
+
     def load_data(self, data):
-        try:
-            return json.loads(data)
-        except json.JSONDecodeError:
-            return None
+        """
+        Désérialise les données JSON reçues.
+
+        :param data: Données JSON à désérialiser
+        :return: Dictionnaire Python contenant les données
+        """
+        return json.loads(data)
 
     def dump_data(self, data):
+        """
+        Sérialise les données en JSON.
+
+        :param data: Dictionnaire Python contenant les données
+        :return: Chaîne JSON
+        """
         return json.dumps(data)
