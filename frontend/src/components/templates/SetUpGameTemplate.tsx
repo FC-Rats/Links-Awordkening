@@ -6,38 +6,38 @@ import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Grid from '@mui/material/Grid';
 
-export const SetUpGameTemplate = () => {
-    const [soloSelected, setSoloSelected] = useState(false);
-    const [multiSelected, setMultiSelected] = useState(true);
+export interface SetUpGameProps {
+    infoGame: {
+        nameGame: string;
+        coupsRestants: string;
+        nameHost: string | undefined;
+        type: string;
+        nombreJoueurs: string;
+    };
+    handleInputChange: (name: string, value: any) => void;
+    handleSubmit: (event: React.FormEvent) => void;
+    handleTypeGame : (name: string) => void;
+}
 
-    const [formData, setFormData] = useState({
-        IDJoin: 'ADDE', //Formule aléatoire
-        nameGame: '', 
-        coupsRestants: '10', //A définir
-        nameHost: '', // A récupérer de la session
-        type: 'multi', //default value
-        nombreJoueurs: '2', // default value
-    });
+export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleInputChange, handleSubmit, handleTypeGame }) => {
+    const { nameGame, coupsRestants, nameHost, type, nombreJoueurs } = infoGame;
+    const [soloSelected, setSoloSelected] = useState(type == 'solo');
+    const [multiSelected, setMultiSelected] = useState(type == 'multi');
 
     const handleSoloClick = () => {
         setSoloSelected(true);
         setMultiSelected(false);
-        setFormData({ ...formData, type: 'solo', nombreJoueurs: "1" });
+        handleTypeGame('solo');
     };
 
     const handleMultiClick = () => {
         setSoloSelected(false);
         setMultiSelected(true);
-        setFormData({ ...formData, type: 'multi' });
+        handleTypeGame('multi');
     };
 
-    const handleInputChange = (name: string, value: any) => {
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = (event: { preventDefault: () => void; }) => {
-        event.preventDefault();
-        console.log(formData);
+    const onInputChange = (name: string, value: any) => {
+        handleInputChange(name,value);
     };
 
     return (
@@ -50,12 +50,12 @@ export const SetUpGameTemplate = () => {
             </Stack>
 
             <Grid container spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
-                    <Grid item xs={12} sm={formData.type !== 'solo' ? 2 : 4}>
-                        <InputForm name="nameGame" label={"Nom de la partie"} required={true} onInputChange={handleInputChange} />
+                    <Grid item xs={12} sm={4}>
+                        <InputForm name="nameGame" label={"Nom de la partie"} required={true} onInputChange={onInputChange} />
                     </Grid>
-                    {formData.type !== 'solo' && (
+                    {multiSelected && (
                         <Grid item xs={12} sm={2}>
-                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={handleInputChange} min={2} max={4} defaultvalue={"2"}/>
+                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={4} defaultvalue={"2"}/>
                         </Grid>
                     )}
                 </Grid>

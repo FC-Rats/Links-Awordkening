@@ -120,6 +120,7 @@ export const JoinRoomPage = () => {
     event.preventDefault();
     console.log(formData);
   };
+  
   return (
     <>
       <AlertBox

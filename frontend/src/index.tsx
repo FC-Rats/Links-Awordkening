@@ -13,15 +13,12 @@ import { EndGamePage } from './components/pages/EndGamePage';
 import { ForgotPasswordPage } from './components/pages/ForgotPasswordPage';
 import { FriendsListPage } from './components/pages/FriendsListPage';
 import { HomePagePage } from './components/pages/HomePagePage';
-import { JoinRoomPage } from './components/pages/JoinRoomPage';
-import { SetUpGamePage } from './components/pages/SetUpGamePage';
 import { SignInPage } from './components/pages/SignInPage';
 import { SignUpPage } from './components/pages/SignUpPage';
 import { GamePage } from './components/pages/GamePage';
 import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
 import { AppContext, AppContextProvider } from './components/hooks/AppContext';
-import { UserInfo } from './components/types/UserInfo';
 import { Nav } from './components/molecules/Nav';
 
 // Titre des pages et l'icone
@@ -68,9 +65,7 @@ root.render(
           <Route path="/end-game" element={<RequireAuth><EndGamePage /></RequireAuth>} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/friends" element={<RequireAuth><FriendsListPage /></RequireAuth>} />
-          <Route path="/join-room" element={<RequireAuth><JoinRoomPage /></RequireAuth>} />
           <Route path="/rules" element={<RulesPage />} />
-          <Route path="/set-up-game" element={<RequireAuth><SetUpGamePage /></RequireAuth>} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/game" element={<RequireAuth><GamePage /></RequireAuth>} />

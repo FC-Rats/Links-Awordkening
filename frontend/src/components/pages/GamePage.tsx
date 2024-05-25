@@ -1,18 +1,27 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
 import { AppContext } from "../hooks/AppContext";
 import { AlertBox } from "../molecules/AlertBox";
+import { SetUpGameTemplate, SetUpGameProps } from "../templates/SetUpGameTemplate";
+import { ChoosingGameTemplate } from "../templates/ChoosingGameTemplate";
+import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
+import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
+import { UserInfo } from "../types/UserInfo";
+
+export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
 export const GamePage = () => {
-    /* SNACK BAR - ALERT HANDLING */
+    // ================== REGION: Alert Box State ==================
     const [alertBox, setAlertBox] = useState({
         severity: "success",
         open: false,
         message: '',
     });
+    // =============================================================
 
+    // ================== REGION: Handle Alert =====================
     /**
      * @description Permet de fermer automatique l'Alertbox au bout de 4 secondes
      */
@@ -22,197 +31,161 @@ export const GamePage = () => {
         }
         setAlertBox(prevState => ({
             ...prevState,
-                open: false,
+            open: false,
         }));        
     };
+    // =============================================================
 
-    /* GAME STATE */
-    const [hasGameStarted, setHasGameStarted] = useState(false);
+    // ============== REGION: Navigation between templates =========
+    const [currentPage, setCurrentPage] = useState<StatePage>("choosing");
+    const [isHost, setisHost] = useState(false);
 
-    /* LOADER */
-    const [isDataLoading, setIsDataLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(false);
+    // =============================================================
 
-    /* WEBSOCKETS */
-    const user = useContext(AppContext);
-    const wsc = useRef<WebSocket | null>(null);
-    const wsg = useRef<WebSocket | null>(null);
-    const [connected, setConnected] = useState(false);
+    // ================== WEBSOCKETS & LISTENERS ===================
+    const context = useContext(AppContext);
+    const ws = useRef<WebSocket | null>(null);
 
-    /* Tchat */
-    const [messages, setMessages] = useState<Message[]>([
-      { nickname: 'Inky', message: 'Le jeu est facile ! eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeee eeeeeeeeee eeeeeee' },
-      { nickname: 'Rykyo', message: 'C\'est super dur !' }
-    ]);
-    const [textMessage, setTextMessage] = useState("");
-    const [isChatVisible, setIsChatVisible] = useState(false);
-
-    const toggleChatVisibility = () => {
-        setIsChatVisible(!isChatVisible);
-    };
-
-    const handleSubmitMessage = async () => {
-        console.log(textMessage);
-    };
-
-    const handleInputChangeMessage = (name: string, value: string) => {
-        setTextMessage(value);
-    };
-
-    /* ADD WORD */
-    const [newWord, setNewWord] = useState("");
-
-    const updateGraphWithNewWord = (word: string) => {
-        setNewWord(word);
-    };
-
-    /*     useEffect(() => {
-            setIsDataLoading(true);
-            fetch("http://localhost/Links-Awordkening/Includes/test.php")
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                    setData(data);
-                    setIsDataLoading(false);
-                })
-                .catch((error) => {
-                    setError(error);
-                    setIsDataLoading(false);
-                });
-        }, []);
-     */
-    /* 
-        useEffect(() => {
-            async function fetchData() {
-                setIsDataLoading(true)
-                try {
-                    const response = await fetch(`http://localhost/Links-Awordkening/api/Log/test.php`)
-                    const data = await response.json()
-                    setData(data)
-                    console.log(data)
-                } catch (err) {
-                    console.log('===== error =====', err)
-                    setError(true)
-                } finally {
-                    setIsDataLoading(false)
-                }
-            }
-            fetchData()
-        }, []) */
-        /* 
     useEffect(() => {
-        joinChat();
-        
+        const connectToGame = async () => {
+            await joinGame();
+            console.log("WebSocket in context:", ws.current);
+
+        };
+
+        connectToGame();
+
         return () => {
-        closeChat();
+            if (ws.current) {
+                ws.current.close();
+            }
         };
     }, []);
-
-    const joinChat = () => {
-        ws.current = new WebSocket("ws://localhost:8765/chat");
-        ws.current.addEventListener("open", onChatJoined);  // on se connecte
-        ws.current.addEventListener("close", onChatClosed); // on se déco
-        ws.current.addEventListener("message", onChatReceived); // on send data
-        ws.current.addEventListener("error", onChatError); // erreurs
-
-        const data = {
-        action: "send_data",
-        args: {
-            id: user?.user?.id,
-            nickname: user?.user?.name
-        }
-        };
-        ws.current.send(JSON.stringify(data));
-    };
-
-    const closeChat = () => {
-        if (ws.current) {
-        const data = { action: "leave_chat" };
-        ws.current.send(JSON.stringify(data));
-        ws.current.close();
-        setConnected(false);
-        setMessages([]);
-        }
-    };
-
-    const sendMessage = () => {
-        if (ws.current && connected) {
-        const data = { action: "send_message", args: { message: text } };
-        ws.current.send(JSON.stringify(data));
-        setText("");
-        }
-    };
-
-    const onMessageKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-        event.preventDefault();
-        sendMessage();
-        }
-    };
-
-    const onChatJoined = () => {
-        if (ws.current) {
-        const data = { action: "join_chat", args: { nickname: "" } }; //TODO
-        ws.current.send(JSON.stringify(data));
-        setConnected(true);
-        }
-    };
-
-    const onChatClosed = () => {
-        setConnected(false);
-        setMessages([]);
-    };
-
-    const onChatReceived = (event: MessageEvent) => {
-        let data: any;
-        try {
-        data = JSON.parse(event.data);
-        } catch (e) {
-        console.log(event.data);
-        return;
-        }
-
-        if (data.action === "join_chat") {
-        if (data.args.return === "error") {
-            alert(data.args.msg);
-            closeChat();
-        } else if (data.args.return === "success") {
-            console.log("Chat joined successfully");
-        }
-        } else if (data.action === "new_message") {
-        const newMessage: Message = { nickname: data.args.from, message: data.args.message };
-        setMessages(prevMessages => [...prevMessages, newMessage]);
-        }
-    };
-
-    const onChatError = (event: Event) => {
-        console.log(event);
-    }; */
-
-
-    if (error) {
-        return <span>Oups il y a eu un problème</span>
-    }
     
+      const joinGame = async () => {
+        ws.current = new WebSocket("ws://localhost:8765/game");
+        ws.current.addEventListener("open", onSendData);
+        ws.current.addEventListener("close", onDataClosed);
+        ws.current.addEventListener("message", onDataReceived);
+        ws.current.addEventListener("error", onDataError);
+      };
+
+      const onSendData = () => {
+        const data = {
+            action: "send_data",
+            args: {
+              id: context?.user?.id,
+              nickname: context?.user?.name,
+            },
+          };
+          if (ws.current) {
+            ws.current.send(JSON.stringify(data));
+          } else {
+            console.error("WebSocket is not open. Unable to send data.");
+          }
+        };
+
+        const onDataClosed = (event: CloseEvent) => {
+            console.log('WebSocket closed:', event);
+            // Handle WebSocket closed event
+        };
+
+        function onDataReceived(ev: MessageEvent<any>) {
+            const message = JSON.parse(ev.data);
+            if (message.args.return == "success") {
+              console.log("e");
+            } else {
+              setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "error",
+                open: true,
+                message: message.args.msg,
+              }));
+            }
+          }
+        
+        const onDataError = (event: Event) => {
+            console.error('WebSocket error:', event);
+            // Handle WebSocket error
+        };
+
+    // ================== JOINROOM TEMPLATE ===================
+    const [codeRoom, setcodeRoom] = useState({
+        codeRoom: "",
+      });
+    
+    const handleInputChangeJoin = (name: string, value: any) => {
+        setcodeRoom({ ...codeRoom, [name]: value });
+    };
+
+    const handleSubmitJoinCode = (event: { preventDefault: () => void }) => {
+        event.preventDefault();
+        console.log(codeRoom);
+        const data = {
+          action: "join_game",
+          args: {
+            game_code: codeRoom.codeRoom,
+          },
+        };
+        ws.current?.send(JSON.stringify(data));
+    };
+
+    // ================= SET UP GAME TEMPLATE =================
+    const [infoGame, setInfoGame] = useState({
+        idJoin : '',
+        nameGame: '', 
+        coupsRestants: '10',
+        nameHost: context?.user?.name, 
+        type: 'multi',
+        nombreJoueurs: '2',
+    });
+
+    const handleInputChangeCreate = (name: string, value: any) => {
+        setInfoGame({ ...infoGame, [name]: value });
+        if (name == "type" && value == 'solo'){
+            setInfoGame({ ...infoGame, ['nombreJoueurs']: '1' });
+        } else if (name == "type" && value == 'multi'){
+            setInfoGame({ ...infoGame, ['nombreJoueurs']: '2' });
+        }
+    };
+
+    const handleTypeGame= (name: string) => {
+        setInfoGame(prevInfoGame => {
+            if (name === 'solo'){
+                return { ...prevInfoGame, type: 'solo', nombreJoueurs: '1' };
+            } else if (name === 'multi'){
+                return { ...prevInfoGame, type: 'multi', nombreJoueurs: '2' };
+            }
+            return prevInfoGame;
+        });
+    };
+
+    const handleSubmitCreateGame = (event: React.FormEvent) => {
+        event.preventDefault();
+        console.log(infoGame);
+    };
+
+    // ================ WAITING ROOM ==========================
+    const [players, setplayers] = useState<UserInfo[]>();
+
+    const handleStartGame = (event: React.FormEvent) => {
+        event.preventDefault();
+        console.log(infoGame);
+    };
+
     return (
         <>
-            {isDataLoading ? (
-                <Loader />
-            ) : (
-                <>
-                <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
-                <GameTemplate 
-                newWord={newWord} 
-                updateGraphWithNewWord={updateGraphWithNewWord} 
-                toggleChatVisibility={toggleChatVisibility} 
-                isChatVisible={isChatVisible} messages={messages} 
-                onInputChangeChat={handleInputChangeMessage} 
-                SumbitMessageChat={handleSubmitMessage}                
-                />
-                </>
-            )}
+            {/* ================== ALERTBOX ==================== */}
+            <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
+            {/* ================================================ */}
+            {currentPage === "choosing" && <div><ChoosingGameTemplate setStatePage={setCurrentPage} /></div>}
+            {currentPage === "creating" && <div><SetUpGameTemplate infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
+            {currentPage === "joining" && <div><JoinRoomTemplate handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
+            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
+            {currentPage === "gaming" && <div>Game in Progress...</div>}
+            {currentPage === "ending" && <div>Game Over</div>}
+            {!["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
         </>
 
     );
-};
+}
