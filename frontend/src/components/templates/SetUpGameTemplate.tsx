@@ -7,6 +7,7 @@ import { SubmitButton } from "../molecules/SubmitButton";
 import Grid from '@mui/material/Grid';
 import { StatePage } from "../types/StatePage";
 import { Button } from "@mui/material";
+import { ReturnButton } from "../molecules/ReturnButton";
 
 export interface SetUpGameProps {
     infoGame: {
@@ -45,9 +46,10 @@ export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleIn
 
     return (
         <>
-            <Button
+            {/*             <Button
                 variant="contained"
-                onClick={() => handlePreviousPage()}>Retour</Button >
+                onClick={() => handlePreviousPage()}>Retour</Button > */}
+            <ReturnButton handlePreviousPage={handlePreviousPage} />
             <CenteredLogo />
             <form method="post" onSubmit={handleSubmit}>
                 <Stack spacing={{ xs: 0, sm: 10, md: 10 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">

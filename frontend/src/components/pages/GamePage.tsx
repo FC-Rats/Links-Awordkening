@@ -363,7 +363,7 @@ export const GamePage = () => {
             {/* ================================================ */}
             {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
             {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
-            {currentPage === "joining" && <div><JoinRoomTemplate handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
+            {currentPage === "joining" && <div><JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
             {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
             {(currentPage === "gaming" && playersInGame != undefined) && <div>                
                 <GameTemplate 

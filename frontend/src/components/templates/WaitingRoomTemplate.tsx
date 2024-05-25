@@ -8,6 +8,7 @@ import { UserInfo } from "../types/UserInfo";
 import { ComponentPlayerInfoWaiting } from "../molecules/ComponentPlayerInfoWaiting";
 import { StatePage } from "../types/StatePage";
 import { Button } from "@mui/material";
+import { ReturnButton } from "../molecules/ReturnButton";
 
 export interface WaitingRoomProps {
     infoGame: {
@@ -29,9 +30,10 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
     console.log(infoGame);
     return (
         <>
-            <Button
+            {/*             <Button
                 variant="contained"
-                onClick={() => handlePreviousPage()}>Retour</Button >
+                onClick={() => handlePreviousPage()}>Retour</Button > */}
+            <ReturnButton handlePreviousPage={handlePreviousPage} />
             <CenteredTitle text={`Rejoindre la partie`} />
             <CenteredTitle text={`Code "${infoGame.idJoin}"`} />
             <div className="waitinginfo">
