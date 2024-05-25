@@ -28,7 +28,7 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ setStatePage }) =>
                     <Button
                         variant="contained"
                         className="submit-button"
-                        onClick={() => ChoosePage(true)}
+                        onClick={ChoosePage(true)}
                         sx={{ padding: '10px 20px', fontSize: '16px' }}
                     >
                         Rejoindre une partie
@@ -36,16 +36,13 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ setStatePage }) =>
                     <Button
                         variant="contained"
                         className="submit-button"
-                        onClick={() => ChoosePage(false)}
+                        onClick={ChoosePage(false)}
                         sx={{ padding: '10px 20px', fontSize: '16px' }}
                     >
                         Créer une partie
                     </Button>
                 </Stack>
             </Stack>
-            {/*             <p>Voulez-vous rejoindre une partie ou créer votre partie ?</p>
-            <Button onClick={ChoosePage(true)}>Rejoindre une partie</Button>
-            <Button onClick={ChoosePage(false)}>Créer une partie</Button> */}
         </>
     );
 };
