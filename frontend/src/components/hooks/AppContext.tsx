@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { AppContextType } from "../types/AppContextType";
 import { UserInfo } from "../types/UserInfo";
+import { StatePage } from "../types/StatePage";
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -12,21 +13,21 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     const [user, setUser] = useState<UserInfo | undefined>(() => {
         // Get user data from localStorage if it exists
         const userData = localStorage.getItem('user');
-        return userData ? JSON.parse(userData) : undefined; 
+        return userData ? JSON.parse(userData) : undefined;
     });
     const [token, setToken] = useState<string | undefined>(() => {
         // Get toekn data from localStorage if it exists
         const tokenData = localStorage.getItem('token');
-        return tokenData ? JSON.parse(tokenData) : undefined; 
+        return tokenData ? JSON.parse(tokenData) : undefined;
     });
-    const [curentPage, setCurentPage] = useState<string | undefined>(() => {
+    const [currentPage, setCurrentPage] = useState<StatePage | undefined>(() => {
         // Get currentPage data from localStorage if it exists
-        const curentPageData = localStorage.getItem('curentPage');
-        return curentPageData ? JSON.parse(curentPageData) : undefined; 
+        const currentPageData = localStorage.getItem('currentPage');
+        return currentPageData ? JSON.parse(currentPageData) : "choosing";
     });
 
-    const updateCurentPage = (curentPageData: string) => {
-        setCurentPage(curentPageData);
+    const updateCurrentPage = (curentPageData: StatePage) => {
+        setCurrentPage(curentPageData);
         localStorage.setItem('curentPage', JSON.stringify(curentPageData));
     };
 
@@ -35,7 +36,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         localStorage.setItem('user', JSON.stringify(userData));
     };
 
-    const logIn = (userData: UserInfo, token:string) => {
+    const logIn = (userData: UserInfo, token: string) => {
         setToken(token);
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
@@ -45,10 +46,17 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     const logOut = () => {
         setUser(undefined);
         setToken(undefined);
+        setCurrentPage(undefined);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('currentPage');
         window.location.reload();
     };
+
+    useEffect(() => {
+        localStorage.setItem('currentPage', JSON.stringify(currentPage));
+        console.log("Current Page : ", currentPage);
+    }, [currentPage]);
 
     useEffect(() => {
         if (user) {
@@ -58,10 +66,10 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
             localStorage.removeItem('user');
             localStorage.removeItem('token');
         }
-    }, [user,token]);
+    }, [user, token]);
 
     return (
-        <AppContext.Provider value={{ user, logIn, logOut, token, updateCurentPage, updateUser }}>
+        <AppContext.Provider value={{ user, logIn, logOut, token, updateCurrentPage, updateUser, currentPage }}>
             {children}
         </AppContext.Provider>
     );

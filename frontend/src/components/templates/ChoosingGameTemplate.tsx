@@ -1,7 +1,7 @@
 import React from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import { Button } from "@mui/material";
-import { StatePage } from "../pages/GamePage";
+import { StatePage } from "../types/StatePage";
 
 interface ChooseProps {
     setStatePage: (choose: StatePage) => void;

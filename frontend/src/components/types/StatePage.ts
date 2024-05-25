@@ -1,0 +1,1 @@
+export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";

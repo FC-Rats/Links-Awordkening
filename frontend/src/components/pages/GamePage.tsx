@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
-import { AppContext } from "../hooks/AppContext";
+import { AppContext, useUserContext } from "../hooks/AppContext";
 import { AlertBox } from "../molecules/AlertBox";
 import { SetUpGameTemplate, SetUpGameProps } from "../templates/SetUpGameTemplate";
 import { ChoosingGameTemplate } from "../templates/ChoosingGameTemplate";
@@ -10,8 +10,6 @@ import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
 import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
 import { UserInfo } from "../types/UserInfo";
 import { info } from "console";
-
-export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
 export const GamePage = () => {
     // ================== REGION: Alert Box State ==================
@@ -38,7 +36,12 @@ export const GamePage = () => {
     // =============================================================
 
     // ============== REGION: Navigation between templates =========
-    const [currentPage, setCurrentPage] = useState<StatePage>("choosing");
+    //const [currentPage, setCurrentPage] = useState<StatePage>();
+    const { currentPage } = useUserContext();
+    const { updateCurrentPage } = useUserContext(); 
+/*     useEffect(() => {
+        updateCurrentPage("choosing");
+    }, []); */
     const [isHost, setisHost] = useState(false);
 
     // ==================== CONSTANTES =============================
@@ -116,7 +119,7 @@ export const GamePage = () => {
                     if (infoGame.type == 'multi') {
                         enterTheWaitingRoom(message.args);
                     } else {
-                        setCurrentPage("gaming"); 
+                        updateCurrentPage("gaming");
                     }
                     setInfoGame((prevInfoGame) => ({ 
                         ...prevInfoGame, 
@@ -221,7 +224,7 @@ export const GamePage = () => {
                 }
             }
         }
-        setCurrentPage("waiting");
+        updateCurrentPage("waiting");
     };
 
     return (
@@ -229,13 +232,13 @@ export const GamePage = () => {
             {/* ================== ALERTBOX ==================== */}
             <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
             {/* ================================================ */}
-            {currentPage === "choosing" && <div><ChoosingGameTemplate setStatePage={setCurrentPage} /></div>}
+            {currentPage === "choosing" && <div><ChoosingGameTemplate setStatePage={updateCurrentPage} /></div>}
             {currentPage === "creating" && <div><SetUpGameTemplate infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
             {currentPage === "joining" && <div><JoinRoomTemplate handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
             {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
             {currentPage === "gaming" && <div>Game in Progress...</div>}
             {currentPage === "ending" && <div>Game Over</div>}
-            {!["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
+            {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
         </>
 
     );
