@@ -1,4 +1,6 @@
 const url = `${process.env.REACT_APP_API_URL}score/`;
+const urlgetMaxScores = url + "getBestScores.php";
+
 const token = localStorage.getItem("token");
 
 /**
@@ -104,6 +106,35 @@ export async function updateScore(ScoreData: Record<string, string | number>) {
             method: 'PUT',
             headers: headers,
             body: JSON.stringify(ScoreData),
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Réponse du serveur : ', responseData);
+            return responseData;
+        } else {
+            console.error('Erreur lors de la requête : ', response.status);
+            return response.status;
+        }
+    } catch (error) {
+        console.error('Une erreur s\'est produite : ', error);
+    }
+}
+
+/**
+ * @function getMaxScores
+ * @description Prend les 3 meilleurs joueurs
+ * @returns {JSON} - Réponse de la requête
+ */
+export async function getMaxScores() {
+    try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+
+        const response = await fetch(`${urlgetMaxScores}`, {
+            method: 'POST',
+            headers: headers,
         });
 
         if (response.ok) {

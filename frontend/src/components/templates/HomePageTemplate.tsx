@@ -2,6 +2,7 @@ import { CenteredLogo } from "../atoms/CenteredLogo";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
 import { getLogs } from "../../services/LogServices";
+import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 
 export const HomePageTemplate = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
@@ -59,8 +60,7 @@ export const HomePageTemplate = () => {
             <form onSubmit={handleSubmit}>
                 <SubmitButton text={"Jouer"} />
             </form>
-            {/* TODO changer par un RedirectButton quand les routeurs seront faits */}
-            {/* <CaseHomePageContainer /> */}
+            <CaseHomePageContainer />
         </Stack>
     );
 };
