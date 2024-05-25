@@ -4,6 +4,7 @@ import { SignInForm } from "../organisms/SignInForm";
 import FormJoinRoom from "../organisms/FormJoinRoom";
 import { CenteredLogo } from "../atoms/CenteredLogo";
 import "../../assets/css/JoinRoom.css";
+import { Button } from "@mui/material";
 
 export const JoinRoomTemplate = ({
   handleInputChange,

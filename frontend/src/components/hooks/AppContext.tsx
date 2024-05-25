@@ -20,15 +20,26 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         const tokenData = localStorage.getItem('token');
         return tokenData ? JSON.parse(tokenData) : undefined;
     });
-    const [currentPage, setCurrentPage] = useState<StatePage | undefined>(() => {
-        // Get currentPage data from localStorage if it exists
-        const currentPageData = localStorage.getItem('currentPage');
-        return currentPageData ? JSON.parse(currentPageData) : "choosing";
+    const [previousPages, setPreviousPages] = useState<StatePage[]>(() => {
+        // Get previousPages data from localStorage if it exists
+        const previousPagesData = localStorage.getItem('previousPages');
+        return previousPagesData ? JSON.parse(previousPagesData) : ["choosing"];
     });
 
-    const updateCurrentPage = (curentPageData: StatePage) => {
-        setCurrentPage(curentPageData);
-        localStorage.setItem('curentPage', JSON.stringify(curentPageData));
+    const goTo = (newPage: StatePage) => {
+        setPreviousPages(prevPages => {
+            const updatedPages = [...prevPages, newPage];
+            return updatedPages;
+        });
+        localStorage.setItem('previousPages', JSON.stringify(previousPages));
+    };
+
+    const goBack = () => {
+        setPreviousPages(prevPages => {
+            const updatedPages = prevPages.slice(0, -1);
+            return updatedPages;
+        });
+        localStorage.setItem('previousPages', JSON.stringify(previousPages));
     };
 
     const updateUser = (userData: UserInfo) => {
@@ -46,17 +57,17 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     const logOut = () => {
         setUser(undefined);
         setToken(undefined);
-        setCurrentPage(undefined);
+        setPreviousPages(["choosing"]);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        localStorage.removeItem('currentPage');
+        localStorage.removeItem('previousPages');
         window.location.reload();
     };
 
     useEffect(() => {
-        localStorage.setItem('currentPage', JSON.stringify(currentPage));
-        console.log("Current Page : ", currentPage);
-    }, [currentPage]);
+        localStorage.setItem('previousPages', JSON.stringify(previousPages));
+        console.log("Previous Pages : ", previousPages);
+    }, [previousPages]);
 
     useEffect(() => {
         if (user) {
@@ -69,7 +80,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     }, [user, token]);
 
     return (
-        <AppContext.Provider value={{ user, logIn, logOut, token, updateCurrentPage, updateUser, currentPage }}>
+        <AppContext.Provider value={{ user, logIn, logOut, token, goTo, goBack, updateUser, previousPages }}>
             {children}
         </AppContext.Provider>
     );

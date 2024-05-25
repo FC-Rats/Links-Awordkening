@@ -7,7 +7,8 @@ export interface AppContextType {
     token: string | undefined;
     logIn: (userData: UserInfo, token: string) => void;
     logOut: () => void;
-    updateCurrentPage: (curentPageData: StatePage) => void;
+    goTo: (newPage: StatePage) => void;
+    goBack: () => void;
     updateUser: (userData: UserInfo) => void;
-    currentPage: StatePage | undefined;
+    previousPages: StatePage[];
 }

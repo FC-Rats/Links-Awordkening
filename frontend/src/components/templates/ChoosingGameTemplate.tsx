@@ -4,18 +4,18 @@ import { Button, Stack, Typography } from "@mui/material";
 import { StatePage } from "../types/StatePage";
 
 interface ChooseProps {
-    setStatePage: (choose: StatePage) => void;
+    handleNextPage: (newPage: StatePage) => void;
 }
 
-export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ setStatePage }) => {
+export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ handleNextPage }) => {
 
-    const ChoosePage = (join: boolean) => () => {
+/*     const ChoosePage = (join: boolean) => () => {
         if (join) {
             setStatePage("joining");
         } else {
             setStatePage("creating");
         }
-    };
+    }; */
 
     return (
         <>
@@ -28,7 +28,8 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ setStatePage }) =>
                     <Button
                         variant="contained"
                         className="submit-button"
-                        onClick={ChoosePage(true)}
+                        // onClick={ChoosePage(true)}
+                        onClick={() => handleNextPage("joining")}
                         sx={{ padding: '10px 20px', fontSize: '16px' }}
                     >
                         Rejoindre une partie
@@ -36,7 +37,8 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ setStatePage }) =>
                     <Button
                         variant="contained"
                         className="submit-button"
-                        onClick={ChoosePage(false)}
+                        // onClick={ChoosePage(false)}
+                        onClick={() => handleNextPage("creating")}
                         sx={{ padding: '10px 20px', fontSize: '16px' }}
                     >
                         Créer une partie

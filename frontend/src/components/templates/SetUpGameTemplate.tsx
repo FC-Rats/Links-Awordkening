@@ -5,6 +5,8 @@ import { CenteredLogo } from "../atoms/CenteredLogo";
 import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Grid from '@mui/material/Grid';
+import { StatePage } from "../types/StatePage";
+import { Button } from "@mui/material";
 
 export interface SetUpGameProps {
     infoGame: {
@@ -16,10 +18,11 @@ export interface SetUpGameProps {
     };
     handleInputChange: (name: string, value: any) => void;
     handleSubmit: (event: React.FormEvent) => void;
-    handleTypeGame : (name: string) => void;
+    handleTypeGame: (name: string) => void;
+    handlePreviousPage: () => void;
 }
 
-export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleInputChange, handleSubmit, handleTypeGame }) => {
+export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleInputChange, handleSubmit, handleTypeGame, handlePreviousPage }) => {
     const { nameGame, coupsRestants, type, nombreJoueurs } = infoGame;
     const [soloSelected, setSoloSelected] = useState(type == 'solo');
     const [multiSelected, setMultiSelected] = useState(type == 'multi');
@@ -37,30 +40,33 @@ export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleIn
     };
 
     const onInputChange = (name: string, value: any) => {
-        handleInputChange(name,value);
+        handleInputChange(name, value);
     };
 
     return (
         <>
-            <CenteredLogo/>
+            <Button
+                variant="contained"
+                onClick={() => handlePreviousPage()}>Retour</Button >
+            <CenteredLogo />
             <form method="post" onSubmit={handleSubmit}>
-            <Stack spacing={{ xs: 0, sm: 10, md: 10 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-                <GameType type='solo' isSelected={soloSelected} onClick={handleSoloClick} />
-                <GameType type='multi' isSelected={multiSelected} onClick={handleMultiClick} />
-            </Stack>
+                <Stack spacing={{ xs: 0, sm: 10, md: 10 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
+                    <GameType type='solo' isSelected={soloSelected} onClick={handleSoloClick} />
+                    <GameType type='multi' isSelected={multiSelected} onClick={handleMultiClick} />
+                </Stack>
 
-            <Grid container spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
+                <Grid container spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
                     <Grid item xs={12} sm={4}>
                         <InputForm name="nameGame" label={"Nom de la partie"} required={true} onInputChange={onInputChange} />
                     </Grid>
                     {multiSelected && (
                         <Grid item xs={12} sm={2}>
-                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={4} defaultvalue={"2"}/>
+                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={4} defaultvalue={"2"} />
                         </Grid>
                     )}
                 </Grid>
                 <div style={{ textAlign: "center" }} >
-                <SubmitButton text={"Jouer"} />
+                    <SubmitButton text={"Jouer"} />
                 </div>
             </form>
         </>

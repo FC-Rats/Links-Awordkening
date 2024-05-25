@@ -6,6 +6,8 @@ import "../../assets/css/WaitingRoom.css"
 import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 import { UserInfo } from "../types/UserInfo";
 import { ComponentPlayerInfoWaiting } from "../molecules/ComponentPlayerInfoWaiting";
+import { StatePage } from "../types/StatePage";
+import { Button } from "@mui/material";
 
 export interface WaitingRoomProps {
     infoGame: {
@@ -19,12 +21,17 @@ export interface WaitingRoomProps {
     isHost: boolean
     players: UserInfo[];
     handleStartGame: (event: React.FormEvent) => void;
+    handleNextPage: (newPage: StatePage) => void;
+    handlePreviousPage: () => void;
 }
 
-export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame }) => {
+export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame, handleNextPage, handlePreviousPage }) => {
     console.log(infoGame);
     return (
         <>
+            <Button
+                variant="contained"
+                onClick={() => handlePreviousPage()}>Retour</Button >
             <CenteredTitle text={`Rejoindre la partie`} />
             <CenteredTitle text={`Code "${infoGame.idJoin}"`} />
             <div className="waitinginfo">

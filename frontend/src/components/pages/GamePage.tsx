@@ -39,12 +39,11 @@ export const GamePage = () => {
     // =============================================================
 
     // ============== REGION: Navigation between templates =========
-    //const [currentPage, setCurrentPage] = useState<StatePage>();
-    const { currentPage } = useUserContext();
-    const { updateCurrentPage } = useUserContext(); 
-/*     useEffect(() => {
-        updateCurrentPage("choosing");
-    }, []); */
+    const [currentPage, setCurrentPage] = useState<StatePage>("choosing");
+    const { previousPages, goTo, goBack } = useUserContext();
+    /*     useEffect(() => {
+            updateCurrentPage("choosing");
+        }, []); */
     const [isHost, setisHost] = useState(false);
 
     // ==================== CONSTANTES =============================
@@ -53,13 +52,13 @@ export const GamePage = () => {
 
     const [codeRoom, setcodeRoom] = useState({
         codeRoom: "",
-      });
-    
+    });
+
     const [infoGame, setInfoGame] = useState({
-        idJoin : '',
-        nameGame: '', 
+        idJoin: '',
+        nameGame: '',
         coupsRestants: '10',
-        idHost: context?.user?.id, 
+        idHost: context?.user?.id,
         type: 'multi',
         nombreJoueurs: '2',
     });
@@ -79,27 +78,27 @@ export const GamePage = () => {
             };
             connectToGame();
         }
-    
+
         return () => {
             if (ws.current) {
                 ws.current.close();
                 ws.current = null;
             }
         };
-    }, []); 
+    }, []);
 
     const onSendData = () => {
-    const data = {
-        action: "send_data",
-        args: {
-            id: context?.user?.id,
-            nickname: context?.user?.name,
-        },
+        const data = {
+            action: "send_data",
+            args: {
+                id: context?.user?.id,
+                nickname: context?.user?.name,
+            },
         };
         if (ws.current) {
-        ws.current.send(JSON.stringify(data));
+            ws.current.send(JSON.stringify(data));
         } else {
-        console.error("WebSocket is not open. Unable to send data.");
+            console.error("WebSocket is not open. Unable to send data.");
         }
     };
 
@@ -108,28 +107,28 @@ export const GamePage = () => {
         // Handle WebSocket closed event
     };
 
-        function onDataReceived(ev: MessageEvent<any>) {
-            const message = JSON.parse(ev.data);
-            if (message.args.return == "success") {
-              switch (message.action) {
-                case "send_data" : console.log("Connection établie !"); break;
-                case "join_game" : enterTheWaitingRoom(message.args); break;
-                case "create_game" : {
+    function onDataReceived(ev: MessageEvent<any>) {
+        const message = JSON.parse(ev.data);
+        if (message.args.return == "success") {
+            switch (message.action) {
+                case "send_data": console.log("Connection établie !"); break;
+                case "join_game": enterTheWaitingRoom(message.args); break;
+                case "create_game": {
                     if (infoGame.type == 'multi') {
                         enterTheWaitingRoom(message.args);
                     } else {
-                        updateCurrentPage("gaming");
+                        handleNextPage("gaming");
                     }
-                    setInfoGame((prevInfoGame) => ({ 
-                        ...prevInfoGame, 
-                        idJoin: message.args.idJoin 
-                    }));                    
+                    setInfoGame((prevInfoGame) => ({
+                        ...prevInfoGame,
+                        idJoin: message.args.idJoin
+                    }));
                     break;
                 }
-                default : console.log(message) ; break;
-              }
-            } else {
-              setAlertBox((prevState) => ({
+                default: console.log(message); break;
+            }
+        } else {
+            setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "error",
                 open: true,
@@ -162,9 +161,9 @@ export const GamePage = () => {
 
     // ================= SET UP GAME TEMPLATE =================
     const handleInputChangeCreate = (name: string, value: any) => {
-        setInfoGame(prevInfoGame => ({ 
-            ...prevInfoGame, 
-            [name]: value 
+        setInfoGame(prevInfoGame => ({
+            ...prevInfoGame,
+            [name]: value
         }));
     };
 
@@ -187,10 +186,10 @@ export const GamePage = () => {
             action: "create_game",
             args: {
                 max_player: parseInt(infoGame.nombreJoueurs),
-                game_name : infoGame.nameGame
+                game_name: infoGame.nameGame
             },
-          };
-          ws.current?.send(JSON.stringify(data));
+        };
+        ws.current?.send(JSON.stringify(data));
     };
 
     // ================ WAITING ROOM ==========================
@@ -224,19 +223,32 @@ export const GamePage = () => {
                 console.error("Failed to get user info by ID:", error);
             }
         }
-        updateCurrentPage("waiting");
+        handleNextPage("waiting");
     };
-    
+
+    const handleNextPage = (newPage: StatePage) => {
+        console.log("Changing page to", newPage);
+        console.log("Previous page was", currentPage);
+        goTo(newPage);
+        setCurrentPage(newPage);
+    };
+
+    const handlePreviousPage = () => {
+        console.log("Actual page was", currentPage);
+        console.log("Changing page to previous :", previousPages[previousPages.length - 1]);
+        setCurrentPage(previousPages[previousPages.length - 2]);
+        goBack();
+    };
 
     return (
         <>
             {/* ================== ALERTBOX ==================== */}
             <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
             {/* ================================================ */}
-            {currentPage === "choosing" && <div><ChoosingGameTemplate setStatePage={updateCurrentPage} /></div>}
-            {currentPage === "creating" && <div><SetUpGameTemplate infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
+            {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
+            {currentPage === "creating" && <div><SetUpGameTemplate infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} handlePreviousPage={handlePreviousPage} /></div>}
             {currentPage === "joining" && <div><JoinRoomTemplate handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
-            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
+            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} /></div>}
             {currentPage === "gaming" && <div>Game in Progress...</div>}
             {currentPage === "ending" && <div>Game Over</div>}
             {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
