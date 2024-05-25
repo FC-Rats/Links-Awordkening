@@ -12,13 +12,28 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     const [user, setUser] = useState<UserInfo | undefined>(() => {
         // Get user data from localStorage if it exists
         const userData = localStorage.getItem('user');
-        return userData ? JSON.parse(userData) : undefined; // Replace testUser with undefined if needed
+        return userData ? JSON.parse(userData) : undefined; 
     });
     const [token, setToken] = useState<string | undefined>(() => {
-        // Get user data from localStorage if it exists
+        // Get toekn data from localStorage if it exists
         const tokenData = localStorage.getItem('token');
-        return tokenData ? JSON.parse(tokenData) : undefined; // Replace testUser with undefined if needed
+        return tokenData ? JSON.parse(tokenData) : undefined; 
     });
+    const [curentPage, setCurentPage] = useState<string | undefined>(() => {
+        // Get currentPage data from localStorage if it exists
+        const curentPageData = localStorage.getItem('curentPage');
+        return curentPageData ? JSON.parse(curentPageData) : undefined; 
+    });
+
+    const updateCurentPage = (curentPageData: string) => {
+        setCurentPage(curentPageData);
+        localStorage.setItem('curentPage', JSON.stringify(curentPageData));
+    };
+
+    const updateUser = (userData: UserInfo) => {
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+    };
 
     const logIn = (userData: UserInfo, token:string) => {
         setToken(token);
@@ -46,7 +61,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     }, [user,token]);
 
     return (
-        <AppContext.Provider value={{ user, logIn, logOut, token }}>
+        <AppContext.Provider value={{ user, logIn, logOut, token, updateCurentPage, updateUser }}>
             {children}
         </AppContext.Provider>
     );

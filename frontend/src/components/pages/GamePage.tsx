@@ -33,7 +33,7 @@ export const GamePage = () => {
         setAlertBox(prevState => ({
             ...prevState,
             open: false,
-        }));        
+        }));
     };
     // =============================================================
 
@@ -77,34 +77,34 @@ export const GamePage = () => {
             }
         };
     }, []);
-    
-      const joinGame = async () => {
+
+    const joinGame = async () => {
         ws.current = new WebSocket("ws://localhost:8765/game");
         ws.current.addEventListener("open", onSendData);
         ws.current.addEventListener("close", onDataClosed);
         ws.current.addEventListener("message", onDataReceived);
         ws.current.addEventListener("error", onDataError);
-      };
+    };
 
-      const onSendData = () => {
+    const onSendData = () => {
         const data = {
             action: "send_data",
             args: {
-              id: context?.user?.id,
-              nickname: context?.user?.name,
+                id: context?.user?.id,
+                nickname: context?.user?.name,
             },
-          };
-          if (ws.current) {
+        };
+        if (ws.current) {
             ws.current.send(JSON.stringify(data));
-          } else {
+        } else {
             console.error("WebSocket is not open. Unable to send data.");
-          }
-        };
+        }
+    };
 
-        const onDataClosed = (event: CloseEvent) => {
-            console.log('WebSocket closed:', event);
-            // Handle WebSocket closed event
-        };
+    const onDataClosed = (event: CloseEvent) => {
+        console.log('WebSocket closed:', event);
+        // Handle WebSocket closed event
+    };
 
         function onDataReceived(ev: MessageEvent<any>) {
             const message = JSON.parse(ev.data);
@@ -132,14 +132,14 @@ export const GamePage = () => {
                 severity: "error",
                 open: true,
                 message: message.args.msg,
-              }));
-            }
-          }
-        
-        const onDataError = (event: Event) => {
-            console.error('WebSocket error:', event);
-            // Handle WebSocket error
-        };
+            }));
+        }
+    }
+
+    const onDataError = (event: Event) => {
+        console.error('WebSocket error:', event);
+        // Handle WebSocket error
+    };
 
     // ================== JOINROOM TEMPLATE ===================
     const handleInputChangeJoin = (name: string, value: any) => {
@@ -150,10 +150,10 @@ export const GamePage = () => {
         event.preventDefault();
         console.log(codeRoom);
         const data = {
-          action: "join_game",
-          args: {
-            game_code: codeRoom.codeRoom,
-          },
+            action: "join_game",
+            args: {
+                game_code: codeRoom.codeRoom,
+            },
         };
         ws.current?.send(JSON.stringify(data));
     };
@@ -166,11 +166,11 @@ export const GamePage = () => {
         }));
     };
 
-    const handleTypeGame= (name: string) => {
+    const handleTypeGame = (name: string) => {
         setInfoGame(prevInfoGame => {
-            if (name === 'solo'){
+            if (name === 'solo') {
                 return { ...prevInfoGame, type: 'solo', nombreJoueurs: '1' };
-            } else if (name === 'multi'){
+            } else if (name === 'multi') {
                 return { ...prevInfoGame, type: 'multi', nombreJoueurs: '2' };
             }
             return prevInfoGame;

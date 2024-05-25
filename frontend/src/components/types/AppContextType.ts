@@ -6,4 +6,6 @@ export interface AppContextType {
     token: string | undefined;
     logIn: (userData: UserInfo, token: string) => void;
     logOut: () => void;
+    updateCurentPage: (curentPageData: string) => void;
+    updateUser: (userData: UserInfo) => void;
 }

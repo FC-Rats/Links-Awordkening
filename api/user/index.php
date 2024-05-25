@@ -40,7 +40,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $data = json_decode($jsonData, true);
 
             // Conversion des données JSON en objet PHP
-            list($user, $jsonError) = User::getJsonData($data); 
+            list($user, $jsonError) = User::getJsonData($data);
 
             // Création du tableau des valeurs des paramètres pour la requête SQL
             $userData = array(
@@ -53,7 +53,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             // Exécution de la requête SQL
             $req = $db->query(
                 "INSERT INTO LA_USER (username, birthYear, email, password) 
-                VALUES (:username, :birthYear, :email, :password)", 
+                VALUES (:username, :birthYear, :email, :password)",
                 $userData
             );
             $res = [];
@@ -70,8 +70,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $jsonData = file_get_contents('php://input');
         if (!empty($jsonData)) {
             $data = json_decode($jsonData, true);
-            if (isset($data['id']) ) { // empêche la modif de toutes les lignes
-                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            if (isset($data['id'])) { // empêche la modif de toutes les lignes
+                if (isset($data['password'])) {
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                }
                 // CREATION DU UPDATE
                 $res = updateQuery("UPDATE LA_USER", $data);
                 $sql = $res[0];
@@ -95,5 +97,3 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode(array("message" => "Méthode non autorisée."));
         break;
 }
-
-?>

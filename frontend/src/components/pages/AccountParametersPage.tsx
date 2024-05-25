@@ -7,6 +7,7 @@ import { accountUpdate } from "../../services/PermissionsServices";
 
 export const AccountParametersPage: React.FC = () => {
     const { user } = useUserContext();
+    const { updateUser } = useUserContext(); 
     const [editMode, setEditMode] = useState(false);
     const initialFormData: UserInfo = {
         id: 0,
@@ -75,6 +76,7 @@ export const AccountParametersPage: React.FC = () => {
                 open: true,
                 message: data.message
             }));
+            updateUser(data.dataUser);
         }
         setEditMode(false);
     };

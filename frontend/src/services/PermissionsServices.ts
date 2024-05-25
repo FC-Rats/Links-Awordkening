@@ -177,21 +177,32 @@ export async function formValidation(formData: { username: string; birthYear : s
  * @param username - user de l'utilisateur
  * @returns {boolean}
  */
-export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : Promise<{ success: boolean; message: string; typeError : string | undefined }> {
+export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : Promise<{ success: boolean; message: string; dataUser: UserInfo; typeError : string | undefined }> {
     let success = false;
     let message = '';
     let typeError = 'error';
-    if (!isValidUsername(formData.name)) { return { success, message : "Le Pseudo ne doit pas contenir de caractères spéciaux " , typeError : "warning"}; }
-    else if (!isValidBirthYear(formData.birthYear)) { return { success, message : "La date de naissance est invalide" , typeError : "warning"}; }
-    else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide" , typeError : "warning"}; }
+    let dataUser = {
+        id: 0,
+        email: "",
+        name: "",
+        profilPicture: "",
+        birthYear: "",
+        tokenR: null,
+        visibility: "",
+        verified: false,
+        admin: false,
+    };
+    if (!isValidUsername(formData.name)) { return { success, message : "Le Pseudo ne doit pas contenir de caractères spéciaux ", dataUser , typeError : "warning"}; }
+    else if (!isValidBirthYear(formData.birthYear)) { return { success, message : "La date de naissance est invalide", dataUser , typeError : "warning"}; }
+    else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide", dataUser , typeError : "warning"}; }
     // 1 bis - Vérification que l'username ou l'email n'est dans la db
     try {
         if (prevInfo.name != formData.name) {
             const userVerifResponse = await getUsers({ username: formData.name });
-            if (userVerifResponse.length > 0) { return { success, message : "Ce nom d'utilisateur est déjà utilisé", typeError : "warning" }; }
+            if (userVerifResponse.length > 0) { return { success, message : "Ce nom d'utilisateur est déjà utilisé", dataUser, typeError : "warning" }; }
         } else if (prevInfo.email != formData.email) {
             const emailVerifResponse = await getUsers({ email: formData.email });
-            if (emailVerifResponse.length > 0) { return { success, message : "L'adresse mail est déjà utilisée", typeError : "warning" }; }
+            if (emailVerifResponse.length > 0) { return { success, message : "L'adresse mail est déjà utilisée", dataUser, typeError : "warning" }; }
         }
         // 2 - createUser de UserServices formData ->  récup idUser
         let user = await updateUser({
@@ -207,13 +218,29 @@ export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : P
             idUser: formData.id,
             log: 'Modification du compte',
         }); 
+        // 4 - getUser ( name )
+        const userResponse = await getUsers({ username: formData.name });
+        if (userResponse.length <= 0) {
+            return { success, message : "Nom d'utilisateur invalide", dataUser, typeError : "warning"};
+        }
+        dataUser = ({
+            id: userResponse[0]['id'],
+            email: userResponse[0]['email'],
+            name: userResponse[0]['username'],
+            profilPicture: userResponse[0]['profilPicture'],
+            tokenR: userResponse[0]['tokenR'],
+            visibility: userResponse[0]['visibility'],
+            verified: userResponse[0]['verified'] === 1 ? true : false,
+            admin: userResponse[0]['admin'] === 1 ? true : false,
+            birthYear: userResponse[0]['birthYear']
+        });
         success = true;
         message = "Modification correctement effectuée";
         typeError = "success";
     } catch (error) {
         message = 'Une erreur s\'est produite lors de la connexion.';
     }
-    return { success, message, typeError };
+    return { success, message, dataUser, typeError }; 
 }
 
 /**
