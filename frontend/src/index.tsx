@@ -9,7 +9,6 @@ import { AccountParametersPage } from './components/pages/AccountParametersPage'
 import { AdminPage } from './components/pages/AdminPage';
 import { ChangeParametersPage } from './components/pages/ChangeParametersPage';
 import { ChangePasswordPage } from './components/pages/ChangePasswordPage';
-import { EndGamePage } from './components/pages/EndGamePage';
 import { ForgotPasswordPage } from './components/pages/ForgotPasswordPage';
 import { FriendsListPage } from './components/pages/FriendsListPage';
 import { HomePagePage } from './components/pages/HomePagePage';
@@ -59,9 +58,8 @@ root.render(
           <Route path="/account" element={<RequireAuth><AccountOverviewPage /></RequireAuth>} />
           <Route path="/account-param" element={<RequireAuth><AccountParametersPage /></RequireAuth>} />
           <Route path="/admin" element={<RequireAuthAdmin><AdminPage /></RequireAuthAdmin>} />
-          <Route path="/change-paramters" element={<RequireAuthAdmin><ChangeParametersPage /></RequireAuthAdmin>} />
+          <Route path="/change-parameters" element={<RequireAuthAdmin><ChangeParametersPage /></RequireAuthAdmin>} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
-          <Route path="/end-game" element={<RequireAuth><EndGamePage /></RequireAuth>} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/friends" element={<RequireAuth><FriendsListPage /></RequireAuth>} />
           <Route path="/rules" element={<RulesPage />} />

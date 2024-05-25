@@ -90,7 +90,7 @@ export const Nav = (props: {}) => {
                         <Link to="/admin" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-admin'  ></i></Link>
                     </span>
                     <span style={{ '--i': 4 } as React.CSSProperties}>
-                    <Link to="/change-paramters" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-change-paramters' ></i></Link>
+                    <Link to="/change-parameters" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-change-paramters' ></i></Link>
                     </span>
                     <span style={{ '--i': 2 } as React.CSSProperties}>
                         <Link to="/logs" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-logs'></i></Link>

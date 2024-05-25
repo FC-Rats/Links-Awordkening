@@ -380,13 +380,10 @@ export const GamePage = () => {
                     SumbitMessageChat={handleSubmitMessage}                
                 />
                 </div>}
-            {currentPage === "ending" && <div><EndGameTemplate /></div>}
+            {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} /></div>}
             {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
                 </>
             )}
         </>
     );
 }
-
-
-

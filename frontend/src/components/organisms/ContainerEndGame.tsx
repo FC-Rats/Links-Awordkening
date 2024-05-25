@@ -3,64 +3,28 @@ import { PlayerInfo } from "../types/PlayerInfo";
 import "../../assets/css/ComponentEndGame.css";
 import { ComponentEndGame } from "../molecules/ComponentEndGame";
 
-export const ContainerEndGame = () => {
-  const ImgCompte = "/img/profilepictures/coconut.jpg"; 
-  const [playersInfos, setPlayersInfos] = useState<PlayerInfo[]>([]);
-  const [score, setScore] = useState<number | null>(null);
+// Define the props type
+type ContainerEndGameProps = {
+  playersInGame: PlayerInfo[];
+};
 
-  useEffect(() => {
-    const playersolo: PlayerInfo[] = [
-      {
-        player_name: "Joueur 1", player_score: 78, player_url: ImgCompte,
-        player_isHost: true,
-        player_remainingTurns:0
-      },
-    ];
-  
-    const players: PlayerInfo[] = [
-      {
-        player_name: "InkyYuu", player_score: 88, player_url: ImgCompte,
-        player_isHost: true,player_remainingTurns:0
-      },
-      {
-        player_name: "Léwow", player_score: 100, player_url: ImgCompte,
-        player_isHost: false,player_remainingTurns:0
-      },
-      {
-        player_name: "Lolooooooooooo", player_score: 15, player_url: ImgCompte,
-        player_isHost: false,player_remainingTurns:0
-      },
-      {
-        player_name: "Dark_LNA_Du_77", player_score: 95, player_url: ImgCompte,
-        player_isHost: false,player_remainingTurns:0
-      },
-    ];
-
-    const notmulti = false;
-
-    console.log(playersolo.length);
-    if (notmulti) {
-      setScore(playersolo[0].player_score);
-      setPlayersInfos(playersolo);
-    } else {
-        const sortedPlayers = [...players].sort((a, b) => b.player_score - a.player_score);
-        setPlayersInfos(sortedPlayers);
-    }
-  }, []); 
+// Accept props in a destructured format
+export const ContainerEndGame: React.FC<ContainerEndGameProps> = ({ playersInGame }) => {
+  console.log(playersInGame);
 
   return (
     <>
-      {playersInfos.length === 1 ? (
+      {playersInGame.length === 1 ? (
         <div className="wrapper-end-game">
             <img className="img-end-game" src={"/img/swatches/LARectPA.png"} alt="Bravo" />
             <div className="title">Bravo !</div>
-            {score !== null && <div className="info">Votre score : {score}</div>}
+            {playersInGame[0].player_score !== null && <div className="info">Votre score : {playersInGame[0].player_score}</div>}
         </div>
       ) : (
         <div className="wrapper-end-game">
             <img className="img-end-game" src={"/img/swatches/LARectPA.png"} alt="Bravo" />
           <div className="frame-info-player-end-game">
-            {playersInfos.map((player, index) => (
+            {playersInGame.map((player, index) => (
               <ComponentEndGame
                 key={index}
                 isMulti={true}
