@@ -77,7 +77,7 @@ export const Nav = (props: {}) => {
                         <Link to="/friends" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-friends' ></i></Link>
                     </span>
                     <span style={{ '--i': 4 } as React.CSSProperties}>
-                    <Link to="/set-up-game" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-set-up-game' ></i></Link>
+                    <Link to="/game" className={"nav-link"} onClick={handleNavLinkClick}><i className='btn-set-up-game' ></i></Link>
                     </span>
                     <span style={{ '--i': 5 } as React.CSSProperties}>
                         <a className={"nav-link"} onClick={logOut}><i className='btn-log-out'  onClick={handleNavLinkClick}></i></a>
