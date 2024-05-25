@@ -48,6 +48,10 @@
     color: var(--parchment);
 }
 
+.player-info-waiting .name {
+    font-weight: bolder;
+}
+
 .player-info .name {
     font-size: larger;
 }
