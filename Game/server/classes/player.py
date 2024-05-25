@@ -1,18 +1,20 @@
 # player.py
 
 import subprocess
+import shutil
 import re
 import os
 
 class Player: 
 
-    def __init__(self, id, game_id) -> None:
+    def __init__(self, server, id, game_id) -> None:
         """
         Initialise un nouveau joueur.
 
         :param id: ID unique du joueur
         """
         self.id = id  # ID unique du joueur
+        self.server = server  # Instance du serveur WebSocket
         self.game_id = game_id # ID de la game dans lequel le joueur se trouve
         self.score = 0  # Score initial du joueur
         self.attempts = 10  # Nombre de tentatives restantes
@@ -33,10 +35,10 @@ class Player:
         :param word: Mot à ajouter
         :return: Dictionnaire avec le résultat de l'ajout
         """
-        rebase_path = "../../../"  # Chemin de base pour les fichiers de données
+        rebase_path = ".."  # Chemin de base pour les fichiers de données
 
         # Commande pour exécuter le programme d'ajout de mot
-        command = f"{rebase_path}C/executables/add_word {rebase_path}C/datafiles/dic.lex {word} {rebase_path}C/datafiles/{self.id}.lex {rebase_path}C/datafiles/words.bin"
+        command = f"{os.path.join(rebase_path, "C", "executables", "add_word")} {os.path.join(rebase_path, "C", "datafiles", "dic.lex")} {word} {os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")} {os.path.join(rebase_path, "C", "datafiles", "words.bin")}"
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
         # Vérification si le mot a déjà été utilisé
@@ -67,58 +69,56 @@ class Player:
             self.word_chain.append(word)
             self.attempts -= 1
 
-            old_path = f"{rebase_path}C/datafiles/{self.id}.txt"
-            new_path = f"{rebase_path}Java/src/files/input{self.id}.txt"
+            old_path = os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")
+            new_path = os.path.join(rebase_path, "Java", "src", "files", "input", f"{self.id}.txt")
+            out_path = os.path.join(rebase_path, "Java", "src", "files", "output", f"{self.id}.txt")
 
             # Commande pour copier le fichier
-            command = f"cp {old_path} {new_path}"
+            try:
+                shutil.copy(old_path, new_path)
+                print(f"Fichier copié de {old_path} à {new_path}")
+            except Exception as e:
+                print(f"Erreur lors de la copie du fichier: {e}")
+
+            # Commande pour exécuter le moteur de chaîne
+            command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-2.5.jar")} {str(self.id)}"
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
             if result.returncode == 0:
-                # Commande pour exécuter le moteur de chaîne
-                command = f"java -jar {rebase_path}Java/target/ChainEngine-2.5.jar {self.id}"
-                result = subprocess.run(command, shell=True, capture_output=True, text=True)
+                new_chart = []
 
-                if result.returncode == 0:
-                    new_chart = []
+                # Lecture du fichier crée par le Java
+                if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                    with open(out_path, 'r') as file:
+                        for line in file:
+                            elements = line.strip().split(',')
+                            if len(elements) > 1:
+                                new_entry = elements
+                                new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
+                            else:
+                                score = line.strip().split(':')
+                                new_score = int(float(score[1]) * 100)
+                                if new_score > self.score:
+                                    await self.server.send_to_all(self.id, self.server.dump_data({
+                                        'action': 'new_score',
+                                        'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score}
+                                    }))
+                                self.score = new_score
 
-                    # Lecture du fichier crée par le Java
-                    if os.path.exists(new_path) and os.path.getsize(new_path) > 0:
-                        with open(new_path, 'r') as file:
-                            for line in file:
-                                elements = line.strip().split(',')
-                                if len(elements) > 1:
-                                    new_entry = elements
-                                    new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
-                                else:
-                                    score = line.strip().split(':')
-                                    new_score = int(float(score[1]) * 100)
-                                    if new_score > self.score:
-                                        await self.server.send_to_all(self.id, self.dump_data({
-                                            'action': 'add_word',
-                                            'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score}
-                                        }))
-                                    self.score = new_score
-
-                        # Vérification si le mot ajouté est entré dans la chaine
-                        if new_chart == self.chart:
-                            return {
-                                'action': 'add_word',
-                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c'}
-                            }
-                        else:
-                            self.chart = new_chart
-                            return {
-                                'action': 'add_word',
-                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
-                            }
-                else:
-                    return {
-                        'action': 'add_word',
-                        'args': {'return': 'error', 'msg': 'Erreur lors de l\'exécution du moteur de chaîne.'}
-                    }
+                    # Vérification si le mot ajouté est entré dans la chaine
+                    if new_chart == self.chart:
+                        return {
+                            'action': 'add_word',
+                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c'}
+                        }
+                    else:
+                        self.chart = new_chart
+                        return {
+                            'action': 'add_word',
+                            'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
+                        }
             else:
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'error', 'msg': 'Erreur lors de la copie du fichier.'}
+                    'args': {'return': 'error', 'msg': 'Erreur lors de l\'exécution du moteur de chaîne.'}
                 }

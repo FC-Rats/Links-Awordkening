@@ -11,6 +11,9 @@ import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
 import { UserInfo } from "../types/UserInfo";
 import { info } from "console";
 import { getUserInfoById } from "../../services/UserServices";
+import { PlayerInfo } from "../types/PlayerInfo";
+import { TestData } from "../molecules/Graph";
+import { EndGameTemplate } from "../templates/EndGameTemplate";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -45,6 +48,8 @@ export const GamePage = () => {
             updateCurrentPage("choosing");
         }, []); */
     const [isHost, setisHost] = useState(false);
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    const [hasGameStarted, setHasGameStarted] = useState(false);
 
     // ==================== CONSTANTES =============================
     const context = useContext(AppContext);
@@ -63,7 +68,25 @@ export const GamePage = () => {
         nombreJoueurs: '2',
     });
 
-    const [players, setPlayers] = useState<UserInfo[]>();
+    const initialPlayerState: UserInfo[] = context?.user ? [context.user] : [];
+    const [players, setPlayers] = useState<UserInfo[]>(initialPlayerState);
+    const convertUserInfoToPlayerInfo = (users: UserInfo[]): PlayerInfo[] => {
+        return users.map((user) => ({
+            player_name: user.name,
+            player_score: 0,
+            player_url: user.profilPicture,
+            player_isHost: infoGame.idHost == context?.user?.id ? true : false,
+            player_remainingTurns: 10,
+        }));
+    };
+    const[playersInGame,setPlayersInGame] = useState<PlayerInfo[]>(
+        convertUserInfoToPlayerInfo(players)
+    );
+    const[coupsRestants,setcoupsRestants] = useState(10);
+    
+    useEffect(() => {
+        setPlayersInGame(convertUserInfoToPlayerInfo(players));
+    }, [players]);
 
     // ================== WEBSOCKETS & LISTENERS ===================
 
@@ -87,45 +110,39 @@ export const GamePage = () => {
         };
     }, []);
 
-    const onSendData = () => {
+    const onSendData = async () => {
         const data = {
             action: "send_data",
             args: {
                 id: context?.user?.id,
                 nickname: context?.user?.name,
             },
-        };
-        if (ws.current) {
+            };
+            if (ws.current) {
             ws.current.send(JSON.stringify(data));
-        } else {
+            } else {
             console.error("WebSocket is not open. Unable to send data.");
-        }
+            }
+        };
+    
+        const onDataClosed = (event: CloseEvent) => {
+            console.log('WebSocket closed:', event);
+            // Handle WebSocket closed event
     };
 
-    const onDataClosed = (event: CloseEvent) => {
-        console.log('WebSocket closed:', event);
-        // Handle WebSocket closed event
-    };
-
-    function onDataReceived(ev: MessageEvent<any>) {
+    const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
         if (message.args.return == "success") {
             switch (message.action) {
-                case "send_data": console.log("Connection établie !"); break;
-                case "join_game": enterTheWaitingRoom(message.args); break;
-                case "create_game": {
-                    if (infoGame.type == 'multi') {
-                        enterTheWaitingRoom(message.args);
-                    } else {
-                        handleNextPage("gaming");
-                    }
-                    setInfoGame((prevInfoGame) => ({
-                        ...prevInfoGame,
-                        idJoin: message.args.idJoin
-                    }));
-                    break;
-                }
-                default: console.log(message); break;
+            case "send_data" : console.log("Connection établie !"); break;
+            case "join_game" : enterTheWaitingRoom(message.args); break;
+            case "create_game" : createGameSpace(message.args);break;
+            case "start_game" : startGame(message.args); break;
+            case "send_message" : showMessages(message.args); break;
+            case "add_word" : console.log(message) ; break;
+            case "new_score" : console.log(message) ; break;
+            case "end_game" : sendToEndGame(message); break;
+            default : console.log(message) ; break;
             }
         } else {
             setAlertBox((prevState) => ({
@@ -141,13 +158,14 @@ export const GamePage = () => {
         console.error('WebSocket error:', event);
         // Handle WebSocket error
     };
+    
 
     // ================== JOINROOM TEMPLATE ===================
-    const handleInputChangeJoin = (name: string, value: any) => {
+    const handleInputChangeJoin = async (name: string, value: any) => {
         setcodeRoom({ ...codeRoom, [name]: value });
     };
 
-    const handleSubmitJoinCode = (event: { preventDefault: () => void }) => {
+    const handleSubmitJoinCode = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
         console.log(codeRoom);
         const data = {
@@ -160,14 +178,14 @@ export const GamePage = () => {
     };
 
     // ================= SET UP GAME TEMPLATE =================
-    const handleInputChangeCreate = (name: string, value: any) => {
-        setInfoGame(prevInfoGame => ({
-            ...prevInfoGame,
-            [name]: value
+    const handleInputChangeCreate = async (name: string, value: any) => {
+        setInfoGame(prevInfoGame => ({ 
+            ...prevInfoGame, 
+            [name]: value 
         }));
     };
 
-    const handleTypeGame = (name: string) => {
+    const handleTypeGame = async (name: string) => {
         setInfoGame(prevInfoGame => {
             if (name === 'solo') {
                 return { ...prevInfoGame, type: 'solo', nombreJoueurs: '1' };
@@ -178,10 +196,9 @@ export const GamePage = () => {
         });
     };
 
-    const handleSubmitCreateGame = (event: React.FormEvent) => {
+    const handleSubmitCreateGame = async (event: React.FormEvent) => {
         event.preventDefault();
         setisHost(true);
-        setInfoGame(infoGame);
         const data = {
             action: "create_game",
             args: {
@@ -193,13 +210,35 @@ export const GamePage = () => {
     };
 
     // ================ WAITING ROOM ==========================
-    const handleStartGame = (event: React.FormEvent) => {
+    const handleStartGame = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(infoGame);
+        const data = {
+            action: "start_game",
+        };
+        ws.current?.send(JSON.stringify(data));
     };
 
-    const enterTheWaitingRoom = async (args: any) => {
+    const startGame = async (args: any) => {
         console.log(args);
+        handleNextPage("gaming");
+    }
+
+    const createGameSpace = async (args: any) => {
+        setInfoGame((prevInfoGame) => ({
+            ...prevInfoGame,
+            idJoin: args.idJoin
+        }));  
+        if (args.type === 'multi') {
+            await enterTheWaitingRoom(args);
+        } else {
+            const data = {
+                action: "start_game",
+            };
+            ws.current?.send(JSON.stringify(data));
+        }                  
+    }
+
+    const enterTheWaitingRoom = async (args: any) => {
         if (!context?.user) {
             console.error("User context is not available");
             return;
@@ -240,19 +279,114 @@ export const GamePage = () => {
         goBack();
     };
 
+    useEffect(() => {
+        console.log(infoGame);
+    }, [infoGame]);
+    
+    // =================== GAME ========================
+
+    /* Tchat */
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [textMessage, setTextMessage] = useState("");
+    const [isChatVisible, setIsChatVisible] = useState(false);
+
+    const showMessages = async (args: any) => {
+        console.log(args);
+        setMessages(prevMessages => [...prevMessages, 
+            { nickname: args.nickname, message: args.message }
+        ]);
+    }
+
+    const toggleChatVisibility = () => {
+        setIsChatVisible(!isChatVisible);
+    };
+
+    const handleSubmitMessage = async () => {
+        const data = {
+            action: "send_message",
+            args : {
+                message : textMessage
+            }
+        };
+        ws.current?.send(JSON.stringify(data));
+        setTextMessage("");
+    };
+
+    const handleInputChangeMessage = (name: string, value: string) => {
+        setTextMessage(value);
+    };
+
+    /* ADD WORD */
+    const [newWord, setNewWord] = useState("");
+
+    const updateGraphWithNewWord = (word: string) => {
+        setNewWord(word);
+        const data = {
+            action: "add_word",
+            args: {
+                word : newWord
+            },
+        };
+        ws.current?.send(JSON.stringify(data));
+    };
+
+    const sendToEndGame = async (args: any) => {
+        console.log(args);
+        handleNextPage("ending");
+    }
+    
+    const testData: TestData = {
+        WordsChart: {
+            key1: ["chat", "chien", "5"],
+            key2: ["chien", "poireau", "25"],
+            key3: ["poireau", "souris", "49"],
+            key4: ["souris", "toupie", "49"] ,
+            key5: ["toupie","bloupi","14"],
+            key6: ["chat","camion","25"],
+            key7: ["bloupi","courir","22"],
+            key8: ["rat","courir","1"],
+            key9: ["rat",'voiture',"2"], 
+            key10: ["voiture","a","45"],
+            key11: ["a","red","95"],
+            key12: ["red","blue","88"]
+        }
+    };
+
     return (
         <>
+            {isDataLoading ? (
+                <Loader />
+            ) : (
+                <>
             {/* ================== ALERTBOX ==================== */}
             <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
             {/* ================================================ */}
             {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
-            {currentPage === "creating" && <div><SetUpGameTemplate infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} handlePreviousPage={handlePreviousPage} /></div>}
+            {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
             {currentPage === "joining" && <div><JoinRoomTemplate handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
-            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} /></div>}
-            {currentPage === "gaming" && <div>Game in Progress...</div>}
-            {currentPage === "ending" && <div>Game Over</div>}
+            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
+            {(currentPage === "gaming" && playersInGame != undefined) && <div>                
+                <GameTemplate 
+                    graph={testData}
+                    coupsRestants={coupsRestants}
+                    listwords={['er','re']}
+                    infoGame={infoGame}
+                    players={playersInGame}
+                    newWord={newWord} 
+                    updateGraphWithNewWord={updateGraphWithNewWord} 
+                    toggleChatVisibility={toggleChatVisibility} 
+                    isChatVisible={isChatVisible} messages={messages} 
+                    onInputChangeChat={handleInputChangeMessage} 
+                    SumbitMessageChat={handleSubmitMessage}                
+                />
+                </div>}
+            {currentPage === "ending" && <div><EndGameTemplate /></div>}
             {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
+                </>
+            )}
         </>
-
     );
 }
+
+
+

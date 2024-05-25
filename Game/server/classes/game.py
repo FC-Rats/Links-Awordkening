@@ -1,5 +1,8 @@
 # game.py
 
+import os
+import subprocess
+import shutil
 import asyncio
 import random
 from datetime import datetime, timedelta
@@ -23,7 +26,7 @@ class Game:
         self.game_name = game_name # Nom de la partie
         # Exemple : {'client1_id': Player(client1_id), 'client2_id': Player(client2_id)}
         self.max_player = max_player  # Nombre maximal de joueurs
-        self.turn_duration = timedelta(minutes=2)  # Durée d'un tour de jeu
+        self.turn_duration = timedelta(minutes=1)  # Durée d'un tour de jeu
         self.start_time = None  # Heure de début du jeu
         self.end_time = None  # Heure de fin du jeu
         self.game_started = False  # Indicateur si le jeu a commencé, ex: False
@@ -46,26 +49,68 @@ class Game:
         self.game_started = True
         self.start_time = datetime.now()
         self.end_time = self.start_time + self.turn_duration
-        asyncio.create_task(self.check_time())
+        print(f"Start : {self.start_time} + {self.turn_duration} = {self.end_time}")
 
         words_game = await self.get_start_words()
+        rebase_path = ".."  # Chemin de base pour les fichiers de données
+
         for player in self.players.values():
             player.word_chain.extend(words_game)
+            command = f"{os.path.join(rebase_path, "C", "executables", "new_game")} {os.path.join(rebase_path, "C", "datafiles", "dic.lex")} {words_game[0]} {words_game[1]} {os.path.join(rebase_path, "C", "datafiles", f"{player.id}.txt")} {os.path.join(rebase_path, "C", "datafiles", "words.bin")}"
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
-        await self.server.send_to_all(self.id, self.server.dump_data({
+            if result.returncode == 0:
+                old_path = os.path.join(rebase_path, "C", "datafiles", f"{player.id}.txt")
+                new_path = os.path.join(rebase_path, "Java", "src", "files", "input", f"{player.id}.txt")
+                out_path = os.path.join(rebase_path, "Java", "src", "files", "output", f"{player.id}.txt")
+
+                try:
+                    shutil.copy(old_path, new_path)
+                    print(f"Fichier copié de {old_path} à {new_path}")
+                except Exception as e:
+                    print(f"Erreur lors de la copie du fichier: {e}")
+
+                # Commande pour exécuter le moteur de chaîne
+                command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-2.5.jar")} {str(player.id)}"
+                result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+                if result.returncode == 0:
+                    new_chart = []
+
+                    # Lecture du fichier crée par le Java
+                    if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                        with open(out_path, 'r') as file:
+                            for line in file:
+                                elements = line.strip().split(',')
+                                if len(elements) > 1:
+                                    new_entry = elements
+                                    new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
+                                else:
+                                    score = line.strip().split(':')
+                                    self.score = int(float(score[1]) * 100)
+
+                        player.chart = new_chart
+                
+                else :
+                    print(f"Java non exécuté ! {result.stderr}")
+                                    
+        await self.server.send_to_all(self.host, self.server.dump_data({
             'action': 'start_game',
             'args': {
                 'return': 'success',
-                'players': list(self.players.keys()),
+                'chart': self.players.get(self.host).chart,
                 'end_time': self.end_time.isoformat()
             }
         }))
+
+        asyncio.create_task(self.check_time())
 
     async def check_time(self):
         """
         Vérifie le temps restant pour la partie.
         """
         while datetime.now() < self.end_time:
+            print(f"Time : {datetime.now() < self.end_time}")
             if await self.check_all_attempts_exhausted():
                 await self.end_game()
                 return
@@ -88,8 +133,9 @@ class Game:
         """
         Termine la partie.
         """
+        print(f"Time : STOP")
         self.game_started = False
-        await self.server.end_game(self.id)
+        await self.server.end_game(str(self.id))
 
     async def check_all_attempts_exhausted(self):
         """

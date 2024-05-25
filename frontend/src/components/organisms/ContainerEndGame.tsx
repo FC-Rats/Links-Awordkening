@@ -12,26 +12,27 @@ export const ContainerEndGame = () => {
     const playersolo: PlayerInfo[] = [
       {
         player_name: "Joueur 1", player_score: 78, player_url: ImgCompte,
-        player_isHost: true
+        player_isHost: true,
+        player_remainingTurns:0
       },
     ];
   
     const players: PlayerInfo[] = [
       {
         player_name: "InkyYuu", player_score: 88, player_url: ImgCompte,
-        player_isHost: true
+        player_isHost: true,player_remainingTurns:0
       },
       {
         player_name: "Léwow", player_score: 100, player_url: ImgCompte,
-        player_isHost: false
+        player_isHost: false,player_remainingTurns:0
       },
       {
         player_name: "Lolooooooooooo", player_score: 15, player_url: ImgCompte,
-        player_isHost: false
+        player_isHost: false,player_remainingTurns:0
       },
       {
         player_name: "Dark_LNA_Du_77", player_score: 95, player_url: ImgCompte,
-        player_isHost: false
+        player_isHost: false,player_remainingTurns:0
       },
     ];
 

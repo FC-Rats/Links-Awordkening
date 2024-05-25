@@ -27,8 +27,10 @@ class WebsocketClient:
         if websocket.path == "/game":
             async for data in websocket:
                 msg = self.load_data(data)
-                if 'action' and 'args' in msg:
+                if 'action' in msg and 'args' in msg:
                     await self.handle_game(msg['action'], msg['args'])
+                if 'action' in msg and not 'args' in msg:
+                    await self.handle_game(msg['action'], {})
 
     async def handle_game(self, action, args):
         """

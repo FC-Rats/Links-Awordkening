@@ -5,45 +5,62 @@ import { ContainerInfoGame } from "../organisms/ContainerInfoGame";
 import { ComponentListWords } from "../molecules/ComponentListWords";
 import ChatComponent from "../organisms/ChatComponent";
 import SubmitWord from "../molecules/SubmitWord";
-import Graph from "../molecules/Graph";
+import Graph, { TestData } from "../molecules/Graph";
 import { Stack, IconButton } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import "../../assets/css/GameTemplate.css";
 import { Message } from "../types/Message";
+import { PlayerInfo } from "../types/PlayerInfo";
 
 interface GameTemplateProps {
     newWord: string;
+    infoGame: {
+        idJoin : string;
+        nameGame: string;
+        coupsRestants: string;
+        idHost: number | undefined;
+        type: string;
+        nombreJoueurs: string;
+    };
+    players: PlayerInfo[];
+    listwords : string[];
     updateGraphWithNewWord: (word: string) => void;
     toggleChatVisibility: () => void;
     isChatVisible: boolean;
     messages: Message[];
     onInputChangeChat: (name: string, value: string) => void;
     SumbitMessageChat: () => void;
+    coupsRestants :number;
+    graph: TestData,
 }
 
 export const GameTemplate: React.FC<GameTemplateProps> = ({
+    graph,
     newWord,
     updateGraphWithNewWord,
     toggleChatVisibility,
     isChatVisible,
     messages,
     onInputChangeChat,
-    SumbitMessageChat
+    SumbitMessageChat,
+    players,
+    infoGame,
+    listwords,
+    coupsRestants
     }) => {
 
     return (
         <Stack direction="column" spacing={2}>
-            <CenteredTitle text="Partie Solo" />
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
-                <ContainerInfoPlayer />
-                <ContainerInfoGame />
+                <ContainerInfoPlayer players={players}/> 
+                <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants}/>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
                 <div className="item-game">
-                <ComponentListWords />
+                <ComponentListWords listwords={listwords}/>
                 </div>
                 <div className="graph">
-                <Graph newWord={newWord}/>
+                <Graph newWord={newWord} data={graph}/>
                 </div>
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">

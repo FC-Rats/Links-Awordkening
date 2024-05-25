@@ -202,14 +202,6 @@ export const OldGamePage = () => {
             ) : (
                 <>
                 <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
-                <GameTemplate 
-                newWord={newWord} 
-                updateGraphWithNewWord={updateGraphWithNewWord} 
-                toggleChatVisibility={toggleChatVisibility} 
-                isChatVisible={isChatVisible} messages={messages} 
-                onInputChangeChat={handleInputChangeMessage} 
-                SumbitMessageChat={handleSubmitMessage}                
-                />
                 </>
             )}
         </>

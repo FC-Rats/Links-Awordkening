@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../assets/css/ComponentListWords.css";
 
-export const ComponentListWords = () => {
-    const [listwords, setListWords] = useState<string[]>([]);
-
-    useEffect(() => {
-        const words = ["mot1", "mot2", "mot3", "mot4"]; //mots récup
-        setListWords(words);
-    }, []);
-
+export const ComponentListWords  = ({ listwords }: { listwords: string[] }) =>{
     return (
         <>
             <div className="wrapper-list-words">

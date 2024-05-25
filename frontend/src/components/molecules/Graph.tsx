@@ -7,18 +7,6 @@ import "../../assets/css/Graph.css"
 
 HighchartsNetworkgraph(Highcharts);
 
-interface WordsChartData {
-    from: string;
-    to: string;
-    label: number;
-}
-
-interface TestData {
-    WordsChart: {
-        [key: string]: string[];
-    };
-}
-
 const testData: TestData = {
     WordsChart: {
         key1: ["chat", "chien", "5"],
@@ -36,7 +24,24 @@ const testData: TestData = {
     }
 };
 
-const ObserverWordsChart: React.FC<{newWord: string}> = ({ newWord }) => {
+export interface WordsChartData {
+    from: string;
+    to: string;
+    label: number;
+}
+
+export interface TestData {
+    WordsChart: {
+        [key: string]: string[];
+    };
+}
+
+interface GraphProps{
+    newWord : string;
+    data : TestData;
+}
+
+const ObserverWordsChart: React.FC<GraphProps> = ({ newWord, data }) => {
     const [seriesData, setSeriesData] = useState<WordsChartData[]>([]);
 
     useEffect(() => {
@@ -48,14 +53,12 @@ const ObserverWordsChart: React.FC<{newWord: string}> = ({ newWord }) => {
 
     useEffect(() => {
         // Sample test data
-        
-
-        const keys = Object.keys(testData.WordsChart);
+        const keys = Object.keys(data.WordsChart);
 
         const formattedData: WordsChartData[] = keys.map((key) => ({
-            from: testData.WordsChart[key][0],
-            to: testData.WordsChart[key][1],
-            label: parseInt(testData.WordsChart[key][2]),
+            from: data.WordsChart[key][0],
+            to: data.WordsChart[key][1],
+            label: parseInt(data.WordsChart[key][2]),
         }));
 
         setSeriesData(formattedData);

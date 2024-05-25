@@ -12,15 +12,18 @@ interface ChatProps {
 }
 
 const ChatComponent: React.FC<ChatProps> = ({ messages, onInputChange , onSubmit}) => {
+  const [textMessage, setTextMessage] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
+    setTextMessage("");
   };
 
   const handleInputChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     const { name, value } = event.target;
     onInputChange(name, value);
+    setTextMessage(value);
   };
 
   return (
@@ -32,12 +35,13 @@ const ChatComponent: React.FC<ChatProps> = ({ messages, onInputChange , onSubmit
           </div>
         ))}
       </div>
-      <form method='post' onSubmit={handleSubmit}>
+      <form id="messageForm" method='post' onSubmit={handleSubmit}>
         <div className='formchat'>
           <TextareaAutosize className='contour-input-form'
             placeholder="Entrer votre message"
             minRows={3}
             required
+            value={textMessage} 
             onChange={handleInputChange}
           />         
           <SubmitButton text={'Envoyer'}/>

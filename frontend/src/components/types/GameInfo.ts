@@ -1,4 +1,4 @@
 export interface GameInfo {
     title: string;
-    info: string;
+    info: string | number | undefined;
 }
