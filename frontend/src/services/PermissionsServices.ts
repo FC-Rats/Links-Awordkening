@@ -57,7 +57,6 @@ export async function accountConnection(formData: { username: string; password: 
         visibility: "",
         verified: false,
         admin: false,
-        averageScore: 0
     };
     try {
         const userResponse = await getUsers({ username: formData.username });
@@ -86,7 +85,6 @@ export async function accountConnection(formData: { username: string; password: 
             visibility: userResponse[0]['visibility'],
             verified: userResponse[0]['verified'] === 1 ? true : false,
             admin: userResponse[0]['admin'] === 1 ? true : false,
-            averageScore: 12, // COMMENT CALCULER l'AVG SCORE
             birthYear: userResponse[0]['birthYear']
         });
 

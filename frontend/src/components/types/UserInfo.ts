@@ -8,6 +8,5 @@ export interface UserInfo {
     visibility: string;
     verified: boolean;
     admin: boolean;
-    averageScore: number;
     password?: string;
 }

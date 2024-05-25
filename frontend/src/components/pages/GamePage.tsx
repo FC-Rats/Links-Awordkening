@@ -9,6 +9,7 @@ import { ChoosingGameTemplate } from "../templates/ChoosingGameTemplate";
 import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
 import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
 import { UserInfo } from "../types/UserInfo";
+import { info } from "console";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -40,11 +41,26 @@ export const GamePage = () => {
     const [currentPage, setCurrentPage] = useState<StatePage>("choosing");
     const [isHost, setisHost] = useState(false);
 
-    // =============================================================
-
-    // ================== WEBSOCKETS & LISTENERS ===================
+    // ==================== CONSTANTES =============================
     const context = useContext(AppContext);
     const ws = useRef<WebSocket | null>(null);
+
+    const [codeRoom, setcodeRoom] = useState({
+        codeRoom: "",
+      });
+    
+    const [infoGame, setInfoGame] = useState({
+        idJoin : '',
+        nameGame: '', 
+        coupsRestants: '10',
+        idHost: context?.user?.id, 
+        type: 'multi',
+        nombreJoueurs: '2',
+    });
+
+    const [players, setPlayers] = useState<UserInfo[]>();
+
+    // ================== WEBSOCKETS & LISTENERS ===================
 
     useEffect(() => {
         const connectToGame = async () => {
@@ -93,7 +109,23 @@ export const GamePage = () => {
         function onDataReceived(ev: MessageEvent<any>) {
             const message = JSON.parse(ev.data);
             if (message.args.return == "success") {
-              console.log("e");
+              switch (message.action) {
+                case "send_data" : console.log("Connection établie !"); break;
+                case "join_game" : enterTheWaitingRoom(message.args); break;
+                case "create_game" : {
+                    if (infoGame.type == 'multi') {
+                        enterTheWaitingRoom(message.args);
+                    } else {
+                        setCurrentPage("gaming"); 
+                    }
+                    setInfoGame((prevInfoGame) => ({ 
+                        ...prevInfoGame, 
+                        idJoin: message.args.idJoin 
+                    }));                    
+                    break;
+                }
+                default : console.log(message) ; break;
+              }
             } else {
               setAlertBox((prevState) => ({
                 ...prevState,
@@ -110,10 +142,6 @@ export const GamePage = () => {
         };
 
     // ================== JOINROOM TEMPLATE ===================
-    const [codeRoom, setcodeRoom] = useState({
-        codeRoom: "",
-      });
-    
     const handleInputChangeJoin = (name: string, value: any) => {
         setcodeRoom({ ...codeRoom, [name]: value });
     };
@@ -131,22 +159,11 @@ export const GamePage = () => {
     };
 
     // ================= SET UP GAME TEMPLATE =================
-    const [infoGame, setInfoGame] = useState({
-        idJoin : '',
-        nameGame: '', 
-        coupsRestants: '10',
-        nameHost: context?.user?.name, 
-        type: 'multi',
-        nombreJoueurs: '2',
-    });
-
     const handleInputChangeCreate = (name: string, value: any) => {
-        setInfoGame({ ...infoGame, [name]: value });
-        if (name == "type" && value == 'solo'){
-            setInfoGame({ ...infoGame, ['nombreJoueurs']: '1' });
-        } else if (name == "type" && value == 'multi'){
-            setInfoGame({ ...infoGame, ['nombreJoueurs']: '2' });
-        }
+        setInfoGame(prevInfoGame => ({ 
+            ...prevInfoGame, 
+            [name]: value 
+        }));
     };
 
     const handleTypeGame= (name: string) => {
@@ -162,15 +179,49 @@ export const GamePage = () => {
 
     const handleSubmitCreateGame = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(infoGame);
+        setInfoGame(infoGame);
+        const data = {
+            action: "create_game",
+            args: {
+                max_player: parseInt(infoGame.nombreJoueurs),
+                game_name : infoGame.nameGame
+            },
+          };
+          ws.current?.send(JSON.stringify(data));
     };
 
     // ================ WAITING ROOM ==========================
-    const [players, setplayers] = useState<UserInfo[]>();
-
     const handleStartGame = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(infoGame);
+    };
+
+    const enterTheWaitingRoom = (args : any) => {
+        console.log(args);
+        if (context?.user){
+            if(args.iDJoin && args.nameGame ){
+                setInfoGame({
+                    idJoin : args.idJoin,
+                    nameGame: args.nameGame, 
+                    coupsRestants: '10',
+                    idHost: args.idHost, 
+                    type: 'multi',
+                    nombreJoueurs: args.max_player,
+                })
+            }
+            else if (!args.players) {
+                setPlayers([context?.user]);
+                setisHost(true);
+            } else {
+                // TO-DO get USERINFOSByID
+                setPlayers(args.players);
+                setPlayers((prevPlayers: any) => [...prevPlayers, context?.user]);
+                if(infoGame.idHost == context?.user.id){
+                    setisHost(true)
+                }
+            }
+        }
+        setCurrentPage("waiting");
     };
 
     return (

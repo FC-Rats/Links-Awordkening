@@ -1,3 +1,5 @@
+import { UserInfo } from "../components/types/UserInfo";
+
 const url = `${process.env.REACT_APP_API_URL}user/`;
 const token = localStorage.getItem('token');
 
@@ -142,3 +144,34 @@ export async function getStats(param: Record<string, number | undefined>) {
         console.error('Une erreur s\'est produite : ', error);
     }
 }
+
+export async function getUserInfoById(playerIds: number[]): Promise<UserInfo[]> {
+    const userInfoList: UserInfo[] = [];
+    
+    for (const playerid of playerIds) {
+        try {
+            const userResponse = await getUsers({ id : playerid });
+            if (userResponse.length > 0) {
+                const userInfo: UserInfo = {
+                    id: userResponse[0]['id'],
+                    email: userResponse[0]['email'],
+                    name: userResponse[0]['username'],
+                    profilPicture: userResponse[0]['profilPicture'],
+                    tokenR: userResponse[0]['tokenR'],
+                    visibility: userResponse[0]['visibility'],
+                    verified: userResponse[0]['verified'] === 1 ? true : false,
+                    admin: userResponse[0]['admin'] === 1 ? true : false,
+                    birthYear: userResponse[0]['birthYear']
+                };
+                userInfoList.push(userInfo);
+            } else {
+                console.warn(`Utilisateur avec ID ${playerid} non trouvé`);
+            }
+        } catch (error) {
+            console.error(`Erreur lors de la récupération de l'utilisateur avec ID ${playerid}:`, error);
+        }
+    }
+
+    return userInfoList;
+}
+

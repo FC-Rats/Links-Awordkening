@@ -17,7 +17,6 @@ export const AccountParametersPage: React.FC = () => {
         visibility: 'PUBLIC',
         verified: false,
         admin: false,
-        averageScore: 0,
         birthYear: ''
     };
     const [formData, setFormData] = useState<UserInfo>(user || initialFormData);

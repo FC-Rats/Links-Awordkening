@@ -42,7 +42,7 @@ class WebsocketClient:
         elif action == "send_message":
             await self.server.send_message(self.id, args)
         elif action == "create_game":
-            await self.server.create_game(self.id, self.websocket, args.get('max_player'))
+            await self.server.create_game(self.id, self.websocket, args)
         elif action == "start_game":
             await self.server.start_game(self.id)
         elif action == "join_game":

@@ -11,7 +11,7 @@ export interface WaitingRoomProps {
       idJoin : string,
       nameGame: string;
       coupsRestants: string;
-      nameHost: string | undefined;
+      idHost: number | undefined;
       type: string;
       nombreJoueurs: string;
   };
@@ -21,6 +21,7 @@ export interface WaitingRoomProps {
 }
 
 export const WaitingRoomTemplate : React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame }) =>  {
+    console.log(infoGame);
     return (
         <>
         <CenteredTitle text={`Rejoindre la partie`} />
@@ -30,7 +31,7 @@ export const WaitingRoomTemplate : React.FC<WaitingRoomProps> = ({ infoGame, pla
             <h2>{players.length} sur {infoGame.nombreJoueurs} joueurs</h2>
             <div className="frame-info-player" style={{ width: '60%' }}>
             {players.map((player, index) => (
-                <p>{player.name}</p>
+                <li id={index.toString()}>{player.name}</li>
             ))}
             </div>
             {isHost ? (

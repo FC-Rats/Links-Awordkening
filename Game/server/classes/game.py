@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 class Game:
 
-    def __init__(self, server, id_client, id, code, max_player) -> None:
+    def __init__(self, server, id_client, id, code, max_player, game_name) -> None:
         """
         Initialise une nouvelle partie.
 
@@ -20,6 +20,7 @@ class Game:
         self.code = code  # Code unique de la partie
         self.server = server  # Instance du serveur WebSocket
         self.players = {}  # Dictionnaire des joueurs dans la partie
+        self.game_name = game_name # Nom de la partie
         # Exemple : {'client1_id': Player(client1_id), 'client2_id': Player(client2_id)}
         self.max_player = max_player  # Nombre maximal de joueurs
         self.turn_duration = timedelta(minutes=2)  # Durée d'un tour de jeu

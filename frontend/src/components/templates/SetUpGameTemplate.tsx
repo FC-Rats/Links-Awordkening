@@ -10,7 +10,7 @@ export interface SetUpGameProps {
     infoGame: {
         nameGame: string;
         coupsRestants: string;
-        nameHost: string | undefined;
+        idHost: number | undefined;
         type: string;
         nombreJoueurs: string;
     };
@@ -20,7 +20,7 @@ export interface SetUpGameProps {
 }
 
 export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleInputChange, handleSubmit, handleTypeGame }) => {
-    const { nameGame, coupsRestants, nameHost, type, nombreJoueurs } = infoGame;
+    const { nameGame, coupsRestants, type, nombreJoueurs } = infoGame;
     const [soloSelected, setSoloSelected] = useState(type == 'solo');
     const [multiSelected, setMultiSelected] = useState(type == 'multi');
 

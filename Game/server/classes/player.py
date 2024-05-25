@@ -20,7 +20,12 @@ class Player:
         # Exemple : ['chat', 'chien']
         self.chart = []  # Liste des scores et chaînes de mots
         # Exemple : [['chat', 'chien', 80], ['chien', 'cheval', 90]]
-
+        
+    def to_json(self):
+        return {
+            'id': self.id,
+        }
+    
     async def add_word(self, word):
         """
         Ajoute un mot à la chaîne de mots du joueur.
