@@ -92,6 +92,8 @@ class WebsocketServer:
                 'action': 'create_game',
                 'args': {'return': 'success', 'idJoin': game_code}
             }))
+        
+        print(f"{[game.code for id, game in self.games.items()]}")
 
     async def join_game(self, client_id, game_code):
         """
@@ -101,32 +103,32 @@ class WebsocketServer:
         :param game_code: Code de la partie à rejoindre
         """
         for game_id, game in self.games.items():
-            print(f"BOOL {not game.game_started} GAME.CODE {game.code} GAMECODE {game_code} = {game.code == game_code}")
-            if game.code == game_code and not game.game_started:
-                if len(game.players) < game.max_player:
-                    player = Player(client_id, game_id)
-                    game.players[client_id] = player
-                    self.players[client_id] = player
-                    players_data = list(game.players.keys())
-                    print(f"Utilisateur {client_id} a rejoint la partie {game_id}")
-                    await self.clients[client_id].websocket.send(self.dump_data({
-                        'action': 'join_game',
-                        'args': {'return': 'success', 'idJoin': game_code, 'nameGame' : game.game_name, 'idHost' : game.host, 'max_player' : game.max_player}
-                    }))
-                    await self.send_to_all(client_id,self.dump_data({ 'action': 'join_game', 'args' : { 'return': 'success', 'players' : players_data}}))
-                    return
+            if game.code == game_code:
+                if not game.game_started:
+                    if len(list(game.players.keys())) < game.max_player:
+                        player = Player(client_id, game_id)
+                        game.players[client_id] = player
+                        self.players[client_id] = player
+                        players_data = list(game.players.keys())
+                        await self.clients[client_id].websocket.send(self.dump_data({
+                            'action': 'join_game',
+                            'args': {'return': 'success', 'idJoin': game_code, 'nameGame' : game.game_name, 'idHost' : game.host, 'max_player' : game.max_player}
+                        }))
+                        if (players_data):
+                            await self.send_to_all(client_id,self.dump_data({ 'action': 'join_game', 'args' : { 'return': 'success', 'players' : players_data}}))
+                        return
+                    else:
+                        await self.clients[client_id].websocket.send(self.dump_data({
+                            'action': 'join_game',
+                            'args': {'return': 'error', 'msg': 'La partie est pleine !'}
+                        }))
+                        return
                 else:
                     await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'join_game',
-                        'args': {'return': 'error', 'msg': 'La partie est pleine !'}
+                        'args': {'return': 'error', 'msg': 'La partie a déjà commencé !'}
                     }))
                     return
-            else:
-                await self.clients[client_id].websocket.send(self.dump_data({
-                    'action': 'join_game',
-                    'args': {'return': 'error', 'msg': 'La partie a déjà commencé !'}
-                }))
-                return
         await self.clients[client_id].websocket.send(self.dump_data({
             'action': 'join_game',
             'args': {'return': 'error', 'msg': 'Partie introuvable !'}
@@ -233,7 +235,7 @@ class WebsocketServer:
             del self.players[client_id]
         del self.games[id_game]
 
-    async def send_to_all(self, id_client, data):
+    async def send_to_all(self, id_client: int, data: any):
         """
         Envoie un message à tous les clients d'une même partie.
 
@@ -248,16 +250,17 @@ class WebsocketServer:
         players = self.games[game_id].players.keys()
         clients_to_send = [
             client.websocket for client_id, client in self.clients.items()
-            if client_id in players
+            if client_id in players and client.websocket is not None
         ]
-        print(self.games[game_id].players)
-        print(clients_to_send)
-        print(len(clients_to_send))
-
+        
         if clients_to_send:
-            await websockets.broadcast(clients_to_send, data)
+            try:
+                websockets.broadcast(clients_to_send, data)
+            except Exception as e:
+                print(f"Erreur lors de l'envoi du message: {e}")
         else:
             print("Aucun client à envoyer.")
+
 
     def generate_unique_code(self):
         """

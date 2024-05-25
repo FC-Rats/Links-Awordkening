@@ -50,7 +50,6 @@ const RequireAuthAdmin: React.FC<{ children: JSX.Element }> = ({ children }) => 
 };
 
 root.render(
-  <React.StrictMode>
     <AppContextProvider>
       <Router>
       <Nav/>
@@ -73,7 +72,6 @@ root.render(
         </Routes>
       </Router>
     </AppContextProvider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

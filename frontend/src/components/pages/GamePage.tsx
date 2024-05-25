@@ -10,6 +10,9 @@ import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
 import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
 import { UserInfo } from "../types/UserInfo";
 import { info } from "console";
+import { getUserInfoById } from "../../services/UserServices";
+
+export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
 export const GamePage = () => {
     // ================== REGION: Alert Box State ==================
@@ -66,41 +69,37 @@ export const GamePage = () => {
     // ================== WEBSOCKETS & LISTENERS ===================
 
     useEffect(() => {
-        const connectToGame = async () => {
-            await joinGame();
-            console.log("WebSocket in context:", ws.current);
-
-        };
-
-        connectToGame();
-
+        if (!ws.current) {
+            const connectToGame = async () => {
+                ws.current = new WebSocket("ws://localhost:8765/game");
+                ws.current.addEventListener("open", onSendData);
+                ws.current.addEventListener("close", onDataClosed);
+                ws.current.addEventListener("message", onDataReceived);
+                ws.current.addEventListener("error", onDataError);
+            };
+            connectToGame();
+        }
+    
         return () => {
             if (ws.current) {
                 ws.current.close();
+                ws.current = null;
             }
         };
-    }, []);
-
-    const joinGame = async () => {
-        ws.current = new WebSocket("ws://localhost:8765/game");
-        ws.current.addEventListener("open", onSendData);
-        ws.current.addEventListener("close", onDataClosed);
-        ws.current.addEventListener("message", onDataReceived);
-        ws.current.addEventListener("error", onDataError);
-    };
+    }, []); 
 
     const onSendData = () => {
-        const data = {
-            action: "send_data",
-            args: {
-                id: context?.user?.id,
-                nickname: context?.user?.name,
-            },
+    const data = {
+        action: "send_data",
+        args: {
+            id: context?.user?.id,
+            nickname: context?.user?.name,
+        },
         };
         if (ws.current) {
-            ws.current.send(JSON.stringify(data));
+        ws.current.send(JSON.stringify(data));
         } else {
-            console.error("WebSocket is not open. Unable to send data.");
+        console.error("WebSocket is not open. Unable to send data.");
         }
     };
 
@@ -182,6 +181,7 @@ export const GamePage = () => {
 
     const handleSubmitCreateGame = (event: React.FormEvent) => {
         event.preventDefault();
+        setisHost(true);
         setInfoGame(infoGame);
         const data = {
             action: "create_game",
@@ -199,33 +199,34 @@ export const GamePage = () => {
         console.log(infoGame);
     };
 
-    const enterTheWaitingRoom = (args : any) => {
+    const enterTheWaitingRoom = async (args: any) => {
         console.log(args);
-        if (context?.user){
-            if(args.iDJoin && args.nameGame ){
-                setInfoGame({
-                    idJoin : args.idJoin,
-                    nameGame: args.nameGame, 
-                    coupsRestants: '10',
-                    idHost: args.idHost, 
-                    type: 'multi',
-                    nombreJoueurs: args.max_player,
-                })
-            }
-            else if (!args.players) {
-                setPlayers([context?.user]);
-                setisHost(true);
-            } else {
-                // TO-DO get USERINFOSByID
-                setPlayers(args.players);
-                setPlayers((prevPlayers: any) => [...prevPlayers, context?.user]);
-                if(infoGame.idHost == context?.user.id){
-                    setisHost(true)
-                }
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        if (args.idJoin && args.nameGame) {
+            setInfoGame({
+                idJoin: args.idJoin,
+                nameGame: args.nameGame,
+                coupsRestants: '10',
+                idHost: args.idHost,
+                type: 'multi',
+                nombreJoueurs: args.max_player,
+            });
+        } else if (!args.players) {
+            setPlayers([context.user]);
+        } else {
+            try {
+                const listPlayers = await getUserInfoById(args.players);
+                setPlayers(listPlayers);
+            } catch (error) {
+                console.error("Failed to get user info by ID:", error);
             }
         }
         updateCurrentPage("waiting");
     };
+    
 
     return (
         <>
