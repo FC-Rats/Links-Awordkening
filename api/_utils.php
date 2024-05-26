@@ -140,7 +140,7 @@ function updateQuery($sql, $data) {
 }
 
 function passwordVerifyFunction($db, $username, $password) {
-    $connectionVerif = $db->query("SELECT password, verified FROM LA_USER WHERE username = :username", array(array(":username", $username)));
+    $connectionVerif = $db->query("SELECT password, verified FROM la_user WHERE username = :username", array(array(":username", $username)));
     if (count($connectionVerif) == 1 && password_verify($password, $connectionVerif[0]['password']) && $connectionVerif[0]['verified'] == 1) {
         return true;
     }

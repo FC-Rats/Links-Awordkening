@@ -26,7 +26,7 @@ validateJWT($config, $authorizationHeader);
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Traitement pour la méthode GET
-        $res = getQuery("SELECT * FROM LA_FRIEND", []);
+        $res = getQuery("SELECT * FROM la_friend", []);
         $sql = $res[0];
         $conditions = $res[1];
         $friends = $db->query($sql, $conditions);
@@ -51,7 +51,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             );
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO LA_FRIEND (idUser, idFriend, state) VALUES (:idUser, :idFriend, :state)",
+                "INSERT INTO la_friend (idUser, idFriend, state) VALUES (:idUser, :idFriend, :state)",
                 $friendData
             );
             $res = [];
@@ -69,7 +69,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $data = json_decode($jsonData, true);
             if (isset($data['idUser']) && isset($data['idFriend'])) { // empêche la modif de toutes les lignes
                 // CREATION DU UPDATE
-                $res = updateQuery("UPDATE LA_FRIEND", $data);
+                $res = updateQuery("UPDATE la_friend", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME
@@ -89,7 +89,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         // Traitement pour la méthode DELETE
         if (isset($_GET['idFriend']) && isset($_GET['idUser'])) {
             $delete = $db->query(
-                "DELETE FROM LA_FRIEND WHERE idFriend = :idFriend AND idUser = :idUser",
+                "DELETE FROM la_friend WHERE idFriend = :idFriend AND idUser = :idUser",
                 [[":idFriend", $_GET['idFriend']],[":idUser", $_GET['idUser']]]
             );
             echo json_encode($delete);

@@ -26,7 +26,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         validateJWT($config, $authorizationHeader);
         // Traitement pour la méthode GET
-        $res = getQuery("SELECT * FROM LA_LOG", []);
+        $res = getQuery("SELECT * FROM la_log", []);
         $sql = $res[0];
         $conditions = $res[1];
         $logs = $db->query($sql, $conditions);
@@ -52,7 +52,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             );
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id, :time, :log, :ip)", $logdata);
+                "INSERT INTO la_log (idUser, dateTime, log, ip) VALUES (:id, :time, :log, :ip)", $logdata);
             $res = [];
             $res['Log'] = $logdata;
             echo json_encode($res);
@@ -69,7 +69,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $data = json_decode($jsonData, true);
             if (isset($data['idUser']) && isset($data['dateTime']) && isset($data['log']) ) { // empêche la modif de toutes les lignes
                 // CREATION DU UPDATE
-                $res = updateQuery("UPDATE LA_LOG", $data);
+                $res = updateQuery("UPDATE la_log", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME

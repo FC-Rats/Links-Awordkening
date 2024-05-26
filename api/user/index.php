@@ -24,7 +24,7 @@ include_once('../validate.php');
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $res = getQuery("SELECT * FROM LA_USER", []);
+        $res = getQuery("SELECT * FROM la_user", []);
         $sql = $res[0];
         $conditions = $res[1];
         $users = $db->query($sql, $conditions);
@@ -52,7 +52,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO LA_USER (username, birthYear, email, password) 
+                "INSERT INTO la_user (username, birthYear, email, password) 
                 VALUES (:username, :birthYear, :email, :password)",
                 $userData
             );
@@ -75,7 +75,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 }
                 // CREATION DU UPDATE
-                $res = updateQuery("UPDATE LA_USER", $data);
+                $res = updateQuery("UPDATE la_user", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME

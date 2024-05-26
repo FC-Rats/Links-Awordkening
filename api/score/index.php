@@ -24,7 +24,7 @@ validateJWT($config, $authorizationHeader);
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $res = getQuery("SELECT * FROM LA_SCORE", []);
+        $res = getQuery("SELECT * FROM la_score", []);
         $sql = $res[0];
         $conditions = $res[1];
         $scores = $db->query($sql, $conditions);
@@ -51,7 +51,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO LA_SCORE (idUser, idGame, score) 
+                "INSERT INTO la_score (idUser, idGame, score) 
                 VALUES (:idUser, :idGame, :score)", 
                 $scoreData
             );
@@ -70,7 +70,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $data = json_decode($jsonData, true);
             if (isset($data['idGame']) && isset($data['idUser']) ) { // empêche la modif de toutes les lignes
                 // CREATION DU UPDATE
-                $res = updateQuery("UPDATE LA_SCORE", $data);
+                $res = updateQuery("UPDATE la_score", $data);
                 $sql = $res[0];
                 $conditions = $res[1];
                 // WHERE SCORE = IDUSER et IDGAME

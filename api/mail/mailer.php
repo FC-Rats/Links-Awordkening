@@ -63,12 +63,12 @@ if (!function_exists('generateTokenLink')) {
         $link .= $token;
 
         global $db;
-        $getId = $db->query("SELECT id, verified FROM LA_USER WHERE email = :email;", array(array(":email", $email)));
+        $getId = $db->query("SELECT id, verified FROM la_user WHERE email = :email;", array(array(":email", $email)));
         if ($getId[0]["verified"] == 0) {
             return "";
         }
-        $recuperation = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
-        $log = $db->query("INSERT INTO LA_LOG (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $getId[0]["id"]), array(":time", date('Y-m-d H:i:s')), array(":log", "Récupération"), array(":ip", getIP($getId[0]["id"]))));
+        $recuperation = $db->query("UPDATE la_user SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+        $log = $db->query("INSERT INTO la_log (idUser, dateTime, log, ip) VALUES (:id,:time,:log,:ip);", array(array(":id", $getId[0]["id"]), array(":time", date('Y-m-d H:i:s')), array(":log", "Récupération"), array(":ip", getIP($getId[0]["id"]))));
         return $link;
     }
 }
@@ -82,8 +82,8 @@ if (!function_exists('generateVerifyLink')) {
         $link .= $token;
         global $db;
 
-        $getId = $db->query("SELECT id FROM LA_USER WHERE email = :email;", array(array(":email", $email)));
-        $verfication = $db->query("UPDATE LA_USER SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
+        $getId = $db->query("SELECT id FROM la_user WHERE email = :email;", array(array(":email", $email)));
+        $verfication = $db->query("UPDATE la_user SET tokenR = :token WHERE email = :email;", array(array(":token", $token), array(":email", $email)));
         return $link;
     }
 }
