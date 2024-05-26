@@ -45,27 +45,28 @@ class Player:
         if word in self.word_chain:
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Le mot a déjà été utilisé !'}
+                'args': {'return': 'warning', 'msg': 'Le mot a déjà été utilisé !'}
             }
         # Vérification si le mot contient des chiffres
         elif re.search(r'\d', word):
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Le mot ne doit pas contenir de nombres !'}
+                'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de nombres !'}
             }
         # Vérification si le mot contient des caractères spéciaux
         elif re.search(r'[^\w]', word, re.UNICODE):
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Le mot ne doit pas contenir de caractères spéciaux !'}
+                'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de caractères spéciaux !'}
             }
         # Vérification si le mot n'existe pas ou est mal orthographié
         elif result.returncode == 1:
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Le mot n\'existe pas ou est mal orthographié !'}
+                'args': {'return': 'warning', 'msg': 'Le mot n\'existe pas ou est mal orthographié !'}
             }
         else:
+            print("MOT DANS LE DICO")
             self.word_chain.append(word)
             self.attempts -= 1
 
@@ -109,7 +110,7 @@ class Player:
                     if new_chart == self.chart:
                         return {
                             'action': 'new_score',
-                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'word' : word}
+                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word}
                         }
                     else:
                         self.chart = new_chart

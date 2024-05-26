@@ -26,7 +26,7 @@ class Game:
         self.game_name = game_name # Nom de la partie
         # Exemple : {'client1_id': Player(client1_id), 'client2_id': Player(client2_id)}
         self.max_player = max_player  # Nombre maximal de joueurs
-        self.turn_duration = timedelta(minutes=1)  # Durée d'un tour de jeu
+        self.turn_duration = timedelta(minutes=10)  # Durée d'un tour de jeu
         self.start_time = None  # Heure de début du jeu
         self.end_time = None  # Heure de fin du jeu
         self.game_started = False  # Indicateur si le jeu a commencé, ex: False
@@ -88,17 +88,20 @@ class Game:
                                 else:
                                     score = line.strip().split(':')
                                     self.score = int(float(score[1]) * 100)
+                                    player.score = self.score
 
                         player.chart = new_chart
                 
                 else :
                     print(f"Java non exécuté ! {result.stderr}")
-                                    
+        
         await self.server.send_to_all(self.host, self.server.dump_data({
             'action': 'start_game',
             'args': {
                 'return': 'success',
                 'chart': self.players.get(self.host).chart,
+                'score': self.score,
+                'players' : list(self.players.keys()),
                 'end_time': self.end_time.isoformat()
             }
         }))

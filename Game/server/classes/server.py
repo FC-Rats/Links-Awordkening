@@ -255,11 +255,11 @@ class WebsocketServer:
 
         game_id = player.game_id
         players = self.games[str(game_id)].players.keys()
+
         clients_to_send = [
             client.websocket for client_id, client in self.clients.items()
             if client_id in players and client.websocket is not None
         ]
-        
         if clients_to_send:
             try:
                 websockets.broadcast(clients_to_send, data)

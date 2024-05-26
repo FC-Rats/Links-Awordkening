@@ -74,6 +74,7 @@ export const GamePage = () => {
     const [players, setPlayers] = useState<UserInfo[]>(initialPlayerState);
     const convertUserInfoToPlayerInfo = (users: UserInfo[]): PlayerInfo[] => {
         return users.map((user) => ({
+            player_id : user.id,
             player_name: user.name,
             player_score: 0,
             player_url: user.profilPicture,
@@ -81,11 +82,25 @@ export const GamePage = () => {
             player_remainingTurns: 10,
         }));
     };
-    const[playersInGame,setPlayersInGame] = useState<PlayerInfo[]>(
+    const [playersInGame, setPlayersInGame] = useState<PlayerInfo[]>(
         convertUserInfoToPlayerInfo(players)
     );
-    const[coupsRestants,setcoupsRestants] = useState(10);
-    
+    const updatePlayerScoreByName = (id : number, score : number) => {
+        setPlayersInGame(prevPlayers => {
+            return prevPlayers.map(player => {
+                if (player.player_id === id) {
+                    return {
+                        ...player,
+                        player_score: score
+                    };
+                }
+                return player;
+            });
+        });
+    };
+
+    const [coupsRestants, setcoupsRestants] = useState(11);
+
     useEffect(() => {
         setPlayersInGame(convertUserInfoToPlayerInfo(players));
     }, [players]);
@@ -93,6 +108,7 @@ export const GamePage = () => {
     // ================== WEBSOCKETS & LISTENERS ===================
 
     useEffect(() => {
+        resetPageGame();
         if (!ws.current) {
             const connectToGame = async () => {
                 ws.current = new WebSocket("ws://localhost:8765/game");
@@ -119,33 +135,40 @@ export const GamePage = () => {
                 id: context?.user?.id,
                 nickname: context?.user?.name,
             },
-            };
-            if (ws.current) {
-            ws.current.send(JSON.stringify(data));
-            } else {
-            console.error("WebSocket is not open. Unable to send data.");
-            }
         };
-    
-        const onDataClosed = (event: CloseEvent) => {
-            console.log('WebSocket closed:', event);
-            // Handle WebSocket closed event
+        if (ws.current) {
+            ws.current.send(JSON.stringify(data));
+        } else {
+            console.error("WebSocket is not open. Unable to send data.");
+        }
+    };
+
+    const onDataClosed = (event: CloseEvent) => {
+        console.log('WebSocket closed:', event);
+        // Handle WebSocket closed event
     };
 
     const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
-        if (message.args.return == "success") {
+        if (message.args.return === "success") {
             switch (message.action) {
-            case "send_data" : console.log("Connection établie !"); break;
-            case "join_game" : enterTheWaitingRoom(message.args); break;
-            case "create_game" : createGameSpace(message.args);break;
-            case "start_game" : startGame(message.args); break;
-            case "send_message" : showMessages(message.args); break;
-            case "add_word" : updateGraphData(message.args) ; break;
-            case "new_score" : console.log(message) ; break;
-            case "end_game" : sendToEndGame(message); break;
-            default : console.log(message) ; break;
+                case "send_data": console.log("Connection établie !"); break;
+                case "join_game": enterTheWaitingRoom(message.args); break;
+                case "create_game": createGameSpace(message.args); break;
+                case "start_game": startGame(message.args); break;
+                case "send_message": showMessages(message.args); break;
+                case "add_word": updateGraphData(message.args); break;
+                case "new_score": addNewWord(message.args); break;
+                case "end_game": sendToEndGame(message); break;
+                default: console.log(message); break;
             }
+        } else if (message.args.return === "warning") {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "warning",
+                open: true,
+                message: message.args.msg,
+            }));
         } else {
             setAlertBox((prevState) => ({
                 ...prevState,
@@ -153,6 +176,9 @@ export const GamePage = () => {
                 open: true,
                 message: message.args.msg,
             }));
+            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c") {
+                addNewWord(message.args);
+            }
         }
     }
 
@@ -160,7 +186,7 @@ export const GamePage = () => {
         console.error('WebSocket error:', event);
         // Handle WebSocket error
     };
-    
+
 
     // ================== JOINROOM TEMPLATE ===================
     const handleInputChangeJoin = async (name: string, value: any) => {
@@ -181,9 +207,9 @@ export const GamePage = () => {
 
     // ================= SET UP GAME TEMPLATE =================
     const handleInputChangeCreate = async (name: string, value: any) => {
-        setInfoGame(prevInfoGame => ({ 
-            ...prevInfoGame, 
-            [name]: value 
+        setInfoGame(prevInfoGame => ({
+            ...prevInfoGame,
+            [name]: value
         }));
     };
 
@@ -223,6 +249,9 @@ export const GamePage = () => {
     const startGame = async (args: any) => {
         console.log(args);
         handleNextPage("gaming");
+        args.players.forEach((player: number) => {
+            updatePlayerScoreByName(player,args.score);
+        });
         updateGraphWordChart(args.chart);
     }
 
@@ -230,7 +259,7 @@ export const GamePage = () => {
         setInfoGame((prevInfoGame) => ({
             ...prevInfoGame,
             idJoin: args.idJoin
-        }));  
+        }));
         if (args.type === 'multi') {
             await enterTheWaitingRoom(args);
         } else {
@@ -238,7 +267,7 @@ export const GamePage = () => {
                 action: "start_game",
             };
             ws.current?.send(JSON.stringify(data));
-        }                  
+        }
     }
 
     const enterTheWaitingRoom = async (args: any) => {
@@ -291,7 +320,7 @@ export const GamePage = () => {
     useEffect(() => {
         console.log(infoGame);
     }, [infoGame]);
-    
+
     // =================== GAME ========================
 
     /* Tchat */
@@ -301,8 +330,8 @@ export const GamePage = () => {
 
     const showMessages = async (args: any) => {
         console.log(args);
-        setMessages(prevMessages => [...prevMessages, 
-            { nickname: args.nickname, message: args.message }
+        setMessages(prevMessages => [...prevMessages,
+        { nickname: args.nickname, message: args.message }
         ]);
     }
 
@@ -313,8 +342,8 @@ export const GamePage = () => {
     const handleSubmitMessage = async () => {
         const data = {
             action: "send_message",
-            args : {
-                message : textMessage
+            args: {
+                message: textMessage
             }
         };
         ws.current?.send(JSON.stringify(data));
@@ -329,13 +358,21 @@ export const GamePage = () => {
     const [newWord, setNewWord] = useState("");
     const [listWords, setListWords] = useState<string[]>([]);
 
+    const addNewWord = (args: any) => {
+        if (args.return === "success"){
+            updatePlayerScoreByName(args.player, args.score);
+        }
+        if (args.player == context?.user?.id) {
+            setListWords(prevListWords => [...prevListWords, args.word]);
+        }
+    };
+
     const updateGraphWithNewWord = (word: string) => {
         setNewWord(word);
-        setListWords(prevListWords => [...prevListWords, word]);
         const data = {
             action: "add_word",
             args: {
-                word : word
+                word: word
             },
         };
         ws.current?.send(JSON.stringify(data));
@@ -371,35 +408,39 @@ export const GamePage = () => {
         console.log('Updated dataGraph:', dataGraph);
     }, [dataGraph]);
 
+    useEffect(() => {
+        setcoupsRestants(coupsRestants - 1);
+    }, [listWords]);
+
     return (
         <>
             {isDataLoading ? (
                 <Loader />
             ) : (
                 <>
-            {/* ================== ALERTBOX ==================== */}
-            <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
-            {/* ================================================ */}
-            {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
-            {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
-            {currentPage === "joining" && <div><JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
-            {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
-            {(currentPage === "gaming" && playersInGame != undefined) && <div>                
-                <GameTemplate 
-                    graph={dataGraph}
-                    coupsRestants={coupsRestants}
-                    listwords={listWords}
-                    infoGame={infoGame}
-                    players={playersInGame}
-                    updateGraphWithNewWord={updateGraphWithNewWord} 
-                    toggleChatVisibility={toggleChatVisibility} 
-                    isChatVisible={isChatVisible} messages={messages} 
-                    onInputChangeChat={handleInputChangeMessage} 
-                    SumbitMessageChat={handleSubmitMessage}              
-                />
-                </div>}
-            {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage}   /></div>}
-            {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
+                    {/* ================== ALERTBOX ==================== */}
+                    <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
+                    {/* ================================================ */}
+                    {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
+                    {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
+                    {currentPage === "joining" && <div><JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
+                    {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
+                    {(currentPage === "gaming" && playersInGame != undefined) && <div>
+                        <GameTemplate
+                            graph={dataGraph}
+                            coupsRestants={coupsRestants}
+                            listwords={listWords}
+                            infoGame={infoGame}
+                            players={playersInGame}
+                            updateGraphWithNewWord={updateGraphWithNewWord}
+                            toggleChatVisibility={toggleChatVisibility}
+                            isChatVisible={isChatVisible} messages={messages}
+                            onInputChangeChat={handleInputChangeMessage}
+                            SumbitMessageChat={handleSubmitMessage}
+                        />
+                    </div>}
+                    {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} /></div>}
+                    {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
                 </>
             )}
         </>
