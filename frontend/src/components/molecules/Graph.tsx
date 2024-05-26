@@ -90,7 +90,7 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
                 draggable: false,
                 marker: {
                     radius: 50,
-                    fillColor: '#4d6c48'
+                    fillColor: '#82a14e'
                 },
                 dataLabels: {
                     enabled: true,

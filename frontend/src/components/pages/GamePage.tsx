@@ -159,7 +159,7 @@ export const GamePage = () => {
                 case "send_message": showMessages(message.args); break;
                 case "add_word": updateGraphData(message.args); break;
                 case "new_score": addNewWord(message.args); break;
-                case "end_game": sendToEndGame(message); break;
+                case "end_game": sendToEndGame(message.args); break;
                 default: console.log(message); break;
             }
         } else if (message.args.return === "warning") {
@@ -385,11 +385,38 @@ export const GamePage = () => {
         ws.current?.send(JSON.stringify(data));
     };
 
-    const sendToEndGame = async (args: any) => {
-        console.log(args);
+    const updateGraphWordChartEndPage = (newEntries: [string, string, number][]) => {
+        const updatedWordsChart: TestData = { WordsChart: {} };
+        newEntries.forEach((entry, index) => {
+          const newKey = `key${index + 1}`;
+          updatedWordsChart.WordsChart[newKey] = [entry[0], entry[1], entry[2].toString()];
+        });
+        return updatedWordsChart;
+      };
+    
+      const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
+      
+      const sendToEndGame = async (args: any) => {
+      
+        if (args.charts) {
+          const updatedCharts: { [key: string]: TestData } = {};
+      
+          Object.keys(args.charts).forEach((key: string) => {
+            const entry = args.charts[key];
+            console.log("entry");
+            console.log(key);
+            const updatedChart = updateGraphWordChartEndPage(entry);
+            updatedCharts[key] = updatedChart;
+          });
+      
+          setAllCharts(prevCharts => ({
+            ...prevCharts,
+            ...updatedCharts
+          }));
+        }
         audioEndGame.play();
         handleNextPage("ending");
-    }
+      };
 
     const [dataGraph, setDataGraph] = useState<TestData>({ WordsChart: {} });
 
@@ -473,7 +500,7 @@ export const GamePage = () => {
                             isSoundEnabled={isSoundEnabled}
                         />
                     </div>}
-                    {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} /></div>}
+                    {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} graphs={allCharts} /></div>}
                     {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
                 </>
             )}

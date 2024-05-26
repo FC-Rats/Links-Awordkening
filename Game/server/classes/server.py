@@ -229,9 +229,8 @@ class WebsocketServer:
                 'action': 'end_game',
                 'args': {
                     'return': 'success', 
-                    'chart': player.chart, 
                     'score': player.score,
-                    'all-chart': all_chart
+                    'charts': all_chart
                 }
             }))
             del self.players[client_id]
