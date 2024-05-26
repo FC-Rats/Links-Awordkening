@@ -3,8 +3,10 @@ import { SubmitButton } from "../molecules/SubmitButton";
 import Stack from "@mui/material/Stack/Stack";
 import { getLogs } from "../../services/LogServices";
 import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
+import { useNavigate } from "react-router-dom";
 
 export const HomePageTemplate = () => {
+    const navigate = useNavigate();
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         /*  TEST POSTS    
@@ -50,6 +52,7 @@ export const HomePageTemplate = () => {
 
        const resp = await getLogs();
        console.log(resp);
+       navigate("/game");
 
        return 
     };

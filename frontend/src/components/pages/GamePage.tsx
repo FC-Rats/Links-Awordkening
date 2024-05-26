@@ -318,9 +318,11 @@ export const GamePage = () => {
 
     /* ADD WORD */
     const [newWord, setNewWord] = useState("");
+    const [listWords, setListWords] = useState<string[]>([]);
 
     const updateGraphWithNewWord = (word: string) => {
         setNewWord(word);
+        setListWords(prevListWords => [...prevListWords, word]);
         const data = {
             action: "add_word",
             args: {
@@ -369,7 +371,7 @@ export const GamePage = () => {
                 <GameTemplate 
                     graph={testData}
                     coupsRestants={coupsRestants}
-                    listwords={['er','re']}
+                    listwords={listWords}
                     infoGame={infoGame}
                     players={playersInGame}
                     newWord={newWord} 

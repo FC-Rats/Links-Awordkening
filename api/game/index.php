@@ -5,7 +5,7 @@ include_once('../../configuration.php');
 session_start();
 
 if (!class_exists('Connection')) {
-    include('../../Includes/connection-function.php');
+    include('../connection-function.php');
 }
 
 require_once('../_utils.php');

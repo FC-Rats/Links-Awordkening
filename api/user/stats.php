@@ -4,7 +4,7 @@ include_once('../cors.php');
 session_start();
 
 if (!class_exists('Connection')) {
-    include('../../Includes/connection-function.php');
+    include('../connection-function.php');
 }
 
 include_once('../validate.php');
