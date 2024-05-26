@@ -35,91 +35,97 @@ class Player:
         :param word: Mot à ajouter
         :return: Dictionnaire avec le résultat de l'ajout
         """
-        rebase_path = ".."  # Chemin de base pour les fichiers de données
+        if (self.attempts > 0):
+            rebase_path = ".."  # Chemin de base pour les fichiers de données
 
-        # Commande pour exécuter le programme d'ajout de mot
-        command = f"{os.path.join(rebase_path, "C", "executables", "add_word")} {os.path.join(rebase_path, "C", "datafiles", "dic.lex")} {word} {os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")} {os.path.join(rebase_path, "C", "datafiles", "words.bin")}"
-        result = subprocess.run(command, shell=True, capture_output=True, text=True)
-
-        # Vérification si le mot a déjà été utilisé
-        if word in self.word_chain:
-            return {
-                'action': 'add_word',
-                'args': {'return': 'warning', 'msg': 'Le mot a déjà été utilisé !'}
-            }
-        # Vérification si le mot contient des chiffres
-        elif re.search(r'\d', word):
-            return {
-                'action': 'add_word',
-                'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de nombres !'}
-            }
-        # Vérification si le mot contient des caractères spéciaux
-        elif re.search(r'[^\w]', word, re.UNICODE):
-            return {
-                'action': 'add_word',
-                'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de caractères spéciaux !'}
-            }
-        # Vérification si le mot n'existe pas ou est mal orthographié
-        elif result.returncode == 1:
-            return {
-                'action': 'add_word',
-                'args': {'return': 'warning', 'msg': 'Le mot n\'existe pas ou est mal orthographié !'}
-            }
-        else:
-            print("MOT DANS LE DICO")
-            self.word_chain.append(word)
-            self.attempts -= 1
-
-            old_path = os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")
-            new_path = os.path.join(rebase_path, "Java", "src", "files", "input", f"{self.id}.txt")
-            out_path = os.path.join(rebase_path, "Java", "src", "files", "output", f"{self.id}.txt")
-
-            # Commande pour copier le fichier
-            try:
-                shutil.copy(old_path, new_path)
-                print(f"Fichier copié de {old_path} à {new_path}")
-            except Exception as e:
-                print(f"Erreur lors de la copie du fichier: {e}")
-
-            # Commande pour exécuter le moteur de chaîne
-            command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-2.5.jar")} {str(self.id)}"
+            # Commande pour exécuter le programme d'ajout de mot
+            command = f"{os.path.join(rebase_path, "C", "executables", "add_word")} {os.path.join(rebase_path, "C", "datafiles", "dic.lex")} {word} {os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")} {os.path.join(rebase_path, "C", "datafiles", "words.bin")}"
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
-            if result.returncode == 0:
-                new_chart = []
-
-                # Lecture du fichier crée par le Java
-                if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
-                    with open(out_path, 'r') as file:
-                        for line in file:
-                            elements = line.strip().split(',')
-                            if len(elements) > 1:
-                                new_entry = elements
-                                new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
-                            else:
-                                score = line.strip().split(':')
-                                new_score = int(float(score[1]) * 100)
-                                if new_score > self.score:
-                                    await self.server.send_to_all(self.id, self.server.dump_data({
-                                        'action': 'new_score',
-                                        'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score, 'word' : word}
-                                    }))
-                                self.score = new_score
-
-                    # Vérification si le mot ajouté est entré dans la chaine
-                    if new_chart == self.chart:
-                        return {
-                            'action': 'new_score',
-                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word}
-                        }
-                    else:
-                        self.chart = new_chart
-                        return {
-                            'action': 'add_word',
-                            'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
-                        }
-            else:
+            # Vérification si le mot a déjà été utilisé
+            if word in self.word_chain:
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'error', 'msg': 'Erreur lors de l\'exécution du moteur de chaîne.'}
+                    'args': {'return': 'warning', 'msg': 'Le mot a déjà été utilisé !'}
                 }
+            # Vérification si le mot contient des chiffres
+            elif re.search(r'\d', word):
+                return {
+                    'action': 'add_word',
+                    'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de nombres !'}
+                }
+            # Vérification si le mot contient des caractères spéciaux
+            elif re.search(r'[^\w]', word, re.UNICODE):
+                return {
+                    'action': 'add_word',
+                    'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de caractères spéciaux !'}
+                }
+            # Vérification si le mot n'existe pas ou est mal orthographié
+            elif result.returncode == 1:
+                return {
+                    'action': 'add_word',
+                    'args': {'return': 'warning', 'msg': 'Le mot n\'existe pas ou est mal orthographié !'}
+                }
+            else:
+                print("MOT DANS LE DICO")
+                self.word_chain.append(word)
+                self.attempts -= 1
+
+                old_path = os.path.join(rebase_path, "C", "datafiles", f"{self.id}.txt")
+                new_path = os.path.join(rebase_path, "Java", "src", "files", "input", f"{self.id}.txt")
+                out_path = os.path.join(rebase_path, "Java", "src", "files", "output", f"{self.id}.txt")
+
+                # Commande pour copier le fichier
+                try:
+                    shutil.copy(old_path, new_path)
+                    print(f"Fichier copié de {old_path} à {new_path}")
+                except Exception as e:
+                    print(f"Erreur lors de la copie du fichier: {e}")
+
+                # Commande pour exécuter le moteur de chaîne
+                command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-2.5.jar")} {str(self.id)}"
+                result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+                if result.returncode == 0:
+                    new_chart = []
+
+                    # Lecture du fichier crée par le Java
+                    if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                        with open(out_path, 'r') as file:
+                            for line in file:
+                                elements = line.strip().split(',')
+                                if len(elements) > 1:
+                                    new_entry = elements
+                                    new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
+                                else:
+                                    score = line.strip().split(':')
+                                    new_score = int(float(score[1]) * 100)
+                                    if new_score > self.score:
+                                        await self.server.send_to_all(self.id, self.server.dump_data({
+                                            'action': 'new_score',
+                                            'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score, 'word' : word}
+                                        }))
+                                    self.score = new_score
+
+                        # Vérification si le mot ajouté est entré dans la chaine
+                        if new_chart == self.chart:
+                            return {
+                                'action': 'new_score',
+                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word}
+                            }
+                        else:
+                            self.chart = new_chart
+                            return {
+                                'action': 'add_word',
+                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
+                            }
+                else:
+                    return {
+                        'action': 'add_word',
+                        'args': {'return': 'error', 'msg': 'Erreur lors de l\'exécution du moteur de chaîne.'}
+                    }
+        else:
+            return {
+                'action': 'add_word',
+                'args': {'return': 'error', 'msg': 'Vous n\'avez plus de coups ! Attendez la fin de la partie'}
+            }

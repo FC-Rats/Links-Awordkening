@@ -140,3 +140,7 @@
     background-color: var(--parchment)!important;
     transform: scale(1.5);
 } 
+
+.sound-btn{
+  background-color: var(--asparagus)!important;
+} 

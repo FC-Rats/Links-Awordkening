@@ -163,6 +163,7 @@ export const GamePage = () => {
                 default: console.log(message); break;
             }
         } else if (message.args.return === "warning") {
+            audioAddWordWarning.play();
             setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "warning",
@@ -170,6 +171,7 @@ export const GamePage = () => {
                 message: message.args.msg,
             }));
         } else {
+            audioAddWordError.play();
             setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "error",
@@ -327,16 +329,20 @@ export const GamePage = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [textMessage, setTextMessage] = useState("");
     const [isChatVisible, setIsChatVisible] = useState(false);
+    const [hasNewMessage, setHasNewMessage] = useState(false);
 
     const showMessages = async (args: any) => {
         console.log(args);
-        setMessages(prevMessages => [...prevMessages,
-        { nickname: args.nickname, message: args.message }
+        audioMessage.play();
+        if (!isChatVisible) setHasNewMessage(true);
+        setMessages(prevMessages => [...prevMessages, 
+            { nickname: args.nickname, message: args.message }
         ]);
     }
 
     const toggleChatVisibility = () => {
         setIsChatVisible(!isChatVisible);
+        if (isChatVisible) setHasNewMessage(false);
     };
 
     const handleSubmitMessage = async () => {
@@ -360,6 +366,7 @@ export const GamePage = () => {
 
     const addNewWord = (args: any) => {
         if (args.return === "success"){
+            audioNewScoreEnemy.play();
             updatePlayerScoreByName(args.player, args.score);
         }
         if (args.player == context?.user?.id) {
@@ -380,6 +387,7 @@ export const GamePage = () => {
 
     const sendToEndGame = async (args: any) => {
         console.log(args);
+        audioEndGame.play();
         handleNextPage("ending");
     }
 
@@ -401,6 +409,7 @@ export const GamePage = () => {
     // Fonction asynchrone pour traiter les nouvelles données et mettre à jour le graphe
     const updateGraphData = async (args: any) => {
         console.log('Received args:', args);
+        audioNewScoreAlly.play();
         updateGraphWordChart(args.chart);
     };
 
@@ -411,6 +420,28 @@ export const GamePage = () => {
     useEffect(() => {
         setcoupsRestants(coupsRestants - 1);
     }, [listWords]);
+
+    /* Notification sonore*/
+    const [audioMessage, setAudioMessage] = useState(new Audio("/sound/message_notification.mp3"));
+    const [audioNewScoreEnemy, setAudioNewScoreEnemy] = useState(new Audio("/sound/new_score_enemy.mp3"));
+    const [audioNewScoreAlly, setAudioNewScoreAlly] = useState(new Audio("/sound/new_score_ally.mp3"));
+    const [audioAddWordWarning, setAudioAddWordWarning] = useState(new Audio("/sound/add_word_warning.mp3"));
+    const [audioAddWordError, setAudioAddWordError] = useState(new Audio("/sound/add_word_error.mp3"));
+    const [audioEndGame, setAudioEndGame] = useState(new Audio("/sound/end_game.mp3"));
+    const [audioCountdown, setAudioCountdown] = useState(new Audio("/sound/countdown.mp3"));
+    const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+
+    const toggleSound = () => {
+        setIsSoundEnabled(!isSoundEnabled);
+        const newVolume = isSoundEnabled ? 0 : 1;
+        audioMessage.volume = newVolume;
+        audioNewScoreEnemy.volume = newVolume;
+        audioNewScoreAlly.volume = newVolume;
+        audioAddWordWarning.volume = newVolume;
+        audioAddWordError.volume = newVolume;
+        audioEndGame.volume = newVolume;
+        audioCountdown.volume = newVolume;
+    };
 
     return (
         <>
@@ -433,10 +464,13 @@ export const GamePage = () => {
                             infoGame={infoGame}
                             players={playersInGame}
                             updateGraphWithNewWord={updateGraphWithNewWord}
+                            toggleSound={toggleSound}
                             toggleChatVisibility={toggleChatVisibility}
                             isChatVisible={isChatVisible} messages={messages}
                             onInputChangeChat={handleInputChangeMessage}
                             SumbitMessageChat={handleSubmitMessage}
+                            hasNewMessage={hasNewMessage}
+                            isSoundEnabled={isSoundEnabled}
                         />
                     </div>}
                     {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} /></div>}

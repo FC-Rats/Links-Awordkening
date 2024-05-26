@@ -26,7 +26,7 @@ class Game:
         self.game_name = game_name # Nom de la partie
         # Exemple : {'client1_id': Player(client1_id), 'client2_id': Player(client2_id)}
         self.max_player = max_player  # Nombre maximal de joueurs
-        self.turn_duration = timedelta(minutes=10)  # Durée d'un tour de jeu
+        self.turn_duration = timedelta(minutes=2)  # Durée d'un tour de jeu
         self.start_time = None  # Heure de début du jeu
         self.end_time = None  # Heure de fin du jeu
         self.game_started = False  # Indicateur si le jeu a commencé, ex: False
@@ -49,7 +49,6 @@ class Game:
         self.game_started = True
         self.start_time = datetime.now()
         self.end_time = self.start_time + self.turn_duration
-        print(f"Start : {self.start_time} + {self.turn_duration} = {self.end_time}")
 
         words_game = await self.get_start_words()
         rebase_path = ".."  # Chemin de base pour les fichiers de données
@@ -91,9 +90,6 @@ class Game:
                                     player.score = self.score
 
                         player.chart = new_chart
-                
-                else :
-                    print(f"Java non exécuté ! {result.stderr}")
         
         await self.server.send_to_all(self.host, self.server.dump_data({
             'action': 'start_game',
@@ -113,7 +109,6 @@ class Game:
         Vérifie le temps restant pour la partie.
         """
         while datetime.now() < self.end_time:
-            print(f"Time : {datetime.now() < self.end_time}")
             if await self.check_all_attempts_exhausted():
                 await self.end_game()
                 return
@@ -136,7 +131,6 @@ class Game:
         """
         Termine la partie.
         """
-        print(f"Time : STOP")
         self.game_started = False
         await self.server.end_game(str(self.id))
 

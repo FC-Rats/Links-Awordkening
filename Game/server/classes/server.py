@@ -95,8 +95,6 @@ class WebsocketServer:
                 'action': 'create_game',
                 'args': {'return': 'success', 'idJoin': game_code, 'type' : game_type}
             }))
-        
-        print(f"{[game.code for id, game in self.games.items()]}")
 
     async def join_game(self, client_id, game_code):
         """
@@ -215,9 +213,7 @@ class WebsocketServer:
 
         :param id_game: ID de la partie à terminer
         """
-        print(f"CLIENT {[player.game_id for client_id, player in self.players.items()]} GAME {id_game}")
         clients_to_remove = [client_id for client_id, player in self.players.items() if (player.game_id == UUID(id_game) or player.game_id == id_game )]
-        print(f"CLIENT {clients_to_remove}")
 
         all_chart = {}
         for client_id in clients_to_remove:
@@ -240,7 +236,6 @@ class WebsocketServer:
             }))
             del self.players[client_id]
         del self.games[id_game]
-        print(f"FIN PARTIE")
 
     async def send_to_all(self, id_client: int, data: any):
         """
