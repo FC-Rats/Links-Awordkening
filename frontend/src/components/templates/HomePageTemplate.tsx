@@ -4,55 +4,28 @@ import Stack from "@mui/material/Stack/Stack";
 import { getLogs } from "../../services/LogServices";
 import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../hooks/AppContext";
 
 export const HomePageTemplate = () => {
+    const [isgame, setisgame] = useState(false);
+    const context = useContext(AppContext);
+
+    useEffect(() => {
+        if (context?.user) {
+            setisgame(true);
+        }
+    }, [context?.user]);
+
     const navigate = useNavigate();
+    
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        /*  TEST POSTS    
-        
-        createScore({
-            idUser: '11',
-            idGame: '2',
-        });
-
-        createGame({
-            idJoin: 'Ab1S',
-            idHost: '11',
-            name: "Nom de la partie",
-            type: "MultiPlayer",
-            maxPlayer: 4,
-            active: 1
-        });
-
-        createUser({
-            username: 'EncoreMoi',
-            birthYear: '2004',
-            email: 'lnalabest2@gmail.com',
-            password: 'Ann1vers@ire',
-        });
-
-        createFriend({
-            id_user: '11',
-            id_friend : '35',
-            state: 0,
-        });
-
-        createLog({
-            idUser: '11',
-            log: 'Vérification',
-        }); 
-        
-
-       
-        // TESTS UTILS
-       let res = await getIp();
-       console.log(res); // TON IP
-        */
-
-       const resp = await getLogs();
-       console.log(resp);
-       navigate("/game");
+        if (isgame){
+            navigate("/game");
+        } else {
+            navigate("/sign-in");
+        }
 
        return 
     };
@@ -61,7 +34,7 @@ export const HomePageTemplate = () => {
         <Stack spacing={5} direction="column" flexWrap="wrap" justifyContent="center" alignItems="center">
             <CenteredLogo />
             <form onSubmit={handleSubmit}>
-                <SubmitButton text={"Jouer"} />
+                <SubmitButton text={isgame ? "Jouer" : "Se connecter"} />
             </form>
             <CaseHomePageContainer />
         </Stack>

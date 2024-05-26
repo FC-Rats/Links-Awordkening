@@ -31,7 +31,6 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
     return (
         <>
             {/*             <Button
-                variant="contained"
                 onClick={() => handlePreviousPage()}>Retour</Button > */}
             <ReturnButton handlePreviousPage={handlePreviousPage} />
             <CenteredTitle text={`Rejoindre la partie`} />

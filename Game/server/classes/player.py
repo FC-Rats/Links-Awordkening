@@ -101,15 +101,15 @@ class Player:
                                 if new_score > self.score:
                                     await self.server.send_to_all(self.id, self.server.dump_data({
                                         'action': 'new_score',
-                                        'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score}
+                                        'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score, 'word' : word}
                                     }))
                                 self.score = new_score
 
                     # Vérification si le mot ajouté est entré dans la chaine
                     if new_chart == self.chart:
                         return {
-                            'action': 'add_word',
-                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c'}
+                            'action': 'new_score',
+                            'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'word' : word}
                         }
                     else:
                         self.chart = new_chart

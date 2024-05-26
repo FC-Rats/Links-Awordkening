@@ -141,7 +141,7 @@ export const GamePage = () => {
             case "create_game" : createGameSpace(message.args);break;
             case "start_game" : startGame(message.args); break;
             case "send_message" : showMessages(message.args); break;
-            case "add_word" : console.log(message) ; break;
+            case "add_word" : updateGraphData(message.args) ; break;
             case "new_score" : console.log(message) ; break;
             case "end_game" : sendToEndGame(message); break;
             default : console.log(message) ; break;
@@ -223,6 +223,7 @@ export const GamePage = () => {
     const startGame = async (args: any) => {
         console.log(args);
         handleNextPage("gaming");
+        updateGraphWordChart(args.chart);
     }
 
     const createGameSpace = async (args: any) => {
@@ -344,23 +345,32 @@ export const GamePage = () => {
         console.log(args);
         handleNextPage("ending");
     }
-    
-    const testData: TestData = {
-        WordsChart: {
-            key1: ["chat", "chien", "5"],
-            key2: ["chien", "poireau", "25"],
-            key3: ["poireau", "souris", "49"],
-            key4: ["souris", "toupie", "49"] ,
-            key5: ["toupie","bloupi","14"],
-            key6: ["chat","camion","25"],
-            key7: ["bloupi","courir","22"],
-            key8: ["rat","courir","1"],
-            key9: ["rat",'voiture',"2"], 
-            key10: ["voiture","a","45"],
-            key11: ["a","red","95"],
-            key12: ["red","blue","88"]
-        }
+
+
+    const [dataGraph, setDataGraph] = useState<TestData>({ WordsChart: {} });
+
+    // Fonction pour mettre à jour WordsChart avec de nouvelles entrées
+    const updateGraphWordChart = (newEntries: [string, string, number][]) => {
+        console.log('New Entries:', newEntries);
+        const updatedWordsChart: TestData['WordsChart'] = {};
+
+        newEntries.forEach((entry, index) => {
+            const newKey = `key${index + 1}`;
+            updatedWordsChart[newKey] = [entry[0], entry[1], entry[2].toString()];
+        });
+
+        setDataGraph({ WordsChart: updatedWordsChart });
     };
+
+    // Fonction asynchrone pour traiter les nouvelles données et mettre à jour le graphe
+    const updateGraphData = async (args: any) => {
+        console.log('Received args:', args);
+        updateGraphWordChart(args.chart);
+    };
+
+    useEffect(() => {
+        console.log('Updated dataGraph:', dataGraph);
+    }, [dataGraph]);
 
     return (
         <>
@@ -377,7 +387,7 @@ export const GamePage = () => {
             {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
             {(currentPage === "gaming" && playersInGame != undefined) && <div>                
                 <GameTemplate 
-                    graph={testData}
+                    graph={dataGraph}
                     coupsRestants={coupsRestants}
                     listwords={listWords}
                     infoGame={infoGame}
