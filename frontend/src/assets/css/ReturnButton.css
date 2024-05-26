@@ -1,6 +1,5 @@
 .return-button {
-    margin-top: 10px !important;
-    margin-left: 10px !important;
-    background-color: var(--viridian) !important;
+    margin: 10px !important;
+    background-color: var(--brunswickGreen) !important;
     font-family: "Playfair Display", serif !important;
 }

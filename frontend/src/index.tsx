@@ -4,8 +4,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { RulesPage } from './components/pages/RulesPage';
-import { AccountOverviewPage } from './components/pages/AccountOverviewPage';
-import { AccountParametersPage } from './components/pages/AccountParametersPage';
 import { AdminPage } from './components/pages/AdminPage';
 import { ChangeParametersPage } from './components/pages/ChangeParametersPage';
 import { ChangePasswordPage } from './components/pages/ChangePasswordPage';
@@ -19,6 +17,7 @@ import { Error404Page } from './components/pages/Error404Page';
 import { LogsPage } from './components/pages/LogsPage';
 import { AppContext, AppContextProvider } from './components/hooks/AppContext';
 import { Nav } from './components/molecules/Nav';
+import { AccountPage } from './components/pages/AccountPage';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -55,8 +54,7 @@ root.render(
         <Routes>
           <Route path="/" element={<HomePagePage />} />
           <Route path="*" element={<Error404Page />} />
-          <Route path="/account" element={<RequireAuth><AccountOverviewPage /></RequireAuth>} />
-          <Route path="/account-param" element={<RequireAuth><AccountParametersPage /></RequireAuth>} />
+          <Route path="/account" element={<RequireAuth><AccountPage /></RequireAuth>} />
           <Route path="/admin" element={<RequireAuthAdmin><AdminPage /></RequireAuthAdmin>} />
           <Route path="/change-parameters" element={<RequireAuthAdmin><ChangeParametersPage /></RequireAuthAdmin>} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
