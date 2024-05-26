@@ -12,9 +12,11 @@ import { DataGrid, GridColDef, GridRowsProp, GridToolbar } from "@mui/x-data-gri
 interface Score {
     username: string;
     totalScore: string;
+    visibility: string;
 }
 
 export const ScoreBoardTemplate = ({ scores }: { scores: Score[]}) => {
+    const context = useContext(AppContext);
     let idCounter = 1;
     
     const columns: GridColDef[] = [
@@ -25,7 +27,7 @@ export const ScoreBoardTemplate = ({ scores }: { scores: Score[]}) => {
     
       const rows: GridRowsProp = scores.map((item) => ({
         id: idCounter++,
-        username: item.username,
+        username: (item.visibility == 'PUBLIC' || context?.user?.name == item.username ) ? item.username : "PROFIL PRIVÉ",
         totalScore: item.totalScore
       }));
 

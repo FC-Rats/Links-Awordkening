@@ -17,6 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         SELECT 
             u.id,
             u.username,
+            u.visibility,
             MAX(s.score) AS totalScore
         FROM 
             la_user u

@@ -9,6 +9,7 @@ interface Score {
     id: number;
     username: string;
     totalScore: string;
+    visibility: string;
 }
 
 export const HomePagePage = () => {
@@ -31,15 +32,12 @@ export const HomePagePage = () => {
         const fetchMaxScores = async () => {
             try {
                 const scoreResponse = await getMaxScores();
-                console.log('Fetched scores:', scoreResponse);
                 setScores(scoreResponse);
-                console.log("scores"+scores);
             } catch (error) {
                 console.error('Error fetching max scores:', error);
             }
         };
         fetchMaxScores();
-        console.log(scores);
     }, []);
 
 
