@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { AppContextType } from "../types/AppContextType";
 import { UserInfo } from "../types/UserInfo";
 import { StatePage } from "../types/StatePage";
+import { createLog } from "../../services/LogServices";
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -62,6 +63,12 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     };
 
     const logOut = () => {
+        if(user){
+            createLog({
+                idUser: user.id,
+                log: 'Déconnexion',
+            }); 
+        }
         setUser(undefined);
         setToken(undefined);
         setPreviousPages(["choosing"]);

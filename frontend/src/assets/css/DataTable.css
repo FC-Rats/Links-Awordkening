@@ -35,3 +35,33 @@
 .MuiDataGrid-root .MuiDataGrid-row:hover {
     background-color: var(--tan)!important;
 }
+
+@media (max-width: 1400px) {
+    .dataresp {
+        width: 60% !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .dataresp {
+        width: 100% !important;
+    }
+}
+
+.podium-gold {
+    background-color: gold!important; 
+    color: black!important;
+    font-weight: bolder;
+}
+
+.podium-silver {
+    background-color: silver!important; 
+    color: black!important; 
+    font-weight: bolder;
+}
+
+.podium-bronze {
+    background-color: #cd7f32!important; 
+    color: black!important; 
+    font-weight: bolder;
+}

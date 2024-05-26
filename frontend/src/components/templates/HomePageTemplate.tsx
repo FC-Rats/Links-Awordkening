@@ -7,7 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../hooks/AppContext";
 
-export const HomePageTemplate = () => {
+interface Score {
+    id: number;
+    username: string;
+    totalScore: string;
+}
+
+export const HomePageTemplate = ({ scores }: { scores: Score[]}) => {
     const [isgame, setisgame] = useState(false);
     const context = useContext(AppContext);
 
@@ -36,7 +42,7 @@ export const HomePageTemplate = () => {
             <form onSubmit={handleSubmit}>
                 <SubmitButton text={isgame ? "Jouer" : "Se connecter"} />
             </form>
-            <CaseHomePageContainer />
+            <CaseHomePageContainer scores={scores} />
         </Stack>
     );
 };

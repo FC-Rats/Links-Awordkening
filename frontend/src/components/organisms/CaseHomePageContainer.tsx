@@ -5,28 +5,11 @@ import { CaseHomePage } from "../molecules/CaseHomePage";
 import { getMaxScores } from "../../services/ScoreServices";
 
 interface Score {
-    id: number;
     username: string;
     totalScore: string;
 }
 
-export const CaseHomePageContainer = () => {
-    const [scores, setScores] = useState<Score[]>([]);
-
-    useEffect(() => {
-        const fetchMaxScores = async () => {
-            try {
-                const scoreResponse = await getMaxScores();
-                console.log('Fetched scores:', scoreResponse);
-                setScores(scoreResponse);
-                console.log("scores"+scores);
-            } catch (error) {
-                console.error('Error fetching max scores:', error);
-            }
-        };
-        fetchMaxScores();
-        console.log(scores);
-    }, []);
+export const CaseHomePageContainer = ({ scores }: { scores: Score[]}) => {
 
     return (
         <>

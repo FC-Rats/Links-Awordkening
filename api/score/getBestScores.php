@@ -17,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         SELECT 
             u.id,
             u.username,
-            SUM(s.score) AS totalScore
+            MAX(s.score) AS totalScore
         FROM 
             la_user u
         JOIN 
@@ -25,8 +25,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         GROUP BY 
             u.id, u.username
         ORDER BY 
-            totalScore DESC
-        LIMIT 3;
+            totalScore DESC;
         ";
         $req = $db->query($query);
         echo json_encode($req);

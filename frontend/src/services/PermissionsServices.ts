@@ -87,6 +87,10 @@ export async function accountConnection(formData: { username: string; password: 
             admin: userResponse[0]['admin'] === 1 ? true : false,
             birthYear: userResponse[0]['birthYear']
         });
+        createLog({
+            idUser: userResponse[0]['id'],
+            log: 'Connexion',
+        }); 
 
         // token en context
 
@@ -216,7 +220,7 @@ export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : P
         //3 - createLog de LogServices ( idUser , 'création de compte' )
         createLog({
             idUser: formData.id,
-            log: 'Modification du compte',
+            log: 'Modification du profil',
         }); 
         // 4 - getUser ( name )
         const userResponse = await getUsers({ username: formData.name });
@@ -267,7 +271,7 @@ export async function accountVerify(token : string) {
         });
         createLog({
             idUser: userResponse[0]['id'],
-            log: 'Vérification',
+            log: 'Vérification du compte',
         }); 
         success = true;
         message = "Connexion établie";
@@ -298,6 +302,10 @@ export async function accountForgotPassword(emailform : string) {
             email : emailform,
             action : "recovery"
         }) 
+        createLog({
+            idUser: userResponse[0]['id'],
+            log: 'Récupération du mot de passe',
+        }); 
         success = true;
         message = "Vérifier vos mails pour le lien de confirmation (Pensez à vérifier les spams)";
     } catch (error) { 
@@ -334,6 +342,10 @@ export async function accountChangePassword(formData: { token: string, password:
             email : userResponse[0]['email'],
             action : "update"
         }) 
+        createLog({
+            idUser: userResponse[0]['id'],
+            log: 'Changement du mot de passe',
+        }); 
         success = true;
         message = "Changement réussi établie";
     } catch (error) {
