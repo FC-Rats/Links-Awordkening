@@ -37,21 +37,14 @@ export interface TestData {
 }
 
 interface GraphProps{
-    newWord : string;
     data : TestData;
 }
 
-const ObserverWordsChart: React.FC<GraphProps> = ({ newWord, data }) => {
+const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
     const [seriesData, setSeriesData] = useState<WordsChartData[]>([]);
 
     useEffect(() => {
-        if (newWord) {
-            // Mettre à jour les données du graphique avec le nouveau mot
-            console.log("Nouveau mot:", newWord);
-        }
-    }, [newWord]);
-
-    useEffect(() => {
+        console.log(data);
         // Sample test data
         const keys = Object.keys(data.WordsChart);
 
@@ -62,7 +55,7 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ newWord, data }) => {
         }));
 
         setSeriesData(formattedData);
-    }, []);
+    }, [data]);
 
     const chartOptions: Highcharts.Options = {
         title: {

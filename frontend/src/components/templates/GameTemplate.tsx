@@ -13,7 +13,6 @@ import { Message } from "../types/Message";
 import { PlayerInfo } from "../types/PlayerInfo";
 
 interface GameTemplateProps {
-    newWord: string;
     infoGame: {
         idJoin : string;
         nameGame: string;
@@ -36,7 +35,6 @@ interface GameTemplateProps {
 
 export const GameTemplate: React.FC<GameTemplateProps> = ({
     graph,
-    newWord,
     updateGraphWithNewWord,
     toggleChatVisibility,
     isChatVisible,
@@ -60,7 +58,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                 <ComponentListWords listwords={listwords}/>
                 </div>
                 <div className="graph">
-                <Graph newWord={newWord} data={graph}/>
+                <Graph data={graph}/>
                 </div>
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">

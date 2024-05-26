@@ -335,7 +335,7 @@ export const GamePage = () => {
         const data = {
             action: "add_word",
             args: {
-                word : newWord
+                word : word
             },
         };
         ws.current?.send(JSON.stringify(data));
@@ -345,7 +345,6 @@ export const GamePage = () => {
         console.log(args);
         handleNextPage("ending");
     }
-
 
     const [dataGraph, setDataGraph] = useState<TestData>({ WordsChart: {} });
 
@@ -392,7 +391,6 @@ export const GamePage = () => {
                     listwords={listWords}
                     infoGame={infoGame}
                     players={playersInGame}
-                    newWord={newWord} 
                     updateGraphWithNewWord={updateGraphWithNewWord} 
                     toggleChatVisibility={toggleChatVisibility} 
                     isChatVisible={isChatVisible} messages={messages} 
