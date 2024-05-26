@@ -11,4 +11,5 @@ export interface AppContextType {
     goBack: () => void;
     updateUser: (userData: UserInfo) => void;
     previousPages: StatePage[];
+    resetPageGame: () => void;
 }

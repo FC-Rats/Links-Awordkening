@@ -14,10 +14,12 @@ import { getUserInfoById } from "../../services/UserServices";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { TestData } from "../molecules/Graph";
 import { EndGameTemplate } from "../templates/EndGameTemplate";
+import { useNavigate } from "react-router-dom";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
 export const GamePage = () => {
+    const navigate = useNavigate();
     // ================== REGION: Alert Box State ==================
     const [alertBox, setAlertBox] = useState({
         severity: "success",
@@ -43,7 +45,7 @@ export const GamePage = () => {
 
     // ============== REGION: Navigation between templates =========
     const [currentPage, setCurrentPage] = useState<StatePage>("choosing");
-    const { previousPages, goTo, goBack } = useUserContext();
+    const { previousPages, goTo, goBack, resetPageGame } = useUserContext();
     /*     useEffect(() => {
             updateCurrentPage("choosing");
         }, []); */
@@ -279,6 +281,12 @@ export const GamePage = () => {
         goBack();
     };
 
+    const handleFinishPage = () => {
+        setCurrentPage("choosing");
+        resetPageGame();
+        navigate("/");
+    };
+
     useEffect(() => {
         console.log(infoGame);
     }, [infoGame]);
@@ -379,10 +387,10 @@ export const GamePage = () => {
                     toggleChatVisibility={toggleChatVisibility} 
                     isChatVisible={isChatVisible} messages={messages} 
                     onInputChangeChat={handleInputChangeMessage} 
-                    SumbitMessageChat={handleSubmitMessage}                
+                    SumbitMessageChat={handleSubmitMessage}              
                 />
                 </div>}
-            {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} /></div>}
+            {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage}   /></div>}
             {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
                 </>
             )}

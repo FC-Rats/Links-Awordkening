@@ -42,6 +42,13 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         localStorage.setItem('previousPages', JSON.stringify(previousPages));
     };
 
+    const resetPageGame = () => {
+        setPreviousPages(prevPages => {
+            return ["choosing"];
+        });
+        localStorage.setItem('previousPages', JSON.stringify(previousPages));
+    };
+
     const updateUser = (userData: UserInfo) => {
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
@@ -80,7 +87,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     }, [user, token]);
 
     return (
-        <AppContext.Provider value={{ user, logIn, logOut, token, goTo, goBack, updateUser, previousPages }}>
+        <AppContext.Provider value={{ user, logIn, logOut, token, goTo, goBack, updateUser, previousPages, resetPageGame }}>
             {children}
         </AppContext.Provider>
     );

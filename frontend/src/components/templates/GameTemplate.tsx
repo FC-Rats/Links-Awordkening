@@ -46,7 +46,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     players,
     infoGame,
     listwords,
-    coupsRestants
+    coupsRestants,
     }) => {
 
     return (
