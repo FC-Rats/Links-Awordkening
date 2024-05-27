@@ -18,7 +18,6 @@ import { LogsPage } from './components/pages/LogsPage';
 import { AppContext, AppContextProvider } from './components/hooks/AppContext';
 import { Nav } from './components/molecules/Nav';
 import { AccountPage } from './components/pages/AccountPage';
-import { Timer } from './components/atoms/Timer';
 
 // Titre des pages et l'icone
 document.title = "Links Awordkening";
@@ -53,7 +52,6 @@ root.render(
       <Router>
       <Nav/>
         <Routes>
-          <Route path="/timer" element={<Timer time={120} />} />
           <Route path="/" element={<HomePagePage />} />
           <Route path="*" element={<Error404Page />} />
           <Route path="/account" element={<RequireAuth><AccountPage /></RequireAuth>} />

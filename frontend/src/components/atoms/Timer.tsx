@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TimerState } from "../types/TimerState";
 import "../../assets/css/Timer.css";
 
-export const Timer: React.FC<{ time: number }> = (props) => {
+export const Timer: React.FC<{ time: number, setIsTimerFinished: (value: boolean) => void; }> = (props) => {
     const initialTime = props.time;
     const [time, setTime] = useState<TimerState>({
         time: initialTime,
@@ -10,7 +10,7 @@ export const Timer: React.FC<{ time: number }> = (props) => {
         minutes: Math.floor(initialTime / 60),
     });
 
-    useEffect(() => {
+    useEffect(() => { 
         const timerId = setTimeout(() => {
             if (time.time === 0) {
                 return;

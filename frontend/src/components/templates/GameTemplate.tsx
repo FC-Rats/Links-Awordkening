@@ -13,6 +13,7 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import "../../assets/css/GameTemplate.css";
 import { Message } from "../types/Message";
 import { PlayerInfo } from "../types/PlayerInfo";
+import { Timer } from "../atoms/Timer";
 
 interface GameTemplateProps {
     infoGame: {
@@ -37,6 +38,7 @@ interface GameTemplateProps {
     hasNewMessage: boolean;
     isSoundEnabled: boolean;
     isBtnDisabled: boolean;
+    setIsTimerFinished: (value: boolean) => void;
 }
 
 export const GameTemplate: React.FC<GameTemplateProps> = ({
@@ -54,7 +56,8 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     coupsRestants,
     hasNewMessage,
     isSoundEnabled,
-    isBtnDisabled
+    isBtnDisabled,
+    setIsTimerFinished
     }) => {
 
     return (
@@ -62,6 +65,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <ContainerInfoPlayer players={players}/> 
                 <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants}/>
+                <Timer time={120} setIsTimerFinished={setIsTimerFinished}/>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
                 <div className="item-game">

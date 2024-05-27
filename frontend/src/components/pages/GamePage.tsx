@@ -15,7 +15,6 @@ import { TestData } from "../molecules/Graph";
 import { EndGameTemplate } from "../templates/EndGameTemplate";
 import { useNavigate } from "react-router-dom";
 import { CenteredTitle } from "../atoms/CenteredTitle";
-import { createScore } from "../../services/ScoreServices";
 import { createLog } from "../../services/LogServices";
 import { createGame } from "../../services/GameServices";
 
@@ -176,14 +175,16 @@ export const GamePage = () => {
                 message: message.args.msg,
             }));
         } else {
-            audioAddWordError.play();
-            setAlertBox((prevState) => ({
-                ...prevState,
-                severity: "error",
-                open: true,
-                message: message.args.msg,
-            }));
-            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c" && message.args.coups > 0) {
+            if (message.args.coups > 0){
+                audioAddWordError.play();
+                setAlertBox((prevState) => ({
+                    ...prevState,
+                    severity: "error",
+                    open: true,
+                    message: message.args.msg,
+                }));
+            }
+            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c") {
                 console.log(message.args.coups);
                 addNewWord(message.args);
             }
@@ -342,6 +343,7 @@ export const GamePage = () => {
     };
 
     // =================== GAME ========================
+    const [isTimerFinished, setIsTimerFinished] = useState(false);
 
     /* Tchat */
     const [messages, setMessages] = useState<Message[]>([]);
@@ -430,30 +432,6 @@ export const GamePage = () => {
       const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
       
       const sendToEndGame = async (args: any) => {
-        // enregistrer les données dans la db
-        if (args.idUser === args.host) {
-            createGame({
-                id: args.id_game,
-                idJoin: args.code,
-                idHost: args.host,
-                dateTime: new Date().toISOString(),
-                name: args.name,
-                type: playersInGame.length == 1 ? "SinglePlayer" : "Multiplayer",
-            });
-        }
-
-        createScore({
-            idUser: args.idUser,
-            idGame: args.id_game,
-            score: args.score,
-            words: args.words.join(","),
-        });
-
-        createLog({
-            idUser: args.idUser,
-            log: 'Fin de partie',
-        }); 
-
         if (args.charts) {
           const updatedCharts: { [key: string]: TestData } = {};
       
@@ -468,7 +446,6 @@ export const GamePage = () => {
             ...updatedCharts
           }));
         }
-        
         audioEndGame.play();
         handleNextPage("ending");
       };
@@ -513,15 +490,21 @@ export const GamePage = () => {
 
     useEffect(() => {
         if(currentPage == "ending") {
-            //setIsDataLoading(false);
+            setIsDataLoading(false);
         }
     }, [currentPage]);
 
     useEffect(() => {
         if (coupsRestants <= 0) {
-            //setIsDataLoading(true);
+            setIsDataLoading(true);
         }
     }, [coupsRestants]);
+
+    useEffect(() => {
+        if (isTimerFinished) {
+            setIsDataLoading(true);
+        }
+    }, [isTimerFinished]);
 
     /* Notification sonore*/
     const [audioMessage, setAudioMessage] = useState(new Audio("/sound/message_notification.mp3"));
@@ -581,6 +564,7 @@ export const GamePage = () => {
                             hasNewMessage={hasNewMessage}
                             isSoundEnabled={isSoundEnabled}
                             isBtnDisabled={isBtnDisabled}
+                            setIsTimerFinished={setIsTimerFinished}
                         />
                     </div>}
                     {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} graphs={allCharts} /></div>}
