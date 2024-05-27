@@ -8,7 +8,7 @@ export const Nav = (props: {}) => {
     const [isDragging, setIsDragging] = useState(false);
     const [initialY, setInitialY] = useState<number>(0);
     const [navTop, setNavTop] = useState<number>(20); // Position initiale du haut de la navbar
-    const navHeight = 220; // Hauteur de votre navbar en pixels
+    const navHeight = 300; // Hauteur de votre navbar en pixels
     const { logOut } = useUserContext();
     const user = useContext(AppContext);
     // user?.user si est connecté
