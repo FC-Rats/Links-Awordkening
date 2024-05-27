@@ -4,17 +4,17 @@ import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
 import { AppContext, useUserContext } from "../hooks/AppContext";
 import { AlertBox } from "../molecules/AlertBox";
-import { SetUpGameTemplate, SetUpGameProps } from "../templates/SetUpGameTemplate";
+import { SetUpGameTemplate } from "../templates/SetUpGameTemplate";
 import { ChoosingGameTemplate } from "../templates/ChoosingGameTemplate";
 import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
 import { WaitingRoomTemplate } from "../templates/WaitingRoomTemplate";
 import { UserInfo } from "../types/UserInfo";
-import { info } from "console";
 import { getUserInfoById } from "../../services/UserServices";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { TestData } from "../molecules/Graph";
 import { EndGameTemplate } from "../templates/EndGameTemplate";
 import { useNavigate } from "react-router-dom";
+import { CenteredTitle } from "../atoms/CenteredTitle";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -52,6 +52,7 @@ export const GamePage = () => {
     const [isHost, setisHost] = useState(false);
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [hasGameStarted, setHasGameStarted] = useState(false);
+    const [isBtnDisabled, setisBtnDisabled] = useState(false);
 
     // ==================== CONSTANTES =============================
     const context = useContext(AppContext);
@@ -150,6 +151,7 @@ export const GamePage = () => {
 
     const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
+        setisBtnDisabled(false); 
         if (message.args.return === "success") {
             switch (message.action) {
                 case "send_data": console.log("Connection établie !"); break;
@@ -178,7 +180,8 @@ export const GamePage = () => {
                 open: true,
                 message: message.args.msg,
             }));
-            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c") {
+            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c" && message.args.coups > 0) {
+                console.log(message.args.coups);
                 addNewWord(message.args);
             }
         }
@@ -371,6 +374,7 @@ export const GamePage = () => {
     };
 
     const updateGraphWithNewWord = (word: string) => {
+        setisBtnDisabled(true);
         setNewWord(word);
         const data = {
             action: "add_word",
@@ -393,7 +397,6 @@ export const GamePage = () => {
       const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
       
       const sendToEndGame = async (args: any) => {
-      
         if (args.charts) {
           const updatedCharts: { [key: string]: TestData } = {};
       
@@ -442,6 +445,18 @@ export const GamePage = () => {
         setcoupsRestants(coupsRestants - 1);
     }, [listWords]);
 
+    useEffect(() => {
+        if(currentPage == "ending") {
+            //setIsDataLoading(false);
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (coupsRestants <= 0) {
+            //setIsDataLoading(true);
+        }
+    }, [coupsRestants]);
+
     /* Notification sonore*/
     const [audioMessage, setAudioMessage] = useState(new Audio("/sound/message_notification.mp3"));
     const [audioNewScoreEnemy, setAudioNewScoreEnemy] = useState(new Audio("/sound/new_score_enemy.mp3"));
@@ -467,7 +482,14 @@ export const GamePage = () => {
     return (
         <>
             {isDataLoading ? (
-                <Loader />
+                playersInGame.length > 1 ? (
+                    <>
+                        <CenteredTitle text={"En attente des autres joueurs ..."}></CenteredTitle>
+                        <Loader />
+                    </>
+                ) : (
+                    <Loader />
+                )
             ) : (
                 <>
                     {/* ================== ALERTBOX ==================== */}
@@ -492,6 +514,7 @@ export const GamePage = () => {
                             SumbitMessageChat={handleSubmitMessage}
                             hasNewMessage={hasNewMessage}
                             isSoundEnabled={isSoundEnabled}
+                            isBtnDisabled={isBtnDisabled}
                         />
                     </div>}
                     {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} graphs={allCharts} /></div>}

@@ -6,7 +6,7 @@ import { ContainerRules } from "../organisms/ContainerRules";
 export const RulesTemplate = () => {
     return (
         <>
-            <CenteredTitle text={"Rules"}/>
+            <CenteredTitle text={"Règles"}/>
             <ContainerRules/>
             </>
     );

@@ -36,6 +36,7 @@ interface GameTemplateProps {
     graph: TestData,
     hasNewMessage: boolean;
     isSoundEnabled: boolean;
+    isBtnDisabled: boolean;
 }
 
 export const GameTemplate: React.FC<GameTemplateProps> = ({
@@ -53,6 +54,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     coupsRestants,
     hasNewMessage,
     isSoundEnabled,
+    isBtnDisabled
     }) => {
 
     return (
@@ -71,7 +73,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <Stack id="container-graph-submit" direction="column" spacing={2} alignItems="center" justifyContent="center">
-                    <SubmitWord onSubmitWord={updateGraphWithNewWord} />
+                    <SubmitWord disabled={isBtnDisabled} onSubmitWord={updateGraphWithNewWord} coupsRestants={coupsRestants}/>
                 </Stack>
             </Stack>
             <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem'}}>

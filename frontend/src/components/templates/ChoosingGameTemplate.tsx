@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Dialog, DialogTitle, Stack, Typography } from "@mui/material";
 import { StatePage } from "../types/StatePage";
+import { RulesTemplate } from "./RulesTemplate";
 
 interface ChooseProps {
     handleNextPage: (newPage: StatePage) => void;
 }
 
 export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ handleNextPage }) => {
+    const [open, setOpen] = useState(false);
 
-/*     const ChoosePage = (join: boolean) => () => {
-        if (join) {
-            setStatePage("joining");
-        } else {
-            setStatePage("creating");
-        }
-    }; */
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     return (
         <>
             <Stack sx={{ minHeight: '100vh' }} direction="column" spacing={2} justifyContent="center" alignItems="center">
                 <CenteredTitle text="Jouez !" />
+
+                <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <RulesTemplate />
+                </Dialog>
+                <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
+
+
                 <Typography variant="h6" sx={{ paddingTop: '50px' }}>
                     Voulez-vous rejoindre une partie ou créer votre partie ?
                 </Typography>
+
+
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" flexWrap="wrap">
                     <Button
                         variant="contained"

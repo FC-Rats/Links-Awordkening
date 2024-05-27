@@ -33,9 +33,8 @@ export const ContainerInfoGame: React.FC<ContainerInfoGameProps> = ({ infoGame, 
         </div>
       ) : (
         <div className="frame-info-game-solo">
-          {Object.entries(infoGame).map(([key, value], index) => (
-            <ComponentInfoGame key={index} item={{ title: key, info: value }} />
-          ))}
+          <ComponentInfoGame item={{ title: "Nom de la partie", info: infoGame.nameGame }} />
+          <ComponentInfoGame item={{ title: "Coups restants", info: coupsRestants }} />
         </div>
       )}
     </div>

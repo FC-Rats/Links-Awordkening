@@ -7,8 +7,10 @@ import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 import { UserInfo } from "../types/UserInfo";
 import { ComponentPlayerInfoWaiting } from "../molecules/ComponentPlayerInfoWaiting";
 import { StatePage } from "../types/StatePage";
-import { Button } from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 import { ReturnButton } from "../molecules/ReturnButton";
+import { RulesTemplate } from "./RulesTemplate";
+import { useState } from "react";
 
 export interface WaitingRoomProps {
     infoGame: {
@@ -27,10 +29,18 @@ export interface WaitingRoomProps {
 }
 
 export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame, handleNextPage, handlePreviousPage }) => {
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+    
     return (
         <>
-            {/*             <Button
-                onClick={() => handlePreviousPage()}>Retour</Button > */}
             <ReturnButton handlePreviousPage={handlePreviousPage} />
             <CenteredTitle text={`Rejoindre la partie`} />
             <CenteredTitle text={`Code "${infoGame.idJoin}"`} />
@@ -42,6 +52,10 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
                         <ComponentPlayerInfoWaiting player={player} key={index} />
                     ))}
                 </div>
+                <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <RulesTemplate />
+                </Dialog>
+                <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
                 {isHost ? (
                     <form onSubmit={handleStartGame}>
                         <SubmitButton text={"Commencer la partie"} />

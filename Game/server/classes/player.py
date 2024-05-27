@@ -111,7 +111,7 @@ class Player:
                         if new_chart == self.chart:
                             return {
                                 'action': 'new_score',
-                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word}
+                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word, 'coups' : self.attempts}
                             }
                         else:
                             self.chart = new_chart

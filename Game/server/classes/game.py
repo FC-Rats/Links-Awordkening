@@ -112,7 +112,7 @@ class Game:
             if await self.check_all_attempts_exhausted():
                 await self.end_game()
                 return
-            await asyncio.sleep(10)
+            await asyncio.sleep(5)
         await self.end_game()
 
     async def get_start_words(self):

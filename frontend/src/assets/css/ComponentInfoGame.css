@@ -24,8 +24,7 @@
 }
 
 .frame-info-game-solo {
-  padding: 2%;
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
