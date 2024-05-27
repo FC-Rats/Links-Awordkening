@@ -39,7 +39,6 @@ export async function getFriends(params?: Record<string, string | number | Array
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -75,7 +74,6 @@ export async function createFriend(FriendData: Record<string, string | number>) 
         
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -111,7 +109,6 @@ export async function updateFriend(FriendData: Record<string, string | number>) 
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -149,7 +146,6 @@ export async function deleteFriend(id: number, idFriend: number) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);

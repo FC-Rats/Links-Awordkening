@@ -60,11 +60,8 @@ export const FriendsListPage = () => {
     };
 
     const handleSubmit = async () => {
-        console.log("ADD");
         if(user?.user?.id !== undefined && search != 0){
-            console.log(user?.user?.id,search);
             const data = await RequestFriends(user?.user?.id, search); // Fonction de connexion
-            console.log(data);
             if (!data.success) {
                 setAlertBox(prevState => ({
                     ...prevState,
@@ -93,12 +90,8 @@ export const FriendsListPage = () => {
     };
 
     const handleDeleteFriend = async (id: number) =>  {
-        console.log("DELETE");
-        console.log(id);
         if(user?.user?.id !== undefined){
-            console.log(user?.user?.id,id);
             const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
-            console.log(data);
             if (!data.success) {
                 setAlertBox(prevState => ({
                     ...prevState,
@@ -119,11 +112,8 @@ export const FriendsListPage = () => {
     };
 
     const handleRefuseFriend  = async (id: number) => {
-        console.log("REFUSE");
-        console.log(id);
         if(user?.user?.id !== undefined){
             const data = await removeFriends(user?.user?.id,id); // Fonction de connexion
-            console.log(data);
             if (!data.success) {
                 setAlertBox(prevState => ({
                     ...prevState,
@@ -144,11 +134,8 @@ export const FriendsListPage = () => {
     };
 
     const handleAcceptFriend = async (id: number) =>  {
-        console.log("ACCEPT");
-        console.log(id);
         if(user?.user?.id !== undefined){
             const data = await acceptFriends(user?.user?.id,id); // Fonction de connexion
-            console.log(data);
             if (!data.success) {
                 setAlertBox(prevState => ({
                     ...prevState,

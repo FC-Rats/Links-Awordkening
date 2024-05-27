@@ -197,7 +197,6 @@ export const GamePage = () => {
 
     const handleSubmitJoinCode = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        console.log(codeRoom);
         const data = {
             action: "join_game",
             args: {
@@ -249,7 +248,6 @@ export const GamePage = () => {
     };
 
     const startGame = async (args: any) => {
-        console.log(args);
         handleNextPage("gaming");
         args.players.forEach((player: number) => {
             updatePlayerScoreByName(player,args.score);
@@ -300,15 +298,11 @@ export const GamePage = () => {
     };
 
     const handleNextPage = (newPage: StatePage) => {
-        console.log("Changing page to", newPage);
-        console.log("Previous page was", currentPage);
         goTo(newPage);
         setCurrentPage(newPage);
     };
 
     const handlePreviousPage = () => {
-        console.log("Actual page was", currentPage);
-        console.log("Changing page to previous :", previousPages[previousPages.length - 1]);
         setCurrentPage(previousPages[previousPages.length - 2]);
         goBack();
     };
@@ -319,10 +313,6 @@ export const GamePage = () => {
         navigate("/");
     };
 
-    useEffect(() => {
-        console.log(infoGame);
-    }, [infoGame]);
-
     // =================== GAME ========================
 
     /* Tchat */
@@ -332,7 +322,6 @@ export const GamePage = () => {
     const [hasNewMessage, setHasNewMessage] = useState(false);
 
     const showMessages = async (args: any) => {
-        console.log(args);
         audioMessage.play();
         if (!isChatVisible) setHasNewMessage(true);
         setMessages(prevMessages => [...prevMessages, 
@@ -403,8 +392,6 @@ export const GamePage = () => {
       
           Object.keys(args.charts).forEach((key: string) => {
             const entry = args.charts[key];
-            console.log("entry");
-            console.log(key);
             const updatedChart = updateGraphWordChartEndPage(entry);
             updatedCharts[key] = updatedChart;
           });
@@ -422,7 +409,6 @@ export const GamePage = () => {
 
     // Fonction pour mettre à jour WordsChart avec de nouvelles entrées
     const updateGraphWordChart = (newEntries: [string, string, number][]) => {
-        console.log('New Entries:', newEntries);
         const updatedWordsChart: TestData['WordsChart'] = {};
 
         newEntries.forEach((entry, index) => {
@@ -435,14 +421,9 @@ export const GamePage = () => {
 
     // Fonction asynchrone pour traiter les nouvelles données et mettre à jour le graphe
     const updateGraphData = async (args: any) => {
-        console.log('Received args:', args);
         audioNewScoreAlly.play();
         updateGraphWordChart(args.chart);
     };
-
-    useEffect(() => {
-        console.log('Updated dataGraph:', dataGraph);
-    }, [dataGraph]);
 
     useEffect(() => {
         setcoupsRestants(coupsRestants - 1);

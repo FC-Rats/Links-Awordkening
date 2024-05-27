@@ -74,9 +74,7 @@ export const AccountPage = () => {
             try {
                 const response = await getStats(param);
                 if (Array.isArray(response)) {
-                    console.log(response);
                     const responseModified = createAccountStatProps(response);
-                    console.log(responseModified);
                     setData(responseModified);
                 } else if (typeof response === 'number') {
                     setStatus(response);
@@ -153,9 +151,7 @@ export const AccountPage = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log('Form submitted:', formData);
         const data = await accountUpdate(formData, user || initialFormData); // Fonction de connexion
-        console.log(data);
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,

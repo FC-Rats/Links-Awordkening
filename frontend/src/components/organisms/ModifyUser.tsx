@@ -51,7 +51,6 @@ function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () =
     if (response.length === 0) {
       setUsers(prevUsers => prevUsers.map(user => user.id === transformedData.id ? formData : user));
     }
-    console.log('Réponse du service updateUser : ', response);
     onClose();
   };
 

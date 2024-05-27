@@ -32,13 +32,10 @@ export const ForgotPasswordPage = () => {
 
     const handleInputChange = (name: string, value: string) => {
         setFormData({ ...formData, [name]: value });
-        console.log(formData);
     };
     
     const handleSubmit = async () => {
-        console.log(formData);
         const data = await accountForgotPassword(formData.email); // Fonction de connexion
-        console.log(data);
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,

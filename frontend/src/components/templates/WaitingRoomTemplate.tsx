@@ -27,7 +27,6 @@ export interface WaitingRoomProps {
 }
 
 export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame, handleNextPage, handlePreviousPage }) => {
-    console.log(infoGame);
     return (
         <>
             {/*             <Button

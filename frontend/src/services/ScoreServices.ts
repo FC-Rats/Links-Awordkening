@@ -38,7 +38,6 @@ export async function getScores(params?: Record<string, string | number | Array<
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -74,7 +73,6 @@ export async function createScore(ScoreData: Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -110,7 +108,6 @@ export async function updateScore(ScoreData: Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -139,7 +136,6 @@ export async function getMaxScores() {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);

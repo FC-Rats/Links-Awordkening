@@ -35,9 +35,7 @@ export const SignUpPage = () => {
     });
 
     const handleSubmit = async () => {
-        console.log(formData);
         const data = await accountInscription(formData); // Fonction de connexion
-        console.log(data);
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,

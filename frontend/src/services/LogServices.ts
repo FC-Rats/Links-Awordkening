@@ -36,7 +36,6 @@ export async function getLogs(params?: Record<string, string | number | Array<st
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -66,7 +65,6 @@ export async function createLog(logData: Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -102,7 +100,6 @@ export async function updateLog(logData: Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);

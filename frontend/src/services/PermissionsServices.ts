@@ -25,7 +25,6 @@ export async function passwordVerify(formData: { username: string; password: str
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log(responseData)
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -71,7 +70,6 @@ export async function accountConnection(formData: { username: string; password: 
             return { success, message : "Le mot de passe n'est pas valide", data : dataUser, token};
         } else if (passwordResponse.token) {
             token = passwordResponse.token;
-            console.log(token);
         }
         success = true;
         message = "Connexion établie";

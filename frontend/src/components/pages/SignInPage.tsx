@@ -22,7 +22,6 @@ export const SignInPage : React.FC = () => {
         const verifyAccount = async () => {
           const token = url.get('token');
           if (token && !hasVerified) {
-            console.log(token);
             const data = await accountVerify(token);
             if (!data.success) {
               setAlertBox(prevState => ({
@@ -59,9 +58,7 @@ export const SignInPage : React.FC = () => {
     });
 
     const handleSubmit = async () => {
-        console.log(formData);
         const data = await accountConnection(formData); // Fonction de connexion
-        console.log(data);
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,

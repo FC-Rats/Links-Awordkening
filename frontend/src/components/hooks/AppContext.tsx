@@ -80,7 +80,6 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
 
     useEffect(() => {
         localStorage.setItem('previousPages', JSON.stringify(previousPages));
-        console.log("Previous Pages : ", previousPages);
     }, [previousPages]);
 
     useEffect(() => {

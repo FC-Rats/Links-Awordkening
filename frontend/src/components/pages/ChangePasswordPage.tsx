@@ -32,14 +32,12 @@ export const ChangePasswordPage = () => {
         }));        
     };
     const url = new URLSearchParams(useLocation().search);
-    console.log(url.get('token'));
     const [hasVerified, setHasVerified] = useState(false); // State to track if verification has been done
 
     useEffect(() => {
         const verifyAccount = () => {
           const token = url.get('token');
           if (token && !hasVerified) {
-            console.log(token);
             setFormData((prevFormData) => ({ ...prevFormData, token: token }));
             setHasVerified(true); // Set to true after verification
           }
@@ -53,9 +51,7 @@ export const ChangePasswordPage = () => {
     };
     
     const handleSubmit = async () => {
-        console.log(formData);
         const data = await accountChangePassword(formData); // Fonction de connexion
-        console.log(data);
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,

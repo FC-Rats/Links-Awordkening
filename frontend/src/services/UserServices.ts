@@ -32,7 +32,6 @@ export async function getUsers(params?: Record<string, string | number | Array<s
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -62,7 +61,6 @@ export async function createUser(userData : Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -92,7 +90,6 @@ export async function updateUser(userData : Record<string, string | number | nul
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -134,7 +131,6 @@ export async function getStats(param: Record<string, number | undefined>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);

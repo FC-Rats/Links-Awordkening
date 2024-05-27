@@ -44,7 +44,6 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
     const [seriesData, setSeriesData] = useState<WordsChartData[]>([]);
 
     useEffect(() => {
-        console.log(data);
         // Sample test data
         const keys = Object.keys(data.WordsChart);
 

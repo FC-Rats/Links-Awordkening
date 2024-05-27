@@ -18,7 +18,6 @@ export const ChangeParametersForm = () => {
 
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        console.log(formData);
     };
 
     return (

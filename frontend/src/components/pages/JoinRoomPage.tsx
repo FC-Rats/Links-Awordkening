@@ -118,7 +118,6 @@ export const JoinRoomPage = () => {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(formData);
   };
   
   return (

@@ -36,7 +36,6 @@ export async function getGames(params?: Record<string, string | number | Array<s
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -72,7 +71,6 @@ export async function createGame(GameData : Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
@@ -108,7 +106,6 @@ export async function updateGame(GameData : Record<string, string | number>) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse du serveur : ', responseData);
             return responseData;
         } else {
             console.error('Erreur lors de la requête : ', response.status);
