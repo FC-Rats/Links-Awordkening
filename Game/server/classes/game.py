@@ -122,8 +122,10 @@ class Game:
         :return: Liste de mots de départ
         """
         word_list = [
-            "chat", "chien", "cheval", "éléphant", "tigre", "lion", "girafe", "singe", "crocodile", "koala",
-            "kangourou", "panda", "ours", "serpent", "perroquet", "poulet", "pingouin", "dauphin", "baleine"
+            "chat", "framboise", "astronaute", "ministre", "balnéaire", "réveil", "fil",
+            "renforcer", "orchestre", "tableau", "wagon", "argentin", "baliverne", "tirelire",
+            "alcool", "tour", "badminton", "médaillon", "bandoulière", "gladiateur",
+            "misanthrope", "opticien", "tintinnabuler", "amitié", "rafistolage"
         ]
         return random.sample(word_list, 2)  # Sélectionne 2 mots aléatoires de la liste
 
