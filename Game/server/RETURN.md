@@ -11,7 +11,7 @@ Envoie les données du client au serveur.
 
 ### Arguments nécessaires
 - `id` : ID du client.
-- `nickname` : Pseudo du joueur.
+- `nickname` : Nombre maximal de joueurs dans la partie.
 
 ### Réponse
 ```json
