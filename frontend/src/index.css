@@ -162,6 +162,10 @@ button {
   outline: none !important;
 }
 
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  border-radius: 20px;
+}
+
 @media (max-width: 576px) {
   .custom-text-wrap {
     word-wrap: break-word;

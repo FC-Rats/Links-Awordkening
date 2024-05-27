@@ -355,11 +355,18 @@ export const GamePage = () => {
 
     const addNewWord = (args: any) => {
         if (args.return === "success"){
-            audioNewScoreEnemy.play();
             updatePlayerScoreByName(args.player, args.score);
         }
         if (args.player == context?.user?.id) {
             setListWords(prevListWords => [...prevListWords, args.word]);
+        } else {
+            audioNewScoreEnemy.play();
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "info",
+                open: true,
+                message: args.msg,
+            }));
         }
     };
 
@@ -422,6 +429,12 @@ export const GamePage = () => {
     // Fonction asynchrone pour traiter les nouvelles données et mettre à jour le graphe
     const updateGraphData = async (args: any) => {
         audioNewScoreAlly.play();
+        setAlertBox((prevState) => ({
+            ...prevState,
+            severity: "info",
+            open: true,
+            message: args.msg,
+        }));
         updateGraphWordChart(args.chart);
     };
 

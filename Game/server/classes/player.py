@@ -117,7 +117,7 @@ class Player:
                             self.chart = new_chart
                             return {
                                 'action': 'add_word',
-                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score}
+                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score, 'msg': f'Vous avez obtenu un nouveau score de {self.score} !'}
                             }
                 else:
                     return {
