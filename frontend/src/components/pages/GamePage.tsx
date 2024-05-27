@@ -15,6 +15,7 @@ import { TestData } from "../molecules/Graph";
 import { EndGameTemplate } from "../templates/EndGameTemplate";
 import { useNavigate } from "react-router-dom";
 import { CenteredTitle } from "../atoms/CenteredTitle";
+import { createScore } from "../../services/ScoreServices";
 import { createLog } from "../../services/LogServices";
 import { createGame } from "../../services/GameServices";
 
@@ -77,7 +78,7 @@ export const GamePage = () => {
     const [players, setPlayers] = useState<UserInfo[]>(initialPlayerState);
     const convertUserInfoToPlayerInfo = (users: UserInfo[]): PlayerInfo[] => {
         return users.map((user) => ({
-            player_id : user.id,
+            player_id: user.id,
             player_name: user.name,
             player_score: 0,
             player_url: user.profilPicture,
@@ -88,7 +89,7 @@ export const GamePage = () => {
     const [playersInGame, setPlayersInGame] = useState<PlayerInfo[]>(
         convertUserInfoToPlayerInfo(players)
     );
-    const updatePlayerScoreByName = (id : number, score : number) => {
+    const updatePlayerScoreByName = (id: number, score: number) => {
         setPlayersInGame(prevPlayers => {
             return prevPlayers.map(player => {
                 if (player.player_id === id) {
@@ -153,7 +154,7 @@ export const GamePage = () => {
 
     const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
-        setisBtnDisabled(false); 
+        setisBtnDisabled(false);
         if (message.args.return === "success") {
             switch (message.action) {
                 case "send_data": console.log("Connection établie !"); break;
@@ -175,7 +176,7 @@ export const GamePage = () => {
                 message: message.args.msg,
             }));
         } else {
-            if (message.args.coups > 0){
+            if (message.args.coups > 0) {
                 audioAddWordError.play();
                 setAlertBox((prevState) => ({
                     ...prevState,
@@ -257,7 +258,7 @@ export const GamePage = () => {
     const startGame = async (args: any) => {
         handleNextPage("gaming");
         args.players.forEach((player: number) => {
-            updatePlayerScoreByName(player,args.score);
+            updatePlayerScoreByName(player, args.score);
         });
         if (!context?.user) {
             console.error("User context is not available");
@@ -266,7 +267,7 @@ export const GamePage = () => {
         createLog({
             idUser: context.user.id,
             log: 'Dans une partie',
-        }); 
+        });
 
         updateGraphWordChart(args.chart);
     }
@@ -283,7 +284,7 @@ export const GamePage = () => {
         createLog({
             idUser: context.user.id,
             log: 'Crée une partie',
-        }); 
+        });
 
         if (args.type === 'multi') {
             await enterTheWaitingRoom(args);
@@ -303,7 +304,7 @@ export const GamePage = () => {
         createLog({
             idUser: context.user.id,
             log: 'A rejoint un salon',
-        }); 
+        });
         if (args.idJoin && args.nameGame) {
             setInfoGame({
                 idJoin: args.idJoin,
@@ -360,10 +361,10 @@ export const GamePage = () => {
         createLog({
             idUser: context.user.id,
             log: 'A envoyé un message',
-        }); 
+        });
         if (!isChatVisible) setHasNewMessage(true);
-        setMessages(prevMessages => [...prevMessages, 
-            { nickname: args.nickname, message: args.message }
+        setMessages(prevMessages => [...prevMessages,
+        { nickname: args.nickname, message: args.message }
         ]);
     }
 
@@ -392,7 +393,7 @@ export const GamePage = () => {
     const [listWords, setListWords] = useState<string[]>([]);
 
     const addNewWord = (args: any) => {
-        if (args.return === "success"){
+        if (args.return === "success") {
             updatePlayerScoreByName(args.player, args.score);
         }
         if (args.player == context?.user?.id) {
@@ -423,32 +424,56 @@ export const GamePage = () => {
     const updateGraphWordChartEndPage = (newEntries: [string, string, number][]) => {
         const updatedWordsChart: TestData = { WordsChart: {} };
         newEntries.forEach((entry, index) => {
-          const newKey = `key${index + 1}`;
-          updatedWordsChart.WordsChart[newKey] = [entry[0], entry[1], entry[2].toString()];
+            const newKey = `key${index + 1}`;
+            updatedWordsChart.WordsChart[newKey] = [entry[0], entry[1], entry[2].toString()];
         });
         return updatedWordsChart;
-      };
-    
-      const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
-      
-      const sendToEndGame = async (args: any) => {
+    };
+
+    const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
+
+    const sendToEndGame = async (args: any) => {
+        // enregistrer les données dans la db
+        if (args.idUser === args.host) {
+            createGame({
+                id: args.id_game,
+                idJoin: args.code,
+                idHost: args.host,
+                dateTime: new Date().toISOString(),
+                name: args.name,
+                type: playersInGame.length == 1 ? "SinglePlayer" : "Multiplayer",
+            });
+        }
+
+        createScore({
+            idUser: args.idUser,
+            idGame: args.id_game,
+            score: args.score,
+            words: args.words.join(","),
+        });
+
+        createLog({
+            idUser: args.idUser,
+            log: 'Fin de partie',
+        });
+        
         if (args.charts) {
-          const updatedCharts: { [key: string]: TestData } = {};
-      
-          Object.keys(args.charts).forEach((key: string) => {
-            const entry = args.charts[key];
-            const updatedChart = updateGraphWordChartEndPage(entry);
-            updatedCharts[key] = updatedChart;
-          });
-      
-          setAllCharts(prevCharts => ({
-            ...prevCharts,
-            ...updatedCharts
-          }));
+            const updatedCharts: { [key: string]: TestData } = {};
+
+            Object.keys(args.charts).forEach((key: string) => {
+                const entry = args.charts[key];
+                const updatedChart = updateGraphWordChartEndPage(entry);
+                updatedCharts[key] = updatedChart;
+            });
+
+            setAllCharts(prevCharts => ({
+                ...prevCharts,
+                ...updatedCharts
+            }));
         }
         audioEndGame.play();
         handleNextPage("ending");
-      };
+    };
 
     const [dataGraph, setDataGraph] = useState<TestData>({ WordsChart: {} });
 
@@ -480,7 +505,7 @@ export const GamePage = () => {
         createLog({
             idUser: context.user.id,
             log: 'A entré un mot',
-        }); 
+        });
         updateGraphWordChart(args.chart);
     };
 
@@ -489,7 +514,7 @@ export const GamePage = () => {
     }, [listWords]);
 
     useEffect(() => {
-        if(currentPage == "ending") {
+        if (currentPage == "ending") {
             setIsDataLoading(false);
         }
     }, [currentPage]);
