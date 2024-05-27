@@ -30,7 +30,33 @@ RUN rm -rf Python-3.12.3 Python-3.12.3.tgz
 RUN apt-get purge -y build-essential wget
 RUN apt-get autoremove -y
 
-WORKDIR /var/www/html
+# Configuration apache spécifique au htaccess
+RUN a2enmod rewrite
+RUN echo '<Directory /var/www/html/>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' > /etc/apache2/conf-available/allow-override.conf
+
+RUN a2enconf allow-override
+
+# RUN npm install -g serve
+# Installe serve si nécessaire
+
+# Configurer Apache pour servir depuis /var/www/html/frontend/build/
+# RUN mkdir -p /var/www/html/frontend/build
+# RUN echo '<VirtualHost *:80>\n\
+#     DocumentRoot /var/www/html/frontend/build\n\
+#     <Directory /var/www/html/frontend/build>\n\
+#         Options Indexes FollowSymLinks\n\
+#         AllowOverride All\n\
+#         Require all granted\n\
+#     </Directory>\n\
+#     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
+#     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
+# </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+WORKDIR /var/www/html/
 
 EXPOSE 80
 
