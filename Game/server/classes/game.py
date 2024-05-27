@@ -86,8 +86,8 @@ class Game:
                                     new_chart.append([new_entry[0], new_entry[1], int(float(new_entry[2]) * 100)])
                                 else:
                                     score = line.strip().split(':')
-                                    self.score = int(float(score[1]) * 100)
-                                    player.score = self.score
+                                    player.score = int(float(score[1]) * 100)
+                                    player.score = player.score
 
                         player.chart = new_chart
         
@@ -96,7 +96,7 @@ class Game:
             'args': {
                 'return': 'success',
                 'chart': self.players.get(self.host).chart,
-                'score': self.score,
+                'score': self.players.get(self.host).score,
                 'players' : list(self.players.keys()),
                 'end_time': self.end_time.isoformat()
             }
