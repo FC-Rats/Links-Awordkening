@@ -228,7 +228,10 @@ class WebsocketServer:
             await client.websocket.send(self.dump_data({
                 'action': 'end_game',
                 'args': {
-                    'return': 'success', 
+                    'return': 'success',
+                    'code': game.code,
+                    'host': game.host, 
+                    'name': game.game_name,
                     'score': player.score,
                     'charts': all_chart
                 }
