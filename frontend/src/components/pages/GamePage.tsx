@@ -258,6 +258,15 @@ export const GamePage = () => {
         args.players.forEach((player: number) => {
             updatePlayerScoreByName(player,args.score);
         });
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        createLog({
+            idUser: context.user.id,
+            log: 'Dans une partie',
+        }); 
+
         updateGraphWordChart(args.chart);
     }
 
@@ -266,6 +275,14 @@ export const GamePage = () => {
             ...prevInfoGame,
             idJoin: args.idJoin
         }));
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        createLog({
+            idUser: context.user.id,
+            log: 'Crée une partie',
+        }); 
 
         if (args.type === 'multi') {
             await enterTheWaitingRoom(args);
@@ -282,6 +299,10 @@ export const GamePage = () => {
             console.error("User context is not available");
             return;
         }
+        createLog({
+            idUser: context.user.id,
+            log: 'A rejoint un salon',
+        }); 
         if (args.idJoin && args.nameGame) {
             setInfoGame({
                 idJoin: args.idJoin,
@@ -330,6 +351,14 @@ export const GamePage = () => {
 
     const showMessages = async (args: any) => {
         audioMessage.play();
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        createLog({
+            idUser: context.user.id,
+            log: 'A envoyé un message',
+        }); 
         if (!isChatVisible) setHasNewMessage(true);
         setMessages(prevMessages => [...prevMessages, 
             { nickname: args.nickname, message: args.message }
@@ -467,6 +496,14 @@ export const GamePage = () => {
             open: true,
             message: args.msg,
         }));
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        createLog({
+            idUser: context.user.id,
+            log: 'A entré un mot',
+        }); 
         updateGraphWordChart(args.chart);
     };
 
