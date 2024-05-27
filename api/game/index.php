@@ -46,25 +46,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             // Création du tableau des valeurs des paramètres pour la requête SQL
             $gameData = array(
+                array(":id", $game->getId()),
                 array(":idJoin", $game->getIdJoin()),
                 array(":idHost", $game->getIdHost()),
                 array(":date", date('Y-m-d H:i:s')),
                 array(":name", $game->getName()),
                 array(":type", $game->getType()),
-                array(":maxPlayer", $game->getMaxPlayer()),
-                array(":active", $game->getActive())
             );
 
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO la_game (idJoin, idHost, dateTime, name, type, maxPlayer, active) 
-                VALUES (:idJoin, :idHost, :date, :name, :type, :maxPlayer, :active)", 
+                "INSERT INTO la_game (id, idJoin, idHost, dateTime, name, type) 
+                VALUES (:id, :idJoin, :idHost, :date, :name, :type)", 
                 $gameData
             );
 
             $res = [];
             $res['Game'] = $gameData;
-            $res['lastId'] = $db->query("SELECT LAST_INSERT_ID();");
             echo json_encode($res);
         } else {
             // Aucune donnée n'a été envoyée dans le corps de la requête

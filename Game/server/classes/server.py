@@ -233,7 +233,10 @@ class WebsocketServer:
                     'host': game.host, 
                     'name': game.game_name,
                     'score': player.score,
-                    'charts': all_chart
+                    'charts': all_chart,
+                    'idUser': client_id,
+                    'id_game': str(game.id),
+                    'words': player.word_chain
                 }
             }))
             del self.players[client_id]

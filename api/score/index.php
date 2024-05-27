@@ -46,13 +46,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $scoreData = array(
                 array(":idUser", $score->getIdUser()),
                 array(":idGame", $score->getIdGame()),
-                array(":score", 0),
+                array(":score", $score->getScore()),
+                array(":words", $score->getWords())
             );
 
             // Exécution de la requête SQL
             $req = $db->query(
-                "INSERT INTO la_score (idUser, idGame, score) 
-                VALUES (:idUser, :idGame, :score)", 
+                "INSERT INTO la_score (idUser, idGame, score, words) 
+                VALUES (:idUser, :idGame, :score, :words)", 
                 $scoreData
             );
             $res = [];

@@ -13,7 +13,7 @@ if (!class_exists("Game", false)) {
         protected $errorData;
 
         public function __construct() {
-            $this->id = 0;
+            $this->id = "";
             $this->idJoin = "";
             $this->idHost = 0;
             $this->dateTime = "";
@@ -26,7 +26,7 @@ if (!class_exists("Game", false)) {
         }
 
         // Gets
-        public function getId():int { return $this->id; }
+        public function getId():string { return $this->id; }
         public function getIdJoin():string { return $this->idJoin; }
         public function getIdHost():int { return $this->idHost; }
         public function getDateTime():string { return $this->dateTime; }
@@ -38,7 +38,7 @@ if (!class_exists("Game", false)) {
         public function getErrorData() { return $this->errorData; }
 
         // Sets
-        public function setId(int $id) { $this->id = $id; }
+        public function setId(string $id) { $this->id = $id; }
         public function setIdJoin(string $idJoin) { $this->idJoin = $idJoin; }
         public function setIdHost(int $idHost) { $this->idHost = $idHost; }
         public function setDateTime(string $dateTime) { $this->dateTime = $dateTime; }
@@ -52,20 +52,19 @@ if (!class_exists("Game", false)) {
 
         public function save($db) {
             $data = [
+                [':id', $this->id],
                 [':idJoin', $this->idJoin],
                 [':idHost', $this->idHost],
                 [':dateTime', $this->dateTime],
                 [':name', $this->name],
-                [':type', $this->type],
-                [':maxPlayer', $this->maxPlayer],
-                [':active', $this->active]
+                [':type', $this->type]
             ];
 
             $existingGame = $db->query("SELECT id FROM LA_GAME WHERE name = :name AND idHost = :idHost", array(array(":name", $this->name), array(":idHost", $this->idHost)));
 
             if ($existingGame == []) {
                 // Nouvel enregistrement
-                $sql = "INSERT INTO LA_GAME (idJoin, idHost, dateTime, name, type, maxPlayer, active) VALUES (:idJoin, :idHost, :dateTime, :name, :type, :maxPlayer, :active)";
+                $sql = "INSERT INTO LA_GAME (idJoin, idHost, dateTime, name, type) VALUES (:idJoin, :idHost, :dateTime, :name, :type)";
             } else {
                 // Enregistrement existant
                 $this->errorData = "Une partie avec ce nom existe déjà.";

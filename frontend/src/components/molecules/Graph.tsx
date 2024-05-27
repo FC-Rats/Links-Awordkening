@@ -7,23 +7,6 @@ import "../../assets/css/Graph.css"
 
 HighchartsNetworkgraph(Highcharts);
 
-const testData: TestData = {
-    WordsChart: {
-        key1: ["chat", "chien", "5"],
-        key2: ["chien", "poireau", "25"],
-        key3: ["poireau", "souris", "49"],
-        key4: ["souris", "toupie", "49"] ,
-        key5: ["toupie","bloupi","14"],
-        key6: ["chat","camion","25"],
-        key7: ["bloupi","courir","22"],
-        key8: ["rat","courir","1"],
-        key9: ["rat",'voiture',"2"], 
-        key10: ["voiture","a","45"],
-        key11: ["a","red","95"],
-        key12: ["red","blue","88"]
-    }
-};
-
 export interface WordsChartData {
     from: string;
     to: string;

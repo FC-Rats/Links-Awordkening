@@ -15,6 +15,9 @@ import { TestData } from "../molecules/Graph";
 import { EndGameTemplate } from "../templates/EndGameTemplate";
 import { useNavigate } from "react-router-dom";
 import { CenteredTitle } from "../atoms/CenteredTitle";
+import { createScore } from "../../services/ScoreServices";
+import { createLog } from "../../services/LogServices";
+import { createGame } from "../../services/GameServices";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -263,6 +266,7 @@ export const GamePage = () => {
             ...prevInfoGame,
             idJoin: args.idJoin
         }));
+
         if (args.type === 'multi') {
             await enterTheWaitingRoom(args);
         } else {
@@ -397,6 +401,30 @@ export const GamePage = () => {
       const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
       
       const sendToEndGame = async (args: any) => {
+        // enregistrer les données dans la db
+        if (args.idUser === args.host) {
+            createGame({
+                id: args.id_game,
+                idJoin: args.code,
+                idHost: args.host,
+                dateTime: new Date().toISOString(),
+                name: args.name,
+                type: playersInGame.length == 1 ? "SinglePlayer" : "Multiplayer",
+            });
+        }
+
+        createScore({
+            idUser: args.idUser,
+            idGame: args.id_game,
+            score: args.score,
+            words: args.words.join(","),
+        });
+
+        createLog({
+            idUser: args.idUser,
+            log: 'Fin de partie',
+        }); 
+
         if (args.charts) {
           const updatedCharts: { [key: string]: TestData } = {};
       
@@ -411,6 +439,7 @@ export const GamePage = () => {
             ...updatedCharts
           }));
         }
+        
         audioEndGame.play();
         handleNextPage("ending");
       };
