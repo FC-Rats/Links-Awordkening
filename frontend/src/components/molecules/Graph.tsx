@@ -54,13 +54,19 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
         plotOptions: {
             networkgraph: {
                 layoutAlgorithm: {
-                    enableSimulation: false,
+                    enableSimulation: true,
                 },
             },
             series: {
+                enableMouseTracking: false,
                 states: {
                     hover: {
                         enabled: true,
+                    },
+                    inactive: {
+                        enabled: true,
+                        linkOpacity: 0,
+                        opacity: 0,
                     },
                 },
             },
@@ -72,7 +78,7 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
                 draggable: false,
                 marker: {
                     radius: 50,
-                    fillColor: '#82a14e'
+                    fillColor: '#82a14e',
                 },
                 dataLabels: {
                     enabled: true,
