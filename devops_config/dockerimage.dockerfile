@@ -1,4 +1,4 @@
-#Version2.3
+#Version3
 #BlitzWoof!
 #awooo.fr
 
@@ -30,6 +30,13 @@ RUN rm -rf Python-3.12.3 Python-3.12.3.tgz
 RUN apt-get purge -y build-essential wget
 RUN apt-get autoremove -y
 
+RUN ln -s /usr/local/bin/python3.12 /usr/bin/python
+
+WORKDIR /srv/temp
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN python get-pip.py
+RUN pip install websockets
+
 # Configuration apache spécifique au htaccess
 RUN a2enmod rewrite
 RUN echo '<Directory /var/www/html/>\n\
@@ -40,21 +47,7 @@ RUN echo '<Directory /var/www/html/>\n\
 
 RUN a2enconf allow-override
 
-# RUN npm install -g serve
-# Installe serve si nécessaire
 
-# Configurer Apache pour servir depuis /var/www/html/frontend/build/
-# RUN mkdir -p /var/www/html/frontend/build
-# RUN echo '<VirtualHost *:80>\n\
-#     DocumentRoot /var/www/html/frontend/build\n\
-#     <Directory /var/www/html/frontend/build>\n\
-#         Options Indexes FollowSymLinks\n\
-#         AllowOverride All\n\
-#         Require all granted\n\
-#     </Directory>\n\
-#     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-#     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-# </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 WORKDIR /var/www/html/
 
