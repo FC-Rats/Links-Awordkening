@@ -1,5 +1,8 @@
 # Python server
-
+---
+# ATTENTION : Déclassé !
+# L'environnement python est préconfiguré via l'image docker et sur l'entrypoint au démarrage du container. Cette configuration sert d'archive seule.
+---
 ## Installation
 
 ```bash
