@@ -1,13 +1,6 @@
-import { CenteredLogo } from "../atoms/CenteredLogo";
-import { SubmitButton } from "../molecules/SubmitButton";
-import Stack from "@mui/material/Stack/Stack";
-import { getLogs } from "../../services/LogServices";
-import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
-import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../hooks/AppContext";
-import { CenteredTitle } from "../atoms/CenteredTitle";
-import { DataGrid, GridColDef, GridRowsProp, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 
 interface Score {
     username: string;
@@ -20,14 +13,14 @@ export const ScoreBoardTemplate = ({ scores }: { scores: Score[]}) => {
     let idCounter = 1;
     
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'id', type: 'number', width: 200 },
+        { field: 'id', headerName: 'Rang', type: 'number', width: 200 },
         { field: 'username', headerName: 'Nom du joueur', type: 'string', width: 200 },
-        { field: 'totalScore', headerName: 'son meilleur score', type: 'number', width: 200 }
+        { field: 'totalScore', headerName: 'Meilleur score', type: 'number', width: 200 }
       ];
     
       const rows: GridRowsProp = scores.map((item) => ({
         id: idCounter++,
-        username: (item.visibility == 'PUBLIC' || context?.user?.name == item.username ) ? item.username : "PROFIL PRIVÉ",
+        username: (item.visibility === 'PUBLIC' || context?.user?.name === item.username ) ? item.username : "PROFIL PRIVÉ",
         totalScore: item.totalScore
       }));
 

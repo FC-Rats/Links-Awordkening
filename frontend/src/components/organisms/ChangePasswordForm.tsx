@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputForm } from "../molecules/InputForm";
 import { Link } from "../atoms/Link";
 import { SubmitButton } from "../molecules/SubmitButton";
@@ -27,7 +27,7 @@ export const ChangePasswordForm : React.FC<ForgotFormProps> = ({ onSubmit, onInp
                 <InputForm name="password" label={"Mot de passe"}  type="password" required onInputChange={handleInputChange}/>
                 <InputForm name="passwordConfirmation" label={"Confirmez le mot de passe"}  type="password" required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Enregistrer le mot de passe"}/>
-                <Link text="Annuler et revenir à l'accueil" url=''/>
+                <Link text="Annuler et revenir à l'accueil" url='/'/>
             </form>
         </div>
     );

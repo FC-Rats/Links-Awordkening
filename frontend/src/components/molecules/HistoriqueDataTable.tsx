@@ -60,7 +60,3 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
         </div>
     );
 }
-
-function useStyles() {
-    throw new Error('Function not implemented.');
-}

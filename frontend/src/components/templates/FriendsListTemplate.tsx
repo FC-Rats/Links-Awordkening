@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import SearchFriends from "../molecules/SearchFriends";
 import ContainerFriendRequests from "../organisms/ContainerFriendRequests";

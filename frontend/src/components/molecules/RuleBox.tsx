@@ -1,7 +1,6 @@
 import React from "react";
 import "../../assets/css/RuleBox.css";
 import Typography from "@mui/material/Typography/Typography";
-import { Box } from "@mui/material";
 import { Stack } from "@mui/system";
 
 export const RuleBox = (props: {textRule:string; title:string;}) => {

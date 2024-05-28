@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { PlayerInfo } from "../types/PlayerInfo";
 import "../../assets/css/ComponentEndGame.css";
 import { ComponentEndGame } from "../molecules/ComponentEndGame";
@@ -12,6 +11,8 @@ type ContainerEndGameProps = {
 
 // Accept props in a destructured format
 export const ContainerEndGame: React.FC<ContainerEndGameProps> = ({ playersInGame, graphs}) => {
+
+  playersInGame = playersInGame.sort((a, b) => b.player_score - a.player_score);
   return (
     <>
       {playersInGame.length === 1 ? (

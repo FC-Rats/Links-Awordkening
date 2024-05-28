@@ -1,4 +1,3 @@
-import { CenteredTitle } from "../atoms/CenteredTitle";
 import { Grid } from "@mui/material";
 import { TileAccountInfo } from "../molecules/TileAccountInfo";
 import { HistoriqueDataTable } from "../molecules/HistoriqueDataTable";

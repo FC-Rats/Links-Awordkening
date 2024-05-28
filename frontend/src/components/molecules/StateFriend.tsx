@@ -3,10 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
-import { green } from '@mui/material/colors';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
-import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 import '../../assets/css/StateFriendRequest.css'
 import {FriendRequestProps} from '../types/FriendRequestProps'
 import RetirerFriend from './RetirerFriend';

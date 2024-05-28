@@ -39,7 +39,7 @@ export const SignUpPage = () => {
         if (!data.success) {
             setAlertBox(prevState => ({
                 ...prevState,
-                    severity : data.typeError != undefined ? data.typeError : "error",
+                    severity : data.typeError !== undefined ? data.typeError : "error",
                     open: true,
                     message : data.message
             }));      

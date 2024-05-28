@@ -7,7 +7,6 @@ import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
 import '../../assets/css/StateFriendRequest.css'
 import {FriendRequestProps} from '../types/FriendRequestProps'
-import RetirerFriend from './RetirerFriend';
 import AcceptRefuseFriendRequest from './AcceptRefuseFriendRequest';
 
 interface FriendsStatesProps {

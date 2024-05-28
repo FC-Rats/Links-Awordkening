@@ -12,7 +12,7 @@ export const InputForm = ({name, value, label, required, type, min, max, default
     const [typefield, setTypeField] = useState(type);
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
-        if (typefield == "password") {
+        if (typefield === "password") {
             setTypeField("text");
         } else {
             setTypeField("password");

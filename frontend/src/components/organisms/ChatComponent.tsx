@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, ChangeEventHandler } from 'react';
+import React, { useState, ChangeEventHandler } from 'react';
 import "../../assets/css/Chat.css"
 import { SubmitButton } from '../molecules/SubmitButton';
 import { TextareaAutosize } from '@mui/material';

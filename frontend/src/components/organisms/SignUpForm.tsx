@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { InputForm } from "../molecules/InputForm";
 import { Link } from "../atoms/Link";
 import { SubmitButton } from "../molecules/SubmitButton";

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { CenteredTitle } from "../atoms/CenteredTitle";
+import React from "react";
 import { ContainerInfoPlayer } from "../organisms/ContainerInfoPlayer";
 import { ContainerInfoGame } from "../organisms/ContainerInfoGame";
 import { ComponentListWords } from "../molecules/ComponentListWords";

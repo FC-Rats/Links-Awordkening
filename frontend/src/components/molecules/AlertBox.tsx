@@ -1,4 +1,4 @@
-import { Alert, AlertColor, AlertPropsColorOverrides, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 import React from "react";
 
 type Severity = "error" | "success" | "info" | "warning" | undefined;

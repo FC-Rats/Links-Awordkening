@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { FriendsListTemplate } from "../templates/FriendsListTemplate";
 import { AlertBox } from "../molecules/AlertBox";
 import { RequestFriends, acceptFriends, removeFriends, selectListFriends, selectPendingFriends, selectPublicFriends } from "../../services/FriendServices";
-import { AppContext, useUserContext } from "../hooks/AppContext";
+import { AppContext } from "../hooks/AppContext";
 import { ContainerFriendRequestsProps } from "../types/ContainerFriendRequestsProps";
 
 export const FriendsListPage = () => {
@@ -60,7 +60,7 @@ export const FriendsListPage = () => {
     };
 
     const handleSubmit = async () => {
-        if(user?.user?.id !== undefined && search != 0){
+        if(user?.user?.id !== undefined && search !== 0){
             const data = await RequestFriends(user?.user?.id, search); // Fonction de connexion
             if (!data.success) {
                 setAlertBox(prevState => ({
@@ -82,7 +82,7 @@ export const FriendsListPage = () => {
     };
 
     const handleInputChange = (value: number | undefined) => {
-        if (value == undefined) {
+        if (value === undefined) {
             setSearch(0);
         } else {
             setSearch(value);

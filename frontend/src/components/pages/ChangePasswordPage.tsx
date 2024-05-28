@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Route, useLocation, useParams } from 'react-router-dom';
 import { ChangePasswordTemplate } from "../templates/ChangePasswordTemplate";
 import { useEffect, useState } from 'react';
-import { accountChangePassword, accountVerify } from '../../services/PermissionsServices';
+import { accountChangePassword } from '../../services/PermissionsServices';
 import { AlertBox } from '../molecules/AlertBox';
-import { ForgotPasswordTemplate } from '../templates/ForgotPasswordTemplate';
 
 export const ChangePasswordPage = () => {
     /* SNACK BAR - ALERT HANDLING */

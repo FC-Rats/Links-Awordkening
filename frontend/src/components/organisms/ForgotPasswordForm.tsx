@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputForm } from "../molecules/InputForm";
 import { Link } from "../atoms/Link";
 import { SubmitButton } from "../molecules/SubmitButton";
@@ -26,7 +26,7 @@ export const ForgotpasswordForm : React.FC<ForgotFormProps> = ({ onSubmit, onInp
                 <img src="/img/swatches/LARectPA.png" alt="logo Links Awordkening" />
                 <InputForm name="email" label={"Email"} required onInputChange={handleInputChange}/>
                 <SubmitButton text={"Envoyer le mail"}/>
-                <Link text='Je me souviens de mon mot de passe :)' url=''/>
+                <Link text='Je me souviens de mon mot de passe :)' url='/sign-in'/>
             </form>
         </div>
     );

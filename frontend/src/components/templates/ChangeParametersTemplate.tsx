@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import { ChangeParametersForm } from "../organisms/ChangeParametersForm";
 

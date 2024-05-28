@@ -1,10 +1,8 @@
 import { AccountOverviewTemplate } from "../templates/AccountOverviewTemplate";
 import { AccountStatProps } from "../types/AccountStatProps";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getStats } from "../../services/UserServices";
-import { AppContext } from "../hooks/AppContext";
 import { Button, Stack } from "@mui/material";
-import { CenteredTitle } from "../atoms/CenteredTitle";
 import { useUserContext } from "../hooks/AppContext";
 import { AccountParametersTemplate } from "../templates/AccountParametersTemplate";
 import { UserInfo } from "../types/UserInfo";

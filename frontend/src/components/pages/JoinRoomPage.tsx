@@ -1,7 +1,5 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import {  useState } from "react";
 import { JoinRoomTemplate } from "../templates/JoinRoomTemplate";
-import { AppContext, useUserContext } from "../hooks/AppContext";
-import { join } from "path";
 import { AlertBox } from "../molecules/AlertBox";
 
 export const JoinRoomPage = () => {

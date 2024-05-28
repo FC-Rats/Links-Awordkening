@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ContainerEndGame } from "../organisms/ContainerEndGame";
 import { CenteredTitle } from "../atoms/CenteredTitle";
 import { PlayerInfo } from "../types/PlayerInfo";

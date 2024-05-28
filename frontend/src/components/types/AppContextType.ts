@@ -1,4 +1,3 @@
-import { MutableRefObject } from "react";
 import { UserInfo } from "./UserInfo";
 import { StatePage } from "./StatePage";
 

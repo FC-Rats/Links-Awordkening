@@ -29,7 +29,7 @@ export const ComponentEndGame: React.FC<{ item: PlayerInfo; isMulti: boolean; wi
         <div className="player-info-end-game">
           <div className="name">{item.player_name}</div>
           <div className="score">Score : {item.player_score}</div>
-          <Button onClick={handleOpen} id={"see-graph"+item.player_id} sx={{ backgroundColor: '#2B5C4A', color: 'white', '&:hover': { backgroundColor: '#3e6d5b' } }}>See graph</Button>
+          <Button onClick={handleOpen} id={"see-graph"+item.player_id} sx={{ backgroundColor: '#2B5C4A', color: 'white', '&:hover': { backgroundColor: '#3e6d5b' } }}>Voir le graph</Button>
           <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
               <IconButton aria-label="close" onClick={handleClose} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
                 <CloseIcon />

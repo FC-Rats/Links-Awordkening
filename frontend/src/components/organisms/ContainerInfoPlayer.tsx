@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 

@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { LogsDataTable } from '../molecules/LogsDataTable';
 import { CenteredTitle } from '../atoms/CenteredTitle';
 import { LogProps } from '../types/LogProps';

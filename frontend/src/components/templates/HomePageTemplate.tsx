@@ -1,17 +1,17 @@
 import { CenteredLogo } from "../atoms/CenteredLogo";
 import { SubmitButton } from "../molecules/SubmitButton";
 import { Stack, IconButton, Dialog, Button } from "@mui/material";
-import { getLogs } from "../../services/LogServices";
 import { CaseHomePageContainer } from "../organisms/CaseHomePageContainer";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../hooks/AppContext";
 import CloseIcon from '@mui/icons-material/Close';
 import { RulesTemplate } from "../templates/RulesTemplate";
+
 interface Score {
-    id: number;
     username: string;
     totalScore: string;
+    visibility: string;
 }
 
 export const HomePageTemplate = ({ scores }: { scores: Score[]}) => {

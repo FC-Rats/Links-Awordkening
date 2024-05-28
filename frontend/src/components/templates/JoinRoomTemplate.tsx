@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
-import { SignInForm } from "../organisms/SignInForm";
 import FormJoinRoom from "../organisms/FormJoinRoom";
 import { CenteredLogo } from "../atoms/CenteredLogo";
 import "../../assets/css/JoinRoom.css";
-import { Button } from "@mui/material";
 import { ReturnButton } from "../molecules/ReturnButton";
 
 export const JoinRoomTemplate = ({ handleInputChange, handleSubmit, handlePreviousPage, }: {

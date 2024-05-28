@@ -14,12 +14,12 @@ interface Score {
 
 export const HomePagePage = () => {
     const [template, setTemplate] = useState<"homepage" | "classement">("homepage");
-    const [title, setTitle] = useState<"Classement Global" | "Retour à l'acceuil">("Classement Global");
+    const [title, setTitle] = useState<"Classement Global" | "Retour à l'accueil">("Classement Global");
 
     const handleChangingTemplatePage = () => {
         if (template === "homepage") {
             setTemplate("classement");
-            setTitle("Retour à l'acceuil");
+            setTitle("Retour à l'accueil");
         } else {
             setTemplate("homepage");
             setTitle("Classement Global");

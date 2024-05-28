@@ -5,8 +5,6 @@ import { CenteredLogo } from "../atoms/CenteredLogo";
 import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Grid from '@mui/material/Grid';
-import { StatePage } from "../types/StatePage";
-import { Button } from "@mui/material";
 import { ReturnButton } from "../molecules/ReturnButton";
 
 export interface SetUpGameProps {
@@ -25,8 +23,8 @@ export interface SetUpGameProps {
 
 export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleInputChange, handleSubmit, handleTypeGame, handlePreviousPage }) => {
     const { nameGame, coupsRestants, type, nombreJoueurs } = infoGame;
-    const [soloSelected, setSoloSelected] = useState(type == 'solo');
-    const [multiSelected, setMultiSelected] = useState(type == 'multi');
+    const [soloSelected, setSoloSelected] = useState(type === 'solo');
+    const [multiSelected, setMultiSelected] = useState(type === 'multi');
 
     const handleSoloClick = () => {
         setSoloSelected(true);

@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { InputForm } from "../molecules/InputForm";
-import { useState } from "react";
 import "../../assets/css/AcceptRefuseFriendRequest.css";
 import { SubmitButton } from "../molecules/SubmitButton";
 

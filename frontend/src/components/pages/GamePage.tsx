@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
@@ -54,7 +54,6 @@ export const GamePage = () => {
         }, []); */
     const [isHost, setisHost] = useState(false);
     const [isDataLoading, setIsDataLoading] = useState(false);
-    const [hasGameStarted, setHasGameStarted] = useState(false);
     const [isBtnDisabled, setisBtnDisabled] = useState(false);
 
     // ==================== CONSTANTES =============================
@@ -82,7 +81,7 @@ export const GamePage = () => {
             player_name: user.name,
             player_score: 0,
             player_url: user.profilPicture,
-            player_isHost: infoGame.idHost == context?.user?.id ? true : false,
+            player_isHost: infoGame.idHost === context?.user?.id ? true : false,
             player_remainingTurns: 10,
         }));
     };
@@ -389,14 +388,13 @@ export const GamePage = () => {
     };
 
     /* ADD WORD */
-    const [newWord, setNewWord] = useState("");
     const [listWords, setListWords] = useState<string[]>([]);
 
     const addNewWord = (args: any) => {
         if (args.return === "success") {
             updatePlayerScoreByName(args.player, args.score);
         }
-        if (args.player == context?.user?.id) {
+        if (args.player === context?.user?.id) {
             setListWords(prevListWords => [...prevListWords, args.word]);
         } else {
             audioNewScoreEnemy.play();
@@ -411,7 +409,6 @@ export const GamePage = () => {
 
     const updateGraphWithNewWord = (word: string) => {
         setisBtnDisabled(true);
-        setNewWord(word);
         const data = {
             action: "add_word",
             args: {
@@ -441,7 +438,7 @@ export const GamePage = () => {
                 idHost: args.host,
                 dateTime: new Date().toISOString(),
                 name: args.name,
-                type: playersInGame.length == 1 ? "SinglePlayer" : "Multiplayer",
+                type: args.nbPlayers === 1 ? "SinglePlayer" : "Multiplayer",
             });
         }
 
@@ -456,7 +453,7 @@ export const GamePage = () => {
             idUser: args.idUser,
             log: 'Fin de partie',
         });
-        
+
         if (args.charts) {
             const updatedCharts: { [key: string]: TestData } = {};
 
@@ -514,7 +511,7 @@ export const GamePage = () => {
     }, [listWords]);
 
     useEffect(() => {
-        if (currentPage == "ending") {
+        if (currentPage === "ending") {
             setIsDataLoading(false);
         }
     }, [currentPage]);
@@ -532,13 +529,13 @@ export const GamePage = () => {
     }, [isTimerFinished]);
 
     /* Notification sonore*/
-    const [audioMessage, setAudioMessage] = useState(new Audio("/sound/message_notification.mp3"));
-    const [audioNewScoreEnemy, setAudioNewScoreEnemy] = useState(new Audio("/sound/new_score_enemy.mp3"));
-    const [audioNewScoreAlly, setAudioNewScoreAlly] = useState(new Audio("/sound/new_score_ally.mp3"));
-    const [audioAddWordWarning, setAudioAddWordWarning] = useState(new Audio("/sound/add_word_warning.mp3"));
-    const [audioAddWordError, setAudioAddWordError] = useState(new Audio("/sound/add_word_error.mp3"));
-    const [audioEndGame, setAudioEndGame] = useState(new Audio("/sound/end_game.mp3"));
-    const [audioCountdown, setAudioCountdown] = useState(new Audio("/sound/countdown.mp3"));
+    const [audioMessage] = useState(new Audio("/sound/message_notification.mp3"));
+    const [audioNewScoreEnemy] = useState(new Audio("/sound/new_score_enemy.mp3"));
+    const [audioNewScoreAlly] = useState(new Audio("/sound/new_score_ally.mp3"));
+    const [audioAddWordWarning] = useState(new Audio("/sound/add_word_warning.mp3"));
+    const [audioAddWordError] = useState(new Audio("/sound/add_word_error.mp3"));
+    const [audioEndGame] = useState(new Audio("/sound/end_game.mp3"));
+    const [audioCountdown] = useState(new Audio("/sound/countdown.mp3"));
     const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
     const toggleSound = () => {
@@ -572,8 +569,24 @@ export const GamePage = () => {
                     {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
                     {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
                     {currentPage === "joining" && <div><JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
-                    {(currentPage === "waiting" && players != undefined) && <div><WaitingRoomTemplate handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} isHost={isHost} players={players} handleStartGame={handleStartGame} infoGame={infoGame} /></div>}
-                    {(currentPage === "gaming" && playersInGame != undefined) && <div>
+                    {(currentPage === "waiting" && players !== undefined) && <div>
+                        <WaitingRoomTemplate
+                            handleNextPage={handleNextPage}
+                            handlePreviousPage={handlePreviousPage} 
+                            isHost={isHost} players={players} 
+                            handleStartGame={handleStartGame} 
+                            infoGame={infoGame} 
+                            hasNewMessage={hasNewMessage}
+                            isSoundEnabled={isSoundEnabled}
+                            toggleSound={toggleSound}
+                            toggleChatVisibility={toggleChatVisibility}
+                            isChatVisible={isChatVisible}
+                            messages={messages}
+                            onInputChangeChat={handleInputChangeMessage}
+                            SumbitMessageChat={handleSubmitMessage} 
+                        />
+                    </div>}
+                    {(currentPage === "gaming" && playersInGame !== undefined) && <div>
                         <GameTemplate
                             graph={dataGraph}
                             coupsRestants={coupsRestants}

@@ -3,7 +3,6 @@ import { createLog } from "./LogServices";
 import { sendMail } from "./SendMailsServices";
 import { createUser, getUsers, updateUser } from "./UserServices";
 import { isValidBirthYear, isValidEmail, isValidPassword, isValidUsername } from "./UtilsServices";
-const token = localStorage.getItem("token");
 
 /**
  * @function passwordVerify
@@ -164,8 +163,8 @@ export async function formValidation(formData: { username: string; birthYear : s
     if (!isValidUsername(formData.username)) { return { success, message : "Le Pseudo ne doit pas contenir de caractères spéciaux " }; }
     else if (!isValidBirthYear(formData.birthYear)) { return { success, message : "La date de naissance est invalide" }; }
     else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide" }; }
-    else if (!isValidPassword(formData.password) && !isValidPassword(formData.passwordConfirmation)) { return { success, message : "Le mot de passe n'est pas valide, il doit être entre 12 et 40 caractère, contenir une majuscule, une minscule, un chiffre et un caractère spécial " }; }
-    else if (formData.password != formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre" }; }
+    else if (!isValidPassword(formData.password) && !isValidPassword(formData.passwordConfirmation)) { return { success, message : "Le mot de passe n'est pas valide, il doit être entre 12 et 40 caractère, contenir une majuscule, une minuscule, un chiffre et un caractère spécial " }; }
+    else if (formData.password !== formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre" }; }
     else {
         success = true;
     }
@@ -199,15 +198,15 @@ export async function accountUpdate(formData: UserInfo, prevInfo : UserInfo) : P
     else if (!isValidEmail(formData.email)) { return { success, message : "L'adresse mail est invalide", dataUser , typeError : "warning"}; }
     // 1 bis - Vérification que l'username ou l'email n'est dans la db
     try {
-        if (prevInfo.name != formData.name) {
+        if (prevInfo.name !== formData.name) {
             const userVerifResponse = await getUsers({ username: formData.name });
             if (userVerifResponse.length > 0) { return { success, message : "Ce nom d'utilisateur est déjà utilisé", dataUser, typeError : "warning" }; }
-        } else if (prevInfo.email != formData.email) {
+        } else if (prevInfo.email !== formData.email) {
             const emailVerifResponse = await getUsers({ email: formData.email });
             if (emailVerifResponse.length > 0) { return { success, message : "L'adresse mail est déjà utilisée", dataUser, typeError : "warning" }; }
         }
         // 2 - createUser de UserServices formData ->  récup idUser
-        let user = await updateUser({
+        await updateUser({
             id : formData.id,
             username: formData.name,
             birthYear: formData.birthYear,
@@ -330,7 +329,7 @@ export async function accountChangePassword(formData: { token: string, password:
             return { success, message : "Erreur de Token", typeError : "error"};
         }
         else if (!isValidPassword(formData.password) && !isValidPassword(formData.passwordConfirmation)) { return { success, message : "Le mot de passe n'est pas valide, il doit être entre 12 et 40 caractère, contenir une majuscule, une minscule, un chiffre et un caractère spécial " ,typeError : "warning"}; }
-        else if (formData.password != formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre", typeError : "warning" }; }
+        else if (formData.password !== formData.passwordConfirmation) { return { success, message : "les deux mots de passes doivent correspondre", typeError : "warning" }; }
         updateUser({ 
             id : userResponse[0]['id'], 
             tokenR : null, 

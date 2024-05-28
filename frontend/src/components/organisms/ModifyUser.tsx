@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { InputForm } from "../molecules/InputForm";
 import { SubmitButton } from "../molecules/SubmitButton";
 import Typography from '@mui/material/Typography';

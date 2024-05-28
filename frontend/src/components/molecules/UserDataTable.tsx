@@ -26,14 +26,6 @@ const renderVisibilityCell = (value: string) => {
   );
 };
 
-const StyledVisibilityChip = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '5px',
-  borderRadius: '5px',
-});
-
 export const UserDataTable = ({ data, onUserEdit }: { data: UserInfo[], onUserEdit: (user: UserInfo) => void }) => {
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', type: 'number', width: 150 },

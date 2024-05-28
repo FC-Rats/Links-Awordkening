@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import "../../assets/css/ComponentListWords.css";
 
 export const ComponentListWords  = ({ listwords }: { listwords: string[] }) =>{

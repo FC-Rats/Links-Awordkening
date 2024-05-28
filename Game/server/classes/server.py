@@ -236,7 +236,8 @@ class WebsocketServer:
                     'charts': all_chart,
                     'idUser': client_id,
                     'id_game': str(game.id),
-                    'words': player.word_chain
+                    'words': player.word_chain,
+                    'nbPlayers' : game.max_player
                 }
             }))
             del self.players[client_id]

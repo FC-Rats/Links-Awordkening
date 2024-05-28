@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { InputForm } from './InputForm';
-import { useState } from 'react'
 import '../../assets/css/AcceptRefuseFriendRequest.css';
 import { ContainerFriendRequestsProps } from '../types/ContainerFriendRequestsProps';
 import { Autocomplete, TextField } from '@mui/material';

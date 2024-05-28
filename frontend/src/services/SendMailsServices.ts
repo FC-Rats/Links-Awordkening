@@ -1,7 +1,6 @@
 export {};
 
 const url = `${process.env.REACT_APP_API_URL}mail/`;
-const token = localStorage.getItem("token");
 
 /** To-Do PHP API
 *    - Index Case selon POST
