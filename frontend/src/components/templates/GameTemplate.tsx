@@ -64,7 +64,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <ContainerInfoPlayer players={players}/> 
                 <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants}/>
-                <Timer time={120} setIsTimerFinished={setIsTimerFinished}/>
+                <Timer time={180} setIsTimerFinished={setIsTimerFinished}/>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
                 <div className="item-game">

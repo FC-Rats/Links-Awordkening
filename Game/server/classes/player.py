@@ -5,6 +5,8 @@ import shutil
 import re
 import os
 
+from ..data.constants import get_string
+
 class Player: 
 
     def __init__(self, server, id, game_id) -> None:
@@ -46,25 +48,25 @@ class Player:
             if word in self.word_chain:
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'warning', 'msg': 'Le mot a déjà été utilisé !'}
+                    'args': {'return': 'warning', 'msg': get_string('word_already_use')}
                 }
             # Vérification si le mot contient des chiffres
             elif re.search(r'\d', word):
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de nombres !'}
+                    'args': {'return': 'warning', 'msg': get_string('word_have_number')}
                 }
             # Vérification si le mot contient des caractères spéciaux
             elif re.search(r'[^\w]', word, re.UNICODE):
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'warning', 'msg': 'Le mot ne doit pas contenir de caractères spéciaux !'}
+                    'args': {'return': 'warning', 'msg': get_string('word_have_unicode')}
                 }
             # Vérification si le mot n'existe pas ou est mal orthographié
             elif result.returncode == 1:
                 return {
                     'action': 'add_word',
-                    'args': {'return': 'warning', 'msg': 'Le mot n\'existe pas ou est mal orthographié !'}
+                    'args': {'return': 'warning', 'msg': get_string('word_not_correct')}
                 }
             else:
                 print("MOT DANS LE DICO")
@@ -103,7 +105,7 @@ class Player:
                                     if new_score > self.score:
                                         await self.server.send_to_all(self.id, self.server.dump_data({
                                             'action': 'new_score',
-                                            'args': {'return': 'success', 'msg': 'Un joueur a obtenu un meilleur score !', 'player': self.id, 'score': new_score, 'word' : word}
+                                            'args': {'return': 'success', 'msg': get_string('new_score_enemy'), 'player': self.id, 'score': new_score, 'word' : word}
                                         }))
                                     self.score = new_score
 
@@ -111,21 +113,16 @@ class Player:
                         if new_chart == self.chart:
                             return {
                                 'action': 'new_score',
-                                'args': {'return': 'error', 'msg': 'Le mot que vous avez rentré n\'a pas amélioré votre score :c', 'player': self.id, 'word' : word, 'coups' : self.attempts}
+                                'args': {'return': 'error', 'msg': get_string('word_not_better'), 'player': self.id, 'word' : word, 'coups' : self.attempts}
                             }
                         else:
                             self.chart = new_chart
                             return {
                                 'action': 'add_word',
-                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score, 'msg': f'Vous avez obtenu un nouveau score de {self.score} !'}
+                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score, 'msg': get_string('new_score_reached', score= self.score)}
                             }
-                else:
-                    return {
-                        'action': 'add_word',
-                        'args': {'return': 'error', 'msg': 'Erreur lors de l\'exécution du moteur de chaîne.'}
-                    }
         else:
             return {
                 'action': 'add_word',
-                'args': {'return': 'error', 'msg': 'Vous n\'avez plus de coups ! Attendez la fin de la partie'}
+                'args': {'return': 'error', 'msg': get_string('no_attempts_left')}
             }

@@ -26,7 +26,7 @@ class Game:
         self.game_name = game_name # Nom de la partie
         # Exemple : {'client1_id': Player(client1_id), 'client2_id': Player(client2_id)}
         self.max_player = max_player  # Nombre maximal de joueurs
-        self.turn_duration = timedelta(minutes=2)  # Durée d'un tour de jeu
+        self.turn_duration = timedelta(minutes=3)  # Durée d'un tour de jeu
         self.start_time = None  # Heure de début du jeu
         self.end_time = None  # Heure de fin du jeu
         self.game_started = False  # Indicateur si le jeu a commencé, ex: False

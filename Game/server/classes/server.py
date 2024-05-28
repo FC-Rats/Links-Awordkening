@@ -1,7 +1,7 @@
 # server.py
 
 import websockets
-from uuid import uuid4
+from uuid import uuid4, UUID
 import random
 import json
 from websockets.server import serve
@@ -9,7 +9,8 @@ from websockets.server import serve
 from .client import WebsocketClient
 from .game import Game
 from .player import Player
-from uuid import UUID
+from ..data.constants import get_string
+from ..data.constants import check_injured
 
 class WebsocketServer:
     def __init__(self, hostname: str, port: int):
@@ -67,7 +68,7 @@ class WebsocketServer:
                 'action': 'send_message',
                 'args': {
                     'return' : 'success',
-                    'message': message,
+                    'message': check_injured(message),
                     'nickname': client.nickname
                 }
             }))
@@ -121,18 +122,18 @@ class WebsocketServer:
                     else:
                         await self.clients[client_id].websocket.send(self.dump_data({
                             'action': 'join_game',
-                            'args': {'return': 'error', 'msg': 'La partie est pleine !'}
+                            'args': {'return': 'error', 'msg': get_string('game_already_full')}
                         }))
                         return
                 else:
                     await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'join_game',
-                        'args': {'return': 'error', 'msg': 'La partie a déjà commencé !'}
+                        'args': {'return': 'error', 'msg': get_string('game_already_started')}
                     }))
                     return
         await self.clients[client_id].websocket.send(self.dump_data({
             'action': 'join_game',
-            'args': {'return': 'error', 'msg': 'Partie introuvable !'}
+            'args': {'return': 'error', 'msg': get_string('game_not_found')}
         }))
 
     async def start_game(self, client_id):
@@ -174,10 +175,7 @@ class WebsocketServer:
                 client = self.clients[client_id]
                 await client.websocket.send(self.dump_data({
                     'action': 'leave_game',
-                    'args': {
-                        'return': 'error',
-                        'msg': 'Le créateur de la partie a quitté. Fin prématurée de la partie'
-                    }
+                    'args': {'return': 'error','msg': get_string('host_left_game')}
                 }))
             del self.players[client_id]
             del self.games[str(player.game_id)]
