@@ -24,7 +24,7 @@ class WebsocketClient:
         :param websocket: WebSocket du client
         """
         self.websocket = websocket
-        if websocket.path == "/game":
+        if websocket.path == "/ws/game":
             async for data in websocket:
                 msg = self.load_data(data)
                 if 'action' in msg and 'args' in msg:
