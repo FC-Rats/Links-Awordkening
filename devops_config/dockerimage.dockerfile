@@ -52,6 +52,7 @@ RUN a2enconf allow-override
 WORKDIR /var/www/html/
 
 EXPOSE 80
+EXPOSE 8765
 
 #for docker setup only
 #elboyo built-for
