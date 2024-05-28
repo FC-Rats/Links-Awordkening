@@ -3,22 +3,26 @@ version: '3'
 #BlitzWoof!
 #awooo.fr
 
-
 services:
   web:
     image: phpwithjava:latest  #image build on elboyo
     ports:
       - "6225:80" 
+      - "6226:8765"
     volumes:
       - /srv/dev-disk-by-uuid-edbd084c-2085-4a70-a40f-f86d66ad0efa/www/linksawordkening:/var/www/html
+      #- linksawakening:/var/www/html
     restart: 'unless-stopped'
     deploy:
       resources:
         limits:
           cpus: "4.0"
-          memory: 100M
+          memory: 500M
     networks:
      - db
+
+#volumes:
+ #linksawakening:
 
 networks:
   db:
