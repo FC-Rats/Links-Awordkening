@@ -8,6 +8,6 @@ export const RulesTemplate = () => {
         <>
             <CenteredTitle text={"Règles"}/>
             <ContainerRules/>
-            </>
+        </>
     );
 };

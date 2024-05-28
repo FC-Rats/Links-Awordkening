@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "../../assets/css/ComponentPlayerInfo.css";
 import { PlayerInfo } from "../types/PlayerInfo";
-import { Avatar, Badge, Button, Dialog, DialogTitle } from "@mui/material";
+import { Avatar, Badge, Button, Dialog, DialogTitle, IconButton } from "@mui/material";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Graph, { TestData } from "./Graph";
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ComponentEndGame: React.FC<{ item: PlayerInfo; isMulti: boolean; winner?: boolean;graphs: { [key: string]: TestData }; }> = ({ item, isMulti, winner, graphs }) => {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,9 @@ export const ComponentEndGame: React.FC<{ item: PlayerInfo; isMulti: boolean; wi
           <div className="score">Score : {item.player_score}</div>
           <Button onClick={handleOpen} id={"see-graph"+item.player_id} sx={{ backgroundColor: '#2B5C4A', color: 'white', '&:hover': { backgroundColor: '#3e6d5b' } }}>See graph</Button>
           <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+              <IconButton aria-label="close" onClick={handleClose} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
+                <CloseIcon />
+              </IconButton>
             <DialogTitle>Graphe de {item.player_name}</DialogTitle>
             <Graph data={graphs[item.player_id]} />
           </Dialog>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { CenteredTitle } from "../atoms/CenteredTitle";
-import { Button, Dialog, DialogTitle, Stack, Typography } from "@mui/material";
+import { Button, Dialog, IconButton, Stack, Typography } from "@mui/material";
 import { StatePage } from "../types/StatePage";
 import { RulesTemplate } from "./RulesTemplate";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface ChooseProps {
     handleNextPage: (newPage: StatePage) => void;
@@ -23,8 +24,11 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ handleNextPage }) 
         <>
             <Stack sx={{ minHeight: '100vh' }} direction="column" spacing={2} justifyContent="center" alignItems="center">
                 <CenteredTitle text="Jouez !" />
-
+                {/* A faire en composant */}
                 <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <IconButton aria-label="close" onClick={handleClose} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
+                        <CloseIcon />
+                    </IconButton>
                     <RulesTemplate />
                 </Dialog>
                 <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>

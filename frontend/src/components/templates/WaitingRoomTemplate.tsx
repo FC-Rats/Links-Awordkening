@@ -7,10 +7,11 @@ import { ComponentPlayerInfo } from "../molecules/ComponentPlayerInfo";
 import { UserInfo } from "../types/UserInfo";
 import { ComponentPlayerInfoWaiting } from "../molecules/ComponentPlayerInfoWaiting";
 import { StatePage } from "../types/StatePage";
-import { Button, Dialog } from "@mui/material";
+import { Button, Dialog, IconButton } from "@mui/material";
 import { ReturnButton } from "../molecules/ReturnButton";
 import { RulesTemplate } from "./RulesTemplate";
 import { useState } from "react";
+import CloseIcon from '@mui/icons-material/Close';
 
 export interface WaitingRoomProps {
     infoGame: {
@@ -53,6 +54,9 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
                     ))}
                 </div>
                 <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <IconButton aria-label="close" onClick={handleClose} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
+                        <CloseIcon />
+                    </IconButton>
                     <RulesTemplate />
                 </Dialog>
                 <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
