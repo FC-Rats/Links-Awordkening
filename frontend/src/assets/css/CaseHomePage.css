@@ -1,16 +1,23 @@
 .case-home-page {
-    height: 400px;
-    width: 300px;
+    height: 300px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    padding: 10px 0;
 }
 .case-home-page .title-case {
     font-size: 1.5rem;
     font-weight: bold;
 }
 .case-home-page .value-case {
-    font-size: 4rem;
+    font-size: 3rem;
+}
+
+.case-home-page .title-icon {
+    width: 35px;
+    height: auto;
 }
