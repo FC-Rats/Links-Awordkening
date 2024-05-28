@@ -80,6 +80,7 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
                     radius: 50,
                     fillColor: '#82a14e',
                 },
+                
                 dataLabels: {
                     enabled: true,
                     allowOverlap: true,
@@ -89,6 +90,11 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
                     },
                 },
                 data: seriesData,
+                link: {
+                    color: "#000",
+                    width:2,
+                },
+                    
             },
         ],
     };

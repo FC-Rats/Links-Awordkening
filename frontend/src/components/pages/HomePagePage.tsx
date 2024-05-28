@@ -42,10 +42,12 @@ export const HomePagePage = () => {
 
 
 
+
     return (
         <>  
             <Stack direction="row" justifyContent="flex-end" alignItems="center">
                 <Button variant="contained" className="return-button" size="large" onClick={() => handleChangingTemplatePage()}>{title}</Button>
+
             </Stack>
             {template === "homepage" && <HomePageTemplate scores={scores}/>}
             {template === "classement" && <ScoreBoardTemplate scores={scores}/>}
