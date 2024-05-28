@@ -32,6 +32,24 @@ export const AdminPage = () => {
         }));
     };
 
+    const handleSuccess = async (isSuccess : boolean) => {
+        if (!isSuccess) {
+            setAlertBox(prevState => ({
+                ...prevState,
+                    severity : "error",
+                    open: true,
+                    message : "Il y a eu un problème avec l'execution de la requête"
+            }));      
+        } else {
+            setAlertBox(prevState => ({
+                ...prevState,
+                    severity : "success",
+                    open: true,
+                    message : "L'utilisateur a bien été modifié !"
+            }));          
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -68,7 +86,7 @@ export const AdminPage = () => {
             ) : (error !== null) ? (
                 <p>Erreur lors de la récupération des users : {error.toString()}</p>
             ) : (
-                <AdminTemplate setUsers={setUsers} users={users} />
+                <AdminTemplate setUsers={setUsers} users={users} SetSuccess={handleSuccess} />
             )}
         </>
     )

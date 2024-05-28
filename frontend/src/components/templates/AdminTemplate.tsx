@@ -7,7 +7,7 @@ import "../../assets/css/ModifyUser.css"
 import "../../assets/css/InputForm.css"
 import { CenteredTitle } from '../atoms/CenteredTitle';
 
-function AdminTemplate({ users, setUsers }: { users: UserInfo[], setUsers: React.Dispatch<React.SetStateAction<UserInfo[]>> }) {
+function AdminTemplate({ users, setUsers, SetSuccess }: { users: UserInfo[], setUsers: React.Dispatch<React.SetStateAction<UserInfo[]>>, SetSuccess: (isSuccess : boolean) => void; }) {
     const [selectedUser, setSelectedUser] = useState<UserInfo | null>(null);
     const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
@@ -38,7 +38,7 @@ function AdminTemplate({ users, setUsers }: { users: UserInfo[], setUsers: React
                 open={isDrawerOpened}
                 onClose={() => toggleDrawer(false)}
             >
-                {selectedUser && <ModifyUser setUsers={setUsers} user={selectedUser} onClose={() => toggleDrawer(false)} />}
+                {selectedUser && <ModifyUser setUsers={setUsers} user={selectedUser} setSuccess={SetSuccess} onClose={() => toggleDrawer(false)} />}
             </Drawer>
         </div>
     )

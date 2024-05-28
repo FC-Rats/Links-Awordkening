@@ -3,7 +3,7 @@ export interface HistoriqueInfo {
     dateTime: string;
     name: string;
     type : string;
-    idHost : number;
+    username : string;
     score: number;
     words : string[];
 }

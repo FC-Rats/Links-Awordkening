@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "set NODE_ENV=development && react-scripts start",
-    "build": "set NODE_ENV=production && react-scripts build",
+    "build": "dotenv -e .env.production.local react-scripts build",
     "test": "set NODE_ENV=test && react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2"
   }
 }

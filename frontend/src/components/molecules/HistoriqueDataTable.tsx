@@ -11,7 +11,7 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
         { field: 'idHost', headerName: 'Host', width: 110 },
         { field: 'score', headerName: 'Score', width: 150 },
         {
-            field: 'words', headerName: 'Mots', width: 220, renderCell: (params: GridCellParams) => {
+            field: 'words', headerName: 'Mots', width: 850, renderCell: (params: GridCellParams) => {
                 const value = params.value as string;
 
                 if (typeof value === 'string') {
@@ -31,7 +31,7 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
         dateTime: historique.dateTime,
         name: historique.name,
         type: historique.type,
-        idHost: historique.idHost,
+        idHost: historique.username,
         score: historique.score,
         words: historique.words
     }));

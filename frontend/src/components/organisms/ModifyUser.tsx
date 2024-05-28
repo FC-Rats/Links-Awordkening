@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import { updateUser } from '../../services/UserServices';
 
-function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () => void, setUsers: React.Dispatch<React.SetStateAction<UserInfo[]>> }) {
+function ModifyUser({ user, onClose, setUsers, setSuccess }: { user: UserInfo, onClose: () => void, setUsers: React.Dispatch<React.SetStateAction<UserInfo[]>>, setSuccess: (isSuccess : boolean) => void;  }) {
   const [formData, setFormData] = useState<UserInfo>(user);
 
   const handleInputChange = (name: string, value: any) => {
@@ -49,7 +49,12 @@ function ModifyUser({ user, onClose, setUsers }: { user: UserInfo, onClose: () =
     const transformedData = transformUserInfoToRecord(formData);
     const response = await updateUser(transformedData);
     if (response.length === 0) {
-      setUsers(prevUsers => prevUsers.map(user => user.id === transformedData.id ? formData : user));
+      try {
+        setUsers(prevUsers => prevUsers.map(user => user.id === transformedData.id ? formData : user));
+        setSuccess(true);
+      } catch {
+        setSuccess(false);
+      }
     }
     onClose();
   };
