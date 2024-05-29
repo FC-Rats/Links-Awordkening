@@ -1,4 +1,4 @@
-# server.py
+# classes/server.py
 
 import websockets
 from uuid import uuid4, UUID
@@ -9,8 +9,8 @@ from websockets.server import serve
 from .client import WebsocketClient
 from .game import Game
 from .player import Player
-from ..data.constants import get_string
-from ..data.constants import check_injured
+from data.constants import get_string
+from data.constants import check_injured
 
 class WebsocketServer:
     def __init__(self, hostname: str, port: int):
@@ -32,6 +32,7 @@ class WebsocketServer:
 
         :param future: Objet asyncio Future pour maintenir le serveur actif
         """
+        print(f"Server started !")
         async with serve(self.client_connected, self.hostname, self.port):
             await future
 
@@ -199,7 +200,6 @@ class WebsocketServer:
             return
         
         if game.host == client_id :
-            print(f"Server start game for host {client_id}")
             await game.start_game()
 
     async def leave_game(self, client_id):

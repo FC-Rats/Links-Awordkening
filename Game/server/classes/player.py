@@ -1,11 +1,11 @@
-# player.py
+# classes/player.py
 
 import subprocess
 import shutil
 import re
 import os
 
-from ..data.constants import get_string
+from data.constants import get_string
 
 class Player: 
 
@@ -69,7 +69,6 @@ class Player:
                     'args': {'return': 'warning', 'msg': get_string('word_not_correct')}
                 }
             else:
-                print("MOT DANS LE DICO")
                 self.word_chain.append(word)
                 self.attempts -= 1
 

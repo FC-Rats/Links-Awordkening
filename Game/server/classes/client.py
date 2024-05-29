@@ -1,4 +1,4 @@
-# client.py
+# classes/client.py
 
 import json
 from uuid import uuid4
@@ -24,7 +24,7 @@ class WebsocketClient:
         :param websocket: WebSocket du client
         """
         self.websocket = websocket
-        if websocket.path == "/game":
+        if websocket.path == "/game": #/ws/game on Fabien's server
             async for data in websocket:
                 msg = self.load_data(data)
                 if 'action' in msg and 'args' in msg:

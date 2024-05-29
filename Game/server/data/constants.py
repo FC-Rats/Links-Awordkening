@@ -1,4 +1,4 @@
-# constants.py
+# data/constants.py
 
 import random
 import re

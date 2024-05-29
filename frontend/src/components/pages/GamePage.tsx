@@ -114,7 +114,7 @@ export const GamePage = () => {
         resetPageGame();
         if (!ws.current) {
             const connectToGame = async () => {
-                ws.current = new WebSocket("ws://localhost:8765/game");
+                ws.current = new WebSocket("ws://localhost:8765/game"); //wss://linksawordkening.fabiengilles.tf/ws/game on Fabien's server
                 ws.current.addEventListener("open", onSendData);
                 ws.current.addEventListener("close", onDataClosed);
                 ws.current.addEventListener("message", onDataReceived);
