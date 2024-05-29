@@ -15,12 +15,18 @@ strings = {
     'game_already_full': 'La partie est pleine !',
     'game_already_started': 'La partie a déjà commencé !',
     'game_not_found': 'Partie introuvable !',
-    'host_left_game': 'Le créateur de la partie a quitté. Fin prématurée de la partie.'
+    'host_left_game': 'Le créateur de la partie a quitté. Fin prématurée de la partie.',
+    'invite_player_success': 'Vous avez invité {joueur} à vous rejoindre !',
+    'invite_player_warning': '{joueur} n\'est pas connecté :c',
+    'invitation_player': '{joueur} vous a invité à le rejoindre ! Code {code}',
+    'invitation_refused': '{joueur} a refusé votre invitation :c',
+    'invitation_accepted': '{joueur} a accepté votre invitation et rejoint votre partie !'
 }
 
 bad_words = {
     'merde': ['zut', 'flûte', 'mince', 'sapristi', 'ah, c\'est vraiment dommage', 'quelle poisse', 'oh, non', 'eh bien, ça alors', 'ah, la barbe', 'oh, purée', 'crotte', 'oh là là'],
     'connard': ['idiot', 'imbécile', 'crétin', 'andouille', 'espèce de', 'malotru', 'insensé'],
+    'connasse': ['idiote', 'imbécile', 'crétine', 'andouille', 'espèce de', 'malotrue', 'insensée'],
     'putain': ['punaise', 'purée', 'sapristi', 'bon sang', 'diantre', 'mince alors'],
     'bordel': ['désordre', 'pagaille', 'foutoir', 'chaos', 'mélasse'],
     'salopard': ['méchant', 'vilain', 'scélérat', 'canaille', 'vaurien'],
@@ -48,7 +54,7 @@ def get_string(key, **kwargs):
     et formate le message en remplaçant les placeholders par les valeurs fournies.
 
     Args:
-    key (str): La clé du message dans le dictionnaire strings. (Possibilités : word_already_use, word_have_number, word_have_unicode, word_not_correct, word_not_better, new_score_enemy, new_score_reached, no_attempts_left, game_already_full, game_already_started, game_not_found, host_left_game)
+    key (str): La clé du message dans le dictionnaire strings. (Possibilités : word_already_use, word_have_number, word_have_unicode, word_not_correct, word_not_better, new_score_enemy, new_score_reached, no_attempts_left, game_already_full, game_already_started, game_not_found, host_left_game, invite_player_success, invite_player_warning, invitation_player, invitation_refused, invitation_accepted)
     kwargs (dict): Les valeurs à insérer dans le message.
 
     Returns:
