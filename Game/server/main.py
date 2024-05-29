@@ -8,7 +8,7 @@ async def run():
     stop = loop.create_future()
     #loop.add_signal_handler(signal.CTRL_BREAK_EVENT, stop.set_result, None)
 
-    server = WebsocketServer("localhost", 8765)
+    server = WebsocketServer("0.0.0.0", 8765)
     await server.run(stop)
 
 if __name__ == "__main__":
