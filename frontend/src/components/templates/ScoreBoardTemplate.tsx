@@ -13,9 +13,9 @@ export const ScoreBoardTemplate = ({ scores }: { scores: Score[]}) => {
     let idCounter = 1;
     
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'Rang', type: 'number', width: 200 },
-        { field: 'username', headerName: 'Nom du joueur', type: 'string', width: 200 },
-        { field: 'totalScore', headerName: 'Meilleur score', type: 'number', width: 200 }
+        { field: 'id', headerName: 'Rang', type: 'number', flex: 1, minWidth: 100, filterable: false},
+        { field: 'username', headerName: 'Nom du joueur', type: 'string', flex: 2, minWidth: 50, filterable: false},
+        { field: 'totalScore', headerName: 'Meilleur score', type: 'number', flex: 2, minWidth: 50, filterable: false }
       ];
     
       const rows: GridRowsProp = scores.map((item) => ({
@@ -42,6 +42,11 @@ export const ScoreBoardTemplate = ({ scores }: { scores: Score[]}) => {
                 initialState={{}} 
                 getRowClassName={getRowClassName}
                 hideFooterPagination 
+                disableColumnFilter
+                disableColumnMenu
+                disableColumnSelector
+                disableColumnSorting
+                disableColumnResize
             />
         </div>
       );

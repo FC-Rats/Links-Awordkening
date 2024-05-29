@@ -46,7 +46,7 @@ export const AccountEditMode = ({ formData, handleInputChange, handleSubmit, han
           >
             {imageOptions.map((image, index) => (
               <MenuItem key={index} value={image}>
-                <img src={image} alt={`Menu ${index}`} style={{ width: '50px', marginRight: '10px' }} />
+                <img src={image} alt={`Menu ${index}`} style={{ width: '200px', marginRight: '1px' }} />
               </MenuItem>
             ))}
           </Select>
