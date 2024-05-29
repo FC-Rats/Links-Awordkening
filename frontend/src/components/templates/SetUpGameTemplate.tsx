@@ -61,7 +61,7 @@ export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleIn
                     </Grid>
                     {multiSelected && (
                         <Grid item xs={12} sm={2}>
-                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={4} defaultvalue={"2"} />
+                            <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={6} defaultvalue={"2"} />
                         </Grid>
                     )}
                 </Grid>
