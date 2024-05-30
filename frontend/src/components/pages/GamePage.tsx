@@ -351,6 +351,7 @@ export const GamePage = () => {
 
     // =================== GAME ========================
     const [isTimerFinished, setIsTimerFinished] = useState(false);
+    const [isModalWordListVisible, setIsModalWordListVisible] = useState(true);
 
     /* Tchat */
     const [messages, setMessages] = useState<Message[]>([]);
@@ -373,6 +374,10 @@ export const GamePage = () => {
         { nickname: args.nickname, message: args.message }
         ]);
     }
+
+    const toggleWordsListVisibility = () => {
+        setIsModalWordListVisible(!isModalWordListVisible);
+    };
 
     const toggleChatVisibility = () => {
         setIsChatVisible(!isChatVisible);
@@ -613,6 +618,8 @@ export const GamePage = () => {
                             updateGraphWithNewWord={updateGraphWithNewWord}
                             toggleSound={toggleSound}
                             toggleChatVisibility={toggleChatVisibility}
+                            isModalWordListVisible={isModalWordListVisible}
+                            toggleWordsListVisibility={toggleWordsListVisibility}
                             isChatVisible={isChatVisible} messages={messages}
                             onInputChangeChat={handleInputChangeMessage}
                             SumbitMessageChat={handleSubmitMessage}

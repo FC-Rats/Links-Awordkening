@@ -13,6 +13,7 @@ import "../../assets/css/GameTemplate.css";
 import { Message } from "../types/Message";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { Timer } from "../atoms/Timer";
+import ListIcon from '@mui/icons-material/List';
 
 interface GameTemplateProps {
     infoGame: {
@@ -27,6 +28,8 @@ interface GameTemplateProps {
     listwords : string[];
     updateGraphWithNewWord: (word: string) => void;
     toggleChatVisibility: () => void;
+    toggleWordsListVisibility: () => void;
+    isModalWordListVisible: boolean;
     toggleSound: () => void
     isChatVisible: boolean;
     messages: Message[];
@@ -44,6 +47,8 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     graph,
     updateGraphWithNewWord,
     toggleChatVisibility,
+    toggleWordsListVisibility,
+    isModalWordListVisible,
     toggleSound,
     isChatVisible,
     messages,
@@ -71,9 +76,11 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                 </Stack>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
+                {isModalWordListVisible && (
                 <div className="item-game">
                 <ComponentListWords listwords={listwords}/>
                 </div>
+                )}
                 <div className="graph">
                 <Graph data={graph}/>
                 </div>
@@ -83,6 +90,16 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                     <SubmitWord disabled={isBtnDisabled} onSubmitWord={updateGraphWithNewWord} coupsRestants={coupsRestants}/>
                 </Stack>
             </Stack>
+            <IconButton className="chat-btn" size="large" onClick={toggleWordsListVisibility} 
+                sx={{
+                    position: 'fixed',
+                    bottom: { xs: '1rem' },
+                    left: { xs: '1rem' },
+                    visibility: { xs: 'visible', md: 'hidden' }
+                }}
+            >
+                <ListIcon />
+            </IconButton>
             {players.length > 1 && (
             <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem'}}>
                 <Badge color="error" variant="dot" invisible={isChatVisible || !hasNewMessage}>
