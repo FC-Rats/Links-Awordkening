@@ -1,9 +1,9 @@
 .case-home-page {
-    height: 250px;
+    height: 240px;
     width: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
@@ -24,9 +24,9 @@
 }
 
 #id1 {
-    height: 350px;
+    height: 320px;
 }
 
 #id2 {
-    height: 300px;
+    height: 280px;
 }
