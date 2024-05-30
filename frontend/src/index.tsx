@@ -25,8 +25,20 @@ const link = document.querySelector("link[rel*='icon']") || document.createEleme
 (link as HTMLLinkElement).type = 'image/x-icon';
 (link as HTMLLinkElement).rel = 'icon';
 (link as HTMLLinkElement).href = '/img/iconeLA.png';
-
 document.head.appendChild(link);
+
+updateMetaTag('charSet', '', 'utf-8');
+updateMetaTag('httpEquiv', 'Content-Language', 'fr');
+updateMetaTag('name', 'description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de lienpour relever le défi ultime du langage !');
+updateMetaTag('name', 'keywords', 'jeu, jeux, jeux vidéo, react, projet, université, mots, liens');
+updateMetaTag('name', 'author', 'FC-Rats');
+updateMetaTag('name', 'viewport', 'width=device-width, initial-scale=1');
+updateMetaTag('property', 'og:title', 'Links Awordkening')
+updateMetaTag('property', 'og:description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de lienpour relever le défi ultime du langage !')
+updateMetaTag('property', 'og:type', 'video game')
+updateMetaTag('property', 'og:url', 'https://linksawordkening.fabiengilles.tf')
+updateMetaTag('property', 'og:image', '/img/iconeLA.png')
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -74,3 +86,26 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+function updateMetaTag(attribut: string, name: string, content: string) {
+  if (attribut === 'charSet') {
+    let charSetElem = document.querySelector(`meta[charSet]`);
+    if (charSetElem) {
+      charSetElem.setAttribute("charSet", content);
+    } else {
+      charSetElem = document.createElement('meta');
+      charSetElem.setAttribute("charSet", content);
+      document.head.appendChild(charSetElem);
+    }
+  } else {
+    let elem = document.querySelector(`meta[${attribut}="${name}"]`);
+    if (elem) {
+      elem.setAttribute("content", content);
+    } else {
+      elem = document.createElement('meta');
+      elem.setAttribute(attribut, name);
+      elem.setAttribute("content", content);
+      document.head.appendChild(elem);
+    }
+  } 
+}
