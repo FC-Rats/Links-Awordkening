@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ComponentInfoGame } from "../molecules/ComponentInfoGame";
+import { Stack } from "@mui/material";
 
 interface ContainerInfoGameProps {
   infoGame: {
@@ -22,15 +23,15 @@ export const ContainerInfoGame: React.FC<ContainerInfoGameProps> = ({ infoGame, 
   return (
     <div className="wrapper-info-game">
       {isMulti ? (
-        <div className="frame-info-game-multi">
-          <div className="left-info-game">
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} alignItems="center" justifyContent={{ xs: 'center', lg: 'space-evenly' }} sx={{ height: '100%' }}>
+          <Stack direction="column" spacing={2} alignItems="center" justifyContent="center">
             <ComponentInfoGame item={{ title: "Coups restants", info: coupsRestants }} />
-          </div>
-          <div className="right-info-game">
+          </Stack>
+          <Stack direction="column" spacing={2} alignItems="center" justifyContent="center">
             <ComponentInfoGame item={{ title: "ID de la partie", info: infoGame.idJoin }} />
             <ComponentInfoGame item={{ title: "Nom de la partie", info: infoGame.nameGame }} />
-          </div>
-        </div>
+          </Stack>
+        </Stack>
       ) : (
         <div className="frame-info-game-solo">
           <ComponentInfoGame item={{ title: "Nom de la partie", info: infoGame.nameGame }} />

@@ -1,14 +1,26 @@
-.component-info-game {
-  height: 20%;
-  position: relative;
-  width: 40%;
+.wrapper-info-game {
+  min-width: calc(min(auto, 30%));
   color: var(--parchment);
+  height: 150px;
+  background-color: var(--hunterGreen);
+  border-radius: 15px;
+  box-shadow: 0 4px 4px #00000040;
+  padding: 0% 5%;
+}
+
+.frame-info-game-solo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: auto;
 }
 
 .component-info-game .title {
   font-size: 1rem;
   font-weight: 400;
-  left: 0;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
@@ -17,65 +29,13 @@
 .component-info-game .info {
   font-size: 1.2rem;
   font-weight: 700;
-  left: 10px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
-}
-
-.frame-info-game-solo {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  position: relative;
-  width: 96%;
-  height: 135px;
-}
-
-.frame-info-game-multi {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  gap : 20% 20%;
-}
-
-.frame-info-game-multi .component-info-game{
-  width: auto!important;
-}
-
-.left-info-game .component-info-game .title{
-  font-size: 1.2rem;
-}
-.left-info-game .component-info-game .info{
-  font-size: 1.5rem;
-}
-
-.right-info-game{
-  display: flex;
-  flex-direction: column;
-  gap : 20%;
-}
-
-.wrapper-info-game {
-  display: flex;
-  background-color: var(--hunterGreen);
-  border-radius: 15px;
-  box-shadow: 0 4px 4px #00000040;
-  height: 150px;
-  width: 25%;
+  text-align: center;
 }
 
 @media (max-width: 1200px) {
-  .wrapper-info-game {
-    width: 50%;
-  }
-  .frame-info-game-multi{
-    gap : 1%;
-  }
   .frame-info-game-multi .component-info-game .title{
     width: auto!important;
     font-size: 1rem!important;
@@ -91,22 +51,7 @@
     height: auto;
   }
 
-  .frame-info-game-solo  {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 17px;
-    height: auto;
-    align-items: center;
-  }
-  .frame-info-game-multi  {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 17px;
-    height: auto;
+  .frame-info-game-solo {
+    height: 150px!important;
   }
 }
