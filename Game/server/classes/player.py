@@ -104,21 +104,23 @@ class Player:
                                     if new_score > self.score:
                                         await self.server.send_to_all(self.id, self.server.dump_data({
                                             'action': 'new_score',
-                                            'args': {'return': 'success', 'msg': get_string('new_score_enemy'), 'player': self.id, 'score': new_score, 'word' : word}
-                                        }))
+                                            'args': {'return': 'success', 'msg': get_string('new_score_enemy'), 'player': self.id, 'score': new_score}
+                                        }), False)
                                     self.score = new_score
 
                         # Vérification si le mot ajouté est entré dans la chaine
                         if new_chart == self.chart:
+                            print("Rien de nouveau !")
                             return {
-                                'action': 'new_score',
-                                'args': {'return': 'error', 'msg': get_string('word_not_better'), 'player': self.id, 'word' : word, 'coups' : self.attempts}
+                                'action': 'add_word',
+                                'args': {'return': 'error', 'msg': get_string('word_not_better'), 'word' : word, 'coups' : self.attempts}
                             }
                         else:
+                            print("Nouveau score !")
                             self.chart = new_chart
                             return {
                                 'action': 'add_word',
-                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score, 'msg': get_string('new_score_reached', score= self.score)}
+                                'args': {'return': 'success', 'chart': self.chart, 'score': self.score, 'id': self.id, 'word' : word, 'msg': get_string('new_score_reached', score= self.score)}
                             }
         else:
             return {

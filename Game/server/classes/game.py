@@ -100,7 +100,7 @@ class Game:
                 'players' : list(self.players.keys()),
                 'end_time': self.end_time.isoformat()
             }
-        }))
+        }), True)
 
         asyncio.create_task(self.check_time())
 

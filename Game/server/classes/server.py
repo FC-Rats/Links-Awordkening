@@ -72,7 +72,7 @@ class WebsocketServer:
                     'message': check_injured(message),
                     'nickname': client.nickname
                 }
-            }))
+            }), True)
 
     async def create_game(self, client_id, websocket, args):
         """
@@ -166,7 +166,7 @@ class WebsocketServer:
                             'args': {'return': 'success', 'idJoin': game_code, 'nameGame' : game.game_name, 'idHost' : game.host, 'max_player' : game.max_player}
                         }))
                         if (players_data):
-                            await self.send_to_all(client_id,self.dump_data({ 'action': 'join_game', 'args' : { 'return': 'success', 'players' : players_data}}))
+                            await self.send_to_all(client_id,self.dump_data({ 'action': 'join_game', 'args' : { 'return': 'success', 'players' : players_data}}), True)
                         return
                     else:
                         await self.clients[client_id].websocket.send(self.dump_data({
@@ -242,7 +242,7 @@ class WebsocketServer:
             await self.send_to_all(host,self.dump_data({
                 'action': 'leave_game',
                 'args': {'return': 'info','msg': get_string('player_left_game', joueur=self.clients[client_id].nickname), 'players': list(game.players.keys())}
-            }))
+            }), False)
             if not game.players:
                 del self.games[str(player.game_id)]
 
@@ -301,12 +301,13 @@ class WebsocketServer:
             del self.players[client_id]
         del self.games[id_game]
 
-    async def send_to_all(self, id_client: int, data: any):
+    async def send_to_all(self, id_client: int, data: any, callback:bool = True):
         """
         Envoie un message à tous les clients d'une même partie.
 
         :param id_client: ID du client émetteur
         :param data: Données à envoyer
+        :param callback: Booleen permettant de savoir si on inclut aussi le receveur
         """
         player = self.players.get(id_client)
         if not player:
@@ -315,10 +316,17 @@ class WebsocketServer:
         game_id = player.game_id
         players = self.games[str(game_id)].players.keys()
 
-        clients_to_send = [
-            client.websocket for client_id, client in self.clients.items()
-            if client_id in players and client.websocket is not None
-        ]
+        if callback :
+            clients_to_send = [
+                client.websocket for client_id, client in self.clients.items()
+                if client_id in players and client.websocket is not None
+            ]
+        else :
+            clients_to_send = [
+                client.websocket for client_id, client in self.clients.items()
+                if client_id in players and client.websocket is not None and client_id != id_client
+            ]
+
         if clients_to_send:
             try:
                 websockets.broadcast(clients_to_send, data)
@@ -326,7 +334,6 @@ class WebsocketServer:
                 print(f"Erreur lors de l'envoi du message: {e}")
         else:
             print("Aucun client à envoyer.")
-
 
     def generate_unique_code(self):
         """

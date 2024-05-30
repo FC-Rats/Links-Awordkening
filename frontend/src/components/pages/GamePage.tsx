@@ -155,6 +155,7 @@ export const GamePage = () => {
     const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
         setisBtnDisabled(false);
+        console.log("Message received:", message);
         if (message.args.return === "success") {
             switch (message.action) {
                 case "send_data": console.log("Connection établie !"); break;
@@ -163,7 +164,7 @@ export const GamePage = () => {
                 case "start_game": startGame(message.args); break;
                 case "send_message": showMessages(message.args); break;
                 case "add_word": updateGraphData(message.args); break;
-                case "new_score": addNewWord(message.args); break;
+                case "new_score": newScoreEnemy(message.args); break;
                 case "end_game": sendToEndGame(message.args); break;
                 case "leave_game": leaveGame(message.args); break;
                 default: console.log(message); break;
@@ -179,17 +180,19 @@ export const GamePage = () => {
         } else if (message.args.return === "info") {
             updatePlayersInWaitingRoom(message.args);
         } else {
-            if (message.args.coups > 0) {
-                audioAddWordError.play();
-                setAlertBox((prevState) => ({
-                    ...prevState,
-                    severity: "error",
-                    open: true,
-                    message: message.args.msg,
-                }));
-            }
-            if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c") {
-                addNewWord(message.args);
+            if (message.action === "add_word") {
+                if (message.args.word) {
+                    setListWords(prevListWords => [...prevListWords, message.args.word]);
+                }
+                if (message.args.coups > 0) {
+                    audioAddWordError.play();
+                    setAlertBox((prevState) => ({
+                        ...prevState,
+                        severity: "error",
+                        open: true,
+                        message: message.args.msg,
+                    }));
+                }
             } else if (message.action === "leave_game") {
                 setAlertBox((prevState) => ({
                     ...prevState,
@@ -454,21 +457,15 @@ export const GamePage = () => {
     /* ADD WORD */
     const [listWords, setListWords] = useState<string[]>([]);
 
-    const addNewWord = (args: any) => {
-        if (args.return === "success") {
-            updatePlayerScoreByName(args.player, args.score);
-        }
-        if (args.player === context?.user?.id) {
-            setListWords(prevListWords => [...prevListWords, args.word]);
-        } else {
-            audioNewScoreEnemy.play();
-            setAlertBox((prevState) => ({
-                ...prevState,
-                severity: "info",
-                open: true,
-                message: args.msg,
-            }));
-        }
+    const newScoreEnemy = (args: any) => {
+        updatePlayerScoreByName(args.player, args.score);
+        audioNewScoreEnemy.play();
+        setAlertBox((prevState) => ({
+            ...prevState,
+            severity: "info",
+            open: true,
+            message: args.msg,
+        }));
     };
 
     const updateGraphWithNewWord = (word: string) => {
@@ -569,6 +566,8 @@ export const GamePage = () => {
             idUser: context.user.id,
             log: 'A entré un mot',
         });
+        updatePlayerScoreByName(args.id, args.score);
+        setListWords(prevListWords => [...prevListWords, args.word]);
         updateGraphWordChart(args.chart);
     };
 
