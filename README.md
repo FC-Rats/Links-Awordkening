@@ -7,7 +7,7 @@ SAE BUT 2 - Jeu liens mots
 - Node.js :blush:
 - Python 3.12 :snake:
 - Composer :skull:
-- PHP :older_man:
+- PHP 8.2 :older_man:
 - Java :confused:
 
 ## Installation :
