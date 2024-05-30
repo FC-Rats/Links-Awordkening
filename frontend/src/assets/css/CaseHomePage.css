@@ -1,5 +1,5 @@
 .case-home-page {
-    height: 300px;
+    height: 250px;
     width: 250px;
     display: flex;
     flex-direction: column;
@@ -20,4 +20,12 @@
 .case-home-page .title-icon {
     width: 35px;
     height: auto;
+}
+
+#id1 {
+    height: 350px;
+}
+
+#id2 {
+    height: 300px;
 }
