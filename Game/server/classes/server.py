@@ -217,7 +217,7 @@ class WebsocketServer:
             return
 
         if game.host == client_id:
-            clients_to_remove = [client_id for client_id, player in self.players.items() if player.game_id == player.game_id]
+            clients_to_remove = [client_id for client_id, player_remove in self.players.items() if UUID(player.game_id) == UUID(player_remove.game_id)]
 
             for client_id in clients_to_remove:
                 client = self.clients[client_id]
@@ -259,7 +259,7 @@ class WebsocketServer:
 
         :param id_game: ID de la partie à terminer
         """
-        clients_to_remove = [client_id for client_id, player in self.players.items() if (player.game_id == UUID(id_game) or player.game_id == id_game )]
+        clients_to_remove = [client_id for client_id, player in self.players.items() if (player.game_id == UUID(id_game) or player.game_id == id_game)]
 
         all_chart = {}
         for client_id in clients_to_remove:
