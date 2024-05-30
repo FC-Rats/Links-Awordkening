@@ -7,6 +7,7 @@ import { useUserContext } from "../hooks/AppContext";
 import { AccountParametersTemplate } from "../templates/AccountParametersTemplate";
 import { UserInfo } from "../types/UserInfo";
 import { accountUpdate } from "../../services/PermissionsServices";
+import { PlayerInfo } from "../types/PlayerInfo";
 
 const createAccountStatProps = (response: any[]): AccountStatProps => {
     const statGameCount = response.length;
@@ -57,7 +58,7 @@ const createAccountStatProps = (response: any[]): AccountStatProps => {
     };
 };
 
-export const AccountPage = () => {
+export const AccountPage = (props: {friendAccountId?: number}) => {
     const { user } = useUserContext();
     const [template, setTemplate] = useState<"overview" | "param">("overview");
     const [title, setTitle] = useState<"Voir mon profil" | "Voir mes stats">("Voir mon profil");
@@ -67,7 +68,7 @@ export const AccountPage = () => {
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        const param = { idUser: user?.id };
+        const param = props.friendAccountId ? {idUser: props.friendAccountId} : { idUser: user?.id };
         const fetchDataStats = async () => {
             try {
                 const response = await getStats(param);
@@ -193,7 +194,9 @@ export const AccountPage = () => {
             ) : (
                 <>
                     <Stack direction="row" justifyContent="flex-end" alignItems="center">
+                        {!props.friendAccountId && (
                         <Button variant="contained" className="return-button" size="large" onClick={() => handleChangingTemplatePage()}>{title}</Button>
+                        )}
                     </Stack>
                     {template === "overview" && <AccountOverviewTemplate data={data} />}
                     {template === "param" && <AccountParametersTemplate
