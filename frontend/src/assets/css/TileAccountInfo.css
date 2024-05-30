@@ -1,7 +1,6 @@
 .tile-account-info {
     background-color: var(--parchment);
     margin: 20px; 
-    height: 23vh; 
     max-width: 100%;
     display: flex;
     justify-content: space-between;

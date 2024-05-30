@@ -18,8 +18,8 @@ export const EndGameTemplate: React.FC<EndGameTemplateProps> = ({ playersInGame,
             <CenteredTitle text="Fin de la partie" />
             <ContainerEndGame playersInGame={playersInGame} graphs={graphs} />
             <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                <Button variant="contained" className="return-button" size="large" onClick={() => handlePlayAgain()}>Rejouer</Button>
-                <Button variant="contained" className="return-button" size="large" onClick={() => handleFinishPage()}>Retour à l'accueil</Button>
+                <Button variant="contained" className="button" size="large" onClick={() => handlePlayAgain()}>Rejouer</Button>
+                <Button variant="contained" className="button" size="large" onClick={() => handleFinishPage()}>Retour à l'accueil</Button>
             </Stack>
         </>
     );

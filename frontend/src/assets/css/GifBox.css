@@ -3,6 +3,9 @@
     width: 150px;
     padding: 15px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gif-box-rule p {
@@ -13,4 +16,10 @@
     height: 100%;
     width: auto;
     border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+    .gif-box-rule {
+        width: 90%;
+    }
 }

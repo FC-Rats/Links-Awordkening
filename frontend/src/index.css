@@ -162,6 +162,12 @@ button {
   min-height: 100vh;
 }
 
+.button {
+  margin: 10px !important;
+  background-color: var(--brunswickGreen) !important;
+  font-family: "Playfair Display", serif !important;
+}
+
 .beautiful-button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
   border: 0 !important;
