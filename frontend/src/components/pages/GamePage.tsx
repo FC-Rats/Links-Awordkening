@@ -342,6 +342,12 @@ export const GamePage = () => {
         navigate("/");
     };
 
+    const handlePlayAgain = () => {
+        setCurrentPage("choosing");
+        resetPageGame();
+        window.location.reload();
+    };
+
     // =================== GAME ========================
     const [isTimerFinished, setIsTimerFinished] = useState(false);
 
@@ -605,7 +611,7 @@ export const GamePage = () => {
                             setIsTimerFinished={setIsTimerFinished}
                         />
                     </div>}
-                    {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} graphs={allCharts} /></div>}
+                    {currentPage === "ending" && <div><EndGameTemplate playersInGame={playersInGame} handleFinishPage={handleFinishPage} handlePlayAgain={handlePlayAgain} graphs={allCharts} /></div>}
                     {currentPage && !["choosing", "creating", "joining", "waiting", "gaming", "ending"].includes(currentPage) && <div>Invalid State</div>}
                 </>
             )}
