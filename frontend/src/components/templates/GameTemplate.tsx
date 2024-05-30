@@ -79,17 +79,21 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                     <SubmitWord disabled={isBtnDisabled} onSubmitWord={updateGraphWithNewWord} coupsRestants={coupsRestants}/>
                 </Stack>
             </Stack>
+            {players.length > 1 && (
             <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem'}}>
                 <Badge color="error" variant="dot" invisible={isChatVisible || !hasNewMessage}>
                     <ChatIcon />
                 </Badge>
             </IconButton>
+            )}
             <IconButton className="sound-btn" size="large" onClick={toggleSound} style={{ position: 'fixed', top: '1rem', right: '1rem' }}>
                 {isSoundEnabled ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </IconButton>
+            {players.length > 1 && (
             <div className={isChatVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', right: '1rem'}}>
                 <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
             </div>
+            )}
         </Stack>
     );
 };
