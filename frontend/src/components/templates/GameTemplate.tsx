@@ -62,11 +62,13 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     return (
         <Stack direction="column" spacing={2}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }}>
-                <Stack direction="row" spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }}>
+                <Stack direction="row" spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }} sx={{ width: '80%' }}>
                     <ContainerInfoPlayer players={players}/> 
                     <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants}/>
                 </Stack>
-                <Timer time={180} setIsTimerFinished={setIsTimerFinished}/>
+                <Stack direction="row" alignItems="center" justifyContent={{ xs: 'center', lg: 'flex-start' }} sx={{ width: '20%' }}>
+                    <Timer time={180} setIsTimerFinished={setIsTimerFinished}/>
+                </Stack>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
                 <div className="item-game">
@@ -88,7 +90,13 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                 </Badge>
             </IconButton>
             )}
-            <IconButton className="sound-btn" size="large" onClick={toggleSound} style={{ position: 'fixed', top: '1rem', right: '1rem' }}>
+            <IconButton className="sound-btn" size="large" onClick={toggleSound}
+            sx={{
+                position: 'fixed',
+                top: { xs: '10rem', md: '7rem', lg: '2rem', xl: '1rem'},
+                right: { xs: '1rem' }
+            }}
+            >
                 {isSoundEnabled ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </IconButton>
             {players.length > 1 && (

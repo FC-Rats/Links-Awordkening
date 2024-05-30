@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { GameTemplate } from "./GameTemplate";
+import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
 import { AppContext, useUserContext } from "../hooks/AppContext";
