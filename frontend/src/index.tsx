@@ -41,7 +41,7 @@ const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
 
 const RequireAuthAdmin: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const user = useContext(AppContext);
-  if (!user?.user?.admin == true) {
+  if (!user?.user?.admin === true) {
     return <Navigate to="/" replace />;
   }
   return children;

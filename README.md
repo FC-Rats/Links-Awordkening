@@ -11,10 +11,6 @@ SAE BUT 2 - Jeu liens mots
 - Java :confused:
 
 ## Installation :
-Depuis la racine du projet : 
-`git submodule init`
-`git submodule update`
-
 Depuis le dossier api : 
 `composer update`
 

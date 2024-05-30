@@ -4,6 +4,7 @@ import { accountInscription } from "../../services/PermissionsServices";
 import { AlertBox } from "../molecules/AlertBox";
 
 export const SignUpPage = () => {
+    const [reset, setReset] = useState(false);
 
     /* SNACK BAR - ALERT HANDLING */
     const [alertBox, setAlertBox] = useState({
@@ -43,13 +44,15 @@ export const SignUpPage = () => {
                     open: true,
                     message : data.message
             }));      
+            setReset(false);
         } else {
             setAlertBox(prevState => ({
                 ...prevState,
                     severity : 'success',
                     open: true,
                     message : data.message
-            }));      
+            }));
+            setReset(true);
         }
     };
 
@@ -60,7 +63,7 @@ export const SignUpPage = () => {
     return (
        <>
             <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
-            <SignUpTemplate onSubmit={handleSubmit} onInputChange={handleInputChange} />
+            <SignUpTemplate onSubmit={handleSubmit} onInputChange={handleInputChange} reset={reset} />
        </>
     );
 };
