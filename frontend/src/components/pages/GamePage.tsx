@@ -155,7 +155,6 @@ export const GamePage = () => {
     const onDataReceived = (ev: MessageEvent<any>) => {
         const message = JSON.parse(ev.data);
         setisBtnDisabled(false);
-        console.log("Message received:", message);
         if (message.args.return === "success") {
             switch (message.action) {
                 case "send_data": console.log("Connection établie !"); break;

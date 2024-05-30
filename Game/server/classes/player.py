@@ -110,13 +110,11 @@ class Player:
 
                         # Vérification si le mot ajouté est entré dans la chaine
                         if new_chart == self.chart:
-                            print("Rien de nouveau !")
                             return {
                                 'action': 'add_word',
                                 'args': {'return': 'error', 'msg': get_string('word_not_better'), 'word' : word, 'coups' : self.attempts}
                             }
                         else:
-                            print("Nouveau score !")
                             self.chart = new_chart
                             return {
                                 'action': 'add_word',
