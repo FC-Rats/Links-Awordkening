@@ -437,46 +437,48 @@ export const GamePage = () => {
     const [allCharts, setAllCharts] = useState<{ [key: string]: TestData }>({});
 
     const sendToEndGame = async (args: any) => {
-        // enregistrer les données dans la db
-        if (args.idUser === args.host) {
-            createGame({
-                id: args.id_game,
-                idJoin: args.code,
-                idHost: args.host,
-                dateTime: new Date().toISOString(),
-                name: args.name,
-                type: args.nbPlayers === 1 ? "SinglePlayer" : "Multiplayer",
-            });
-        }
+        setTimeout(async () => {
+            // enregistrer les données dans la db
+            if (args.idUser === args.host) {
+                createGame({
+                    id: args.id_game,
+                    idJoin: args.code,
+                    idHost: args.host,
+                    dateTime: new Date().toISOString(),
+                    name: args.name,
+                    type: args.nbPlayers === 1 ? "SinglePlayer" : "Multiplayer",
+                });
+            }
 
-        createScore({
-            idUser: args.idUser,
-            idGame: args.id_game,
-            score: args.score,
-            words: args.words.join(","),
-        });
-
-        createLog({
-            idUser: args.idUser,
-            log: 'Fin de partie',
-        });
-
-        if (args.charts) {
-            const updatedCharts: { [key: string]: TestData } = {};
-
-            Object.keys(args.charts).forEach((key: string) => {
-                const entry = args.charts[key];
-                const updatedChart = updateGraphWordChartEndPage(entry);
-                updatedCharts[key] = updatedChart;
+            createScore({
+                idUser: args.idUser,
+                idGame: args.id_game,
+                score: args.score,
+                words: args.words.join(","),
             });
 
-            setAllCharts(prevCharts => ({
-                ...prevCharts,
-                ...updatedCharts
-            }));
-        }
-        audioEndGame.play();
-        handleNextPage("ending");
+            createLog({
+                idUser: args.idUser,
+                log: 'Fin de partie',
+            });
+
+            if (args.charts) {
+                const updatedCharts: { [key: string]: TestData } = {};
+
+                Object.keys(args.charts).forEach((key: string) => {
+                    const entry = args.charts[key];
+                    const updatedChart = updateGraphWordChartEndPage(entry);
+                    updatedCharts[key] = updatedChart;
+                });
+
+                setAllCharts(prevCharts => ({
+                    ...prevCharts,
+                    ...updatedCharts
+                }));
+            }
+            audioEndGame.play();
+            handleNextPage("ending");
+        }, 2000);
     };
 
     const [dataGraph, setDataGraph] = useState<TestData>({ WordsChart: {} });
@@ -525,13 +527,21 @@ export const GamePage = () => {
 
     useEffect(() => {
         if (coupsRestants <= 0) {
-            setIsDataLoading(true);
+            const timer = setTimeout(() => {
+                setIsDataLoading(true);
+            }, 2000);
+
+            return () => clearTimeout(timer);
         }
     }, [coupsRestants]);
 
     useEffect(() => {
         if (isTimerFinished) {
-            setIsDataLoading(true);
+            const timer = setTimeout(() => {
+                setIsDataLoading(true);
+            }, 2000);
+
+            return () => clearTimeout(timer);
         }
     }, [isTimerFinished]);
 
