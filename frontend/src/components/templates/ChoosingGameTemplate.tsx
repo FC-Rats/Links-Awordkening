@@ -34,7 +34,7 @@ export const ChoosingGameTemplate: React.FC<ChooseProps> = ({ handleNextPage }) 
                 <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
 
 
-                <Typography variant="h6" sx={{ paddingTop: '50px' }}>
+                <Typography variant="h6" sx={{ paddingTop: '50px', textAlign: 'center' }}>
                     Voulez-vous rejoindre une partie ou créer votre partie ?
                 </Typography>
 

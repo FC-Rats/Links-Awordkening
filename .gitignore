@@ -11,5 +11,6 @@ frontend/package-lock.json
 frontend/package.json
 Game/C/datafiles/*.txt
 Game/server/env-py/
+Game/server/data/__pycache__
 Game/server/classes/__pycache__
 api/vendor
