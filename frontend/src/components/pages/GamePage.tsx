@@ -18,6 +18,7 @@ import { CenteredTitle } from "../atoms/CenteredTitle";
 import { createScore } from "../../services/ScoreServices";
 import { createLog } from "../../services/LogServices";
 import { createGame } from "../../services/GameServices";
+import { info } from "console";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -224,7 +225,7 @@ export const GamePage = () => {
     const handleTypeGame = async (name: string) => {
         setInfoGame(prevInfoGame => {
             if (name === 'solo') {
-                return { ...prevInfoGame, type: 'solo', nombreJoueurs: '1' };
+                return { ...prevInfoGame, type: 'solo', nombreJoueurs: '1', nameGame: 'SoloGame'};
             } else if (name === 'multi') {
                 return { ...prevInfoGame, type: 'multi', nombreJoueurs: '2' };
             }

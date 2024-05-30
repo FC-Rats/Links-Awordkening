@@ -56,16 +56,18 @@ export const SetUpGameTemplate: React.FC<SetUpGameProps> = ({ infoGame, handleIn
                 </Stack>
 
                 <Grid container spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
+                    {multiSelected && (
                     <Grid item xs={12} sm={4}>
                         <InputForm name="nameGame" label={"Nom de la partie"} required={true} onInputChange={onInputChange} />
                     </Grid>
+                    )}
                     {multiSelected && (
                         <Grid item xs={12} sm={2}>
                             <InputForm name="nombreJoueurs" label={"Nombre de joueurs"} type={"number"} onInputChange={onInputChange} min={2} max={6} defaultvalue={"2"} />
                         </Grid>
                     )}
                 </Grid>
-                <div style={{ textAlign: "center" }} >
+                <div style={{ textAlign: "center", marginTop: soloSelected ? "30px" : "0px" }}>
                     <SubmitButton text={"Jouer"} />
                 </div>
             </form>
