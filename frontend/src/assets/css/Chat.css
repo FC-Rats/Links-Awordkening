@@ -144,3 +144,9 @@
 .sound-btn{
   background-color: var(--asparagus)!important;
 } 
+
+@media (max-width: 1040px) {
+    .chatbox {
+        background-color: rgb(244, 233, 205);
+    }
+}
