@@ -15,7 +15,10 @@ strings = {
     'game_already_full': 'La partie est pleine !',
     'game_already_started': 'La partie a déjà commencé !',
     'game_not_found': 'Partie introuvable !',
-    'host_left_game': 'Le créateur de la partie a quitté. Fin prématurée de la partie.',
+    'host_left_game': 'Le créateur de la partie a quitté. Fermeture prématurée du salon.',
+    'player_left_game': '{joueur} a quitté la partie.',
+    'host_left_game_success': 'Vous avez quitté la partie. Tous les joueurs du salon ont été déconnecté',
+    'left_game_success': 'Vous avez quitté la partie.',
     'invite_player_success': 'Vous avez invité {joueur} à vous rejoindre !',
     'invite_player_warning': '{joueur} n\'est pas connecté :c',
     'invitation_player': '{joueur} vous a invité à le rejoindre ! Code {code}',
@@ -54,7 +57,7 @@ def get_string(key, **kwargs):
     et formate le message en remplaçant les placeholders par les valeurs fournies.
 
     Args:
-    key (str): La clé du message dans le dictionnaire strings. (Possibilités : word_already_use, word_have_number, word_have_unicode, word_not_correct, word_not_better, new_score_enemy, new_score_reached, no_attempts_left, game_already_full, game_already_started, game_not_found, host_left_game, invite_player_success, invite_player_warning, invitation_player, invitation_refused, invitation_accepted)
+    key (str): La clé du message dans le dictionnaire strings. (Possibilités : word_already_use, word_have_number, word_have_unicode, word_not_correct, word_not_better, new_score_enemy, new_score_reached, no_attempts_left, game_already_full, game_already_started, game_not_found, host_left_game, player_left_game, left_game_success, invite_player_success, invite_player_warning, invitation_player, invitation_refused, invitation_accepted)
     kwargs (dict): Les valeurs à insérer dans le message.
 
     Returns:

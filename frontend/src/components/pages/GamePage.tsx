@@ -165,6 +165,7 @@ export const GamePage = () => {
                 case "add_word": updateGraphData(message.args); break;
                 case "new_score": addNewWord(message.args); break;
                 case "end_game": sendToEndGame(message.args); break;
+                case "leave_game": leaveGame(message.args); break;
                 default: console.log(message); break;
             }
         } else if (message.args.return === "warning") {
@@ -175,6 +176,8 @@ export const GamePage = () => {
                 open: true,
                 message: message.args.msg,
             }));
+        } else if (message.args.return === "info") {
+            updatePlayersInWaitingRoom(message.args);
         } else {
             if (message.args.coups > 0) {
                 audioAddWordError.play();
@@ -186,8 +189,15 @@ export const GamePage = () => {
                 }));
             }
             if (message.action === "new_score" && message.args.msg === "Le mot que vous avez rentré n'a pas amélioré votre score :c") {
-                console.log(message.args.coups);
                 addNewWord(message.args);
+            } else if (message.action === "leave_game") {
+                setAlertBox((prevState) => ({
+                    ...prevState,
+                    severity: "error",
+                    open: true,
+                    message: message.args.msg,
+                }));
+                handleNextPage("choosing");
             }
         }
     }
@@ -196,7 +206,6 @@ export const GamePage = () => {
         console.error('WebSocket error:', event);
         // Handle WebSocket error
     };
-
 
     // ================== JOINROOM TEMPLATE ===================
     const handleInputChangeJoin = async (name: string, value: any) => {
@@ -325,6 +334,49 @@ export const GamePage = () => {
             }
         }
         handleNextPage("waiting");
+    };
+
+    const handleLeaveGame = async (event: React.FormEvent) => {
+        event.preventDefault();
+        const data = {
+            action: "leave_game",
+        };
+        ws.current?.send(JSON.stringify(data));
+    };
+
+    const leaveGame = async (args: any) => {
+        if (!context?.user) {
+            console.error("User context is not available");
+            return;
+        }
+        createLog({
+            idUser: context.user.id,
+            log: 'Quitte la partie',
+        });
+        if (args.msg) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "success",
+                open: true,
+                message: args.msg,
+            }));
+        }
+        handleNextPage("choosing");
+    }
+    
+    const updatePlayersInWaitingRoom = async (args: any) => {
+        if (args.msg) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "info",
+                open: true,
+                message: args.msg,
+            }));
+        }
+        if (args.players) {
+            const listPlayers = await getUserInfoById(args.players);
+            setPlayers(listPlayers);
+        }
     };
 
     const handleNextPage = (newPage: StatePage) => {
@@ -594,7 +646,7 @@ export const GamePage = () => {
                     {(currentPage === "waiting" && players !== undefined) && <div>
                         <WaitingRoomTemplate
                             handleNextPage={handleNextPage}
-                            handlePreviousPage={handlePreviousPage} 
+                            handlePreviousPage={handleLeaveGame} 
                             isHost={isHost} players={players} 
                             handleStartGame={handleStartGame} 
                             infoGame={infoGame} 
@@ -636,3 +688,4 @@ export const GamePage = () => {
         </>
     );
 }
+

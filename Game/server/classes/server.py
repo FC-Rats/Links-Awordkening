@@ -217,20 +217,32 @@ class WebsocketServer:
             return
 
         if game.host == client_id:
-            clients_to_remove = [client_id for client_id, player_remove in self.players.items() if UUID(player.game_id) == UUID(player_remove.game_id)]
-
-            for client_id in clients_to_remove:
-                client = self.clients[client_id]
-                await client.websocket.send(self.dump_data({
-                    'action': 'leave_game',
-                    'args': {'return': 'error','msg': get_string('host_left_game')}
-                }))
-            del self.players[client_id]
+            clients_to_remove = game.players.keys()
+            for client_removed_id in clients_to_remove:
+                if client_id != client_removed_id :
+                    await self.clients[client_removed_id].websocket.send(self.dump_data({
+                        'action': 'leave_game',
+                        'args': {'return': 'error','msg': get_string('host_left_game')}
+                    }))
+                else :
+                    await self.clients[client_id].websocket.send(self.dump_data({
+                        'action': 'leave_game',
+                        'args': {'return': 'success','msg': get_string('host_left_game_success')}
+                    }))
+                del self.players[client_removed_id]
             del self.games[str(player.game_id)]
-        
         else:
+            await self.clients[client_id].websocket.send(self.dump_data({
+                    'action': 'leave_game',
+                    'args': {'return': 'success','msg': get_string('left_game_success')}
+            }))
+            host = game.host
             del self.players[client_id]
             del game.players[client_id]
+            await self.send_to_all(host,self.dump_data({
+                'action': 'leave_game',
+                'args': {'return': 'info','msg': get_string('player_left_game', joueur=self.clients[client_id].nickname), 'players': list(game.players.keys())}
+            }))
             if not game.players:
                 del self.games[str(player.game_id)]
 

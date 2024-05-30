@@ -29,7 +29,7 @@ export interface WaitingRoomProps {
     players: UserInfo[];
     handleStartGame: (event: React.FormEvent) => void;
     handleNextPage: (newPage: StatePage) => void;
-    handlePreviousPage: () => void;
+    handlePreviousPage: (event: React.FormEvent) => void;
     toggleSound: () => void;
     toggleChatVisibility: () => void;
     isChatVisible: boolean;
@@ -53,7 +53,7 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
     
     return (
         <>
-            <ReturnButton handlePreviousPage={handlePreviousPage} />
+            <ReturnButton handlePreviousPage={() => {}} handleQuit={handlePreviousPage} />
             <CenteredTitle text={`Rejoindre la partie`} />
             <CenteredTitle text={`Code "${infoGame.idJoin}"`} />
             <div className="waitinginfo">
