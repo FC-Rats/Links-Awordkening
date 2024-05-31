@@ -405,7 +405,7 @@ export const GamePage = () => {
 
     // =================== GAME ========================
     const [isTimerFinished, setIsTimerFinished] = useState(false);
-    const [isModalWordListVisible, setIsModalWordListVisible] = useState(true);
+    const [isModalWordListVisible, setIsModalWordListVisible] = useState(false);
 
     /* Tchat */
     const [messages, setMessages] = useState<Message[]>([]);

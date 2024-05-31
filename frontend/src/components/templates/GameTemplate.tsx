@@ -2,6 +2,7 @@ import React from "react";
 import { ContainerInfoPlayer } from "../organisms/ContainerInfoPlayer";
 import { ContainerInfoGame } from "../organisms/ContainerInfoGame";
 import { ComponentListWords } from "../molecules/ComponentListWords";
+import { ComponentListWordsResponsive } from "../molecules/ComponentListWordsResponsive";
 import ChatComponent from "../organisms/ChatComponent";
 import SubmitWord from "../molecules/SubmitWord";
 import Graph, { TestData } from "../molecules/Graph";
@@ -14,6 +15,7 @@ import { Message } from "../types/Message";
 import { PlayerInfo } from "../types/PlayerInfo";
 import { Timer } from "../atoms/Timer";
 import ListIcon from '@mui/icons-material/List';
+import Box from '@mui/material/Box';
 
 interface GameTemplateProps {
     infoGame: {
@@ -75,15 +77,18 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                     <Timer time={180} setIsTimerFinished={setIsTimerFinished}/>
                 </Stack>
             </Stack>
-            <Stack direction="row" spacing={2} minHeight="50vh" width="100%">
-                {isModalWordListVisible && (
-                <div className="item-game">
-                <ComponentListWords listwords={listwords}/>
-                </div>
-                )}
-                <div className="graph">
-                <Graph data={graph}/>
-                </div>
+            <Stack direction="row" spacing={2} minHeight="50vh" width="100%" sx={{ maxHeight: 400 }}>
+                <Box component="div" className="item-game" sx={{
+                    visibility: { xs: 'hidden', md: 'visible' },
+                    width: { xs: '0', md: 'auto' }
+                }}>
+                    <ComponentListWords listwords={listwords}/>
+                </Box>
+                <Box component="div" className="graph" sx={{
+                    width: { xs: '100%', md: 'auto' }
+                }}>
+                    <Graph data={graph}/>
+                </Box>
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <Stack id="container-graph-submit" direction="column" spacing={2} alignItems="center" justifyContent="center">
@@ -121,6 +126,9 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                 <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
             </div>
             )}
+            <div className={isModalWordListVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', left: '1rem'}}>
+                <ComponentListWordsResponsive listwords={listwords} />
+            </div>
         </Stack>
     );
 };

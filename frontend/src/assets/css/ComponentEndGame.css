@@ -59,7 +59,7 @@
     font-size: 0.9rem;
   }
     .wrapper-end-game {
-        width: 100%;
+        width: calc(100% - 20px);
     }
     .wrapper-end-game .title {
         font-size: 3rem;
@@ -67,7 +67,7 @@
     }
     .wrapper-end-game .info {
         margin-top: 5%;
-        font-size: 4rem;
+        font-size: 3rem;
     }
 }
 
