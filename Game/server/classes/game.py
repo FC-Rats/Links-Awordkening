@@ -70,7 +70,7 @@ class Game:
                     print(f"Erreur lors de la copie du fichier: {e}")
 
                 # Commande pour exécuter le moteur de chaîne
-                command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-2.5.jar")} {str(player.id)}"
+                command = f"java -jar {os.path.join(rebase_path, "Java", "target", "ChainEngine-3.0.jar")} {str(player.id)}"
                 result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
                 if result.returncode == 0:

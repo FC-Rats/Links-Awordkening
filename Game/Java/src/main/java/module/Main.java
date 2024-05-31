@@ -46,8 +46,7 @@ public class Main {
             tree.addEdges(edges);
 
             // Trouver le chemin et sérialiser l'arbre
-            List<Edge> treeEdges = tree.findPath(startWord, endWord);
-            serializeTree(treeEdges, saveFile);
+            serializeTree(new ArrayList<>(tree.getEdges()), saveFile);
 
             // Écrire l'arbre dans le fichier de sortie
             FileReaderWriter.writeTreeToFile(tree, outputFile, startWord, endWord);

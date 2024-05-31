@@ -66,15 +66,16 @@ public class Tree {
      * @param parent      Mot parent du mot actuel.
      * @return Vrai s'il y a un cycle, faux sinon.
      */
-    private boolean hasCycle(String currentEdge, Set<String> visited, String parent) {
-        List<String> children = adjMatrice.get(currentEdge).keySet().stream().filter(child -> !child.equals(parent)).collect(Collectors.toList());
-        if (!children.isEmpty()) {
-            visited.add(currentEdge);
-            for (String child : children) {
-                if (!visited.contains(child)) {
-                    hasCycle(child, visited, currentEdge);
-                } else
+    private boolean hasCycle(String currentNode, Set<String> visited, String parent) {
+        visited.add(currentNode);  // Ajoute le mot actuel à l'ensemble des mots visités
+        // Parcourt tous les voisins du mot actuel
+        for (String neighbor : adjMatrice.get(currentNode).keySet()) {
+            // Vérifie si le voisin n'est pas le parent du mot actuel (évite de revenir en arrière)
+            if (!neighbor.equals(parent)) {
+                // Vérifie si le voisin a déjà été visité ou s'il y a un cycle dans le voisin
+                if (visited.contains(neighbor) || hasCycle(neighbor, visited, currentNode)) {
                     return true;
+                }
             }
         }
         return false;
@@ -90,16 +91,10 @@ public class Tree {
     public List<Edge> findPath(String startWord, String endWord) {
         List<Edge> path = new ArrayList<>();
         Set<String> visited = new HashSet<>();
-
-        // Effectue une recherche en profondeur pour trouver le chemin
-        if (depthSearch(startWord, endWord, visited, path)) {
-            // Inverse le chemin pour l'obtenir dans le bon ordre
-            Collections.reverse(path);
-            return path;
-        } else {
-            // Si aucun chemin n'est trouvé, retourne une liste vide
-            return Collections.emptyList();
-        }
+        depthSearch(startWord, endWord, visited, path);
+        // Inverse le chemin pour l'ordre correct du départ à l'arrivée
+        Collections.reverse(path);
+        return path;
     }
 
     /**
@@ -112,27 +107,25 @@ public class Tree {
      * @return Vrai s'il y a un chemin, faux sinon.
      */
     private boolean depthSearch(String currentWord, String endWord, Set<String> visited, List<Edge> path) {
-        visited.add(currentWord);
-
-        // Vérifie si le mot actuel est le mot de fin
+        visited.add(currentWord); // Ajoute le mot actuel à l'ensemble des mots visités
         if (currentWord.equals(endWord)) {
             return true;
         }
-        
-        // Itère sur les voisins du mot actuel
+        // Récupère les voisins du mot actuel
         Map<String, Double> neighbors = adjMatrice.get(currentWord);
         if (neighbors != null) {
             for (Map.Entry<String, Double> neighborEntry : neighbors.entrySet()) {
                 String neighbor = neighborEntry.getKey();
+                // Vérifie si le voisin n'a pas déjà été visité
                 if (!visited.contains(neighbor)) {
-                    // Recherche récursivement le chemin du voisin au mot de fin
+                    // Effectue une recherche en profondeur récursive sur le voisin
                     if (depthSearch(neighbor, endWord, visited, path)) {
-                        // Ajoute l'arête au chemin
-                    	path.add(new Edge(currentWord, neighbor, neighborEntry.getValue()));
-                    	return true; // Retourne immédiatement après avoir trouvé le chemin
+                        // Si un chemin est trouvé, ajoute l'arête correspondante au chemin et retourne vrai
+                        path.add(new Edge(currentWord, neighbor, neighborEntry.getValue()));
+                        return true;
                     }
                 }
-             }
+            }
         }
         return false;
     }

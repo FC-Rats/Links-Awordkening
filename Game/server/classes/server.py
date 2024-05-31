@@ -3,6 +3,7 @@
 import websockets
 from uuid import uuid4, UUID
 import random
+import os
 import json
 from websockets.server import serve
 
@@ -51,6 +52,10 @@ class WebsocketServer:
             await client.handler(websocket)
         finally:
             if client.id in self.players:
+                rebase_path = ".."  # Chemin de base pour les fichiers de données
+                ser_path = os.path.join(rebase_path, "Java", "src", "files", "save", f"{client.id}.ser")
+                if os.path.exists(ser_path):
+                    os.remove(ser_path)
                 await self.leave_game(client.id)
             del self.clients[client.id]
 
@@ -271,6 +276,7 @@ class WebsocketServer:
 
         :param id_game: ID de la partie à terminer
         """
+        rebase_path = ".."  # Chemin de base pour les fichiers de données
         clients_to_remove = [client_id for client_id, player in self.players.items() if (player.game_id == UUID(id_game) or player.game_id == id_game)]
 
         all_chart = {}
@@ -299,6 +305,10 @@ class WebsocketServer:
                 }
             }))
             del self.players[client_id]
+            
+            ser_path = os.path.join(rebase_path, "Java", "src", "files", "save", f"{client_id}.ser")
+            if os.path.exists(ser_path):
+                os.remove(ser_path)
         del self.games[id_game]
 
     async def send_to_all(self, id_client: int, data: any, callback:bool = True):
