@@ -16,8 +16,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (!empty($_GET['idUser'])) {
             $scores = $db->query("SELECT la_game.id, dateTime, type, name, username, idGame, score, words, idHost FROM `la_score` 
             JOIN la_game ON la_score.idGame = la_game.id
-            JOIN la_user ON la_game.idHost = la_user.id
-            WHERE idGame IN (SELECT idGame FROM la_score WHERE idUser = :idUser) AND idUser = :idUser;", [[":idUser", $_GET['idUser']]]);
+            JOIN la_user ON la_score.idUser = la_user.id
+            WHERE idUser = :idUser;", [[":idUser", $_GET['idUser']]]);
             echo json_encode($scores);
         } else {
             echo json_encode(["error" => "Données non compatibles"]);
