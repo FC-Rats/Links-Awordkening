@@ -38,7 +38,6 @@
     }
 }
 
-
 @media screen and (max-width: 1000px) {
     .box-rule {
         width: 90%;
@@ -51,13 +50,12 @@
         flex-direction: column;
     }
     .gridRules img{
-       width: 250px;
+       width: 280px;
     }
 }
 
-
 @media screen and (max-width: 500px) {
     .gridRules img{
-       width: 195px;
+       width: 250px;
     }
 }

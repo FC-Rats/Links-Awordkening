@@ -20,16 +20,16 @@ export const ContainerRules = () => {
                 </Typography>
                 <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }} display={'flex'} className="gridRules">
                     <Grid >
-                        <img src={"/img/rules/rules1.png"} alt={"règles"} loading="lazy" width={"350px"}/>
+                        <img src={"/img/rules/rules1.png"} alt={"règles"} loading="lazy" width={"420px"}/>
                     </Grid>
                     <Grid>
-                        <img src={"/img/rules/rules2.png"} alt={"règles"} loading="lazy" width={"350px"}/>
+                        <img src={"/img/rules/rules2.png"} alt={"règles"} loading="lazy" width={"420px"}/>
                     </Grid>
                     <Grid>
-                        <img src={"/img/rules/rules3.png"} alt={"règles"} loading="lazy" width={"350px"}/>
+                        <img src={"/img/rules/rules3.png"} alt={"règles"} loading="lazy" width={"420px"}/>
                     </Grid>
                     <Grid>
-                        <img src={"/img/rules/rules4.png"} alt={"règles"} loading="lazy" width={"350px"}/>
+                        <img src={"/img/rules/rules4.png"} alt={"règles"} loading="lazy" width={"420px"}/>
                     </Grid>
                 </Grid>
             </Stack>

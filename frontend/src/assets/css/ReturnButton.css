@@ -8,4 +8,5 @@
     margin: 10px !important;
     background-color: var(--coffee) !important;
     font-family: "Playfair Display", serif !important;
+    margin-bottom: -10px!important;
 }

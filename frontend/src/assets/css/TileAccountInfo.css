@@ -1,7 +1,18 @@
+.grid-account {
+    width: calc(100% - 5px)!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+
 .tile-account-info {
     background-color: var(--parchment);
-    margin: 20px; 
-    max-width: 100%;
+    margin: 10px 10px 5px 10px; 
+    width: 98%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,8 +46,14 @@
 }
 
 .tile-account-info img.responsive-image {
-    max-width: 200px;
+    max-width: 185px;
     height: auto; 
+}
+
+@media screen and (max-width: 1200px) {
+    .grid-account {
+        flex-direction: column;
+    }
 }
 @media screen and (max-width: 768px) {
     .tile-account-info {
