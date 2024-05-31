@@ -11,8 +11,53 @@
     justify-content: center;
 }
 
-@media (max-width: 800px) {
+.box-rule-grid {
+    background-color: var(--parchment);
+    border-radius: 10px;
+    min-height: 150px;
+    padding: 15px;
+    width: 68%;
+    font-size: 25px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gridRules {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-left: 0!important;
+}
+
+@media screen and (max-width: 1400px) {
+    .box-rule-grid {
+        width: 82%;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
     .box-rule {
         width: 90%;
+        margin-left: 0!important;
+    }
+    .box-rule-grid {
+        width: 90%;
+    }
+    .gridRules {
+        flex-direction: column;
+    }
+    .gridRules img{
+       width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .gridRules img{
+       width: 195px;
     }
 }

@@ -18,8 +18,9 @@
     border-radius: 5px;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 1000px) {
     .gif-box-rule {
-        width: 90%;
+        display: none;
     }
+    
 }

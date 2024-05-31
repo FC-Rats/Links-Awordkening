@@ -178,6 +178,14 @@ button {
   border-radius: 20px;
 }
 
+
+@media (max-width: 900px) {
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    width: 100%!important;
+    max-width: 100%!important;
+  }
+}
+
 @media (max-width: 576px) {
   .custom-text-wrap {
     word-wrap: break-word;

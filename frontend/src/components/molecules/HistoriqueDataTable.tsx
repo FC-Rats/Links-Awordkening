@@ -4,14 +4,14 @@ import '../../assets/css/DataTable.css';
 
 export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'dateTime', headerName: 'Date', width: 200 },
-        { field: 'name', headerName: 'Name Game', width: 230 },
-        { field: 'type', headerName: 'Type', width: 110 },
-        { field: 'idHost', headerName: 'Host', width: 110 },
-        { field: 'score', headerName: 'Score', width: 150 },
+        { field: 'id', headerName: 'ID'},
+        { field: 'dateTime', headerName: 'Date', flex: 1, minWidth: 120},
+        { field: 'name', headerName: 'Name Game', flex: 1, minWidth: 160 },
+        { field: 'type', headerName: 'Type', flex: 1, minWidth: 160 },
+        { field: 'idHost', headerName: 'Host', flex: 1, minWidth: 120},
+        { field: 'score', headerName: 'Score', flex: 1, minWidth: 120 },
         {
-            field: 'words', headerName: 'Mots', width: 850, renderCell: (params: GridCellParams) => {
+            field: 'words', headerName: 'Mots', flex: 3, minWidth: 900, renderCell: (params: GridCellParams) => {
                 const value = params.value as string;
 
                 if (typeof value === 'string') {
@@ -54,6 +54,11 @@ export const HistoriqueDataTable = ({ data }: { data: HistoriqueInfo[] }) => {
                             quickFilterValues: [],
                         },
                     },
+                    columns: {
+                        columnVisibilityModel: {
+                            id: false,
+                        },
+                      },
                     pagination: { paginationModel: { pageSize: 5 } },
                 }}
                 pageSizeOptions={[5, 10]} />

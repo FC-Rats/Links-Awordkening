@@ -195,7 +195,7 @@ export const AccountPage = (props: {friendAccountId?: number}) => {
                 <>
                     <Stack direction="row" justifyContent="flex-end" alignItems="center">
                         {!props.friendAccountId && (
-                        <Button variant="contained" className="button" size="large" onClick={() => handleChangingTemplatePage()}>{title}</Button>
+                        <Button variant="contained" className="return-button-account" size="large" onClick={() => handleChangingTemplatePage()}>{title}</Button>
                         )}
                     </Stack>
                     {template === "overview" && <AccountOverviewTemplate data={data} />}

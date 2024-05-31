@@ -28,24 +28,24 @@ const renderVisibilityCell = (value: string) => {
 
 export const UserDataTable = ({ data, onUserEdit }: { data: UserInfo[], onUserEdit: (user: UserInfo) => void }) => {
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', type: 'number', width: 150 },
-    { field: 'name', headerName: 'Pseudo', width: 300 },
-    { field: 'birthYear', headerName: 'Année de naissance', width: 200, type: 'string' },
-    { field: 'email', headerName: 'Email', width: 300 },
-    { field: 'verified', headerName: 'Compte vérifié', type: 'boolean', width: 200 },
+    { field: 'id', headerName: 'ID', type: 'number',  flex: 1, minWidth: 100 },
+    { field: 'name', headerName: 'Pseudo', flex: 2, minWidth: 150 },
+    { field: 'birthYear', headerName: 'Année de naissance', type: 'string',  flex: 2, minWidth: 210  },
+    { field: 'email', headerName: 'Email', flex: 3, minWidth: 250  },
+    { field: 'verified', headerName: 'Vérifié ?', type: 'boolean', flex: 1, minWidth: 130},
     {
-      field: 'visibility', headerName: 'Visibility', type: 'singleSelect', width: 130, valueOptions: [
+      field: 'visibility', headerName: 'Visibilitée', type: 'singleSelect', flex: 1, minWidth: 140, valueOptions: [
         'PUBLIC',
         'PRIVATE',
-        'FRIENDS',
+        // 'FRIENDS',
       ],
       renderCell: (params) => renderVisibilityCell(params.value),
     },
-    { field: 'admin', headerName: 'Compte administrateur', type: 'boolean', width: 200 },
+    { field: 'admin', headerName: 'Administrateur ?', type: 'boolean', flex: 1, minWidth: 190 },
     {
       field: 'modify',
-      headerName: 'Modifier l\'utilisateur',
-      width: 200,
+      headerName: 'Modifier le compte',
+      flex: 1, minWidth: 205,
       renderCell: (params: GridCellParams) => (
         <IconButton onClick={() => onUserEdit(params.row)}>
           <EditIcon />
