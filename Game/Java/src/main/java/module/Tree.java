@@ -1,7 +1,6 @@
 package module;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Classe représentant un graphe pondéré non orienté.
@@ -179,26 +178,4 @@ public class Tree {
 
         return result.toString();
     }
-
-    /*
-    public static void main(String[] args) {
-        Graph graph = new Graph();
-        graph.addEdges(Arrays.asList(new Edge("Chat", "Chien", 0.85)));
-        graph.addEdges(Arrays.asList(new Edge("Mouton", "Chien", 0.67), new Edge("Mouton", "Chat", 0.30)));
-        graph.addEdges(Arrays.asList(new Edge("Chèvre", "Chien", 0.60), new Edge("Chèvre", "Chat", 0.75), new Edge("Chèvre", "Mouton", 0.65)));
-
-        List<Edge> path = graph.findPath("Chat", "Mouton");
-        if (!path.isEmpty()) {
-            System.out.println("Chemin de Chat à Mouton: " + path.toString());
-            System.out.println("Le score final est: " + graph.getFinalScore("Chat", "Mouton"));
-        } else {
-            System.out.println("Aucun chemin trouvé.");
-        }
-        try {
-			FileReaderWriter.writeGraphToFile(graph, "joueur1.txt", "Chat", "Mouton");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }*/
 }

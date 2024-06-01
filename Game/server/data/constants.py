@@ -28,8 +28,8 @@ strings = {
 
 bad_words = {
     'merde': ['zut', 'flûte', 'mince', 'sapristi', 'ah, c\'est vraiment dommage', 'quelle poisse', 'oh, non', 'eh bien, ça alors', 'ah, la barbe', 'oh, purée', 'crotte', 'oh là là'],
-    'connard': ['idiot', 'imbécile', 'crétin', 'andouille', 'espèce de', 'malotru', 'insensé'],
-    'connasse': ['idiote', 'imbécile', 'crétine', 'andouille', 'espèce de', 'malotrue', 'insensée'],
+    'connard': ['idiot', 'imbécile', 'crétin', 'andouille', 'malotru', 'insensé'],
+    'connasse': ['idiote', 'imbécile', 'crétine', 'andouille', 'malotrue', 'insensée'],
     'putain': ['punaise', 'purée', 'sapristi', 'bon sang', 'diantre', 'mince alors'],
     'bordel': ['désordre', 'pagaille', 'foutoir', 'chaos', 'mélasse'],
     'salopard': ['méchant', 'vilain', 'scélérat', 'canaille', 'vaurien'],
@@ -47,8 +47,25 @@ bad_words = {
     'branleur': ['paresseux', 'fainéant', 'flemmard'],
     'niquer': ['gêner', 'déranger', 'ennuyer'],
     'bouffon': ['farceur', 'plaisantin', 'amuseur'],
-    'ta gueule': ['silence s\'il te plaît', 'peux-tu garder le silence ?', 'je t\'en prie, calme-toi'],
-    'pute': ['femme de joie', 'travailleuse du sexe', 'professionnelle du plaisir', 'compagne rémunérée']
+    'ta gueule': ['silence s\'il te plaît', 'peux-tu garder le silence', 'je t\'en prie, calme-toi'],
+    'pute': ['femme de joie', 'travailleuse du sexe', 'professionnelle du plaisir', 'compagne rémunérée'],
+    'salaud': ['méchant', 'vilain', 'scélérat', 'canaille', 'vaurien'],
+    'enfoirée': ['imbécile', 'idiote', 'folle', 'abrutie', 'sotte'],
+    'taré': ['fou', 'dément', 'cinglé', 'dérangé'],
+    'pédé': ['homosexuel', 'gay', 'personne très joyeuse', 'buveur de cosmo'],
+    'trou du cul': ['imbécile', 'idiot', 'personne désagréable'],
+    'garce': ['vilaine', 'méchante', 'malfaisante'],
+    'clodo': ['sans-abri', 'personne démunie'],
+    'pétasse': ['personne vulgaire', 'femme désagréable'],
+    'connarde': ['idiote', 'imbécile', 'crétine', 'abrutie'],
+    'chieur': ['personne ennuyeuse', 'agaçant', 'pénible'],
+    'chieuse': ['personne ennuyeuse', 'agaçante', 'pénible'],
+    'nique ta mère': ['je souhaite te faire de nouveaux frères', 'je veux devenir ton beau père'],
+    'chiotte': ['toilettes', 'WC'],
+    'emmerdeur': ['personne pénible', 'agaçant', 'irritable'],
+    'emmerdeur': ['personne pénible', 'agaçante', 'irritable'],
+    'pourri': ['corrompu', 'malhonnête', 'dépravé'],
+    'pourrie': ['corrompue', 'malhonnête', 'dépravée'],
 }
 
 def get_string(key, **kwargs):
