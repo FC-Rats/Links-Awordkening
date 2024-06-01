@@ -19,7 +19,7 @@ import Box from '@mui/material/Box';
 
 interface GameTemplateProps {
     infoGame: {
-        idJoin : string;
+        idJoin: string;
         nameGame: string;
         coupsRestants: string;
         idHost: number | undefined;
@@ -27,7 +27,7 @@ interface GameTemplateProps {
         nombreJoueurs: string;
     };
     players: PlayerInfo[];
-    listwords : string[];
+    listwords: string[];
     updateGraphWithNewWord: (word: string) => void;
     toggleChatVisibility: () => void;
     toggleWordsListVisibility: () => void;
@@ -37,7 +37,7 @@ interface GameTemplateProps {
     messages: Message[];
     onInputChangeChat: (name: string, value: string) => void;
     SumbitMessageChat: () => void;
-    coupsRestants :number;
+    coupsRestants: number;
     graph: TestData,
     hasNewMessage: boolean;
     isSoundEnabled: boolean;
@@ -64,17 +64,20 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
     isSoundEnabled,
     isBtnDisabled,
     setIsTimerFinished
-    }) => {
+}) => {
 
     return (
         <Stack direction="column" spacing={2}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }}>
-                <Stack direction="row" spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }} sx={{ width: '80%' }}>
-                    <ContainerInfoPlayer players={players}/> 
-                    <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants}/>
+                <Stack direction="row" spacing={2} alignItems="center" justifyContent={{ xs: 'space-evenly', lg: 'center' }} sx={{ width: { xs:'100%', lg:'80%'} }}>
+                    <ContainerInfoPlayer players={players} />
+                    <ContainerInfoGame infoGame={infoGame} coupsRestants={coupsRestants} />
                 </Stack>
-                <Stack direction="row" alignItems="center" justifyContent={{ xs: 'center', lg: 'flex-start' }} sx={{ width: '20%' }}>
-                    <Timer time={180} setIsTimerFinished={setIsTimerFinished}/>
+                <Stack direction="row" flexWrap="wrap" spacing={3} alignItems="center" justifyContent={{ xs: 'center', lg: 'flex-start' }}  sx={{ width: { xs:'100%', lg:'20%'} }}>
+                    <Timer time={180} setIsTimerFinished={setIsTimerFinished} />
+                    <IconButton className="sound-btn" size="large" onClick={toggleSound}>
+                        {isSoundEnabled ? <VolumeUpIcon /> : <VolumeOffIcon />}
+                    </IconButton>
                 </Stack>
             </Stack>
             <Stack direction="row" spacing={2} minHeight="50vh" width="100%" sx={{ maxHeight: 400 }}>
@@ -82,20 +85,20 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                     visibility: { xs: 'hidden', md: 'visible' },
                     width: { xs: '0', md: 'auto' }
                 }}>
-                    <ComponentListWords listwords={listwords}/>
+                    <ComponentListWords listwords={listwords} />
                 </Box>
                 <Box component="div" className="graph" sx={{
                     width: { xs: '100%', md: 'auto' }
                 }}>
-                    <Graph data={graph}/>
+                    <Graph data={graph} />
                 </Box>
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
                 <Stack id="container-graph-submit" direction="column" spacing={2} alignItems="center" justifyContent="center">
-                    <SubmitWord disabled={isBtnDisabled} onSubmitWord={updateGraphWithNewWord} coupsRestants={coupsRestants}/>
+                    <SubmitWord disabled={isBtnDisabled} onSubmitWord={updateGraphWithNewWord} coupsRestants={coupsRestants} />
                 </Stack>
             </Stack>
-            <IconButton className="chat-btn" size="large" onClick={toggleWordsListVisibility} 
+            <IconButton className="chat-btn" size="large" onClick={toggleWordsListVisibility}
                 sx={{
                     position: 'fixed',
                     bottom: { xs: '1rem' },
@@ -106,27 +109,18 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                 <ListIcon />
             </IconButton>
             {players.length > 1 && (
-            <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem'}}>
-                <Badge color="error" variant="dot" invisible={isChatVisible || !hasNewMessage}>
-                    <ChatIcon />
-                </Badge>
-            </IconButton>
+                <IconButton className="chat-btn" size="large" onClick={toggleChatVisibility} style={{ position: 'fixed', bottom: '1rem', right: '1rem' }}>
+                    <Badge color="error" variant="dot" invisible={isChatVisible || !hasNewMessage}>
+                        <ChatIcon />
+                    </Badge>
+                </IconButton>
             )}
-            <IconButton className="sound-btn" size="large" onClick={toggleSound}
-            sx={{
-                position: 'fixed',
-                top: { xs: '10rem', md: '7rem', lg: '2rem', xl: '1rem'},
-                right: { xs: '1rem' }
-            }}
-            >
-                {isSoundEnabled ? <VolumeUpIcon /> : <VolumeOffIcon />}
-            </IconButton>
             {players.length > 1 && (
-            <div className={isChatVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', right: '1rem'}}>
-                <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
-            </div>
+                <div className={isChatVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', right: '1rem' }}>
+                    <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
+                </div>
             )}
-            <div className={isModalWordListVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', left: '1rem'}}>
+            <div className={isModalWordListVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', left: '1rem' }}>
                 <ComponentListWordsResponsive listwords={listwords} />
             </div>
         </Stack>
