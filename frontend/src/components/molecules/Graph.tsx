@@ -3,6 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsNetworkgraph from 'highcharts/modules/networkgraph';
 import HighchartsReact from 'highcharts-react-official';
 import "../../assets/css/Graph.css"
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 HighchartsNetworkgraph(Highcharts);
@@ -24,6 +25,8 @@ interface GraphProps{
 }
 
 const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
+const isSmallScreen = useMediaQuery('(max-width:800px)');
+
     const [seriesData, setSeriesData] = useState<WordsChartData[]>([]);
 
     useEffect(() => {
@@ -58,7 +61,7 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
                 },
             },
             series: {
-                enableMouseTracking: false,
+                enableMouseTracking: !isSmallScreen,
                 states: {
                     hover: {
                         enabled: true,
@@ -74,8 +77,8 @@ const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
         series: [
             {
                 type: 'networkgraph', 
-                allowPointSelect: false,
-                draggable: false,
+                allowPointSelect:  true, 
+                draggable:  true,
                 marker: {
                     radius: 50,
                     fillColor: '#82a14e',
