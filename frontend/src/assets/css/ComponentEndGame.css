@@ -71,9 +71,21 @@
     }
 }
 
-@media (max-width: 400px) {
-    .player-info-end-game{
-      font-size: 0.8rem;
+@media (max-width: 500px) {
+    .player-info-end-game {
+      font-size: 0.9rem;
+      padding: 10px;
+      flex-direction: column;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .player-info-end-game * {
+      padding: 10px 0;
+    }
+    .badge-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .wrapper-end-game {
        border-radius: 15px;
@@ -85,6 +97,9 @@
     .wrapper-end-game .info {
         margin-top: 5%;
         font-size: 2rem;
+    }
+    .wrapper-multi-end-game {
+      flex-direction: column;
     }
 }
 

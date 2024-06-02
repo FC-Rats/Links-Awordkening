@@ -80,7 +80,7 @@ const isSmallScreen = useMediaQuery('(max-width:800px)');
                 allowPointSelect:  true, 
                 draggable:  true,
                 marker: {
-                    radius: 50,
+                    radius: isSmallScreen ? 25 : 50,
                     fillColor: '#82a14e',
                 },
                 
@@ -94,7 +94,7 @@ const isSmallScreen = useMediaQuery('(max-width:800px)');
                 },
                 data: seriesData,
                 link: {
-                    color: "#000",
+                    color: "#6A5138",
                     width:2,
                 },
                     
