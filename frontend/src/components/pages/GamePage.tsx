@@ -243,7 +243,7 @@ export const GamePage = () => {
 
     // ================= SET UP GAME TEMPLATE =================
     const handleInputChangeCreate = async (name: string, value: any) => {
-        if(name == "nombreJoueurs" || (value < 2 && value > 6) ) {
+        if(name == "nombreJoueurs" && (value < 2 || value > 6) ) {
             setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "error",

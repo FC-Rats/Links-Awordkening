@@ -39,6 +39,13 @@
     right: -50%;
 }
 
+.loser {
+    margin: auto;
+    text-align: center;
+    padding-bottom: 11%;
+    font-weight: bolder;
+}
+
 @media (max-width: 1100px) {
     .horizontal {
         max-width: 400px;

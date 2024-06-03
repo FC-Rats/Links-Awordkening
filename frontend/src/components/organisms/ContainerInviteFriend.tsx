@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 import { ContainerFriendRequestsProps } from '../types/ContainerFriendRequestsProps';
 import InvitationFriend from '../molecules/InvitationFriend';
 import { UserInfo } from '../types/UserInfo';
+import { CenteredTitle } from '../atoms/CenteredTitle';
 
 interface FriendsStatesProps {
     inviteFriends: (id:number,nickname:string) => void;
@@ -15,15 +16,18 @@ const ContainerInviteFriend: React.FC<FriendsStatesProps> = ({ inviteFriends, fr
     const availableFriends = friends.filter(friend => !playerIds.has(friend.id));
 
     return (
+        <>
+        <CenteredTitle text={'Vos amis'} />
         <Stack spacing={2}>
             {availableFriends && availableFriends.length > 0 ? (
                 availableFriends.map(friend => (
                     <InvitationFriend key={friend.id} friend={friend} inviteFriend={inviteFriends} />
                 ))
             ) : (
-                <div>Vous n'avez pas d'amis</div>
+                <div className='loser'>Vous n'avez pas d'amis...</div>
             )}
         </Stack>
+        </>
     );
 }
 
