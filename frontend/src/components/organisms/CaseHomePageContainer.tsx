@@ -19,7 +19,7 @@ export const CaseHomePageContainer = ({ scores }: { scores: Score[]}) => {
     return (
         <>
         {scores && <Typography variant="h4">Meilleurs Joueurs</Typography>}
-        <Stack spacing={2} direction={isSmallScreen ? 'column' : 'row'} flexWrap="wrap" justifyContent="center" alignItems="flex-end">
+        <Stack spacing={2} direction={isSmallScreen ? 'column' : 'row'} flexWrap="wrap" justifyContent="center" alignItems="flex-end" style={{marginBottom: 20}}>
                 {scores && scores.length > 1 && scores[1] && (
                         <CaseHomePage title={"2"} pseudo={context?.user?.name === scores[1].username || scores[1].visibility === 'PUBLIC' ? scores[1].username : "PROFIL PRIVÉ"} value={scores[1].totalScore} color={'var(--hunterGreen)'} />
                 )}
