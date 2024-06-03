@@ -243,10 +243,19 @@ export const GamePage = () => {
 
     // ================= SET UP GAME TEMPLATE =================
     const handleInputChangeCreate = async (name: string, value: any) => {
-        setInfoGame(prevInfoGame => ({
-            ...prevInfoGame,
-            [name]: value
-        }));
+        if(name == "nombreJoueurs" || (value < 2 && value > 6) ) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "error",
+                open: true,
+                message: "TU TENTES DE FAIRE QUOI ( ఠ ͟ʖ ఠ)", //easter egg
+            }));
+        } else {
+            setInfoGame(prevInfoGame => ({
+                ...prevInfoGame,
+                [name]: value
+            }));
+        }
     };
 
     const handleTypeGame = async (name: string) => {
@@ -262,15 +271,25 @@ export const GamePage = () => {
 
     const handleSubmitCreateGame = async (event: React.FormEvent) => {
         event.preventDefault();
-        setisHost(true);
-        const data = {
-            action: "create_game",
-            args: {
-                max_player: parseInt(infoGame.nombreJoueurs),
-                game_name: infoGame.nameGame
-            },
-        };
-        ws.current?.send(JSON.stringify(data));
+        console.log(infoGame.nombreJoueurs);
+        if((parseInt(infoGame.nombreJoueurs) < 2 || parseInt(infoGame.nombreJoueurs) > 6) ) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: "error",
+                open: true,
+                message: "TU TENTES DE FAIRE QUOI ( ఠ ͟ʖ ఠ)",  //easter egg
+            }));
+        } else  {
+            setisHost(true);
+            const data = {
+                action: "create_game",
+                args: {
+                    max_player: parseInt(infoGame.nombreJoueurs),
+                    game_name: infoGame.nameGame
+                },
+            };
+            ws.current?.send(JSON.stringify(data));
+        }
     };
 
     // ================ WAITING ROOM ==========================
