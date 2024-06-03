@@ -26,8 +26,27 @@ interface GraphProps{
 
 const ObserverWordsChart: React.FC<GraphProps> = ({ data }) => {
 const isSmallScreen = useMediaQuery('(max-width:800px)');
-
+    console.log(data);
     const [seriesData, setSeriesData] = useState<WordsChartData[]>([]);
+
+    const keys = Object.keys(data.WordsChart);
+    const firstWordDefault = '';
+    const secondWordDefault = '';
+    
+    const firstKey = keys[0];
+    const lastKey = keys[keys.length - 1];
+    const words = data.WordsChart[firstKey];
+    const lastWords =  data.WordsChart[lastKey];
+    var firstWord = firstWordDefault;
+    var secondWord = secondWordDefault;
+    
+    if (words && words.length == 1) {
+        firstWord = words[0];
+        secondWord = words[1];
+    } else if (words && words.length > 1) {
+        firstWord = words[0];
+        secondWord = lastWords[1];
+    }
 
     useEffect(() => {
         // Sample test data
@@ -93,9 +112,21 @@ const isSmallScreen = useMediaQuery('(max-width:800px)');
                     },
                 },
                 data: seriesData,
+                nodes: [{
+                    id:  firstWord,
+                    marker: {
+                        fillColor: "#6A5138",
+                    },
+                }, {
+                    id: secondWord,
+                    marker: {
+                        fillColor: "#6A5138",
+                    },
+                },
+            ],
                 link: {
                     color: "#6A5138",
-                    width:2,
+                    width:3,
                 },
                     
             },
