@@ -271,7 +271,6 @@ export const GamePage = () => {
 
     const handleSubmitCreateGame = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(infoGame.nombreJoueurs);
         if((parseInt(infoGame.nombreJoueurs) < 2 || parseInt(infoGame.nombreJoueurs) > 6) ) {
             setAlertBox((prevState) => ({
                 ...prevState,
