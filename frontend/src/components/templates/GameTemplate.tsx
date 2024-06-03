@@ -120,7 +120,7 @@ export const GameTemplate: React.FC<GameTemplateProps> = ({
                     <ChatComponent messages={messages} onInputChange={onInputChangeChat} onSubmit={SumbitMessageChat} />
                 </div>
             )}
-            <div className={isModalWordListVisible ? "slide-in" : "slide-out"} style={{ position: 'fixed', bottom: '5rem', left: '1rem' }}>
+            <div className={isModalWordListVisible ? "slide-in visible-xs hidden-md" : "slide-out visible-xs hidden-md"} style={{ position: 'fixed', bottom: '5rem', left: '1rem' }}>
                 <ComponentListWordsResponsive listwords={listwords} />
             </div>
         </Stack>

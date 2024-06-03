@@ -110,3 +110,15 @@
 .list-words-responsive h3 {
     text-align: center;
 }
+
+@media (min-width: 768px) {
+    .hidden-md {
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+    .visible-xs {
+        visibility: visible;
+    }
+}
