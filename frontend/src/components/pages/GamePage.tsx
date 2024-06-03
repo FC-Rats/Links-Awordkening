@@ -243,7 +243,7 @@ export const GamePage = () => {
 
     // ================= SET UP GAME TEMPLATE =================
     const handleInputChangeCreate = async (name: string, value: any) => {
-        if(name == "nombreJoueurs" && (value < 2 || value > 6) ) {
+        if(name == "nombreJoueurs" && (value < 1 || value > 6) ) {
             setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "error",
@@ -271,7 +271,7 @@ export const GamePage = () => {
 
     const handleSubmitCreateGame = async (event: React.FormEvent) => {
         event.preventDefault();
-        if((parseInt(infoGame.nombreJoueurs) < 2 || parseInt(infoGame.nombreJoueurs) > 6) ) {
+        if((parseInt(infoGame.nombreJoueurs) < 1 || parseInt(infoGame.nombreJoueurs) > 6) ) {
             setAlertBox((prevState) => ({
                 ...prevState,
                 severity: "error",
