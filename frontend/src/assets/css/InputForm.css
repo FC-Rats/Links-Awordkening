@@ -5,6 +5,7 @@
     font-weight: 500;
     width: 90%;
     border-radius: 5px;
+    z-index: 0;
 }
 
 .contour-input-form {

@@ -105,6 +105,8 @@
     margin: 15px !important;
     padding: 0.5rem;
     margin-bottom: 15px!important;
+    z-index: 99999!important;
+    position: relative;
 }
 
 .list-words-responsive h3 {
