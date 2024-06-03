@@ -94,6 +94,7 @@
     overflow-y: scroll;
     border-radius: 15px;
     margin-bottom: 15px!important;
+    box-shadow: 0 0 10px 0 var(--coffee);
 }
 
 .chat-msg {

@@ -111,14 +111,18 @@
     text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
     .hidden-md {
         visibility: hidden;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .visible-xs {
         visibility: visible;
+    }
+
+    .list-words-responsive {
+        box-shadow: 0 0 10px 0 var(--coffee);
     }
 }
