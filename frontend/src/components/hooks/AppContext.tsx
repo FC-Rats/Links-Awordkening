@@ -92,6 +92,32 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         }
     }, [user, token]);
 
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                // User is leaving the page
+                localStorage.setItem('lastLeaveTime', JSON.stringify(Date.now()));
+            } else {
+                // User is coming back to the page
+                const lastLeaveTime = localStorage.getItem('lastLeaveTime');
+                if (lastLeaveTime) {
+                    const leaveTime = JSON.parse(lastLeaveTime);
+                    const currentTime = Date.now();
+                    const deltaMinutes = (currentTime - leaveTime) / (1000 * 60);
+                    if (deltaMinutes > 1) {
+                        logOut();
+                        window.location.href = '/sign-in';
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    });
+
     return (
         <AppContext.Provider value={{ user, logIn, logOut, token, goTo, goBack, updateUser, previousPages, resetPageGame }}>
             {children}
