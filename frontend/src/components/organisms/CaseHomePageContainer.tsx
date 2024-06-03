@@ -20,13 +20,22 @@ export const CaseHomePageContainer = ({ scores }: { scores: Score[]}) => {
         <>
         {scores && <Typography variant="h4">Meilleurs Joueurs</Typography>}
         <Stack spacing={2} direction={isSmallScreen ? 'column' : 'row'} flexWrap="wrap" justifyContent="center" alignItems="flex-end" style={{marginBottom: 20}}>
-                {scores && scores.length > 1 && scores[1] && (
+                {!isSmallScreen && scores && scores.length > 1 && scores[1] && (
                         <CaseHomePage title={"2"} pseudo={context?.user?.name === scores[1].username || scores[1].visibility === 'PUBLIC' ? scores[1].username : "PROFIL PRIVÉ"} value={scores[1].totalScore} color={'var(--hunterGreen)'} />
                 )}
-                {scores && scores.length > 0 && scores[0] && (
+                {!isSmallScreen && scores && scores.length > 0 && scores[0] && (
                         <CaseHomePage title={"1"} pseudo={context?.user?.name === scores[0].username || scores[0].visibility === 'PUBLIC'  ? scores[0].username : "PROFIL PRIVÉ" } value={scores[0].totalScore} color={'var(--asparagus)'} />
                 )}
-                {scores && scores.length > 2 && scores[2] && (
+                {!isSmallScreen && scores && scores.length > 2 && scores[2] && (
+                        <CaseHomePage title={"3"} pseudo={context?.user?.name === scores[2].username || scores[2].visibility === 'PUBLIC' ? scores[2].username : "PROFIL PRIVÉ"} value={scores[2].totalScore} color={'var(--coffee)'} />
+                )}
+                {isSmallScreen && scores && scores.length > 0 && scores[0] && (
+                        <CaseHomePage title={"1"} pseudo={context?.user?.name === scores[0].username || scores[0].visibility === 'PUBLIC'  ? scores[0].username : "PROFIL PRIVÉ" } value={scores[0].totalScore} color={'var(--asparagus)'} />
+                )}
+                {isSmallScreen && scores && scores.length > 1 && scores[1] && (
+                        <CaseHomePage title={"2"} pseudo={context?.user?.name === scores[1].username || scores[1].visibility === 'PUBLIC' ? scores[1].username : "PROFIL PRIVÉ"} value={scores[1].totalScore} color={'var(--hunterGreen)'} />
+                )}
+                {isSmallScreen && scores && scores.length > 2 && scores[2] && (
                         <CaseHomePage title={"3"} pseudo={context?.user?.name === scores[2].username || scores[2].visibility === 'PUBLIC' ? scores[2].username : "PROFIL PRIVÉ"} value={scores[2].totalScore} color={'var(--coffee)'} />
                 )}
         </Stack>
