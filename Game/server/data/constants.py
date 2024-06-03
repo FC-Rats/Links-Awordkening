@@ -21,8 +21,9 @@ strings = {
     'left_game_success': 'Vous avez quitté la partie.',
     'invite_player_success': 'Vous avez invité {joueur} à vous rejoindre !',
     'invite_player_warning': '{joueur} n\'est pas connecté :c',
-    'invitation_player': '{joueur} vous a invité à le rejoindre ! Code {code}',
+    'invitation_player': '{joueur} vous a invité à rejoindre sa partie !',
     'invitation_refused': '{joueur} a refusé votre invitation :c',
+    'invitation_deconnected' : 'Le joueur que vous avez invité s\'est déconnecté :c',
     'invitation_accepted': '{joueur} a accepté votre invitation et rejoint votre partie !'
 }
 

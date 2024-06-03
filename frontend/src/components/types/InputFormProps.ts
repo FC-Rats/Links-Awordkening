@@ -8,4 +8,5 @@ export interface InputFormProps {
     max?: number;
     defaultvalue? :string;
     onInputChange?: (name: string, value: any) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 }

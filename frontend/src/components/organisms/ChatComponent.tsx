@@ -1,4 +1,4 @@
-import React, { useState, ChangeEventHandler } from 'react';
+import React, { useState, ChangeEventHandler, KeyboardEventHandler } from 'react';
 import "../../assets/css/Chat.css"
 import { SubmitButton } from '../molecules/SubmitButton';
 import { TextareaAutosize } from '@mui/material';
@@ -26,6 +26,14 @@ const ChatComponent: React.FC<ChatProps> = ({ messages, onInputChange , onSubmit
     setTextMessage(value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        onSubmit();
+        setTextMessage("");
+    }
+  };
+
   return (
     <>
       <div id="chatbox" className="chatbox">
@@ -43,6 +51,7 @@ const ChatComponent: React.FC<ChatProps> = ({ messages, onInputChange , onSubmit
             required
             value={textMessage} 
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
           />         
           <SubmitButton text={'Envoyer'}/>
         </div>

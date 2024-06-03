@@ -102,6 +102,7 @@
     color: var(--coffee-active);
     word-wrap: break-word;
     max-width: 300px; 
+    text-align: left;
 }
 
 .chat-nickname {
@@ -126,6 +127,7 @@
     font-family: 'Nanum Gothic', sans-serif !important;
     border: 0;
     padding-left: 5px!important;
+    resize: none;
 }
 
 .formchat .css-jh47zj-MuiButtonBase-root-MuiButton-root {

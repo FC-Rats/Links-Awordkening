@@ -103,28 +103,31 @@ class WebsocketServer:
                 'args': {'return': 'success', 'idJoin': game_code, 'type' : game_type}
             }))
 
-    async def invite_player(self, client_id, invite_id):
+    async def invite_player(self, client_id, args):
         """
         Envoie une invitation à un joueur s'il est connecté.
 
         :param client_id: ID du client qui invite
         :param invite_id: ID du client à inviter
         """
-        if client_id in self.players.keys() :
-            game = self.players.get(client_id).game_id
+        if args.get('id') and args.get('nickname') :
+            invite_id = args.get('id')
+            nickname = args.get('nickname')
+        if client_id in self.players.keys()  :
+            game = self.games.get(str(self.players.get(client_id).game_id))
             if invite_id in self.clients.keys() :
                 await self.clients.get(client_id).websocket.send(self.dump_data({
                     'action': 'invite_player',
-                    'args': {'return': 'success', 'msg': get_string('invite_player_success', joueur=self.clients.get(invite_id).nickname)}
+                    'args': {'return': 'success', 'msg': get_string('invite_player_success', joueur=nickname)}
                 }))
                 await self.clients.get(invite_id).websocket.send(self.dump_data({
-                    'action': 'invitation_recieved',
-                    'args': {'return': 'success', 'msg': get_string('invitation_player', joueur=self.clients.get(client_id).nickname, code=game.game_code),'idJoin': game.game_code, 'idInvite': client_id}
+                    'action': 'invitation_received',
+                    'args': {'return': 'success', 'msg': get_string('invitation_player', joueur=self.clients.get(client_id).nickname),'idJoin': game.code, 'idInvite': client_id}
                 }))
             else :
                 await self.clients.get(client_id).websocket.send(self.dump_data({
                     'action': 'invite_player',
-                    'args': {'return': 'warning', 'msg': get_string('invite_player_warning', joueur=self.clients.get(invite_id).nickname)}
+                    'args': {'return': 'warning', 'msg': get_string('invite_player_warning', joueur=nickname)}
                 }))
     
     async def answer_invitation(self, invited_client_id, args) :
@@ -135,20 +138,27 @@ class WebsocketServer:
         :param answer: 'refused' or 'accepted'
         :param id: ID du client qui invite
         """
+        print(f"{args}")
         if args.get('answer') and args.get('id') :
             invitation_client_id = args.get('id')
             answer = args.get('answer')
-            if invited_client_id in self.players.keys() and invitation_client_id in self.clients.keys() :
+            if invitation_client_id in self.players.keys() and invited_client_id in self.clients.keys() :
                 if answer == 'accepted' :
                     await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
                         'action': 'answer_invitation',
-                        'args': {'return': 'succes', 'msg': get_string('invitation_accepted', joueur=self.clients.get(invited_client_id).nickname)}
+                        'args': {'return': 'success', 'msg': get_string('invitation_accepted', joueur=self.clients.get(invited_client_id).nickname)}
                     }))
                 elif answer == 'refused' :
+                    print(f'{invitation_client_id}')
                     await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
                         'action': 'answer_invitation',
                         'args': {'return': 'error', 'msg': get_string('invitation_refused', joueur=self.clients.get(invited_client_id).nickname)}
                     }))
+            elif invitation_client_id in self.players.keys() and not invited_client_id in self.clients.keys() :
+                await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
+                    'action': 'answer_invitation',
+                    'args': {'return': 'error', 'msg': get_string('invitation_deconnected')}
+                }))
             
 
     async def join_game(self, client_id, game_code):
@@ -247,7 +257,7 @@ class WebsocketServer:
             await self.send_to_all(host,self.dump_data({
                 'action': 'leave_game',
                 'args': {'return': 'info','msg': get_string('player_left_game', joueur=self.clients[client_id].nickname), 'players': list(game.players.keys())}
-            }), False)
+            }))
             if not game.players:
                 del self.games[str(player.game_id)]
 

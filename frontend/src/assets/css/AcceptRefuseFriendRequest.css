@@ -42,3 +42,8 @@
         background-color: var(--tan);
     }
 }
+
+.invitationbutton {
+    color: aliceblue!important;
+    margin: 0 2px 0 20px!important;
+}

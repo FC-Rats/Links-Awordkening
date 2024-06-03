@@ -7,7 +7,7 @@ import { StatePage } from "../types/StatePage";
 import { Button, Dialog, IconButton } from "@mui/material";
 import { ReturnButton } from "../molecules/ReturnButton";
 import { RulesTemplate } from "./RulesTemplate";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
@@ -15,6 +15,10 @@ import { Badge } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import { Message } from "../types/Message";
 import ChatComponent from "../organisms/ChatComponent";
+import ContainerFriend from "../organisms/ContainerFriend";
+import { ContainerFriendRequestsProps } from "../types/ContainerFriendRequestsProps";
+import ContainerInviteFriend from "../organisms/ContainerInviteFriend";
+import { AlertInvitationBox } from "../molecules/AlertInvitationBox";
 
 export interface WaitingRoomProps {
     infoGame: {
@@ -38,17 +42,29 @@ export interface WaitingRoomProps {
     SumbitMessageChat: () => void;
     hasNewMessage: boolean;
     isSoundEnabled: boolean;
+    dataFriends : ContainerFriendRequestsProps['friends'];
+    inviteFriend : (id :number,nickname:string) => void;
 }
 
-export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame, handleNextPage, handlePreviousPage, isChatVisible, messages,onInputChangeChat,SumbitMessageChat, isSoundEnabled, toggleSound, toggleChatVisibility, hasNewMessage }) => {
-    const [open, setOpen] = useState(false);
+export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, players, isHost, handleStartGame, handleNextPage, handlePreviousPage, isChatVisible, messages,onInputChangeChat,SumbitMessageChat, isSoundEnabled, toggleSound, toggleChatVisibility, hasNewMessage, dataFriends, inviteFriend }) => {
+    const [openRules, setOpenRules] = useState(false);
 
-    const handleOpen = () => {
-      setOpen(true);
+    const handleOpenRules = () => {
+        setOpenRules(true);
     };
   
-    const handleClose = () => {
-      setOpen(false);
+    const handleCloseRules = () => {
+        setOpenRules(false);
+    };
+
+    const [openFriends, setOpenFriends] = useState(false);
+
+    const handleOpenFriends = () => {
+        setOpenFriends(true);
+    };
+  
+    const handleCloseFriends = () => {
+        setOpenFriends(false);
     };
     
     return (
@@ -64,14 +80,24 @@ export const WaitingRoomTemplate: React.FC<WaitingRoomProps> = ({ infoGame, play
                         <ComponentPlayerInfoWaiting player={player} key={index} />
                     ))}
                 </div>
-                <Dialog open={open} onClose={handleClose} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
-                    <IconButton aria-label="close" onClick={handleClose} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
+                
+                <Dialog open={openRules} onClose={handleCloseRules} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <IconButton aria-label="close" onClick={handleCloseRules} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
                         <CloseIcon />
                     </IconButton>
                     <RulesTemplate />
                 </Dialog>
-                <Button onClick={handleOpen} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
-                {isHost ? (
+                <Button onClick={handleOpenRules} className="submit-button" id={"rules"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Règles du jeu</Button>
+                
+                <Dialog open={openFriends} onClose={handleCloseFriends} PaperProps={{style: {width: '70%',maxWidth: '70%', backgroundColor:'#D2B48C'},}}>
+                    <IconButton aria-label="close" onClick={handleCloseFriends} style={{ position: 'absolute', right: '10px', top: '10px' }}> {/* Ajout d'un IconButton */}
+                        <CloseIcon />
+                    </IconButton>
+                    <ContainerInviteFriend friends={dataFriends} inviteFriends={inviteFriend} players={players}/> 
+                </Dialog>
+                <Button onClick={handleOpenFriends} className="submit-button" id={"friends"} variant="contained" sx={{ padding: '10px 20px', fontSize: '16px' }}>Inviter des amis</Button>
+               
+               {isHost ? (
                     <form onSubmit={handleStartGame}>
                         <SubmitButton text={"Commencer la partie"} />
                     </form>

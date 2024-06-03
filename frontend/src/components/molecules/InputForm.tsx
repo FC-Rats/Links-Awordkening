@@ -7,9 +7,10 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InputFormProps } from "../types/InputFormProps";
 
-export const InputForm = ({name, value, label, required, type, min, max, defaultvalue, onInputChange }: InputFormProps) => {
+export const InputForm = ({name, value, label, required, type, min, max, defaultvalue, onInputChange, onKeyDown }: InputFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const [typefield, setTypeField] = useState(type);
+
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
         if (typefield === "password") {
@@ -73,6 +74,7 @@ export const InputForm = ({name, value, label, required, type, min, max, default
                         variant="outlined" 
                         inputProps={{ min, max }} // Ajout de min et max ici
                         onChange={handleChange}
+                        onKeyDown={onKeyDown}
                         value={value}
                         name={name}
                         defaultValue={defaultvalue}

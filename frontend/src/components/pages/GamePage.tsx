@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useRef, useState } from "react";
 import { GameTemplate } from "../templates/GameTemplate";
 import { Loader } from "../atoms/Loader";
 import { Message } from "../types/Message";
@@ -19,6 +19,10 @@ import { createScore } from "../../services/ScoreServices";
 import { createLog } from "../../services/LogServices";
 import { createGame } from "../../services/GameServices";
 import { info } from "console";
+import { selectListFriends } from "../../services/FriendServices";
+import { ContainerFriendRequestsProps } from "../types/ContainerFriendRequestsProps";
+import { Alert } from "@mui/material";
+import { AlertInvitationBox } from "../molecules/AlertInvitationBox";
 
 export type StatePage = "choosing" | "creating" | "joining" | "waiting" | "gaming" | "ending";
 
@@ -56,6 +60,7 @@ export const GamePage = () => {
     const [isHost, setisHost] = useState(false);
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [isBtnDisabled, setisBtnDisabled] = useState(false);
+    const [dataFriends, setDataFriends] = useState<ContainerFriendRequestsProps['friends']>([]);
 
     // ==================== CONSTANTES =============================
     const context = useContext(AppContext);
@@ -115,7 +120,8 @@ export const GamePage = () => {
         resetPageGame();
         if (!ws.current) {
             const connectToGame = async () => {
-                ws.current = new WebSocket("ws://localhost:8765/game"); //wss://linksawordkening.fabiengilles.tf/ws/game on Fabien's server
+                const wsUrl = process.env.REACT_APP_WS_URL || "ws://localhost:8765/game";
+                ws.current = new WebSocket(wsUrl); //wss://linksawordkening.fabiengilles.tf/ws/game on Fabien's server
                 ws.current.addEventListener("open", onSendData);
                 ws.current.addEventListener("close", onDataClosed);
                 ws.current.addEventListener("message", onDataReceived);
@@ -149,7 +155,7 @@ export const GamePage = () => {
 
     const onDataClosed = (event: CloseEvent) => {
         console.log('WebSocket closed:', event);
-        // Handle WebSocket closed event
+        handleNextPage("choosing");
     };
 
     const onDataReceived = (ev: MessageEvent<any>) => {
@@ -161,6 +167,9 @@ export const GamePage = () => {
                 case "join_game": enterTheWaitingRoom(message.args); break;
                 case "create_game": createGameSpace(message.args); break;
                 case "start_game": startGame(message.args); break;
+                case "invite_player": sendInvitation(message.args);break;
+                case "invitation_received": receiveInvitation(message.args);break;
+                case "answer_invitation": alertInvitation(message.args);break;
                 case "send_message": showMessages(message.args); break;
                 case "add_word": updateGraphData(message.args); break;
                 case "new_score": newScoreEnemy(message.args); break;
@@ -200,13 +209,20 @@ export const GamePage = () => {
                     message: message.args.msg,
                 }));
                 handleNextPage("choosing");
+            } else {
+                setAlertBox((prevState) => ({
+                    ...prevState,
+                    severity: "error",
+                    open: true,
+                    message: message.args.msg,
+                }));
             }
         }
     }
 
     const onDataError = (event: Event) => {
         console.error('WebSocket error:', event);
-        // Handle WebSocket error
+        handleNextPage("choosing");
     };
 
     // ================== JOINROOM TEMPLATE ===================
@@ -258,6 +274,14 @@ export const GamePage = () => {
     };
 
     // ================ WAITING ROOM ==========================
+    const [alertInvitationBox, setAlertInvitationBox] = useState({
+        severity: "info",
+        open: false,
+        message: '',
+        idHost: '',
+        idJoin:''
+    });
+
     const handleStartGame = async (event: React.FormEvent) => {
         event.preventDefault();
         const data = {
@@ -403,6 +427,99 @@ export const GamePage = () => {
         window.location.reload();
     };
 
+    const fetchFriends = async () => {
+        const data = await selectListFriends(context?.user?.id || 0);
+          setDataFriends(data.dataUser);
+      };     
+  
+      /* Listes de users */
+      useEffect(() => {
+          fetchFriends();
+      }, []);
+
+    const inviteFriend = (id: number, nickname: string) => {
+        const data = {
+            action: "invite_player",
+            args: {
+                id: id,
+                nickname : nickname
+            },
+        };
+        ws.current?.send(JSON.stringify(data));
+    };
+
+    const alertInvitation = async (args: any) => {
+        if (args.msg) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: args.return,
+                open: true,
+                message: args.msg,
+            }));
+        }
+    };
+
+    const receiveInvitation = async (args: any) => {
+        if (args.msg) {
+            setAlertInvitationBox((prevState) => ({
+                ...prevState,
+                severity: "info",
+                open: true,
+                message: args.msg,
+                idHost: args.idInvite,
+                idJoin: args.idJoin
+            }));
+        }
+    };
+        
+    const sendInvitation = async (args: any) => {
+        if (args.msg) {
+            setAlertBox((prevState) => ({
+                ...prevState,
+                severity: args.warning,
+                open: true,
+                message: args.msg,
+            }));
+        }
+    };
+
+    const handleAcceptInvitation = () => {
+        const data = {
+            action: "answer_invitation",
+            args: {
+                answer : "accepted",
+                id: alertInvitationBox.idHost
+            },
+        };
+        ws.current?.send(JSON.stringify(data));
+        const data2 = {
+            action: "join_game",
+            args: {
+                game_code: alertInvitationBox.idJoin,
+            },
+        };
+        ws.current?.send(JSON.stringify(data2));
+        setAlertInvitationBox((prevState) => ({
+            ...prevState,
+            open: false,
+        }));
+    };
+
+    const handleRefuseInvitation = () => {
+        const data = {
+            action: "answer_invitation",
+            args: {
+                answer : "refused",
+                id: alertInvitationBox.idHost
+            },
+        };
+        ws.current?.send(JSON.stringify(data));
+        setAlertInvitationBox((prevState) => ({
+            ...prevState,
+            open: false,
+        }));
+    };
+
     // =================== GAME ========================
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const [isModalWordListVisible, setIsModalWordListVisible] = useState(false);
@@ -472,7 +589,7 @@ export const GamePage = () => {
         const data = {
             action: "add_word",
             args: {
-                word: word
+                word: word.trim().toLowerCase()
             },
         };
         ws.current?.send(JSON.stringify(data));
@@ -638,9 +755,16 @@ export const GamePage = () => {
                     {/* ================== ALERTBOX ==================== */}
                     <AlertBox severity={alertBox.severity} open={alertBox.open} message={alertBox.message} handleClose={handleAlert}></AlertBox>
                     {/* ================================================ */}
-                    {currentPage === "choosing" && <div><ChoosingGameTemplate handleNextPage={handleNextPage} /></div>}
-                    {currentPage === "creating" && <div><SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
-                    {currentPage === "joining" && <div><JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
+                    {currentPage === "choosing" && <div>
+                        <AlertInvitationBox open={alertInvitationBox.open} message={alertInvitationBox.message} handleAccept={handleAcceptInvitation} handleRefuse={handleRefuseInvitation} handleClose={handleAlert} ></AlertInvitationBox>
+                        <ChoosingGameTemplate handleNextPage={handleNextPage} />
+                        </div>}
+                    {currentPage === "creating" && <div>
+                        <AlertInvitationBox open={alertInvitationBox.open} message={alertInvitationBox.message} handleAccept={handleAcceptInvitation} handleRefuse={handleRefuseInvitation} handleClose={handleAlert} ></AlertInvitationBox>
+                        <SetUpGameTemplate handlePreviousPage={handlePreviousPage} infoGame={infoGame} handleTypeGame={handleTypeGame} handleInputChange={handleInputChangeCreate} handleSubmit={handleSubmitCreateGame} /></div>}
+                    {currentPage === "joining" && <div>
+                        <AlertInvitationBox open={alertInvitationBox.open} message={alertInvitationBox.message} handleAccept={handleAcceptInvitation} handleRefuse={handleRefuseInvitation} handleClose={handleAlert} ></AlertInvitationBox>
+                        <JoinRoomTemplate handlePreviousPage={handlePreviousPage} handleInputChange={handleInputChangeJoin} handleSubmit={handleSubmitJoinCode} /></div>}
                     {(currentPage === "waiting" && players !== undefined) && <div>
                         <WaitingRoomTemplate
                             handleNextPage={handleNextPage}
@@ -656,6 +780,8 @@ export const GamePage = () => {
                             messages={messages}
                             onInputChangeChat={handleInputChangeMessage}
                             SumbitMessageChat={handleSubmitMessage} 
+                            dataFriends={dataFriends}
+                            inviteFriend={inviteFriend}
                         />
                     </div>}
                     {(currentPage === "gaming" && playersInGame !== undefined) && <div>

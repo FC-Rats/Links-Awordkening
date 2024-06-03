@@ -18,9 +18,15 @@ function SubmitWord({ onSubmitWord, disabled,coupsRestants }: { onSubmitWord: (w
         }
     };
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') {
+            handleSendWord();
+        }
+    };
+
     return (
         <Stack spacing={{ xs: 1, sm: 2 }} direction="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-            <InputForm name="submitWord" value={word} label="Mot" onInputChange={handleInputChange} required />
+            <InputForm name="submitWord" value={word} label="Mot" onInputChange={handleInputChange} onKeyDown={handleKeyPress} required />
             <Button
                 onClick={handleSendWord}
                 className="acceptRefuseFriendRequest acceptRefuseFriendRequest-accept"

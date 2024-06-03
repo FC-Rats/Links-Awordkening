@@ -142,4 +142,4 @@ class Game:
 
         :return: True si tous les joueurs ont épuisé leurs tentatives, sinon False
         """
-        return all(player.attempts == 0 for player in self.players.values())
+        return all(player.attempts <= 0 for player in self.players.values())

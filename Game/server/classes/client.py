@@ -46,7 +46,7 @@ class WebsocketClient:
         elif action == "create_game":
             await self.server.create_game(self.id, self.websocket, args)
         elif action == "invite_player":
-            await self.server.invite_player(self.id, args.get('id'))
+            await self.server.invite_player(self.id, args)
         elif action == "answer_invitation":
             await self.server.answer_invitation(self.id, args)
         elif action == "start_game":
