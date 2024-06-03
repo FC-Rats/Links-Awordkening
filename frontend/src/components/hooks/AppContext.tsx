@@ -103,8 +103,8 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
                 if (lastLeaveTime) {
                     const leaveTime = JSON.parse(lastLeaveTime);
                     const currentTime = Date.now();
-                    const deltaMinutes = (currentTime - leaveTime) / (1000 * 60);
-                    if (deltaMinutes > 1) {
+                    const deltaHours = (currentTime - leaveTime) / (1000 * 60 * 60);
+                    if (deltaHours > 4) {
                         logOut();
                         window.location.href = '/sign-in';
                     }
