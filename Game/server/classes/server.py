@@ -138,7 +138,6 @@ class WebsocketServer:
         :param answer: 'refused' or 'accepted'
         :param id: ID du client qui invite
         """
-        print(f"{args}")
         if args.get('answer') and args.get('id') :
             invitation_client_id = args.get('id')
             answer = args.get('answer')
@@ -149,7 +148,6 @@ class WebsocketServer:
                         'args': {'return': 'success', 'msg': get_string('invitation_accepted', joueur=self.clients.get(invited_client_id).nickname)}
                     }))
                 elif answer == 'refused' :
-                    print(f'{invitation_client_id}')
                     await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
                         'action': 'answer_invitation',
                         'args': {'return': 'error', 'msg': get_string('invitation_refused', joueur=self.clients.get(invited_client_id).nickname)}
@@ -234,12 +232,12 @@ class WebsocketServer:
         if game.host == client_id:
             clients_to_remove = game.players.keys()
             for client_removed_id in clients_to_remove:
-                if client_id != client_removed_id :
+                if client_id != client_removed_id and client_removed_id in self.clients.keys() :
                     await self.clients[client_removed_id].websocket.send(self.dump_data({
                         'action': 'leave_game',
                         'args': {'return': 'error','msg': get_string('host_left_game')}
                     }))
-                else :
+                elif client_id in self.clients.keys() :
                     await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'leave_game',
                         'args': {'return': 'success','msg': get_string('host_left_game_success')}
@@ -247,17 +245,19 @@ class WebsocketServer:
                 del self.players[client_removed_id]
             del self.games[str(player.game_id)]
         else:
-            await self.clients[client_id].websocket.send(self.dump_data({
-                    'action': 'leave_game',
-                    'args': {'return': 'success','msg': get_string('left_game_success')}
-            }))
+            if client_id in self.clients.keys() :
+                await self.clients[client_id].websocket.send(self.dump_data({
+                        'action': 'leave_game',
+                        'args': {'return': 'success','msg': get_string('left_game_success')}
+                }))
             host = game.host
             del self.players[client_id]
             del game.players[client_id]
-            await self.send_to_all(host,self.dump_data({
-                'action': 'leave_game',
-                'args': {'return': 'info','msg': get_string('player_left_game', joueur=self.clients[client_id].nickname), 'players': list(game.players.keys())}
-            }))
+            if client_id in self.clients.keys() :
+                await self.send_to_all(host,self.dump_data({
+                    'action': 'leave_game',
+                    'args': {'return': 'info','msg': get_string('player_left_game', joueur=self.clients[client_id].nickname), 'players': list(game.players.keys())}
+                }))
             if not game.players:
                 del self.games[str(player.game_id)]
 
@@ -299,21 +299,22 @@ class WebsocketServer:
             game = self.games[id_game]
             player = game.players[client_id]
             client = self.clients[client_id]
-            await client.websocket.send(self.dump_data({
-                'action': 'end_game',
-                'args': {
-                    'return': 'success',
-                    'code': game.code,
-                    'host': game.host, 
-                    'name': game.game_name,
-                    'score': player.score,
-                    'charts': all_chart,
-                    'idUser': client_id,
-                    'id_game': str(game.id),
-                    'words': player.word_chain,
-                    'nbPlayers' : game.max_player
-                }
-            }))
+            if client.websocket.open:
+                await client.websocket.send(self.dump_data({
+                    'action': 'end_game',
+                    'args': {
+                        'return': 'success',
+                        'code': game.code,
+                        'host': game.host, 
+                        'name': game.game_name,
+                        'score': player.score,
+                        'charts': all_chart,
+                        'idUser': client_id,
+                        'id_game': str(game.id),
+                        'words': player.word_chain,
+                        'nbPlayers' : game.max_player
+                    }
+                }))
             del self.players[client_id]
             
             ser_path = os.path.join(rebase_path, "Java", "src", "files", "save", f"{client_id}.ser")

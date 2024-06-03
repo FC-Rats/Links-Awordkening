@@ -44,6 +44,8 @@ bad_words = {
     'batard': ['enfant illégitime', 'enfant né hors mariage', 'enfant naturel'],
     'bâtard': ['enfant illégitime', 'enfant né hors mariage', 'enfant naturel'],
     'fils de pute': ['enfant de joie', 'enfant naturel', 'fils de famille', 'fils de maman respectable'],
+    'fille de pute': ['enfant de joie', 'enfant naturel', 'fille de famille', 'fille de maman respectable'],
+    'fdp': ['enfant de joie', 'enfant naturel', 'fils de famille', 'fils de maman respectable'],
     'enculé': ['fichu', 'sacré', 'foutu'],
     'branleur': ['paresseux', 'fainéant', 'flemmard'],
     'niquer': ['gêner', 'déranger', 'ennuyer'],
@@ -67,6 +69,12 @@ bad_words = {
     'emmerdeur': ['personne pénible', 'agaçante', 'irritable'],
     'pourri': ['corrompu', 'malhonnête', 'dépravé'],
     'pourrie': ['corrompue', 'malhonnête', 'dépravée'],
+    'pénis': ['organe génital masculin', 'membre', 'attribut masculin'],
+    'zizi': ['organe génital masculin', 'membre', 'attribut masculin'],
+    'vagin': ['organe génital féminin', 'intimité féminine', 'partie intime'],
+    'chatte': ['organe génital féminin', 'intimité féminine', 'partie intime'],
+    'nigger': ['joker, je sais pas traduire ça en gentil', '¯\\_(ツ)_/¯'],
+    'nigga': ['joker, je sais pas traduire ça en gentil', '¯\\_(ツ)_/¯']
 }
 
 def get_string(key, **kwargs):
