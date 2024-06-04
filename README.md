@@ -78,10 +78,11 @@ Si vous souhaitez ``build`` le projet React :
 
 ```bash
 npm install -g dotenv-cli
+npm run build
 ```
 
 ## Retrouvez l'équipe LinksAwordkening (FC-Rats) !
-[@Artena8](https://github.com/Artena8) - Héléna Chevalier<br>
+[@Artena8](https://github.com/Artena8) - Hélèna Chevalier<br>
 Développeuse <span style="color: #61DAFB">#React</span> <span style="color: #A8B9CC">#C</span><br>
 Designer <span style="color: red">#</span><span style="color: orange;">V</span><span style="color: yellow;">i</span><span style="color: green;">v</span><span style="color: blue;">e</span><span style="color: indigo;">L</span><span style="color: violet;">e</span><span style="color: red;">D</span><span style="color: orange;">e</span><span style="color: yellow;">s</span><span style="color: green;">s</span><span style="color: blue;">i</span><span style="color: indigo;">n</span>
 
