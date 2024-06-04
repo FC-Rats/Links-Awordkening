@@ -98,10 +98,11 @@ class WebsocketServer:
             game.players[client_id] = player
             self.players[client_id] = player
             self.games[str(game_id)] = game
-            await websocket.send(self.dump_data({
-                'action': 'create_game',
-                'args': {'return': 'success', 'idJoin': game_code, 'type' : game_type}
-            }))
+            if websocket.open :
+                await websocket.send(self.dump_data({
+                    'action': 'create_game',
+                    'args': {'return': 'success', 'idJoin': game_code, 'type' : game_type}
+                }))
 
     async def invite_player(self, client_id, args):
         """
@@ -141,7 +142,7 @@ class WebsocketServer:
         if args.get('answer') and args.get('id') :
             invitation_client_id = args.get('id')
             answer = args.get('answer')
-            if invitation_client_id in self.players.keys() and invited_client_id in self.clients.keys() :
+            if invitation_client_id in self.players.keys() and invited_client_id in self.clients.keys() and self.clients.get(invitation_client_id).websocket.open :
                 if answer == 'accepted' :
                     await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
                         'action': 'answer_invitation',
@@ -152,7 +153,7 @@ class WebsocketServer:
                         'action': 'answer_invitation',
                         'args': {'return': 'error', 'msg': get_string('invitation_refused', joueur=self.clients.get(invited_client_id).nickname)}
                     }))
-            elif invitation_client_id in self.players.keys() and not invited_client_id in self.clients.keys() :
+            elif invitation_client_id in self.players.keys() and not invited_client_id in self.clients.keys() and self.clients.get(invitation_client_id).websocket.open :
                 await self.clients.get(invitation_client_id).websocket.send(self.dump_data({
                     'action': 'answer_invitation',
                     'args': {'return': 'error', 'msg': get_string('invitation_deconnected')}
@@ -232,12 +233,12 @@ class WebsocketServer:
         if game.host == client_id:
             clients_to_remove = game.players.keys()
             for client_removed_id in clients_to_remove:
-                if client_id != client_removed_id and client_removed_id in self.clients.keys() :
+                if client_id != client_removed_id and client_removed_id in self.clients.keys() and self.clients[client_removed_id].websocket.open :
                     await self.clients[client_removed_id].websocket.send(self.dump_data({
                         'action': 'leave_game',
                         'args': {'return': 'error','msg': get_string('host_left_game')}
                     }))
-                elif client_id in self.clients.keys() :
+                elif client_id in self.clients.keys() and self.clients[client_id].websocket.open :
                     await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'leave_game',
                         'args': {'return': 'success','msg': get_string('host_left_game_success')}
@@ -245,7 +246,7 @@ class WebsocketServer:
                 del self.players[client_removed_id]
             del self.games[str(player.game_id)]
         else:
-            if client_id in self.clients.keys() :
+            if client_id in self.clients.keys() and self.clients[client_id].websocket.open :
                 await self.clients[client_id].websocket.send(self.dump_data({
                         'action': 'leave_game',
                         'args': {'return': 'success','msg': get_string('left_game_success')}
