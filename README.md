@@ -42,18 +42,15 @@ Importez le fichier SQL pour la base de données : <a href="./data/linksawordken
 
 Renommez le fichier ``dev-configuration.php`` en ``configuration.php``
 
-Depuis la racine du projet ``/`` : 
-
-```bash
-git submodule init
-git submodule update
-```
-
 Depuis le dossier `api` :
 
 ```bash
 composer update
 ```
+
+Depuis le dossier `api/mail` :
+
+Installer PHPMailer
 
 Depuis le dossier `frontend` : 
 
