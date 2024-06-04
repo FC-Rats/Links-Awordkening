@@ -5,7 +5,7 @@
 
 
 <p align="center" style="font-size:15px;">
-🌿 Vevez défier votre esprit <span style="color: #6A5138">seul</span> ou en <span style="color: #D2B48C">famille</span> avec des <span style="color: #82a14e">chaînes de mots</span> et explorez un monde remplie de <span style="color: #547E5E">liens</span> pour relever le défi ultime du <span style="color: #F4E9CD">langage</span> ! 💬 
+🌿 Venez défier votre esprit <span style="color: #6A5138">seul</span> ou en <span style="color: #D2B48C">famille</span> avec des <span style="color: #82a14e">chaînes de mots</span> et explorez un monde remplie de <span style="color: #547E5E">liens</span> pour relever le défi ultime du <span style="color: #F4E9CD">langage</span> ! 💬 
 </p>
 <br>
 <p align="center"><a href="https://linksawordkening.fabiengilles.tf" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Jouer au jeu !</a></p>
@@ -103,24 +103,3 @@ IT Boy <span style="color: #FFD700">#Serveur</span> <span style="color: #0DB7ED"
 <p align="center">
     <img  alt="Icône du site" width="150" src="./frontend/public/img/iconeLA.png">
 </p>
-
-<style>
-.center-table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rule-table {
-    border-collapse: collapse;
-}
-.rule-cell {
-    border-left: 1px solid black;
-    padding: 10px;
-}
-.rule-cell:first-child {
-    border-left: none;
-}
-.rule-row {
-    border: none;
-}
-</style>
