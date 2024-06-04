@@ -9,7 +9,7 @@ $config = [
 
     'PHPMailer' => [
         'mailadress' => '', //Adresse mail pour PHPMailer
-        'mailpassword' => '', //Clée secrète du mail (mot de passe d'application)
+        'mailpassword' => '', //Clé secrète du mail (mot de passe d'application)
     ],
 
     'links' => [

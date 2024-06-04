@@ -38,9 +38,9 @@ Technolgie | Version | Partie associée |
 
 ### - Site -
 
-Importez le fichier SQL pour la base de données : <a href="./data/linksawordkening-db.sql">linksawordkening-db.sql</a>
+Importez le fichier SQL pour la base de données : <a href="./documents/bdd/linksawordkening-db.sql">linksawordkening-db.sql</a>
 
-Renommez le fichier ``dev-configuration.php`` en ``configuration.php``
+Renommez le fichier ``dev-configuration.php`` en ``configuration.php`` si le fichier n'existe pas
 
 Depuis le dossier `api` :
 
@@ -77,6 +77,13 @@ Si vous souhaitez ``build`` le projet React :
 npm install -g dotenv-cli
 npm run build
 ```
+
+## - Crédits & Sources -
++ https://github.com/dav/word2vec - Nous avons réutilisé son code pour calculer les vecteurs et nous l'avons adapté pour calculer le score en C
++ https://fauconnier.github.io/#data - Nous avons utilisé ses modèles Word2Vec pré-entrainés pour créer notre arbre lexicographique
++ https://github.com/LoginRadius/engineering-blog-samples/tree/master/php - modèle pour faire fonctionner les JWT
++ https://mui.com - Bibliothèque de composants React
++ https://www.adobe.com/ - IA générative Adobe Firefly
 
 ## Retrouvez l'équipe LinksAwordkening (FC-Rats) !
 [@Artena8](https://github.com/Artena8) - Hélèna Chevalier<br>
