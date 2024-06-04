@@ -1,23 +1,123 @@
-# Links-Awordkening
-SAE BUT 2 - Jeu liens mots
+# Links Awordkening <img  alt="Ouvrir le site" width="25" src="./frontend/public/img/iconeLA.png">
+<p align="center">
+    <img  alt="Logo du site" width="500" src="./frontend/public/img/swatches/logoLA.png">
+</p>
 
-<ins>Objectif du jeu</ins> : Reliez le mot de départ au mot cible en proposant des mots similaires. Pour accumuler des points, il faudra suggérer des mots liés <span style="color: #26B260">sémantiquement et/ou orthographiquement</span> aux autres mots afin de former de nouveaux liens. Soyez original :information_desk_person: et explorez des associations surprenantes. Chaque mot ajouté peut contribuer à votre score total si celui-ci permet d'améliorer votre score actuel. Vous pouvez vous lancer en solo :man_with_gua_pi_mao:, ou bien partager des parties avec d'autres joueurs. :family:
 
-## Tech nécessaires pour run le jeu : 
-- Node.js :blush:
-- Python 3.12 :snake:
-- Composer :skull:
-- PHP 8.2 :older_man:
-- Java :confused:
+<p align="center" style="font-size:15px;">
+🌿 Vevez défier votre esprit <span style="color: #6A5138">seul</span> ou en <span style="color: #D2B48C">famille</span> avec des <span style="color: #82a14e">chaînes de mots</span> et explorez un monde remplie de <span style="color: #547E5E">liens</span> pour relever le défi ultime du <span style="color: #F4E9CD">langage</span> ! 💬 
+</p>
+<br>
+<p align="center"><a href="https://linksawordkening.fabiengilles.tf" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Jouer au jeu !</a></p>
+
+## Règles : 
+
+<table class="center-table">
+  <tr class="rule-row">
+    <td class="rule-cell"><img src="./frontend/public/img/rules/rules-colored-1.png" alt="Image 1" width="300"></td>
+    <td class="rule-cell"><img src="./frontend/public/img/rules/rules-colored-2.png" alt="Image 2" width="300"></td>
+  </tr>
+  <tr class="rule-row">
+    <td class="rule-cell"><img src="./frontend/public/img/rules/rules-colored-3.png" alt="Image 3" width="300"></td>
+    <td class="rule-cell"><img src="./frontend/public/img/rules/rules-colored-4.png" alt="Image 4" width="300"></td>
+  </tr>
+</table>
+
+## Technolgies nécessaires : 
+
+Technolgie | Version | Partie associée |
+------- | ------ | -------
+<span style="color: #68A063">Node.js<span> | ``20.12`` | Site react
+<span style="color: #CB3837">NPM</span> | ``10.5`` | Site react
+<span style="color: #885630">Composer</span> | ``2.7`` | API PHP
+<span style="color: #777BB4">PHP</span> | ``8.2`` | API PHP
+<span style="color: #B22222">Java</span> | ``19`` | Moteur de jeu
+<span style="color: #FFD343">Python</span> | ``3.12`` | Serveur jeu multijoueur
 
 ## Installation :
-Depuis le dossier api : 
-`composer update`
 
-Depuis le dossier frontend : 
-`npm install`
-`npm start`
+### - Site -
 
+Importez le fichier SQL pour la base de données : <a href="./data/linksawordkening-db.sql">linksawordkening-db.sql</a>
 
-### Annexes
-Pour convertir un fichier du format Windows (CRLF) au format Unix (LF), utilisez la commande `dos2unix fichier.txt`
+Renommez le fichier ``dev-configuration.php`` en ``configuration.php``
+
+Depuis la racine du projet ``/`` : 
+
+```bash
+git submodule init
+git submodule update
+```
+
+Depuis le dossier `api` :
+
+```bash
+composer update
+```
+
+Depuis le dossier `frontend` : 
+
+```bash
+npm install
+npm start
+```
+
+### - Multijoueur -
+
+Lire la documentation dans `Game/server` : <a href="./Game/server/README.md">README.md</a>
+
+### - Annexes -
+
+Pour ``convertir`` un fichier du format ``Windows (CRLF)`` au format ``Unix (LF)`` :
+
+```bash
+dos2unix <FICHIER>
+```
+
+Si vous souhaitez ``build`` le projet React :
+
+```bash
+npm install -g dotenv-cli
+```
+
+## Retrouvez l'équipe LinksAwordkening (FC-Rats) !
+[@Artena8](https://github.com/Artena8) - Héléna Chevalier<br>
+Développeuse <span style="color: #61DAFB">#React</span> <span style="color: #A8B9CC">#C</span><br>
+Designer <span style="color: red">#</span><span style="color: orange;">V</span><span style="color: yellow;">i</span><span style="color: green;">v</span><span style="color: blue;">e</span><span style="color: indigo;">L</span><span style="color: violet;">e</span><span style="color: red;">D</span><span style="color: orange;">e</span><span style="color: yellow;">s</span><span style="color: green;">s</span><span style="color: blue;">i</span><span style="color: indigo;">n</span>
+
+[@widfleer](https://github.com/widfleer) - Loélia Coutellier<br>
+Développeuse <span style="color: #61DAFB">#React</span> <span style="color: #777BB4">#PHP</span>
+
+[@InkyYuu](https://github.com/InkyYuu) - Kellian Bredeau<br>
+Développeur <span style="color: #FFD343">#Python</span> <span style="color: #B22222">#Java</span>
+
+[@LeoDessertenne](https://github.com/LeoDessertenne) - Léo Dessertenne<br>
+Développeur <span style="color: #61DAFB">#React</span> <span style="color: #F29111">#SQL</span>
+
+<br>
+<h3 style="text-align:center;">Toute l'équipe LinksAwordkening vous remercie de votre soutien !</h3>
+<h5 style="text-align:center;">Copyright @FC-Rats<h5>
+<p align="center">
+    <img  alt="Icône du site" width="150" src="./frontend/public/img/iconeLA.png">
+</p>
+
+<style>
+.center-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rule-table {
+    border-collapse: collapse;
+}
+.rule-cell {
+    border-left: 1px solid black;
+    padding: 10px;
+}
+.rule-cell:first-child {
+    border-left: none;
+}
+.rule-row {
+    border: none;
+}
+</style>

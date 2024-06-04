@@ -29,12 +29,12 @@ document.head.appendChild(link);
 
 updateMetaTag('charSet', '', 'utf-8');
 updateMetaTag('httpEquiv', 'Content-Language', 'fr');
-updateMetaTag('name', 'description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de lienpour relever le défi ultime du langage !');
+updateMetaTag('name', 'description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de liens pour relever le défi ultime du langage !');
 updateMetaTag('name', 'keywords', 'jeu, jeux, jeux vidéo, react, projet, université, mots, liens');
 updateMetaTag('name', 'author', 'FC-Rats');
 updateMetaTag('name', 'viewport', 'width=device-width, initial-scale=1');
 updateMetaTag('property', 'og:title', 'Links Awordkening')
-updateMetaTag('property', 'og:description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de lienpour relever le défi ultime du langage !')
+updateMetaTag('property', 'og:description', '🌿💬 Vevez défier votre esprit avec des chaînes de mots et explorez un monde remplie de liens pour relever le défi ultime du langage !')
 updateMetaTag('property', 'og:type', 'video game')
 updateMetaTag('property', 'og:url', 'https://linksawordkening.fabiengilles.tf')
 updateMetaTag('property', 'og:image', '/img/iconeLA.png')

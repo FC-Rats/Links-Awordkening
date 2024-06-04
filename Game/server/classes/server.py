@@ -113,22 +113,22 @@ class WebsocketServer:
         if args.get('id') and args.get('nickname') :
             invite_id = args.get('id')
             nickname = args.get('nickname')
-        if client_id in self.players.keys()  :
-            game = self.games.get(str(self.players.get(client_id).game_id))
-            if invite_id in self.clients.keys() :
-                await self.clients.get(client_id).websocket.send(self.dump_data({
-                    'action': 'invite_player',
-                    'args': {'return': 'success', 'msg': get_string('invite_player_success', joueur=nickname)}
-                }))
-                await self.clients.get(invite_id).websocket.send(self.dump_data({
-                    'action': 'invitation_received',
-                    'args': {'return': 'success', 'msg': get_string('invitation_player', joueur=self.clients.get(client_id).nickname),'idJoin': game.code, 'idInvite': client_id}
-                }))
-            else :
-                await self.clients.get(client_id).websocket.send(self.dump_data({
-                    'action': 'invite_player',
-                    'args': {'return': 'warning', 'msg': get_string('invite_player_warning', joueur=nickname)}
-                }))
+            if client_id in self.players.keys()  :
+                game = self.games.get(str(self.players.get(client_id).game_id))
+                if invite_id in self.clients.keys() and self.clients.get(client_id).websocket.open and self.clients.get(invite_id).websocket.open :
+                    await self.clients.get(client_id).websocket.send(self.dump_data({
+                        'action': 'invite_player',
+                        'args': {'return': 'success', 'msg': get_string('invite_player_success', joueur=nickname)}
+                    }))
+                    await self.clients.get(invite_id).websocket.send(self.dump_data({
+                        'action': 'invitation_received',
+                        'args': {'return': 'success', 'msg': get_string('invitation_player', joueur=self.clients.get(client_id).nickname),'idJoin': game.code, 'idInvite': client_id}
+                    }))
+                else :
+                    await self.clients.get(client_id).websocket.send(self.dump_data({
+                        'action': 'invite_player',
+                        'args': {'return': 'warning', 'msg': get_string('invite_player_warning', joueur=nickname)}
+                    }))
     
     async def answer_invitation(self, invited_client_id, args) :
         """
