@@ -50,7 +50,7 @@ composer update
 
 Depuis le dossier `api/mail` :
 
-Installer PHPMailer
+- Installer PHPMailer
 
 Depuis le dossier `frontend` : 
 

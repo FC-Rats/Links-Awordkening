@@ -1,20 +1,20 @@
 <?php
 $config = [
  'database' => [
-        'host' => 'localhost',
-        'db' => 'la',
-        'login' => 'root',
-        'password' => '',
+        'host' => '', //Nom de domaine de la base de données
+        'db' => '', //Nom de la base de données
+        'login' => '', //Nom d'utilisateur de la base de données
+        'password' => '', //Mot de passe de la base de données
     ],
 
     'PHPMailer' => [
         'mailadress' => '', //Adresse mail pour PHPMailer
-        'mailpassword' => '', //Clée secrète du mail
+        'mailpassword' => '', //Clée secrète du mail (mot de passe d'application)
     ],
 
     'links' => [
-        'host' => 'https://localhost/Links-Awordkening/',
-        'apiURL' => 'https://localhost/Links-Awordkening/api/',
+        'host' => 'https://localhost/Links-Awordkening/', //Adresse du site à adapter selon son emplacement dans le serveur
+        'apiURL' => 'https://localhost/Links-Awordkening/api/', //Adresse de l'API à adapter selon son emplacement dans le serveur
     ],
 
     'JWT' => [
