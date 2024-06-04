@@ -309,6 +309,7 @@ export const GamePage = () => {
     };
 
     const startGame = async (args: any) => {
+        audioStart.play()
         handleNextPage("gaming");
         args.players.forEach((player: number) => {
             updatePlayerScoreByName(player, args.score);
@@ -742,7 +743,7 @@ export const GamePage = () => {
     const [audioAddWordWarning] = useState(new Audio("/sound/add_word_warning.mp3"));
     const [audioAddWordError] = useState(new Audio("/sound/add_word_error.mp3"));
     const [audioEndGame] = useState(new Audio("/sound/end_game.mp3"));
-    const [audioCountdown] = useState(new Audio("/sound/countdown.mp3"));
+    const [audioStart] = useState(new Audio("/sound/start_game.mp3"));
     const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
     const toggleSound = () => {
@@ -754,7 +755,7 @@ export const GamePage = () => {
         audioAddWordWarning.volume = newVolume;
         audioAddWordError.volume = newVolume;
         audioEndGame.volume = newVolume;
-        audioCountdown.volume = newVolume;
+        audioStart.volume = newVolume;
     };
 
     return (

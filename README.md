@@ -94,6 +94,9 @@ Développeur <span style="color: #FFD343">#Python</span> <span style="color: #B2
 [@LeoDessertenne](https://github.com/LeoDessertenne) - Léo Dessertenne<br>
 Développeur <span style="color: #61DAFB">#React</span> <span style="color: #F29111">#SQL</span>
 
+[@TheIceMagmaCube](https://github.com/TheIceMagmaCube) - Fabien Gilles<br>
+IT Boy <span style="color: #FFD700">#Serveur</span> <span style="color: #0DB7ED">#Docker</span>
+
 <br>
 <h3 style="text-align:center;">Toute l'équipe LinksAwordkening vous remercie de votre soutien !</h3>
 <h5 style="text-align:center;">Copyright @FC-Rats<h5>
