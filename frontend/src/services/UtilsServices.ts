@@ -63,6 +63,6 @@ export function isValidEmail(email: string) : boolean {
  * @returns {boolean} valide ou non
  */
 export function isValidPassword(mdp: string) : boolean {
-    var regex = /^(?=.*[0-9])(?=.*[!@#$%^&€_+~&*])[a-zA-Z0-9!@#$%^&€_+~&*]{12,40}$/; // {12} = plus de 12 caractères  
+    var regex = /^(?=.*[0-9])(?=.*[@\[\]\^_!"#$%&'()*+,./:;{}<>=|~?])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@\[\]\^_!"#$%&'()*+,./:;{}<>=|~?]{12,40}$/;
     return regex.test(mdp);
 }
