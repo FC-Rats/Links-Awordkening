@@ -287,17 +287,18 @@ class WebsocketServer:
 
         :param id_game: ID de la partie à terminer
         """
+        
         rebase_path = ".."  # Chemin de base pour les fichiers de données
         clients_to_remove = [client_id for client_id, player in self.players.items() if (player.game_id == UUID(id_game) or player.game_id == id_game)]
 
         all_chart = {}
         for client_id in clients_to_remove:
-            game = self.games[id_game]
+            game = self.games[str(id_game)]
             player = game.players[client_id]
             all_chart[player.id] = player.chart
 
         for client_id in clients_to_remove:
-            game = self.games[id_game]
+            game = self.games[str(id_game)]
             player = game.players[client_id]
             client = self.clients[client_id]
             if client.websocket.open:
@@ -316,12 +317,15 @@ class WebsocketServer:
                         'nbPlayers' : game.max_player
                     }
                 }))
-            del self.players[client_id]
+            if client_id in self.players:
+                del self.players[client_id]
             
             ser_path = os.path.join(rebase_path, "Java", "src", "files", "save", f"{client_id}.ser")
             if os.path.exists(ser_path):
                 os.remove(ser_path)
-        del self.games[id_game]
+
+        if str(id_game) in self.games:
+            del self.games[str(id_game)]
 
     async def send_to_all(self, id_client: int, data: any, callback:bool = True):
         """
