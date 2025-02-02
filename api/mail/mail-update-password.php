@@ -1,5 +1,10 @@
 <?php
 
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('html_errors', 0);
+error_reporting(E_ALL);
+
 /* 
 $token = $_POST['token'];
 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);

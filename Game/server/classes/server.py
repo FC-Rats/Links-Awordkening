@@ -1,6 +1,7 @@
 # classes/server.py
 
 import websockets
+import asyncio
 from uuid import uuid4, UUID
 import random
 import os
@@ -354,10 +355,12 @@ class WebsocketServer:
             ]
 
         if clients_to_send:
-            try:
-                websockets.broadcast(clients_to_send, data)
-            except Exception as e:
-                print(f"Erreur lors de l'envoi du message: {e}")
+            for client_ws in clients_to_send:
+                if client_ws.open:
+                    try:
+                        asyncio.create_task(client_ws.send(data))
+                    except Exception as e:
+                        print(f"Erreur lors de l'envoi du message à {client_ws}: {e}")
         else:
             print("Aucun client à envoyer.")
 

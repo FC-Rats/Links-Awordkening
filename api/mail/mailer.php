@@ -1,6 +1,9 @@
 <?php
+
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('html_errors', 0);
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 require_once './PHPMailer/src/Exception.php';
 require_once './PHPMailer/src/PHPMailer.php';
