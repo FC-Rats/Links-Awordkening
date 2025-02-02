@@ -1,29 +1,20 @@
-version: '3'
-#Version2.3
-#BlitzWoof!
-#awooo.fr
-
+# Ici ça compose
+# PAS TOUCHER
+# C'est pour le déploiement de l'application
+# 02/02/2024 - Pour PVE
 
 services:
   web:
-    image: phpwithjava:latest  #image build on elboyo
+    image: linksawordkening:latest
+    entrypoint: bash /var/www/html/init.sh
     ports:
-      - "6225:80" 
+      - "xxxx:80"
+      - "8765:8765"
     volumes:
-      - /srv/dev-disk-by-uuid-edbd084c-2085-4a70-a40f-f86d66ad0efa/www/linksawordkening:/var/www/html
+      - lechemin:/var/www/html
     restart: 'unless-stopped'
     deploy:
       resources:
         limits:
           cpus: "4.0"
-          memory: 100M
-    networks:
-     - db
-
-networks:
-  db:
-    external:
-      name: db_db
-#db isolation
-#use "db" or "192.168.1.45" for access
-#try to use db it's better.
+          memory: 512M

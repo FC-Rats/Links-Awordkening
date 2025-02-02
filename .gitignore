@@ -14,5 +14,4 @@ Game/server/env-py/
 Game/server/data/__pycache__
 Game/server/classes/__pycache__
 api/vendor
-devops_config
 documents/reporting
